@@ -17,6 +17,7 @@ export default {
 </script>
 
 <style>
+@import "./assets/styles/variables.css";
 #selectable {
   cursor: pointer;
 }
