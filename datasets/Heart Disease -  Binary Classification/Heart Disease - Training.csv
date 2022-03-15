@@ -817,3 +817,4 @@ PatientId,Species,ChestPainType,RestingBP,Cholesterol,MaxHR,ST_Slope,HeartDiseas
 815,Homo sapiens,ASY,110,0,149,Up,1
 816,Homo sapiens,ASY,140,241,123,Flat,1
 817,Homo sapiens,ASY,130,330,169,Up,1
+818,NA,NA,,321,na,,0

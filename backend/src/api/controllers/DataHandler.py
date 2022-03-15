@@ -14,6 +14,11 @@ class DataHandler():
     def removeFeature(self, featureName):
         self.dataframe.drop(featureName, inplace=True, axis=1)
     
+    def removeInvalidData(self):
+        self.dataframe.fillna("")
+        self.dataframe.replace('', np.nan, inplace=True)
+        self.dataframe.dropna()
+
     def translateData(self):
         # train.day = train.day.astype('category')
         mydataframe = self.dataframe
