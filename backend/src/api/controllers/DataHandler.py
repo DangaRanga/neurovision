@@ -8,13 +8,21 @@ class DataHandler():
     def __init__(self, dataframe):
         self.dataframe = dataframe
     
-    def getDataFrame():
+    def getDataFrame(self):
         return self.dataframe
     
-    def removeFeature(featureName):
+    def removeFeature(self, featureName):
         self.dataframe.drop(featureName, inplace=True, axis=1)
     
-    def normalizeData():
+    def translateData(self):
+        # train.day = train.day.astype('category')
+        data = self.dataframe.dtypes[self.dataframe.dtypes == np.object]
+        columnNames = list(data.index)
+        for i in columnNames:
+            self.dataframe = self.dataframe.astype('category')
+        return self.dataframe
+
+    def normalizeData(self):
         scaler = preprocessing.MinMaxScaler()
         names = self.dataframe.columns
         d = scaler.fit_transform(self.dataframe)
