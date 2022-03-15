@@ -16,11 +16,15 @@ class DataHandler():
     
     def translateData(self):
         # train.day = train.day.astype('category')
-        data = self.dataframe.dtypes[self.dataframe.dtypes == np.object]
+        mydataframe = self.dataframe
+        data = mydataframe.dtypes[mydataframe.dtypes == np.object]
         columnNames = list(data.index)
         for i in columnNames:
-            self.dataframe = self.dataframe.astype('category')
-        return self.dataframe
+            mydataframe[i] = mydataframe[i].astype('category')
+            catagories = mydataframe[i].unique()
+            for cat_index in range(len(catagories)):
+                mydataframe[i] = mydataframe[i].replace([catagories[cat_index]], cat_index + 1)
+        self.dataframe = mydataframe
 
     def normalizeData(self):
         scaler = preprocessing.MinMaxScaler()
@@ -28,5 +32,4 @@ class DataHandler():
         d = scaler.fit_transform(self.dataframe)
         normalize_df = pd.DataFrame(d, columns = names)
         self.dataframe = normalize_df
-        return self.dataframe
     
