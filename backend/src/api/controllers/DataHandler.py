@@ -1,4 +1,5 @@
 from sklearn import preprocessing
+from sklearn.model_selection import train_test_split
 import numpy as np
 import pandas as pd
 
@@ -36,4 +37,14 @@ class DataHandler():
         d = scaler.fit_transform(self.dataframe)
         normalize_df = pd.DataFrame(d, columns = names)
         self.dataframe = normalize_df
+    
+    def init_normalizer(self):
+        pass
+    
+    def denormalizeData(self):
+        pass
+
+    def dataset_split(split):
+        # X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=100, test_size = 0.20)
+        pass
     
