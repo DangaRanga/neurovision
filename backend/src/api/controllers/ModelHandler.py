@@ -3,6 +3,7 @@ import pandas as pd
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
 
+
 class ModelHandler(object):
 
     """
@@ -10,10 +11,10 @@ class ModelHandler(object):
         layers e.g [5,5,5]
         activation e.g [relu, relu, sigmoid]
     """
-    def __init__(self, layers, activation) -> None:
-        self.layers  = layers
-        self.activation  = activation
 
+    def __init__(self, layers, activation) -> None:
+        self.layers = layers
+        self.activation = activation
 
     def createModel(self) -> None:
         options = []
@@ -23,10 +24,10 @@ class ModelHandler(object):
 
         self.model = Sequential(options)
 
-        self.model.compile(optimizer="sgd", loss='binary_crossentropy', metrics=['accuracy'])
-    
-    def train(self, features, output, epochs, batch) -> pd.DataFrame:
-        self.model.fit(features, output,epochs=epochs,batch_size=batch)
+        self.model.compile(optimizer="sgd", loss='mse', metrics=['accuracy'])
+
+    def train(self, features, output, epochs, batch) -> None:
+        return self.model.fit(features, output, epochs=epochs, batch_size=batch)
 
     def evaluate(self, features, output) -> list : #[Loss_final]":
         return self.model.evaluate(features, output)

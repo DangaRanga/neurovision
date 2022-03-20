@@ -1,8 +1,8 @@
 <template>
-  <div class="flex">
-    <selector-item></selector-item>
-    <selector-item></selector-item>
-    <selector-item></selector-item>
+  <div class="flex justify-around">
+    <selector-item :src="''" :alt="'Cat Images'"></selector-item>
+    <selector-item :src="''" :alt="'Cat Images'"></selector-item>
+    <selector-item :src="''" :alt="'Cat Images'"></selector-item>
   </div>
 </template>
 <script>
