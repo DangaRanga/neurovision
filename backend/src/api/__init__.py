@@ -4,4 +4,4 @@ from .config import Config
 app = Flask(__name__)
 app.config.from_object(Config)
 
-from api.routes import routes
+from src.api.routes import routes

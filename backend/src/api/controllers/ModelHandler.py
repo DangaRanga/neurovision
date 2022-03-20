@@ -25,10 +25,10 @@ class ModelHandler(object):
 
         self.model.compile(optimizer="sgd", loss='binary_crossentropy', metrics=['accuracy'])
     
-    def train(self, features, output, epochs, batch) -> None:
+    def train(self, features, output, epochs, batch) -> pd.DataFrame:
         self.model.fit(features, output,epochs=epochs,batch_size=batch)
 
-    def evaluate(self, features, output):
+    def evaluate(self, features, output) -> list : #[Loss_final]":
         return self.model.evaluate(features, output)
 
     def predict(self, features):

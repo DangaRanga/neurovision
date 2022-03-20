@@ -1,5 +1,4 @@
-from api import app
-from security.jwt import decodetoken, checktoken
+from src.api import app
 from flask import json, request, jsonify, g, make_response, abort, redirect
 
 
