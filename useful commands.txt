@@ -1,0 +1,29 @@
+from controllers.DataHandler import DataHandler
+import pandas as pd
+data = pd.read_csv(r"C:\Users\andrew\Documents\Webdev\neurovision\neurovision\datasets\Heart Disease -  Binary Classification\Heart Disease - Training.csv")
+dataframe = pd.DataFrame(data)
+datahandle = DataHandler(dataframe)
+datahandle.getDataFrame()
+
+
+datahandle.removeInvalidData()
+datahandle.removeFeature('PatientId')
+datahandle.removeFeature('Species')
+
+datahandle.translateData()
+datahandle.normalizeData()
+datahandle.setInputs()
+datahandle.setOutput()
+datahandle.dataset_split(70)
+datahandle.x_train
+
+from controllers.ModelHandler import ModelHandler
+model = ModelHandler([5,5,1], ["relu","relu","sigmoid"])
+model.createModel()
+history = model.train(datahandle.x_train, datahandle.y_train, 10, 1)
+history
+history.history # Prints the stuff as a dictionary
+
+evaluation_thing = model.evaluate(datahandle.x_test, datahandle.y_test)
+
+evaluation_thing # Gives loss and accuracy
