@@ -7,6 +7,7 @@ class DataHandler():
 
     def __init__(self, dataframe):
         self.dataframe = dataframe
+        self.dataframe2 = dataframe
     
     def getDataFrame(self):
         return self.dataframe
@@ -17,7 +18,7 @@ class DataHandler():
     def removeInvalidData(self):
         self.dataframe.fillna("")
         self.dataframe.replace('', np.nan, inplace=True)
-        self.dataframe.dropna()
+        self.dataframe.dropna(inplace=True)
 
     def translateData(self):
         # train.day = train.day.astype('category')
@@ -38,13 +39,25 @@ class DataHandler():
         normalize_df = pd.DataFrame(d, columns = names)
         self.dataframe = normalize_df
     
-    def init_normalizer(self):
-        pass
     
     def denormalizeData(self):
         pass
 
-    def dataset_split(split):
-        # X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=100, test_size = 0.20)
-        pass
+    def setInputs(self):
+        n = len(self.dataframe.columns) - 1
+        self.inputs  = self.dataframe.iloc[: , :n]
     
+    def setOutput(self):
+        self.output = self.dataframe.iloc[: , -1:]
+    
+    def dataset_split(self, train):
+        test_size = 1 - (train / 100)
+        self.x_train, self.x_test, self.y_train, self.y_test = train_test_split(self.inputs, self.output, random_state=100, test_size = test_size)
+    
+
+# from controllers.DataHandler import DataHandler
+# import pandas as pd
+# data = pd.read_csv(r"C:\Users\Jantae Leckie\Desktop\Computing\3rd Year\COMP3901\Code\neurovision\datasets\Heart Disease -  Binary Classification\Heart Disease - Training.csv")
+# dataframe = pd.DataFrame(data)
+# datahandle = DataHandler(dataframe) 
+# datahandle.getDataFrame()
