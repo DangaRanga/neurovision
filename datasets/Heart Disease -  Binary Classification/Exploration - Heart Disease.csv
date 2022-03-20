@@ -1,101 +1,101 @@
-PatientId,Age,Sex,ChestPainType,RestingBP,Cholesterol,FastingBS,RestingECG,MaxHR,ExerciseAngina,Oldpeak,ST_Slope
-818,36,M,NAP,112,340,0,Normal,184,N,1.0,Flat
-819,63,M,ASY,170,177,0,Normal,84,Y,2.5,Down
-820,58,M,ASY,114,318,0,ST,140,N,4.4,Down
-821,64,M,ASY,144,0,0,ST,122,Y,1.0,Flat
-822,46,M,ASY,118,186,0,Normal,124,N,0.0,Flat
-823,56,M,ASY,120,0,0,ST,100,Y,-1.0,Down
-824,38,M,ASY,135,0,1,Normal,150,N,0.0,Flat
-825,74,M,TA,145,216,1,Normal,116,Y,1.8,Flat
-826,38,F,ASY,105,0,1,Normal,166,N,2.8,Up
-827,54,F,ATA,120,230,1,Normal,140,N,0.0,Up
-828,58,M,ASY,135,222,0,Normal,100,N,0.0,Up
-829,70,M,ATA,156,245,0,LVH,143,N,0.0,Up
-830,74,M,ATA,145,0,1,ST,123,N,1.3,Up
-831,59,M,ASY,140,264,1,LVH,119,Y,0.0,Flat
-832,57,M,ASY,150,255,0,Normal,92,Y,3.0,Flat
-833,50,M,ASY,115,0,0,Normal,120,Y,0.5,Flat
-834,53,M,ATA,140,320,0,Normal,162,N,0.0,Up
-835,38,M,ASY,110,289,0,Normal,105,Y,1.5,Down
-836,55,M,ASY,120,226,0,LVH,127,Y,1.7,Down
-837,53,M,ASY,123,282,0,Normal,95,Y,2.0,Flat
-838,49,M,NAP,118,149,0,LVH,126,N,0.8,Up
-839,44,M,NAP,120,226,0,Normal,169,N,0.0,Up
-840,38,F,ASY,110,0,0,Normal,156,N,0.0,Flat
-841,50,F,ATA,110,202,0,Normal,145,N,0.0,Up
-842,55,M,ASY,160,289,0,LVH,145,Y,0.8,Flat
-843,60,M,ASY,142,216,0,Normal,110,Y,2.5,Flat
-844,57,M,ASY,110,197,0,LVH,100,N,0.0,Up
-845,48,F,ATA,133,308,0,ST,156,N,2.0,Up
-846,60,M,ASY,140,281,0,ST,118,Y,1.5,Flat
-847,49,M,NAP,115,265,0,Normal,175,N,0.0,Flat
-848,57,M,ASY,140,214,0,ST,144,Y,2.0,Flat
-849,55,M,ASY,172,260,0,Normal,73,N,2.0,Flat
-850,39,F,NAP,138,220,0,Normal,152,N,0.0,Flat
-851,52,M,ASY,140,404,0,Normal,124,Y,2.0,Flat
-852,63,F,ASY,108,269,0,Normal,169,Y,1.8,Flat
-853,47,M,NAP,110,0,1,Normal,120,Y,0.0,Flat
-854,55,M,NAP,120,220,0,LVH,134,N,0.0,Up
-855,65,M,TA,138,282,1,LVH,174,N,1.4,Flat
-856,57,M,ASY,139,277,1,ST,118,Y,1.9,Flat
-857,47,F,ATA,140,257,0,Normal,135,N,1.0,Up
-858,46,M,ASY,110,240,0,ST,140,N,0.0,Up
-859,57,M,ASY,152,274,0,Normal,88,Y,1.2,Flat
-860,45,M,ASY,140,224,0,Normal,144,N,0.0,Up
-861,54,M,ASY,130,242,0,Normal,91,Y,1.0,Flat
-862,53,M,ASY,124,243,0,Normal,122,Y,2.0,Flat
-863,45,M,NAP,135,192,0,Normal,110,N,0.0,Up
-864,31,F,ATA,100,219,0,ST,150,N,0.0,Up
-865,41,M,ASY,110,172,0,LVH,158,N,0.0,Up
-866,51,M,NAP,94,227,0,Normal,154,Y,0.0,Up
-867,50,M,ASY,144,349,0,LVH,120,Y,1.0,Up
-868,60,M,ASY,125,258,0,LVH,141,Y,2.8,Flat
-869,56,M,ATA,130,221,0,LVH,163,N,0.0,Up
-870,41,M,ATA,120,295,0,Normal,170,N,0.0,Up
-871,53,M,NAP,145,518,0,Normal,130,N,0.0,Flat
-872,63,M,ASY,140,0,1,LVH,149,N,2.0,Up
-873,57,M,ASY,130,311,1,ST,148,Y,2.0,Flat
-874,59,M,ASY,135,0,0,Normal,115,Y,1.0,Flat
-875,69,M,ASY,130,0,1,ST,129,N,1.0,Flat
-876,45,M,ATA,128,308,0,LVH,170,N,0.0,Up
-877,57,M,NAP,150,126,1,Normal,173,N,0.2,Up
-878,62,F,ASY,140,394,0,LVH,157,N,1.2,Flat
-879,54,M,ATA,108,309,0,Normal,156,N,0.0,Up
-880,62,F,TA,140,0,1,Normal,143,N,0.0,Flat
-881,37,F,ATA,120,260,0,Normal,130,N,0.0,Up
-882,52,M,ATA,120,284,0,Normal,118,N,0.0,Up
-883,54,M,ATA,160,195,0,ST,130,N,1.0,Up
-884,49,M,TA,130,0,0,ST,145,N,3.0,Flat
-885,70,M,ASY,140,0,1,Normal,157,Y,2.0,Flat
-886,64,M,ASY,143,306,1,ST,115,Y,1.8,Flat
-887,48,M,ASY,160,355,0,Normal,99,Y,2.0,Flat
-888,51,M,ASY,110,0,1,Normal,92,N,0.0,Flat
-889,70,M,NAP,160,269,0,Normal,112,Y,2.9,Flat
-890,43,F,NAP,150,254,0,Normal,175,N,0.0,Up
-891,64,M,NAP,140,335,0,Normal,158,N,0.0,Up
-892,59,M,ASY,140,0,0,ST,117,Y,1.0,Flat
-893,57,M,ASY,110,335,0,Normal,143,Y,3.0,Flat
-894,61,M,ASY,105,0,1,Normal,110,Y,1.5,Up
-895,57,F,ASY,180,347,0,ST,126,Y,0.8,Flat
-896,45,F,ATA,130,237,0,Normal,170,N,0.0,Up
-897,61,M,ASY,120,260,0,Normal,140,Y,3.6,Flat
-898,43,M,ASY,150,247,0,Normal,130,Y,2.0,Flat
-899,48,M,ASY,140,208,0,Normal,159,Y,1.5,Up
-900,57,F,TA,130,308,0,Normal,98,N,1.0,Flat
-901,48,M,ASY,106,263,1,Normal,110,N,0.0,Flat
-902,39,M,ATA,120,241,0,ST,146,N,2.0,Up
-903,46,M,ASY,140,311,0,Normal,120,Y,1.8,Flat
-904,58,M,ASY,120,0,0,LVH,106,Y,1.5,Down
-905,68,M,NAP,134,254,1,Normal,151,Y,0.0,Up
-906,65,M,ASY,160,0,1,ST,122,N,1.2,Flat
-907,54,M,ASY,125,216,0,Normal,140,N,0.0,Flat
-908,51,M,ASY,132,227,1,ST,138,N,0.2,Up
-909,51,F,NAP,130,256,0,LVH,149,N,0.5,Up
-910,52,F,NAP,125,272,0,Normal,139,N,0.0,Up
-911,59,M,ASY,110,239,0,LVH,142,Y,1.2,Flat
-912,40,M,ASY,125,0,1,Normal,165,N,0.0,Flat
-913,50,M,ASY,130,233,0,Normal,121,Y,2.0,Flat
-914,47,M,ASY,140,276,1,Normal,125,Y,0.0,Up
-915,58,M,NAP,140,211,1,LVH,165,N,0.0,Up
-916,62,M,TA,135,139,0,ST,137,N,0.2,Up
-917,60,M,ASY,160,0,1,Normal,149,N,0.4,Flat
+PatientId,Species,ChestPainType,RestingBP,Cholesterol,MaxHR,ST_Slope
+818,Homo sapiens,NAP,112,340,184,Flat
+819,Homo sapiens,ASY,170,177,84,Down
+820,Homo sapiens,ASY,114,318,140,Down
+821,Homo sapiens,ASY,144,0,122,Flat
+822,Homo sapiens,ASY,118,186,124,Flat
+823,Homo sapiens,ASY,120,0,100,Down
+824,Homo sapiens,ASY,135,0,150,Flat
+825,Homo sapiens,TA,145,216,116,Flat
+826,Homo sapiens,ASY,105,0,166,Up
+827,Homo sapiens,ATA,120,230,140,Up
+828,Homo sapiens,ASY,135,222,100,Up
+829,Homo sapiens,ATA,156,245,143,Up
+830,Homo sapiens,ATA,145,0,123,Up
+831,Homo sapiens,ASY,140,264,119,Flat
+832,Homo sapiens,ASY,150,255,92,Flat
+833,Homo sapiens,ASY,115,0,120,Flat
+834,Homo sapiens,ATA,140,320,162,Up
+835,Homo sapiens,ASY,110,289,105,Down
+836,Homo sapiens,ASY,120,226,127,Down
+837,Homo sapiens,ASY,123,282,95,Flat
+838,Homo sapiens,NAP,118,149,126,Up
+839,Homo sapiens,NAP,120,226,169,Up
+840,Homo sapiens,ASY,110,0,156,Flat
+841,Homo sapiens,ATA,110,202,145,Up
+842,Homo sapiens,ASY,160,289,145,Flat
+843,Homo sapiens,ASY,142,216,110,Flat
+844,Homo sapiens,ASY,110,197,100,Up
+845,Homo sapiens,ATA,133,308,156,Up
+846,Homo sapiens,ASY,140,281,118,Flat
+847,Homo sapiens,NAP,115,265,175,Flat
+848,Homo sapiens,ASY,140,214,144,Flat
+849,Homo sapiens,ASY,172,260,73,Flat
+850,Homo sapiens,NAP,138,220,152,Flat
+851,Homo sapiens,ASY,140,404,124,Flat
+852,Homo sapiens,ASY,108,269,169,Flat
+853,Homo sapiens,NAP,110,0,120,Flat
+854,Homo sapiens,NAP,120,220,134,Up
+855,Homo sapiens,TA,138,282,174,Flat
+856,Homo sapiens,ASY,139,277,118,Flat
+857,Homo sapiens,ATA,140,257,135,Up
+858,Homo sapiens,ASY,110,240,140,Up
+859,Homo sapiens,ASY,152,274,88,Flat
+860,Homo sapiens,ASY,140,224,144,Up
+861,Homo sapiens,ASY,130,242,91,Flat
+862,Homo sapiens,ASY,124,243,122,Flat
+863,Homo sapiens,NAP,135,192,110,Up
+864,Homo sapiens,ATA,100,219,150,Up
+865,Homo sapiens,ASY,110,172,158,Up
+866,Homo sapiens,NAP,94,227,154,Up
+867,Homo sapiens,ASY,144,349,120,Up
+868,Homo sapiens,ASY,125,258,141,Flat
+869,Homo sapiens,ATA,130,221,163,Up
+870,Homo sapiens,ATA,120,295,170,Up
+871,Homo sapiens,NAP,145,518,130,Flat
+872,Homo sapiens,ASY,140,0,149,Up
+873,Homo sapiens,ASY,130,311,148,Flat
+874,Homo sapiens,ASY,135,0,115,Flat
+875,Homo sapiens,ASY,130,0,129,Flat
+876,Homo sapiens,ATA,128,308,170,Up
+877,Homo sapiens,NAP,150,126,173,Up
+878,Homo sapiens,ASY,140,394,157,Flat
+879,Homo sapiens,ATA,108,309,156,Up
+880,Homo sapiens,TA,140,0,143,Flat
+881,Homo sapiens,ATA,120,260,130,Up
+882,Homo sapiens,ATA,120,284,118,Up
+883,Homo sapiens,ATA,160,195,130,Up
+884,Homo sapiens,TA,130,0,145,Flat
+885,Homo sapiens,ASY,140,0,157,Flat
+886,Homo sapiens,ASY,143,306,115,Flat
+887,Homo sapiens,ASY,160,355,99,Flat
+888,Homo sapiens,ASY,110,0,92,Flat
+889,Homo sapiens,NAP,160,269,112,Flat
+890,Homo sapiens,NAP,150,254,175,Up
+891,Homo sapiens,NAP,140,335,158,Up
+892,Homo sapiens,ASY,140,0,117,Flat
+893,Homo sapiens,ASY,110,335,143,Flat
+894,Homo sapiens,ASY,105,0,110,Up
+895,Homo sapiens,ASY,180,347,126,Flat
+896,Homo sapiens,ATA,130,237,170,Up
+897,Homo sapiens,ASY,120,260,140,Flat
+898,Homo sapiens,ASY,150,247,130,Flat
+899,Homo sapiens,ASY,140,208,159,Up
+900,Homo sapiens,TA,130,308,98,Flat
+901,Homo sapiens,ASY,106,263,110,Flat
+902,Homo sapiens,ATA,120,241,146,Up
+903,Homo sapiens,ASY,140,311,120,Flat
+904,Homo sapiens,ASY,120,0,106,Down
+905,Homo sapiens,NAP,134,254,151,Up
+906,Homo sapiens,ASY,160,0,122,Flat
+907,Homo sapiens,ASY,125,216,140,Flat
+908,Homo sapiens,ASY,132,227,138,Up
+909,Homo sapiens,NAP,130,256,149,Up
+910,Homo sapiens,NAP,125,272,139,Up
+911,Homo sapiens,ASY,110,239,142,Flat
+912,Homo sapiens,ASY,125,0,165,Flat
+913,Homo sapiens,ASY,130,233,121,Flat
+914,Homo sapiens,ASY,140,276,125,Up
+915,Homo sapiens,NAP,140,211,165,Up
+916,Homo sapiens,TA,135,139,137,Up
+917,Homo sapiens,ASY,160,0,149,Flat
