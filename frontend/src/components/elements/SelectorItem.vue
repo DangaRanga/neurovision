@@ -1,13 +1,24 @@
 <template>
-  <div>
+  <div class="flex flex-col items-center">
     <article
       class="shadow-lg w-52 h-52 rounded-full flex items-center justify-center transition-colors duration-200"
       :class="selected ? 'border-2 border-primary parent' : ''"
       id="selectable"
       @click="toggleSelected"
     >
-      <img :src="require(img_src)" :alt="title" />
+      <div v-if="image">
+        <img :src="image" :alt="title" />
+      </div>
     </article>
+
+    <div class="text-center w-1/2 my-3">
+      <h1 class="text-lg font-bold text-primary_dark">
+        {{ title }}
+      </h1>
+      <p class="text-gray-600">
+        {{ summary }}
+      </p>
+    </div>
     <transition name="fade">
       <div v-if="selected">
         <svg
@@ -33,13 +44,19 @@
   </div>
 </template>
 <script>
+import { toRefs } from "vue";
+
 export default {
   name: "selection-item",
   props: {
-    img_src: String,
+    image: String,
     selected: Boolean,
     title: String,
     summary: String,
+  },
+
+  setup(props) {
+    const { image, selected, title, summary } = toRefs(props);
   },
   data() {
     return {
@@ -71,8 +88,8 @@ export default {
   height: 30px;
   border-radius: 50%;
   position: relative;
-  top: -165px;
-  left: 180px;
+  top: -290px;
+  left: 90px;
   stroke-width: 2;
   stroke: #fff;
   stroke-miterlimit: 10;
