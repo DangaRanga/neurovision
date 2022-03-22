@@ -23,16 +23,22 @@ def create_model():
     if request.method == 'POST':
         global modelhandler
         modelhandler = ModelHandler(**request.json)
+        modelhandler.createModel()
         return jsonify({"msg": "Training Model was created successfully"}), 200
-    return jsonify({"message": "Method not Allowed"}), 405
+    return jsonify({"msg": "Method not Allowed"}), 405
 
 @app.route("/api/data", methods=["GET"])
 def get_data():
-    return jsonify({"message": "This is a starter Flask Project"}), 200
+    global datahandler
+    if request.method == "GET":
+        selection = request.args.get('data')
+        result = datahandler.toJSON(choice=selection)
+        return jsonify({"msg": "Data Transmission Successful", "data": result}), 200
+    return jsonify({"msg": "Method not Allowed"}), 405
 
 
 @app.route("/api/data/remove", methods=["POST"])
-def remove_feature(feature, dataframe):
+def remove_feature():
     return jsonify({"message": "This is a starter Flask Project"}), 200
 
 
@@ -42,7 +48,7 @@ def normalize():
 
 
 @app.route("/api/model/fit", methods=["POST"])
-def fit(dataframe):
+def fit():
     return jsonify({"message": "This is a starter Flask Project"}), 200
 
 

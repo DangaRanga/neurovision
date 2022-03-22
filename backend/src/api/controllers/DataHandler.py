@@ -53,6 +53,13 @@ class DataHandler():
     def dataset_split(self, train):
         test_size = 1 - (train / 100)
         self.x_train, self.x_test, self.y_train, self.y_test = train_test_split(self.inputs, self.output, random_state=100, test_size = test_size)
+
+    def toJSON(self, choice=0):
+        if choice == 0:
+            return self.dataframe.iloc[1:10, ].to_json(orient="split")
+        elif choice == 1:
+            return self.dataframe2.iloc[1:10, ].to_json(orient="split")
+
     
 
 # from controllers.DataHandler import DataHandler
