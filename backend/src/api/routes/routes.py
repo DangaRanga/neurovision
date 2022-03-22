@@ -39,7 +39,7 @@ def get_data():
 def remove_feature():
     if request.method == 'POST':
         global datahandler
-        datahandler.removeFeature(request.json["fetureName"])
+        datahandler.removeFeature(request.json["featureName"])
         dataframe = datahandler.getDataFrame()
         print(dataframe)
         return jsonify({"msg": dataframe.to_json(orient = 'table')}), 200
