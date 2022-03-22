@@ -4,6 +4,9 @@ class Config(object):
     """Base Config Object"""
     DEBUG = False
     SECRET_KEY = os.urandom(24)
+    DATASET_FOLDER = '../../datasets'
+
+import os
 
 
 class DevelopmentConfig(Config):
