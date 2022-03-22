@@ -26,7 +26,6 @@ class ModelHandler(object):
         ?? optimizer -> Adam, SGD
     """
     def __init__(self, **kwargs) -> None:
-         # Checking for the layers 
         if "prob" in kwargs.keys():
           self.prob = "RGR"
         else: 
@@ -88,6 +87,7 @@ class ModelHandler(object):
             "acc_hist": hist.history['accuracy']
         }
     
+    ## TBD
     def getWeights(self):
       for i in self.model.layers:
           print(i.weights)
