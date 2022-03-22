@@ -56,10 +56,25 @@ def remove_invalid():
         return jsonify({"msg": dataframe.to_json(orient = 'table')}), 200
     return jsonify({"message": "Method not Allowed"}), 405
 
+@app.route("/api/data/translate", methods=["POST"])
+def translate_data():
+    if request.method == 'POST':
+        global datahandler
+        datahandler.translateData()
+        dataframe = datahandler.getDataFrame()
+        print(dataframe)
+        return jsonify({"msg": dataframe.to_json(orient = 'table')}), 200
+    return jsonify({"message": "Method not Allowed"}), 405
 
 @app.route("/api/data/normalize", methods=["POST"])
-def normalize():
-    return jsonify({"message": "This is a starter Flask Project"}), 200
+def normalize_data():
+    if request.method == 'POST':
+        global datahandler
+        datahandler.normalizeData()
+        dataframe = datahandler.getDataFrame()
+        print(dataframe)
+        return jsonify({"msg": dataframe.to_json(orient = 'table')}), 200
+    return jsonify({"message": "Method not Allowed"}), 405
 
 
 @app.route("/api/model/fit", methods=["POST"])
