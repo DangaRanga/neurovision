@@ -23,7 +23,7 @@ def create_datahandler(fileurl):
     dataframe = pd.DataFrame(data)
     datahandler = DataHandler(dataframe)
     print(datahandler)
-    return jsonify({"message": "This is a starter Flask Project"}), 200
+    return jsonify({"message": "This is a starter Flask Project"}), 201
 
 @app.route("/api/data", methods=["GET"])
 def get_data():
