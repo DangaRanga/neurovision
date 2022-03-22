@@ -1,35 +1,60 @@
-from src.api import app
+import pandas as pd
+from api import app
 from flask import json, request, jsonify, g, make_response, abort, redirect
 from werkzeug.utils import secure_filename
 from flask.helpers import send_from_directory
-from controllers.DataHandler import DataHandler
+from ..controllers.DataHandler import DataHandler
+from ..controllers.ModelHandler import ModelHandler
 
-
-
-# @app.route('/', defaults={'path': ''})
-# @app.route('/<path:path>')
-# def home():
-#     return redirect("/api", 200)
-# return jsonify({"message": "This is a starter Flask Project"}), 200
+#Global Imports
 global datahandler
+global modelhandler 
 
-@app.route("/api/create/datahandler", method=["POST"])
-def create_datahandler(fileurl):
-    url='https://drive.google.com/uc?id=' + fileurl.split('/')[-2]
-    data = pd.read_csv(url)
-    dataframe = pd.DataFrame(data)
-    datahandler = DataHandler(dataframe)
-    print(datahandler)
-    return jsonify({"message": "This is a starter Flask Project"}), 201
+@app.route("/api/create/data", methods=["POST"])
+def create_data():
+   # https://drive.google.com/file/d/1dcDUnZcCOpQJdspssXoxueJZiXBDYeNK/view?usp=sharing
+    if request.method == 'POST':
+        global datahandler
+        url='https://drive.google.com/uc?id=' + request.json["fileurl"].split('/')[-2]
+        dataframe = pd.read_csv(r".././datasets/Heart Disease -  Binary Classification/Heart Disease - Training.csv")
+        datahandler = DataHandler(dataframe)
+        return jsonify({"msg": "Dataset was created successfully"}), 200
+    return jsonify({"message": "Method not Allowed"}), 405
+    
+
+@app.route("/api/create/model", methods=["POST"])
+def create_model():
+    if request.method == 'POST':
+        global modelhandler
+        modelhandler = ModelHandler(**request.json)
+        return jsonify({"msg": "Training Model was created successfully"}), 200
+    return jsonify({"message": "Method not Allowed"}), 405
 
 @app.route("/api/data", methods=["GET"])
 def get_data():
     return jsonify({"message": "This is a starter Flask Project"}), 200
 
 
-@app.route("/api/data/remove", methods=["POST"])
-def remove_feature(feature, dataframe):
-    return jsonify({"message": "This is a starter Flask Project"}), 200
+@app.route("/api/data/remove/feature", methods=["POST"])
+def remove_feature():
+    if request.method == 'POST':
+        global datahandler
+        datahandler.removeFeature(request.json["featureName"])
+        dataframe = datahandler.getDataFrame()
+        print(dataframe)
+        return jsonify({"msg": dataframe.to_json(orient = 'table')}), 200
+    return jsonify({"message": "Method not Allowed"}), 405
+    
+
+@app.route("/api/data/remove/invalid", methods=["POST"])
+def remove_invalid():
+    if request.method == 'POST':
+        global datahandler
+        datahandler.removeInvalidData()
+        dataframe = datahandler.getDataFrame()
+        print(dataframe)
+        return jsonify({"msg": dataframe.to_json(orient = 'table')}), 200
+    return jsonify({"message": "Method not Allowed"}), 405
 
 
 @app.route("/api/data/normalize", methods=["POST"])
