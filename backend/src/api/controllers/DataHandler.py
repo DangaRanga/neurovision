@@ -3,7 +3,7 @@ from sklearn.model_selection import train_test_split
 import numpy as np
 import pandas as pd
 
-class DataHandler():
+class DataHandler(object):
 
     def __init__(self, dataframe):
         self.dataframe = dataframe
@@ -56,9 +56,11 @@ class DataHandler():
 
     def toJSON(self, choice=0):
         if choice == 0:
-            return self.dataframe.iloc[1:10, ].to_json(orient="split")
+            # return self.dataframe.iloc[1:10, ].to_dict(orient="split")
+            return self.dataframe.to_dict(orient="split")
         elif choice == 1:
-            return self.dataframe2.iloc[1:10, ].to_json(orient="split")
+            # return self.dataframe2.iloc[1:10, ].to_dict(orient="split")
+            return self.dataframe2.to_dict(orient="split")
 
     
 
