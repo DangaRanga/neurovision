@@ -75,7 +75,7 @@ class ModelHandler(object):
 
         self.model.compile(optimizer=optimizer, loss='mse', metrics=['accuracy'])
     
-    def train(self, features, output) -> None:
+    def train(self, features, output) -> dict:
         hist = self.model.fit(features,
                               output, 
                               epochs=self.epochs, 
