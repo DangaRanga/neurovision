@@ -2,7 +2,7 @@
   <div
     class="flex flex-col items-center justify-center border h-screen border-red-500"
   >
-    <div class="grid grid-cols-3 my-10">
+    <div class="grid grid-cols-3 mt-48">
       <selector-item
         image=""
         title="Heart Predict Dataset"
