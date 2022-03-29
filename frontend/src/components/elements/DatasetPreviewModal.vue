@@ -1,18 +1,29 @@
 <template>
   <!-- Main modal -->
 
-  <data-table></data-table>
+  <data-table :headings="heartData.headings" :rows="heartData.rows"
+    >></data-table
+  >
 </template>
-<script>
+<script setup>
 import DataTable from "@/components/elements/DataTable.vue";
+import { ref } from "vue";
 
-export default {
-  components: {
-    "data-table": DataTable,
-  },
-
-  props: {
-    isVisible: Boolean,
-  },
-};
+const heartData = ref({
+  headings: [
+    "PatientId",
+    "Species",
+    "ChestPainType",
+    "RestingBP",
+    "Cholesterol",
+    "MaxHR",
+    "ST_Slope",
+  ],
+  rows: [
+    [0, "Homo sapiens", "ATA", "150", "214", "168", "Up"],
+    [0, "Homo sapiens", "ATA", "150", "214", "168", "Up"],
+    [0, "Homo sapiens", "ATA", "150", "214", "168", "Up"],
+    [0, "Homo sapiens", "ATA", "150", "214", "168", "Up"],
+  ],
+});
 </script>

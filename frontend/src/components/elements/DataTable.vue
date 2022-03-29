@@ -13,38 +13,18 @@
         </tr>
       </thead>
       <tbody>
-        <tr class="border-b odd:bg-white even:bg-gray-50">
-          <th
-            scope="row"
-            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
+        <tr
+          v-for="(row, index) in rows"
+          :key="index"
+          class="border-b odd:bg-white even:bg-gray-50"
+        >
+          <td
+            v-for="(detail, detailIndex) in row"
+            :key="detailIndex"
+            class="px-6 py-4"
           >
-            Apple MacBook Pro 17"
-          </th>
-          <td class="px-6 py-4">Sliver</td>
-          <td class="px-6 py-4">Laptop</td>
-          <td class="px-6 py-4">$2999</td>
-        </tr>
-        <tr class="border-b odd:bg-white even:bg-gray-50">
-          <th
-            scope="row"
-            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
-          >
-            Apple MacBook Pro 17"
-          </th>
-          <td class="px-6 py-4">Sliver</td>
-          <td class="px-6 py-4">Laptop</td>
-          <td class="px-6 py-4">$2999</td>
-        </tr>
-        <tr class="border-b odd:bg-white even:bg-gray-50">
-          <th
-            scope="row"
-            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
-          >
-            Apple MacBook Pro 17"
-          </th>
-          <td class="px-6 py-4">Sliver</td>
-          <td class="px-6 py-4">Laptop</td>
-          <td class="px-6 py-4">$2999</td>
+            {{ detail }}
+          </td>
         </tr>
       </tbody>
     </table>
