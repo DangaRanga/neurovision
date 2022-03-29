@@ -2,16 +2,19 @@
   <nav>
     <navbar />
     <dataset-selection />
+    <!-- <page2 /> -->
   </nav>
 </template>
 <script>
 import Nav from "@/components/elements/Nav.vue";
 import DatasetSelection from "@/views/DatasetSelection.vue";
+import Page2 from "@/views/Page2.vue";
 
 export default {
   components: {
     navbar: Nav,
     "dataset-selection": DatasetSelection,
+    page2: Page2,
   },
 };
 </script>

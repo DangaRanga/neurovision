@@ -15,7 +15,7 @@ def create_data():
    # https://drive.google.com/file/d/1dcDUnZcCOpQJdspssXoxueJZiXBDYeNK/view?usp=sharing
     if request.method == 'POST':
         # url='https://drive.google.com/uc?id=' + request.json["fileurl"].split('/')[-2]
-        dataframe = pd.read_csv(r"./datasets/Heart Disease -  Binary Classification/Heart Disease - Training.csv")
+        dataframe = pd.read_csv(r"../datasets/Heart Disease -  Binary Classification/Heart Disease - Training.csv")
         datahandler = DataHandler(dataframe)
         return jsonify({"msg": "Dataset was created successfully"}), 200
     return jsonify({"msg": "Method not Allowed"}), 405

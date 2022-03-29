@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="flex flex-col items-center justify-center border h-screen"
-  >
+  <div class="flex flex-col items-center justify-center border h-screen">
     <div class="grid grid-cols-3 my-10">
       <selector-item
         image=""
