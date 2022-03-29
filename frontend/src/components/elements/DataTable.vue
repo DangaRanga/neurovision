@@ -30,17 +30,11 @@
     </table>
   </div>
 </template>
-<script>
-import { toRefs } from "vue";
+<script setup>
+import { defineProps } from "vue";
 
-export default {
-  props: {
-    rows: [Object],
-    headings: [String],
-  },
-
-  setup(props) {
-    const { headings, rows } = toRefs(props);
-  },
-};
+const props = defineProps({
+  rows: [Object],
+  headings: [String],
+});
 </script>
