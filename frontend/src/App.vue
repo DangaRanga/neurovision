@@ -1,5 +1,6 @@
 <template>
   <nav>
+    <!-- <CreateModel /> -->
     <navbar />
     <dataset-selection />
   </nav>
@@ -7,11 +8,13 @@
 <script>
 import Nav from "@/components/elements/Nav.vue";
 import DatasetSelection from "@/views/DatasetSelection.vue";
+import CreateModel from "@/views/CreateModel.vue";
 
 export default {
   components: {
     navbar: Nav,
     "dataset-selection": DatasetSelection,
+    CreateModel,
   },
 };
 </script>
