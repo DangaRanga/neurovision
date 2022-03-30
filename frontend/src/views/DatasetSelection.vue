@@ -44,25 +44,10 @@ import DatasetPreviewModal from "@/components/elements/DatasetPreviewModal.vue";
 import { ref } from "vue";
 export default {
   setup() {
+    // eslint-disable-next-line no-unused-vars
     const selected = ref(null);
 
-    const heartData = ref({
-      headings: [
-        "PatientId",
-        "Species",
-        "ChestPainType",
-        "RestingBP",
-        "Cholesterol",
-        "MaxHR",
-        "ST_Slope",
-      ],
-      rows: [
-        [0, "Homo sapiens", "ATA", "150", "214", "168", "Up"],
-        [0, "Homo sapiens", "ATA", "150", "214", "168", "Up"],
-        [0, "Homo sapiens", "ATA", "150", "214", "168", "Up"],
-        [0, "Homo sapiens", "ATA", "150", "214", "168", "Up"],
-      ],
-    });
+    // eslint-disable-next-line no-unused-vars
     function toggleDatasetPreview() {}
   },
 

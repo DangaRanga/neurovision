@@ -44,25 +44,8 @@
   </div>
 </template>
 <script>
-import { toRefs } from "vue";
-
 export default {
   name: "selection-item",
-  props: {
-    image: String,
-    selected: Boolean,
-    title: String,
-    summary: String,
-  },
-
-  setup(props) {
-    const { image, selected, title, summary } = toRefs(props);
-  },
-  data() {
-    return {
-      selected: false,
-    };
-  },
 
   methods: {
     toggleSelected() {
@@ -71,6 +54,18 @@ export default {
     },
   },
 };
+</script>
+<script setup>
+import { toRefs } from "vue";
+
+import { defineProps } from "vue";
+
+const props = defineProps({
+  image: String,
+  selected: Boolean,
+  title: String,
+  summary: String,
+});
 </script>
 <style scoped>
 .checkmark__circle {

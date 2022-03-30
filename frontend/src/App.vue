@@ -3,20 +3,20 @@
     <!-- <CreateModel /> -->
     <navbar />
     <dataset-selection />
-    <!-- <page2 /> -->
+    <!-- <customize-dataset /> -->
   </nav>
 </template>
 <script>
 import Nav from "@/components/elements/Nav.vue";
 import DatasetSelection from "@/views/DatasetSelection.vue";
-import Page2 from "@/views/Page2.vue";
+import CustomizeDataset from "@/views/CustomizeDataset.vue";
 import CreateModel from "@/views/CreateModel.vue";
 
 export default {
   components: {
     navbar: Nav,
     "dataset-selection": DatasetSelection,
-    page2: Page2,
+    "customize-dataset": CustomizeDataset,
     CreateModel,
   },
 };

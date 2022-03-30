@@ -1,4 +1,8 @@
-import { createRouter, createWebHashHistory, createWebHistory } from "vue-router";
+import {
+  createRouter,
+  createWebHashHistory,
+  createWebHistory,
+} from "vue-router";
 import DatasetSelection from "../views/DatasetSelection.vue";
 
 const routes = [
@@ -6,7 +10,7 @@ const routes = [
     path: "/",
     name: "home",
     component: DatasetSelection,
-  }
+  },
 ];
 
 const router = createRouter({
