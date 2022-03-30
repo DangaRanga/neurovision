@@ -1,6 +1,6 @@
 <template>
   <!-- Sidebar -->
-  <div class="bg-aliceblue grid grid-cols-1 py-10 w-full">
+  <div class="bg-primary_light grid grid-cols-1 py-10 w-full">
     <div class="w-full pl-8 pr-12">
       <h3 class="text-lg font-bold py-2">Dataset - Heart Disease Prediction</h3>
       <p class="text-s font-regular py-2">
@@ -54,13 +54,13 @@
           class="px-4 pt-12 mt-6 mb-4 flex flex-col text-center sm:flex-row sm:text-left sm:items-baseline"
         >
           <button
-            className="w-1/3 bg-darkslategrey text-white text-xs font-bold px-4 py-3 rounded shadow hover:shadow-md outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3"
+            className="w-1/3 bg-grey_dark text-white text-xs font-bold px-4 py-3 rounded shadow hover:shadow-md outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3"
             type="button"
           >
             Pervious Step
           </button>
           <button
-            className="w-1/3 bg-dodgerblue text-white text-xs font-semibold px-4 py-3 rounded shadow hover:shadow-md outline outline-1 lg:mr-1 lg:mb-0 ml-3 mb-3"
+            className="w-1/3 bg-primary text-white text-xs font-semibold px-4 py-3 rounded shadow hover:shadow-md outline outline-1 lg:mr-1 lg:mb-0 ml-3 mb-3"
             type="button"
           >
             Next Step

@@ -6,7 +6,7 @@
       class="flex-shrink-0 w-full md:w-2/3 mx-auto text-left md:mx-0 md:text-left pt-28"
     >
       <div
-        class="bg-white rounded-sm outline outline-1 outline-darkeslategrey w-5/6 h-96 mx-auto"
+        class="bg-white rounded-sm outline outline-1 outline-grey_dark w-5/6 h-96 mx-auto"
       >
         Insert Dataset Info
       </div>
