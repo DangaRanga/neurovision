@@ -33,6 +33,7 @@
 <script setup>
 import { defineProps } from "vue";
 
+// eslint-disable-next-line no-unused-vars
 const props = defineProps({
   rows: [Object],
   headings: [String],

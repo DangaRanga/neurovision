@@ -7,17 +7,19 @@
   </nav>
 </template>
 <script>
-import Nav from "@/components/elements/Nav.vue";
+import NavBar from "@/components/elements/NavBar.vue";
 import DatasetSelection from "@/views/DatasetSelection.vue";
 import CustomizeDataset from "@/views/CustomizeDataset.vue";
 import CreateModel from "@/views/CreateModel.vue";
 
 export default {
   components: {
-    navbar: Nav,
+    navbar: NavBar,
     "dataset-selection": DatasetSelection,
+    // eslint-disable-next-line vue/no-unused-components
     "customize-dataset": CustomizeDataset,
-    CreateModel,
+    // eslint-disable-next-line vue/no-unused-components
+    "create-model": CreateModel,
   },
 };
 </script>

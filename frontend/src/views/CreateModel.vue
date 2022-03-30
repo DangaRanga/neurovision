@@ -1,16 +1,16 @@
 <template>
   <div>
-    <Header />
+    <dataset-preview-header />
     <div></div>
   </div>
 </template>
 
 <script>
-import Header from "@/components/elements/Header.vue";
+import DatasetPreviewHeader from "@/components/elements/DatasetPreviewHeader.vue";
 
 export default {
   components: {
-    Header,
+    "dataset-preview-header": DatasetPreviewHeader,
   },
 };
 </script>
