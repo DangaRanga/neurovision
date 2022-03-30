@@ -5,11 +5,13 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
+    "test":"cypress open",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
     "autoprefixer": "^10",
     "core-js": "^3.8.3",
+    "cypress": "^9.5.3",
     "d3": "^7.3.0",
     "postcss": "^8",
     "tailwindcss": "^3",

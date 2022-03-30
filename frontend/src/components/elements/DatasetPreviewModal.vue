@@ -1,9 +1,10 @@
 <template>
   <!-- Main modal -->
 
-  <data-table :headings="heartData.headings" :rows="heartData.rows"
-    >></data-table
-  >
+  <data-table
+    :headings="heartData.headings"
+    :rows="heartData.rows"
+  ></data-table>
 </template>
 <script setup>
 import DataTable from "@/components/elements/DataTable.vue";
