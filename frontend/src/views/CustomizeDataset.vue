@@ -15,10 +15,10 @@
   </div>
 </template>
 <script>
-import SideBar from "../components/elements/SideBar.vue";
+import DatasetSideBar from "@/components/elements/DatasetSideBar.vue";
 export default {
   components: {
-    sidebar: SideBar,
+    "dataset-sidebar": DatasetSideBar,
   },
 };
 </script>
