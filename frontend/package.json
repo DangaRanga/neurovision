@@ -7,17 +7,17 @@
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
-    "lint:fix":"vue-cli-service lint --fix",
+    "lint:fix": "vue-cli-service lint --fix",
     "test:e2e": "cypress open"
   },
   "dependencies": {
     "autoprefixer": "^10",
     "core-js": "^3.8.3",
-    
     "d3": "^7.3.0",
     "postcss": "^8",
     "tailwindcss": "^3",
     "vue": "^3.2.13",
+    "vue-js-modal": "^2.0.1",
     "vue-router": "^4.0.3",
     "vue-tour": "^2.0.0"
   },
