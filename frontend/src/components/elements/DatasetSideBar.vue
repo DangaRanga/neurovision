@@ -11,7 +11,17 @@
     <div class="w-full">
       <form class="pl-10 py-6">
         <div class="py-4">
-          <p class="text-s font-semibold py-2">Type of Analysis</p>
+          <div
+            class="flex flex-row flex-nowrap md:items-center lg:items-start md:flex-row md:flex-nowrap"
+          >
+            <p class="w-4/5 text-s font-semibold py-2">Type of Analysis</p>
+            <img
+              :src="infographics_icon"
+              alt="train_info"
+              class="object-cover pt-2 mr-6 pr-10 items-center justify-center"
+              @click="showAnalysisType()"
+            />
+          </div>
           <select
             name="dataset"
             id="dataset"
@@ -25,7 +35,19 @@
           </select>
         </div>
         <div class="py-4">
-          <p class="text-s font-semibold py-2">Training Data Percentage</p>
+          <div
+            class="flex flex-row flex-nowrap md:items-center lg:items-start md:flex-row md:flex-nowrap"
+          >
+            <p class="w-4/5 text-s font-semibold py-2">
+              Training Data Percentage
+            </p>
+            <img
+              :src="infographics_icon"
+              alt="train_info"
+              class="object-cover pt-2 mr-6 pr-10 items-center justify-center"
+              @click="showTrain()"
+            />
+          </div>
           <select
             name="datasplit"
             id="datasplit"
@@ -39,7 +61,17 @@
           </select>
         </div>
         <div class="py-4">
-          <p class="text-s font-semibold py-2">Normalize Data</p>
+          <div
+            class="flex flex-row flex-nowrap md:items-center lg:items-start md:flex-row md:flex-nowrap"
+          >
+            <p class="w-4/5 text-s font-semibold py-2">Normalize Data</p>
+            <img
+              :src="infographics_icon"
+              alt="normalization_info"
+              class="object-cover pt-2 mr-6 pr-10 items-center justify-center"
+              @click="showNormalization()"
+            />
+          </div>
           <select
             name="normalize"
             id="normalize"
@@ -70,9 +102,55 @@
       </form>
     </div>
   </div>
+
+  <Modal
+    :topic="title"
+    :message="message"
+    v-show="isModalVisible"
+    @close="closeModal"
+  />
 </template>
 <script>
 // import DataTable from "@/components/elements/DataTable.vue";
+import infographics_icon from "@/assets/icons/infographics_icon.svg";
+import InfograpicModal from "@/components/elements/Infographic.vue";
 
-export default {};
+export default {
+  components: {
+    Modal: InfograpicModal,
+  },
+  data() {
+    return {
+      infographics_icon: infographics_icon,
+      trainTitle: "Training Data Pecentage",
+      trainInfo: "This is zxy, abc.",
+      isModalVisible: false,
+      message: "Helloo",
+      title: "My Title",
+    };
+  },
+
+  methods: {
+    showModal() {
+      this.isModalVisible = true;
+    },
+    closeModal() {
+      this.isModalVisible = false;
+    },
+    showTrain() {
+      this.title = "Training Data Percentage";
+      this.message = "This is the train xyz";
+      this.showModal();
+    },
+    showNormalization() {
+      this.title = "Normalize";
+      this.message = "Normalization is abc";
+      this.showModal();
+    },
+    showAnalysisType() {
+      this.title = "Binary Classification";
+      this.message = "Binary Classification id qrs";
+    },
+  },
+};
 </script>

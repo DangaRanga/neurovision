@@ -8,6 +8,7 @@
 </template>
 <script>
 import NavBar from "@/components/elements/NavBar.vue";
+import MyInfographic from "@/components/elements/Infographic.vue";
 import DatasetSelection from "@/views/DatasetSelection.vue";
 import CustomizeDataset from "@/views/CustomizeDataset.vue";
 import CreateModel from "@/views/CreateModel.vue";
@@ -15,11 +16,12 @@ import CreateModel from "@/views/CreateModel.vue";
 export default {
   components: {
     navbar: NavBar,
+    MyInfographic: MyInfographic,
     "dataset-selection": DatasetSelection,
     // eslint-disable-next-line vue/no-unused-components
     "customize-dataset": CustomizeDataset,
     // eslint-disable-next-line vue/no-unused-components
-    "create-model": CreateModel
+    "create-model": CreateModel,
   },
 };
 </script>
