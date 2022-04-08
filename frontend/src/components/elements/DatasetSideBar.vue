@@ -23,8 +23,8 @@
             />
           </div>
           <select
-            name="dataset"
-            id="dataset"
+            name="datasettype"
+            id="datasettype"
             class="bg-white rounded-sm outline outline-1 outline-white w-2/3 md:w-5/6 h-8 text-s"
           >
             <option value="binaryClassification">Binary Classification</option>
@@ -150,6 +150,7 @@ export default {
     showAnalysisType() {
       this.title = "Binary Classification";
       this.message = "Binary Classification id qrs";
+      this.showModal();
     },
   },
 };
