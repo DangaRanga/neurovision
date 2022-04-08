@@ -2,8 +2,8 @@
   <nav>
     <!-- <create-model /> -->
     <navbar />
-    <dataset-selection />
-    <!-- <customize-dataset /> -->
+    <!-- <dataset-selection /> -->
+    <customize-dataset />
   </nav>
 </template>
 <script>

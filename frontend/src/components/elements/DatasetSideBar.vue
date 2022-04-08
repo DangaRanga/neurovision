@@ -23,8 +23,8 @@
             />
           </div>
           <select
-            name="dataset"
-            id="dataset"
+            name="datasettype"
+            id="datasettype"
             class="bg-white rounded-sm outline outline-1 outline-white w-2/3 md:w-5/6 h-8 text-s"
           >
             <option value="binaryClassification">Binary Classification</option>
@@ -147,9 +147,15 @@ export default {
       this.message = "Normalization is abc";
       this.showModal();
     },
-    showAnalysisType() {
+    showAnalysisType: function (e) {
+      var id = e.datasettype.value;
+      var name =
+        e.datasettype.options[e.datasettype.options.selectedIndex].text;
+      console.log("id ", id);
+      console.log("name ", name);
       this.title = "Binary Classification";
       this.message = "Binary Classification id qrs";
+      this.showModal();
     },
   },
 };
