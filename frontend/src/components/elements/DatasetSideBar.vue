@@ -147,12 +147,7 @@ export default {
       this.message = "Normalization is abc";
       this.showModal();
     },
-    showAnalysisType: function (e) {
-      var id = e.datasettype.value;
-      var name =
-        e.datasettype.options[e.datasettype.options.selectedIndex].text;
-      console.log("id ", id);
-      console.log("name ", name);
+    showAnalysisType() {
       this.title = "Binary Classification";
       this.message = "Binary Classification id qrs";
       this.showModal();
