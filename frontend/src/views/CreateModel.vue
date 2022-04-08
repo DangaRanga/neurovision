@@ -1,21 +1,21 @@
 <template>
   <div>
-    <model-header />
-    <div class="grid grid-cols-3">
+    <model-header :isRunning=false />
+    <div class="grid grid-cols-3 min-h-screen">
       <div class="bg-primary col-span-2"></div>
-      <dataset-sidebar />
+      <model-sidebar />
     </div>
   </div>
 </template>
 
 <script>
 import ModelHeader from "@/components/elements/ModelHeader.vue";
-import DatasetSideBar from "@/components/elements/DatasetSideBar.vue";
+import ModelSidebar from "@/components/elements/ModelSidebar.vue";
 
 export default {
   components: {
     "model-header": ModelHeader,
-    "dataset-sidebar": DatasetSideBar
+    "model-sidebar": ModelSidebar
   },
 };
 </script>

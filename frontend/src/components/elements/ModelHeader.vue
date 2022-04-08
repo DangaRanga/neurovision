@@ -1,7 +1,7 @@
 <template>
   <div>
     <div
-      v-if="isRunning"
+      v-if="!isRunning"
       class="flex flex-row-reverse bg-grey_dark h-18 py-4 px-2 drop-shadow-lg"
     >
       <button
@@ -11,7 +11,7 @@
       </button>
     </div>
     <div
-      v-if="!isRunning"
+      v-if="isRunning"
       class="flex justify-between bg-grey_dark h-18 py-3 px-2 items-center drop-shadow-lg"
     >
       <div class="flex items-center">
@@ -74,12 +74,12 @@
 import HeaderDisplayItem from '@/components/elements/HeaderDisplayItem.vue';
 
 export default {
+  props: ['isRunning'],
   components : {
     "header-display-item": HeaderDisplayItem,
   },
   data() {
     return {
-      isRunning: false,
       hitems: [
         { header: "Epoch No.", value: 0 },
         { header: "Batch Size", value: 0 },
@@ -87,7 +87,7 @@ export default {
         { header: "Model Accuracy", value: 0 },
         { header: "Problem Type", value: "Classification" },
         { header: "Loss Function", value: "MSE" },
-      ]
+      ],
     };
   },
 };

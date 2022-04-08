@@ -1,9 +1,10 @@
 <template>
   <nav>
-    <!-- <create-model /> -->
+    
     <navbar />
-    <!-- <dataset-selection /> -->
-    <customize-dataset />
+    <dataset-selection />
+    <!-- <create-model /> -->
+    <!-- <customize-dataset /> -->
   </nav>
 </template>
 <script>
