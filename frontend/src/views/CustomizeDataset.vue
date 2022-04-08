@@ -11,7 +11,7 @@
         Insert Dataset Info
       </div>
     </div>
-    <sidebar class="w-1/3" />
+    <dataset-sidebar class="w-1/3" />
   </div>
 </template>
 <script>

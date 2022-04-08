@@ -1,16 +1,21 @@
 <template>
   <div>
-    <dataset-preview-header />
-    <div></div>
+    <model-header />
+    <div class="grid grid-cols-3">
+      <div class="bg-primary col-span-2"></div>
+      <dataset-sidebar />
+    </div>
   </div>
 </template>
 
 <script>
-import DatasetPreviewHeader from "@/components/elements/DatasetPreviewHeader.vue";
+import ModelHeader from "@/components/elements/ModelHeader.vue";
+import DatasetSideBar from "@/components/elements/DatasetSideBar.vue";
 
 export default {
   components: {
-    "dataset-preview-header": DatasetPreviewHeader,
+    "model-header": ModelHeader,
+    "dataset-sidebar": DatasetSideBar
   },
 };
 </script>

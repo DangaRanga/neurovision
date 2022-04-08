@@ -1,6 +1,6 @@
 <template>
   <nav>
-    <!-- <CreateModel /> -->
+    <!-- <create-model /> -->
     <navbar />
     <dataset-selection />
     <!-- <customize-dataset /> -->
@@ -19,7 +19,7 @@ export default {
     // eslint-disable-next-line vue/no-unused-components
     "customize-dataset": CustomizeDataset,
     // eslint-disable-next-line vue/no-unused-components
-    "create-model": CreateModel,
+    "create-model": CreateModel
   },
 };
 </script>
