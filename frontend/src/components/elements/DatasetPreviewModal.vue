@@ -1,10 +1,19 @@
 <template>
   <!-- Main modal -->
-
-  <data-table
-    :headings="heartData.headings"
-    :rows="heartData.rows"
-  ></data-table>
+  <div class="modal-backdrop">
+    <div class="modal">
+      <header id="modal-header">
+        <h1 class="text-3xl font-bold">Modal Title</h1>
+        <button type="button" class="btn-close" @click="close">x</button>
+      </header>
+      <section id="modal-body">
+        <data-table
+          :headings="heartData.headings"
+          :rows="heartData.rows"
+        ></data-table>
+      </section>
+    </div>
+  </div>
 </template>
 <script setup>
 import DataTable from "@/components/elements/DataTable.vue";
@@ -28,3 +37,33 @@ const heartData = ref({
   ],
 });
 </script>
+<script>
+export default {
+  methods: {
+    close() {
+      this.$emit("close");
+    },
+  },
+};
+</script>
+<style scoped>
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modal {
+  background: #ffffff;
+  border-radius: 5px;
+  overflow-x: auto;
+  display: flex;
+  padding: 50px 60px;
+  flex-direction: column;
+}
+</style>
