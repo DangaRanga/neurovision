@@ -41,7 +41,7 @@
     <div v-if="isRunning" class="bg-primary_light py-8 px-10 w-full h-full flex flex-col justify-between">
       <div class="mb-8">
         <div class="mb-10">
-          Tabbed Menu
+          <tabbed-menu />
         </div>
         <div>
           <sidebar-input 
@@ -70,11 +70,13 @@
 
 <script>
 import SidebarInput from "@/components/elements/SidebarInput.vue";
+import TabbedMenu from "@/components/elements/TabbedMenu.vue";
 
 export default {
   props: ['isRunning'],
   components: {
     "sidebar-input": SidebarInput,
+    "tabbed-menu": TabbedMenu,
   },
   data(){
     return {
