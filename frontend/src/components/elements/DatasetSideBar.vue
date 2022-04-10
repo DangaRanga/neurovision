@@ -2,7 +2,9 @@
   <aside>
     <div class="bg-primary_light grid grid-cols-1 py-10 w-full">
       <div class="w-full pl-8 pr-12">
-        <h3 class="text-lg font-bold py-2">Dataset - Heart Disease Prediction</h3>
+        <h3 class="text-lg font-bold py-2">
+          Dataset - Heart Disease Prediction
+        </h3>
         <p class="text-s font-regular py-2">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dictum enim
           pellentesque auctor ipsum integer feugiat risus nulla sed
@@ -27,7 +29,9 @@
               id="datasettype"
               class="bg-white rounded-sm outline outline-1 outline-white w-2/3 md:w-5/6 h-8 text-s"
             >
-              <option value="binaryClassification">Binary Classification</option>
+              <option value="binaryClassification">
+                Binary Classification
+              </option>
               <option value="multipleClassification">
                 Multiple Classification
               </option>
@@ -140,17 +144,20 @@ export default {
     },
     showTrain() {
       this.title = "Training Data Percentage";
-      this.message = "This is the train xyz";
+      this.message =
+        "This is the train Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ornare facilisis pellentesque vitae eget. Felis etiam elit tincidunt dis habitasse metus elementum enim.";
       this.showModal();
     },
     showNormalization() {
-      this.title = "Normalize";
-      this.message = "Normalization is abc";
+      this.title = "Normalization";
+      this.message =
+        "Normalization is Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ornare facilisis pellentesque vitae eget. Felis etiam elit tincidunt dis habitasse metus elementum enim. Id auctor enim vulputate sed in fusce non massa. ";
       this.showModal();
     },
     showAnalysisType() {
       this.title = "Binary Classification";
-      this.message = "Binary Classification id qrs";
+      this.message =
+        "Binary Classification is Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ornare facilisis pellentesque vitae eget. Felis etiam elit tincidunt dis habitasse metus elementum enim. Id auctor enim vulputate sed in fusce non massa. Vulputate etiam nunc, vitae elit sem faucibus pulvinar.";
       this.showModal();
     },
   },

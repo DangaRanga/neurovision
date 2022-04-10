@@ -1,6 +1,6 @@
 <template>
   <div class="modal-backdrop">
-    <div class="modal">
+    <div class="modal w-1/4">
       <header class="modal-header">
         <slot name="header"> {{ topic }} </slot>
         <button type="button" class="btn-close" @click="close">x</button>
@@ -11,9 +11,18 @@
       </section>
 
       <footer class="modal-footer">
-        <slot name="footer"> This is the default footer! </slot>
-        <button type="button" class="btn-green" @click="close">
-          Close Modal
+        <slot name="footer"> </slot>
+        <button
+          type="button"
+          class="btn-back items-center mx-auto"
+          @click="close"
+        >
+          <img
+            :src="back_icon"
+            alt="back_icon"
+            class="object-cover items-center justify-center mx-auto"
+            @click="showAnalysisType()"
+          />
         </button>
       </footer>
     </div>
@@ -21,11 +30,18 @@
 </template>
 
 <script>
+import back_icon from "@/assets/icons/back_icon.svg";
+
 export default {
   name: "MyInfographic",
   props: {
     topic: String,
     message: String,
+  },
+  data() {
+    return {
+      back_icon: back_icon,
+    };
   },
   methods: {
     close() {
@@ -51,6 +67,7 @@ export default {
 .modal {
   background: #ffffff;
   box-shadow: 2px 2px 20px 1px;
+  border-radius: 10px;
   overflow-x: auto;
   display: flex;
   flex-direction: column;
@@ -65,8 +82,9 @@ export default {
 .modal-header {
   position: relative;
   border-bottom: 1px solid #eeeeee;
-  color: #4aae9b;
-  justify-content: space-between;
+  color: #20a4f3;
+  font-weight: bold;
+  justify-content: center;
 }
 
 .modal-footer {
@@ -89,14 +107,15 @@ export default {
   padding: 10px;
   cursor: pointer;
   font-weight: bold;
-  color: #4aae9b;
+  color: #20a4f3;
   background: transparent;
 }
 
-.btn-green {
-  color: white;
-  background: #4aae9b;
-  border: 1px solid #4aae9b;
+.btn-back {
+  color: #20a4f3;
+  background: white;
+  border: 1px solid white;
   border-radius: 2px;
+  align-items: center;
 }
 </style>
