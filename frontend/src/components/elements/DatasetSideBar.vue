@@ -28,11 +28,12 @@
               name="datasettype"
               id="datasettype"
               class="bg-white rounded-sm outline outline-1 outline-white w-2/3 md:w-5/6 h-8 text-s"
+              @change="onChange($event)"
             >
               <option value="binaryClassification">
                 Binary Classification
               </option>
-              <option value="multipleClassification">
+              <option value="multivariateClassification">
                 Multiple Classification
               </option>
               <option value="prediction">Pediction</option>
@@ -68,7 +69,9 @@
             <div
               class="flex flex-row flex-nowrap md:items-center lg:items-start md:flex-row md:flex-nowrap"
             >
-              <p class="w-4/5 text-s font-semibold py-2">Normalize Data</p>
+              <p class="w-4/5 text-s font-semibold py-2">
+                Perform Normalization?
+              </p>
               <img
                 :src="infographics_icon"
                 alt="normalization_info"
@@ -132,6 +135,7 @@ export default {
       isModalVisible: false,
       message: "Helloo",
       title: "My Title",
+      analysisType: "None",
     };
   },
 
@@ -155,10 +159,35 @@ export default {
       this.showModal();
     },
     showAnalysisType() {
-      this.title = "Binary Classification";
-      this.message =
-        "Binary Classification is Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ornare facilisis pellentesque vitae eget. Felis etiam elit tincidunt dis habitasse metus elementum enim. Id auctor enim vulputate sed in fusce non massa. Vulputate etiam nunc, vitae elit sem faucibus pulvinar.";
+      switch (this.analysisType) {
+        case "binaryClassification":
+          this.title = "Binary Classification";
+          this.message =
+            "Binary Classification is Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ornare facilisis pellentesque vitae eget. Felis etiam elit tincidunt dis habitasse metus elementum enim. Id auctor enim vulputate sed in fusce non massa. Vulputate etiam nunc, vitae elit sem faucibus pulvinar.";
+          break;
+        case "multivariateClassification":
+          this.title = "Multivariate Classification";
+          this.message =
+            "Multivariable Classification is Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ornare facilisis pellentesque vitae eget. Felis etiam elit tincidunt dis habitasse metus elementum enim. Id auctor enim vulputate sed in fusce non massa. Vulputate etiam nunc, vitae elit sem faucibus pulvinar.";
+          break;
+        case "prediction":
+          this.title = "Prediction";
+          this.message =
+            "Prediction is Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ornare facilisis pellentesque vitae eget. Felis etiam elit tincidunt dis habitasse metus elementum enim. Id auctor enim vulputate sed in fusce non massa. Vulputate etiam nunc, vitae elit sem faucibus pulvinar.";
+          break;
+        default:
+          break;
+      }
+
       this.showModal();
+    },
+    onChange(event) {
+      let analysisOption = event.target.value;
+      this.analysisType = analysisOption;
+      var optionText =
+        event.target.options[event.target.options.selectedIndex].text;
+
+      console.log(optionText);
     },
   },
 };
