@@ -127,6 +127,9 @@ export default {
   components: {
     Modal: InfograpicModal,
   },
+  props: {
+    analysis: String,
+  },
   data() {
     return {
       infographics_icon: infographics_icon,
@@ -135,7 +138,7 @@ export default {
       isModalVisible: false,
       message: "Helloo",
       title: "My Title",
-      analysisType: "None",
+      analysisType: this.analysis,
     };
   },
 
@@ -176,9 +179,9 @@ export default {
             "Prediction is Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ornare facilisis pellentesque vitae eget. Felis etiam elit tincidunt dis habitasse metus elementum enim. Id auctor enim vulputate sed in fusce non massa. Vulputate etiam nunc, vitae elit sem faucibus pulvinar.";
           break;
         default:
-          this.title = "Binary Classification";
+          this.title = "Type of Analysis";
           this.message =
-            "Binary Classification is Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ornare facilisis pellentesque vitae eget. Felis etiam elit tincidunt dis habitasse metus elementum enim. Id auctor enim vulputate sed in fusce non massa. Vulputate etiam nunc, vitae elit sem faucibus pulvinar.";
+            "There are several different types of problems that can be modeled using neural networks. These include: Binary Classification, Multivariate Classification, Prediction and Regression.";
           break;
       }
 
