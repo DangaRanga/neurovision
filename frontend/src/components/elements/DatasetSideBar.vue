@@ -36,7 +36,7 @@
               <option value="multivariateClassification">
                 Multiple Classification
               </option>
-              <option value="prediction">Pediction</option>
+              <option value="prediction">Prediction</option>
             </select>
           </div>
           <div class="py-4">
@@ -176,6 +176,9 @@ export default {
             "Prediction is Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ornare facilisis pellentesque vitae eget. Felis etiam elit tincidunt dis habitasse metus elementum enim. Id auctor enim vulputate sed in fusce non massa. Vulputate etiam nunc, vitae elit sem faucibus pulvinar.";
           break;
         default:
+          this.title = "Binary Classification";
+          this.message =
+            "Binary Classification is Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ornare facilisis pellentesque vitae eget. Felis etiam elit tincidunt dis habitasse metus elementum enim. Id auctor enim vulputate sed in fusce non massa. Vulputate etiam nunc, vitae elit sem faucibus pulvinar.";
           break;
       }
 
