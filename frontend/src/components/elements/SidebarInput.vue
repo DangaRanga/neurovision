@@ -32,16 +32,16 @@
 import infographics_icon from "@/assets/icons/infographics_icon.svg";
 
 export default {
-    props : ["type"],
+    props : ["type", "options", "title"],
     data(){
         return {
             infographics_icon: infographics_icon,
-            options: [
-                { title: "ReLu", value: "relu"},
-                { title: "Sigmoid", value: "sigm"},
-                { title: "Softmax", value: "smax"},
-            ],
-            title: "Activation Function"
+            // options: [
+            //     { title: "ReLu", value: "relu"},
+            //     { title: "Sigmoid", value: "sigm"},
+            //     { title: "Softmax", value: "smax"},
+            // ],
+            // title: "Activation Function"
         }
     }
 }

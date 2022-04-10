@@ -3,7 +3,7 @@
     <model-header :isRunning=false />
     <div class="grid grid-cols-3 min-h-screen">
       <div class="bg-primary col-span-2"></div>
-      <model-sidebar />
+      <model-sidebar :isRunning=true />
     </div>
   </div>
 </template>
