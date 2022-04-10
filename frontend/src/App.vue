@@ -1,8 +1,9 @@
 <template>
   <nav>
     <navbar />
+    <router-view />
     <!-- <dataset-selection /> -->
-    <create-model />
+    <!-- <create-model /> -->
     <!-- <customize-dataset /> -->
   </nav>
 </template>

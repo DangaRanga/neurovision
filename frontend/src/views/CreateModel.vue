@@ -1,6 +1,6 @@
 <template>
   <div>
-    <model-header :isRunning=false />
+    <model-header :isRunning=true />
     <div class="grid grid-cols-3 min-h-screen">
       <div class="bg-primary col-span-2"></div>
       <model-sidebar :isRunning=true />
@@ -15,7 +15,7 @@ import ModelSidebar from "@/components/elements/ModelSidebar.vue";
 export default {
   components: {
     "model-header": ModelHeader,
-    "model-sidebar": ModelSidebar
+    "model-sidebar": ModelSidebar,
   },
 };
 </script>

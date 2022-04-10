@@ -11,7 +11,7 @@
         Insert Dataset Info
       </div>
     </div>
-    <dataset-sidebar class="w-1/3" />
+    <dataset-sidebar class="w-1/3" :analysis="analysisType" />
   </div>
 </template>
 <script>
@@ -19,6 +19,14 @@ import DatasetSideBar from "@/components/elements/DatasetSideBar.vue";
 export default {
   components: {
     "dataset-sidebar": DatasetSideBar,
+  },
+  data() {
+    return {
+      analysisType: "None",
+    };
+  },
+  created() {
+    this.analysisType = this.$route.params.analysisType;
   },
 };
 </script>

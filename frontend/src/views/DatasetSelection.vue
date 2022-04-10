@@ -24,11 +24,15 @@
         Preview Selected Dataset
       </button>
 
-      <button
+      <router-link
         class="text-white bg-primary hover:bg-blue-500 rounded-md py-3 px-4 mx-3 transition-colors duration-200"
+        :to="{
+          name: 'dataset',
+          params: { analysisType: 'binaryClassification' },
+        }"
       >
         Next Step
-      </button>
+      </router-link>
     </div>
     <div class="my-3">
       <p class="text-center font-medium text-primary_dark">
