@@ -1,11 +1,11 @@
 <template>
   <div>
-    <!-- <model-header :isRunning=true />
+    <model-header :isRunning="isRunning" />
     <div class="grid grid-cols-3 min-h-screen">
-      <div class="bg-primary col-span-2"></div>
-      <model-sidebar :isRunning=true />
-    </div> -->
-    <model-build />
+      <div class="bg-primary col-span-2">{{ isRunning }}</div>
+      <model-sidebar :isRunning="isRunning" :changeState="changeState" />
+    </div>
+    <!-- <model-build /> -->
   </div>
 </template>
 
@@ -19,6 +19,19 @@ export default {
     "model-header": ModelHeader,
     "model-sidebar": ModelSidebar,
     "model-build": ModelBuild,
+  },
+  data() {
+    return {
+      isRunning: false,
+    };
+  },
+  methods: {
+    changeState() {
+      this.isRunning = !this.isRunning;
+    },
+  },
+  created() {
+    this.isRunning = this.$route.params.isRunning == "true" ? true : false;
   },
 };
 </script>

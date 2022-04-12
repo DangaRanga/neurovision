@@ -27,6 +27,7 @@
             <select
               name="datasettype"
               id="datasettype"
+              v-model="selected"
               class="bg-white rounded-sm outline outline-1 outline-white w-2/3 md:w-5/6 h-8 text-s"
               @change="onChange($event)"
             >
@@ -92,18 +93,30 @@
           <div
             class="px-4 pt-12 mt-6 mb-4 flex flex-col text-center sm:flex-row sm:text-left sm:items-baseline"
           >
-            <button
+            <router-link
               className="w-1/3 bg-grey_dark text-white text-xs font-bold px-4 py-3 rounded shadow hover:shadow-md outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3"
-              type="button"
+              :to="{
+                name: 'create',
+                params: { isRunning: true },
+              }"
             >
               Pervious Step
-            </button>
-            <button
+            </router-link>
+            <router-link
+              class="w-1/3 bg-primary text-center text-white text-xs font-semibold px-4 py-3 rounded shadow hover:shadow-md outline outline-1 lg:mr-1 lg:mb-0 ml-3 mb-3"
+              :to="{
+                name: 'create',
+                params: { isRunning: false },
+              }"
+            >
+              Next Step
+            </router-link>
+            <!-- <button
               className="w-1/3 bg-primary text-white text-xs font-semibold px-4 py-3 rounded shadow hover:shadow-md outline outline-1 lg:mr-1 lg:mb-0 ml-3 mb-3"
               type="button"
             >
               Next Step
-            </button>
+            </button> -->
           </div>
           <p class="px-4 mx-auto">Step 2 of 5</p>
         </form>
@@ -139,6 +152,7 @@ export default {
       message: "Helloo",
       title: "My Title",
       analysisType: this.analysis,
+      selected: this.analysis,
     };
   },
 
@@ -151,37 +165,50 @@ export default {
     },
     showTrain() {
       this.title = "Training Data Percentage";
-      this.message =
-        "This is the train Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ornare facilisis pellentesque vitae eget. Felis etiam elit tincidunt dis habitasse metus elementum enim.";
+      this.message = `Refers to the percentage of data being used to train and teach the model 
+      the hidden features or patterns in the data.
+      Example: Training data is fed to the neural network continuously, in order for the model to 
+      continue to learn the features of the data. `;
       this.showModal();
     },
     showNormalization() {
       this.title = "Normalization";
-      this.message =
-        "Normalization is Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ornare facilisis pellentesque vitae eget. Felis etiam elit tincidunt dis habitasse metus elementum enim. Id auctor enim vulputate sed in fusce non massa. ";
+      this.message = `The process of transforming or changing the columns in a dataset to a common
+       scale is referred to as Normalization.
+       Example: In the process known as Min-Max scaling, values are rescaled to ensure that the 
+       values are within a specified range varying between 0 and 1. The process of scaling these 
+       values on a common scale is known as normalization.`;
       this.showModal();
     },
     showAnalysisType() {
       switch (this.analysisType) {
         case "binaryClassification":
           this.title = "Binary Classification";
-          this.message =
-            "Binary Classification is Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ornare facilisis pellentesque vitae eget. Felis etiam elit tincidunt dis habitasse metus elementum enim. Id auctor enim vulputate sed in fusce non massa. Vulputate etiam nunc, vitae elit sem faucibus pulvinar.";
+          this.message = `A type of classification that predicts categorical variables and categorizes
+           the output into two classes. This is especially important when predicting a possible outcome
+            based on a series of data given.
+            Example: A patient displaying multiple symptoms for a particular disease is predicted to be 
+            ‘healthy’ or ‘carrying the disease’ based on the two possible outcomes of their diagnosis. 
+            This outcome is categorized into two classes known as positive and negative. `;
           break;
         case "multivariateClassification":
           this.title = "Multivariate Classification";
-          this.message =
-            "Multivariable Classification is Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ornare facilisis pellentesque vitae eget. Felis etiam elit tincidunt dis habitasse metus elementum enim. Id auctor enim vulputate sed in fusce non massa. Vulputate etiam nunc, vitae elit sem faucibus pulvinar.";
+          this.message = `The term ‘multivariate’ refers to having one or more variables. It is the process
+           by which data contains observations with more than one variable or outcome being measured.
+           Example: The measurement of a star in terms of different variables such as its color, luminosity 
+           and environment`;
           break;
         case "prediction":
           this.title = "Prediction";
-          this.message =
-            "Prediction is Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ornare facilisis pellentesque vitae eget. Felis etiam elit tincidunt dis habitasse metus elementum enim. Id auctor enim vulputate sed in fusce non massa. Vulputate etiam nunc, vitae elit sem faucibus pulvinar.";
+          this.message = `The end result or output of an algorithm that has been trained on a dataset 
+          containing  already existing data and new data in an effort to determine a particular outcome.
+          Example: Determining or predicting the weather forecast for a particular day based on a historical 
+          dataset and new data gathered.`;
           break;
         default:
           this.title = "Type of Analysis";
-          this.message =
-            "There are several different types of problems that can be modeled using neural networks. These include: Binary Classification, Multivariate Classification, Prediction and Regression.";
+          this.message = `There are several different types of problems that can be modeled using neural networks. 
+          These include: Binary Classification, Multivariate Classification, Prediction and Regression.`;
           break;
       }
 

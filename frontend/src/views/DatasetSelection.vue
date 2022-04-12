@@ -8,12 +8,12 @@
       ></selector-item>
       <selector-item
         image=""
-        title="cat image"
+        title="Iris Dataset"
         summary="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt"
       ></selector-item>
       <selector-item
         image=""
-        title="cat image"
+        title="House Price Dataset"
         summary="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt"
       ></selector-item>
     </div>
@@ -28,7 +28,7 @@
         class="text-white bg-primary hover:bg-blue-500 rounded-md py-3 px-4 mx-3 transition-colors duration-200"
         :to="{
           name: 'dataset',
-          params: { analysisType: 'binaryClassification' },
+          params: { analysisType: 'prediction' },
         }"
       >
         Next Step
