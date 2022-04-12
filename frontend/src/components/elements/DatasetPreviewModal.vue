@@ -1,6 +1,6 @@
 <template>
   <!-- Main modal -->
-  <div class="modal-backdrop">
+  <div class="modal-backdrop" :class="'hidden'">
     <div class="custom-modal w-3/5">
       <header id="modal-header" class="flex items-start">
         <div>
@@ -121,5 +121,9 @@ export default {
   background: #4aae9b;
   border: 1px solid #4aae9b;
   border-radius: 2px;
+}
+
+.hidden {
+  display: none;
 }
 </style>
