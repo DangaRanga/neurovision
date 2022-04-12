@@ -1,9 +1,9 @@
 <template>
   <div>
-    <model-header :isRunning=isRunning />
+    <model-header :isRunning="isRunning" />
     <div class="grid grid-cols-3 min-h-screen">
-      <div class="bg-primary col-span-2"></div>
-      <model-sidebar :isRunning=isRunning :changeState=changeState />
+      <div class="bg-primary col-span-2">{{ isRunning }}</div>
+      <model-sidebar :isRunning="isRunning" :changeState="changeState" />
     </div>
     <!-- <model-build /> -->
   </div>
@@ -20,19 +20,19 @@ export default {
     "model-sidebar": ModelSidebar,
     "model-build": ModelBuild,
   },
-  data(){
+  data() {
     return {
       isRunning: false,
-    }
+    };
   },
   methods: {
-    changeState(){
+    changeState() {
       this.isRunning = !this.isRunning;
-    }
+    },
   },
-  mounted(){
-    this.isRunning = this.$route.params.isRunning;
-    console.log(this.$route.params.isRunning)
-  }
+  mounted() {
+    this.isRunning = Boolean(this.$route.params.isRunning);
+    console.log(this.$route.params.isRunning);
+  },
 };
 </script>

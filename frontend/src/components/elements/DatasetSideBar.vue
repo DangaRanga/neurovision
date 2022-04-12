@@ -93,12 +93,15 @@
           <div
             class="px-4 pt-12 mt-6 mb-4 flex flex-col text-center sm:flex-row sm:text-left sm:items-baseline"
           >
-            <button
+            <router-link
               className="w-1/3 bg-grey_dark text-white text-xs font-bold px-4 py-3 rounded shadow hover:shadow-md outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3"
-              type="button"
+              :to="{
+                name: 'create',
+                params: { isRunning: true },
+              }"
             >
               Pervious Step
-            </button>
+            </router-link>
             <router-link
               class="w-1/3 bg-primary text-center text-white text-xs font-semibold px-4 py-3 rounded shadow hover:shadow-md outline outline-1 lg:mr-1 lg:mb-0 ml-3 mb-3"
               :to="{

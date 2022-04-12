@@ -20,11 +20,11 @@ const routes = [
     name: "create",
     component: CreateModel,
   },
-  {
-    path: "/run",
-    name: "run",
-    component: CreateModel,
-  },
+  // {
+  //   path: "/run",
+  //   name: "run",
+  //   component: CreateModel,
+  // },
   {
     path: "/tour",
     name: "tour",
