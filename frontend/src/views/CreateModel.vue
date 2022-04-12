@@ -30,10 +30,6 @@ export default {
       this.isRunning = !this.isRunning;
     },
   },
-  mounted() {
-    this.isRunning = Boolean(this.$route.params.isRunning);
-    console.log(this.$route.params.isRunning);
-  },
   created() {
     this.isRunning = this.$route.params.isRunning == "true" ? true : false;
   },
