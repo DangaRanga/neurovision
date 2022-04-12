@@ -1,7 +1,7 @@
 <template>
   <nav>
     <navbar />
-    <router-view />
+    <!-- <router-view /> -->
     <!-- <dataset-selection /> -->
     <!-- <create-model /> -->
     <!-- <customize-dataset /> -->

@@ -41,15 +41,23 @@
     <div v-if="isRunning" class="bg-primary_light py-8 px-10 w-full h-full flex flex-col justify-between">
       <div class="mb-8">
         <div class="mb-10">
-          <tabbed-menu />
+          <tabbed-menu :selected=selected :changeSelected=changeSelected />
         </div>
         <div>
-          <sidebar-input 
-            v-for="(header, i) in headers"
-            :key=i
-            type="input"
-            :title=header 
-          />
+          <div v-if="selected == 1">
+            <sidebar-input 
+              v-for="(header, i) in headers"
+              :key=i
+              type="input"
+              :title=header 
+            />
+          </div>
+          <div v-if="selected == 2">
+            <div 
+              v-for="(graph, i) in graphs" 
+              :key=i
+              class="w-2/3 h-56 bg-grey_dark mb-10 mx-auto"></div>
+          </div>
         </div>
       </div>
       <div class="flex flex-col justify-center">
@@ -80,6 +88,8 @@ export default {
   },
   data(){
     return {
+      selected: 2,
+      graphs: [1, 2, 3],
       options: [
         { title: "ReLu", value: "relu"},
         { title: "Sigmoid", value: "sigm"},
@@ -87,6 +97,11 @@ export default {
       ],
       title: "Activation Function",
       headers: ["Batch Size", "Epochs", "Learning Rate", "Loss Function", "Optimization Algorithm"]
+    }
+  },
+  methods: {
+    changeSelected(option){
+      this.selected = option
     }
   }
 };

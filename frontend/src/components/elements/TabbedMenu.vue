@@ -1,18 +1,32 @@
 <template>
-  <div class="text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
-    <ul class="flex flex-wrap -mb-px">
-        <li class="mr-2">
-            <a href="#" class="inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">Customize Parameters</a>
+  <div class="text-md font-medium text-center text-grey_light border-b border-gray_light">
+    <ul class="grid grid-cols-2 gap-px">
+        <li @click="changeSelected(1)">
+            <a href="#" :class=class_1 >Customize Parameters</a>
         </li>
-        <li class="mr-2">
-            <a href="#" class="inline-block p-4 text-blue-600 rounded-t-lg border-b-2 border-blue-600 active dark:text-blue-500 dark:border-blue-500" aria-current="page">View Output</a>
+        <li @click="changeSelected(2)">
+            <a href="#" :class=class_2 >View Output</a>
         </li>
     </ul>
-    </div>
+  </div>
 </template>
 
 <script>
 export default {
-
+    props : ["selected", "changeSelected"],
+    data(){
+        return {
+            active: "inline-block w-full p-4 rounded-t-lg bg-primary_20 text-primary border-b-4 border-primary active",
+            inactive: "inline-block w-full p-4 rounded-t-lg border-b-4 border-transparent hover:bg-primary_20 hover:border-primary",
+        }
+    },
+    computed : {
+        class_1: function (){
+            return this.selected == 1 ? this.active : this.inactive;
+        },
+        class_2: function() {
+            return this.selected == 2 ? this.active : this.inactive;
+        }
+    }
 }
 </script>
