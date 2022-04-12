@@ -21,6 +21,11 @@ const routes = [
     component: CreateModel,
   },
   {
+    path: "/run",
+    name: "run",
+    component: CreateModel,
+  },
+  {
     path: "/tour",
     name: "tour",
     component: Tour,

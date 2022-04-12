@@ -99,12 +99,21 @@
             >
               Pervious Step
             </button>
-            <button
+            <router-link
+              class="w-1/3 bg-primary text-center text-white text-xs font-semibold px-4 py-3 rounded shadow hover:shadow-md outline outline-1 lg:mr-1 lg:mb-0 ml-3 mb-3"
+              :to="{
+                name: 'create',
+                params: { isRunning: false },
+              }"
+            >
+              Next Step
+            </router-link>
+            <!-- <button
               className="w-1/3 bg-primary text-white text-xs font-semibold px-4 py-3 rounded shadow hover:shadow-md outline outline-1 lg:mr-1 lg:mb-0 ml-3 mb-3"
               type="button"
             >
               Next Step
-            </button>
+            </button> -->
           </div>
           <p class="px-4 mx-auto">Step 2 of 5</p>
         </form>

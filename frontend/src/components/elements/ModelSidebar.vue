@@ -30,6 +30,7 @@
             <button
               className="w-1/3 bg-primary text-white font-semibold py-3 rounded shadow hover:shadow-md outline outline-1"
               type="button"
+              @click="changeState"
             >
               Next Step
             </button>
@@ -67,6 +68,7 @@
             <button
               className="w-3/5 bg-primary text-white font-bold py-3 rounded shadow hover:shadow-md outline-none focus:outline-none mr-2"
               type="button"
+              @click="changeState"
             >
               Restart Simulation
             </button>            
@@ -81,14 +83,14 @@ import SidebarInput from "@/components/elements/SidebarInput.vue";
 import TabbedMenu from "@/components/elements/TabbedMenu.vue";
 
 export default {
-  props: ['isRunning'],
+  props: ['isRunning', "changeState"],
   components: {
     "sidebar-input": SidebarInput,
     "tabbed-menu": TabbedMenu,
   },
   data(){
     return {
-      selected: 2,
+      selected: 1,
       graphs: [1, 2, 3],
       options: [
         { title: "ReLu", value: "relu"},
