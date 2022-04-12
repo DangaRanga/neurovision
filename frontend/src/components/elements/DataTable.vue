@@ -1,6 +1,6 @@
 <template>
-  <div class="shadow-md sm:rounded-lg">
-    <table class="w-full text-sm text-left overflow-y-auto h-32">
+  <div class="shadow-md sm:rounded-lg overflow-scroll h-40 w-full p-0">
+    <table class="w-full text-sm text-left">
       <thead class="text-xs text-gray-700 uppercase bg-gray-100">
         <tr>
           <th
