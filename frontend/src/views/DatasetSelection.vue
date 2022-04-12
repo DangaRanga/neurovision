@@ -8,12 +8,12 @@
       ></selector-item>
       <selector-item
         image=""
-        title="cat image"
+        title="Iris Dataset"
         summary="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt"
       ></selector-item>
       <selector-item
         image=""
-        title="cat image"
+        title="House Price Dataset"
         summary="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt"
       ></selector-item>
     </div>
