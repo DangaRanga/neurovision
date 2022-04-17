@@ -4,19 +4,17 @@
     <div class="custom-modal w-3/5">
       <header id="modal-header" class="flex items-start">
         <div>
-          <h1 class="text-3xl font-bold">Modal Title</h1>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur.
+          <h1 class="text-3xl font-bold">{{ headerText }}</h1>
+          <p class="text-gray-700 my-3">{{ description }}</p>
+          <p class="my-3 font-semibold">Problem Type: {{ problemType }}</p>
+          <p class="my-3 font-semibold">
+            No Records: {{ heartData.rows.length }}
           </p>
         </div>
+
         <button class="text-3xl" @click="close">x</button>
       </header>
-      <section id="modal-body" class="border border-black">
+      <section id="modal-body" class="rounded">
         <data-table
           :headings="heartData.headings"
           :rows="heartData.rows"
@@ -25,39 +23,27 @@
     </div>
   </div>
 </template>
-<script setup>
-import DataTable from "@/components/elements/DataTable.vue";
-import { ref } from "vue";
-
-const heartData = ref({
-  headings: [
-    "PatientId",
-    "Species",
-    "ChestPainType",
-    "RestingBP",
-    "Cholesterol",
-    "MaxHR",
-    "ST_Slope",
-    "ST_Slope",
-    "ST_Slope",
-  ],
-  rows: [
-    [0, "Homo sapiens", "ATA", "150", "214", "168", "Up", "Up", "Up"],
-    [0, "Homo sapiens", "ATA", "150", "214", "168", "Up", "Up", "Up"],
-    [0, "Homo sapiens", "ATA", "150", "214", "168", "Up", "Up", "Up"],
-    [0, "Homo sapiens", "ATA", "150", "214", "168", "Up", "Up", "Up"],
-  ],
-});
-</script>
 <script>
+import DataTable from "@/components/elements/DataTable.vue";
+
 export default {
-  methods: {
-    close() {
-      this.$emit("close");
+  props: {
+    headerText: String,
+    description: String,
+    heartData: {
+      headings: Array,
+      rows: [],
     },
+    problemType: String,
+  },
+
+  components: {
+    "data-table": DataTable,
   },
 };
 </script>
+<script setup></script>
+
 <style scoped>
 .modal-backdrop {
   position: fixed;
@@ -124,6 +110,5 @@ export default {
 }
 
 .hidden {
-  display: none;
 }
 </style>

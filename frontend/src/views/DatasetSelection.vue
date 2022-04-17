@@ -39,7 +39,11 @@
         Not sure which to select? Preview each dataset to learn more!
       </p>
     </div>
-    <dataset-preview-modal />
+    <dataset-preview-modal
+      :header-text="'Test Modal'"
+      :heart-data="heartData"
+      :description="description"
+    />
   </div>
 </template>
 <script>
@@ -54,7 +58,35 @@ export default {
     // eslint-disable-next-line no-unused-vars
     function toggleDatasetPreview() {}
   },
-
+  data() {
+    return {
+      description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat. Duis aute irure dolor in
+            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+            pariatur.`,
+      heartData: {
+        headings: [
+          "PatientId",
+          "Species",
+          "ChestPainType",
+          "RestingBP",
+          "Cholesterol",
+          "MaxHR",
+          "ST_Slope",
+          "ST_Slope",
+          "ST_Slope",
+        ],
+        rows: [
+          [0, "Homo sapiens", "ATA", "150", "214", "168", "Up", "Up", "Up"],
+          [0, "Homo sapiens", "ATA", "150", "214", "168", "Up", "Up", "Up"],
+          [0, "Homo sapiens", "ATA", "150", "214", "168", "Up", "Up", "Up"],
+          [0, "Homo sapiens", "ATA", "150", "214", "168", "Up", "Up", "Up"],
+        ],
+      },
+    };
+  },
   components: {
     "selector-item": SelectorItem,
     "dataset-preview-modal": DatasetPreviewModal,
