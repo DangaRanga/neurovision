@@ -4,21 +4,16 @@
     <div class="custom-modal w-3/5">
       <header id="modal-header" class="flex items-start">
         <div>
-          <h1 class="text-3xl font-bold">{{ headerText }}</h1>
+          <h1 class="text-3xl font-bold">{{ title }}</h1>
           <p class="text-gray-700 my-3">{{ description }}</p>
           <p class="my-3 font-semibold">Problem Type: {{ problemType }}</p>
-          <p class="my-3 font-semibold">
-            No Records: {{ heartData.rows.length }}
-          </p>
+          <p class="my-3 font-semibold">No Records: {{ data.rows.length }}</p>
         </div>
 
         <button class="text-3xl" @click="close">x</button>
       </header>
       <section id="modal-body" class="rounded">
-        <data-table
-          :headings="heartData.headings"
-          :rows="heartData.rows"
-        ></data-table>
+        <data-table :headings="data.headings" :rows="data.rows"></data-table>
       </section>
     </div>
   </div>
@@ -28,9 +23,9 @@ import DataTable from "@/components/elements/DataTable.vue";
 
 export default {
   props: {
-    headerText: String,
+    title: String,
     description: String,
-    heartData: {
+    data: {
       headings: Array,
       rows: [],
     },

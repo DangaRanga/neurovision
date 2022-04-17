@@ -40,15 +40,21 @@
       </p>
     </div>
     <dataset-preview-modal
-      :header-text="'Test Modal'"
-      :heart-data="heartData"
-      :description="description"
+      :title="heartData.title"
+      :data="heartDataset"
+      :description="heartData.description"
+      :problem-type="heartData.problemType"
     />
   </div>
 </template>
 <script>
 import SelectorItem from "@/components/elements/SelectorItem.vue";
 import DatasetPreviewModal from "@/components/elements/DatasetPreviewModal.vue";
+import {
+  heartDiseaseData,
+  irisPredictionData,
+  housePredictionData,
+} from "@/constants/dataset.constants";
 import { ref } from "vue";
 export default {
   setup() {
@@ -60,13 +66,10 @@ export default {
   },
   data() {
     return {
-      description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur.`,
-      heartData: {
+      heartData: heartDiseaseData,
+      irisData: irisPredictionData,
+      houseData: housePredictionData,
+      heartDataset: {
         headings: [
           "PatientId",
           "Species",
