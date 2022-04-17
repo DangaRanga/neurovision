@@ -1,6 +1,6 @@
 <template>
   <!-- Main modal -->
-  <div class="modal-backdrop" :class="'hidden'">
+  <div class="modal-backdrop" @click="close">
     <div class="custom-modal w-3/5">
       <header id="modal-header" class="flex items-start">
         <div>
@@ -35,6 +35,11 @@ export default {
   components: {
     "data-table": DataTable,
   },
+  methods: {
+    close() {
+      this.$emit("close");
+    },
+  },
 };
 </script>
 <script setup></script>
@@ -50,6 +55,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 .custom-modal {
   background: #ffffff;

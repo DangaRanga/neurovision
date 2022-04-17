@@ -15,7 +15,7 @@ const housePredictionData = {
   summary: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
       eiusmod tempor incididunt ut labore`,
   problemType: "Regression",
-
+  image: "",
   data: getHousePredictionData(),
 };
 
@@ -30,7 +30,7 @@ const heartDiseaseData = {
   summary: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
         eiusmod tempor incididunt ut labore`,
   problemType: "Binary Classification",
-
+  image: "",
   data: getHeartPredictionData(),
 };
 
@@ -45,7 +45,7 @@ const irisPredictionData = {
   summary: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore`,
   problemType: "Multi Classification",
-
+  image: "",
   data: getIrisPredictionData(),
 };
 

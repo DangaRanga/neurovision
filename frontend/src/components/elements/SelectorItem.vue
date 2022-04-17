@@ -52,18 +52,17 @@ export default {
     itemNo: Number,
     title: String,
     summary: String,
+    datasetIndex: Number,
+    selected: false,
   },
 
-  data() {
-    return {
-      selected: false,
-    };
-  },
+  data() {},
 
   methods: {
     toggleSelected() {
       console.log(this.selected);
-      this.selected = !this.selected;
+
+      this.$emit("select", this.datasetIndex);
     },
   },
 };
