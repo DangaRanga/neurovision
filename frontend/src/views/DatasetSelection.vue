@@ -41,7 +41,6 @@
       @close="closeModal"
       :title="datasets[selectedDataset].title"
       :data="heartDataset"
-      :description="datasets[selectedDataset].description"
       :problem-type="datasets[selectedDataset].problemType"
     />
   </div>
