@@ -11,19 +11,6 @@ from ..controllers.prep import prepHRT
 from ..globals import *
 
 
-@app.route("/api/create/data", methods=["POST"])
-def create_data():
-    global datahandler
-   # https://drive.google.com/file/d/1dcDUnZcCOpQJdspssXoxueJZiXBDYeNK/view?usp=sharing
-    if request.method == 'POST':
-        # url='https://drive.google.com/uc?id=' + request.json["fileurl"].split('/')[-2]
-        dataframe = pd.read_csv(
-            r"../datasets/Heart Disease -  Binary Classification/Heart Disease - Training.csv")
-        datahandler = DataHandler(dataframe)
-        return jsonify({"msg": "Dataset was created successfully"}), 200
-    return jsonify({"msg": "Method not Allowed"}), 405
-
-
 @app.route("/api/create/model", methods=["POST"])
 def create_model():
     global modelhandler
@@ -36,6 +23,8 @@ def create_model():
 
 @app.route("/api/data", methods=["GET"])
 def get_data():
+    # Create global alias for data handler (to be refactored)
+    global datahandler
     dataset_names = ['heart_disease', 'house_price', 'iris']
 
     if request.method == "GET":
