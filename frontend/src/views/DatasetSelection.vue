@@ -40,7 +40,7 @@
       v-if="isModalVisible && selectDataset"
       @close="closeModal"
       :title="datasets[selectedDataset].title"
-      :data="heartDataset"
+      :data="dataset"
       :problem-type="datasets[selectedDataset].problemType"
     />
   </div>
@@ -60,24 +60,10 @@ export default {
       datasets: [heartDiseaseData, irisPredictionData, housePredictionData],
       selectedDataset: undefined,
       isModalVisible: false,
-      heartDataset: {
-        headings: [
-          "PatientId",
-          "Species",
-          "ChestPainType",
-          "RestingBP",
-          "Cholesterol",
-          "MaxHR",
-          "ST_Slope",
-          "ST_Slope",
-          "ST_Slope",
-        ],
-        rows: [
-          [0, "Homo sapiens", "ATA", "150", "214", "168", "Up", "Up", "Up"],
-          [0, "Homo sapiens", "ATA", "150", "214", "168", "Up", "Up", "Up"],
-          [0, "Homo sapiens", "ATA", "150", "214", "168", "Up", "Up", "Up"],
-          [0, "Homo sapiens", "ATA", "150", "214", "168", "Up", "Up", "Up"],
-        ],
+      data: null,
+      dataset: {
+        headings: [],
+        rows: [],
       },
     };
   },
@@ -103,13 +89,36 @@ export default {
 
     selectDataset(dataset) {
       this.selectedDataset = dataset;
-      console.log(this.selectedDataset);
+      console.log(this.datasets[dataset]);
+      this.$http
+        .get(
+          `http://localhost:9090/api/data?dataset=${this.datasets[dataset].name}`,
+          {}
+        )
+        .then((response) => {
+          const newData = response.data.dataset;
+          this.dataset = {
+            headings: newData.columns,
+            rows: newData.data,
+          };
+        });
     },
   },
   components: {
     "selector-item": SelectorItem,
     "dataset-preview-modal": DatasetPreviewModal,
   },
+
+  watch: {
+    data: {
+      handler(newValue, oldValue) {
+        console.log(newValue);
+        // Note: `newValue` will be equal to `oldValue` here
+        // on nested mutations as long as the object itself
+        // hasn't been replaced.
+      },
+      deep: true,
+    },
+  },
 };
 </script>
-SelectorItem
