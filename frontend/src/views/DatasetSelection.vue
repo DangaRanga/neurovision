@@ -80,6 +80,9 @@ export default {
           target: "#v-step-1",
           content:
             "<strong>Let's Get Started!!</strong> First select a dataset for building the neural network model!",
+          params: {
+            placement: "top",
+          },
         },
         {
           target: "#v-step-2",
