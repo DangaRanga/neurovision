@@ -16,7 +16,7 @@ const housePredictionData = {
       eiusmod tempor incididunt ut labore`,
   problemType: "Regression",
   image: "",
-  data: getHousePredictionData(),
+  name: "house_price",
 };
 
 const heartDiseaseData = {
@@ -31,7 +31,7 @@ const heartDiseaseData = {
         eiusmod tempor incididunt ut labore`,
   problemType: "Binary Classification",
   image: "",
-  data: getHeartPredictionData(),
+  name: "heart_disease",
 };
 
 const irisPredictionData = {
@@ -46,6 +46,7 @@ const irisPredictionData = {
           eiusmod tempor incididunt ut labore`,
   problemType: "Multi Classification",
   image: "",
+  name: "iris",
   data: getIrisPredictionData(),
 };
 
