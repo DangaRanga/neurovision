@@ -112,7 +112,7 @@ export default {
   watch: {
     data: {
       handler(newValue, oldValue) {
-        console.log(newValue);
+        //console.log(newValue);
         // Note: `newValue` will be equal to `oldValue` here
         // on nested mutations as long as the object itself
         // hasn't been replaced.
