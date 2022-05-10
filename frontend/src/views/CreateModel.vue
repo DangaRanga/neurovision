@@ -1,11 +1,11 @@
 <template>
   <div>
     <model-header :isRunning="isRunning" />
-    <div class="grid grid-cols-3 min-h-screen">
+    <!-- <div class="grid grid-cols-3 min-h-screen">
       <div class="bg-primary col-span-2">{{ isRunning }}</div>
       <model-sidebar :isRunning="isRunning" :changeState="changeState" />
-    </div>
-    <!-- <model-build /> -->
+    </div> -->
+    <model-build />
   </div>
 </template>
 
