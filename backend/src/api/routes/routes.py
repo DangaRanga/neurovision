@@ -26,7 +26,7 @@ def get_data():
     # Create global alias for data handler (to be refactored)
     global datahandler
     dataset_names = ['heart_disease', 'house_price', 'iris']
-
+    
     if request.method == "GET":
         # Retrieve and initialize dataset based on request
         selection = request.args.get('dataset')
