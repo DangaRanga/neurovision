@@ -20,7 +20,7 @@ export default {
   name: "ModelBuild",
   data() {
     return {
-      width: 700,
+      width: 900,
       height: 500,
       margin: {
         left: 15,
@@ -184,9 +184,9 @@ export default {
         .attr("class", "bg-grey_light")
         .attr("r", 30)
         .attr("cy", function (d) {
-          return y(d.id);
+          return y(d.id) + 50;
         })
-        .attr("cx", (d) => l_scale(d.layer));
+        .attr("cx", (d) => l_scale(d.layer) + 50);
 
       d3.select("#node").select("svg").remove();
       // const svg2 = d3
