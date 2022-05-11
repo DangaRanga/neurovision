@@ -10,6 +10,7 @@
           :title="dataset.title"
           :summary="dataset.summary"
           :dataset-index="index"
+          :selected="index == selectedDataset"
           @select="selectDataset"
           v-bind="index"
         ></selector-item>

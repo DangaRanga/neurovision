@@ -2,7 +2,7 @@
   <div class="flex flex-col items-center">
     <article
       class="shadow-lg w-52 h-52 rounded-full flex items-center justify-center transition-colors duration-200"
-      :class="selected ? 'border-2 border-primary parent' : ''"
+      :class="{ 'border-2 border-primary parent': selected }"
       id="selectable"
       @click="toggleSelected"
     >
@@ -52,6 +52,7 @@ export default {
     itemNo: Number,
     title: String,
     summary: String,
+    selected: Boolean,
     datasetIndex: Number,
     selected: false,
   },
@@ -60,8 +61,6 @@ export default {
 
   methods: {
     toggleSelected() {
-      console.log(this.selected);
-
       this.$emit("select", this.datasetIndex);
     },
   },
