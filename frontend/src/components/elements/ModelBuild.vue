@@ -7,6 +7,7 @@
       <h2>Hidden Layers</h2>
     </div>
     <div id="chart5"></div>
+    <div id="node" class="bg-primary"></div>
   </section>
 </template>
 
@@ -39,12 +40,20 @@ export default {
         {
           id: 1,
           name: "hidden-1",
-          nodes: [{ id: 0 }],
+          nodes: [{ id: 0 }, { id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }],
         },
         {
           id: 2,
           name: "output",
           nodes: [{ id: 0 }],
+        },
+      ],
+      nodes: [
+        {
+          id: 0,
+          name: "ServiceGroup",
+          description: "Port : 80",
+          connection_count: 3,
         },
       ],
     };
@@ -91,6 +100,12 @@ export default {
       output.id = this.layers.length;
       this.layers.push(output);
     },
+    addNode() {
+      return 0;
+    },
+    subNode() {
+      return 0;
+    },
     createModel() {
       d3.select("#chart5").select("svg").remove();
       const svg = d3
@@ -100,10 +115,17 @@ export default {
         .attr("height", this.height);
 
       const id = (d) => d.id;
+
       const l_scale = d3
         .scaleBand()
         .domain(this.layers.map(id))
         .range([0, this.width]);
+
+      const cl_scale = d3
+        .scaleBand()
+        .domain(this.layers.map(id))
+        .range([0, this.height]);
+
       const c_scale = d3
         .scaleLinear()
         .domain([this.layers[0].id, this.layers[this.layers.length - 1].id])
@@ -120,6 +142,21 @@ export default {
         .attr("height", this.height)
         .attr("fill", (d) => c_scale(d.id))
         .attr("x", (d) => l_scale(d.id));
+
+      const circle = svg
+        .selectAll(".rect")
+        .data(this.layers[1].nodes)
+        .enter()
+        .append("circle")
+        .attr("id", (d) => d.id)
+        .attr("width", 50)
+        .attr("height", 50)
+        .attr("class", "bg-grey_light")
+        .attr("r", 30)
+        .attr("cx", 70)
+        .attr("cy", (d) => cl_scale(d.id));
+
+      svg = svg.merge(circle);
     },
   },
   mounted() {
