@@ -107,6 +107,8 @@ export default {
       const output = this.layers[this.layers.length - 1];
       this.layers.splice(-2, 2);
       output.id = this.layers.length;
+      for (var i = 0; i < output.nodes.length; i++)
+        output.nodes[i].layer = this.layers.length;
       this.layers.push(output);
     },
     addNode() {
