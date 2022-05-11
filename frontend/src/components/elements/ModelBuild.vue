@@ -156,7 +156,7 @@ export default {
         .attr("cx", 70)
         .attr("cy", (d) => cl_scale(d.id));
 
-      svg = svg.merge(circle);
+      //   svg = svg.merge(circle);
     },
   },
   mounted() {
