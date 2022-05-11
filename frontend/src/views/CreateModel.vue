@@ -2,7 +2,7 @@
   <div>
     <model-header :isRunning="isRunning" />
     <div class="grid grid-cols-3 min-h-screen">
-      <div class="bg-primary col-span-2"><model-build /></div>
+      <div class="bg-white col-span-2"><model-build /></div>
       <model-sidebar :isRunning="isRunning" :changeState="changeState" />
     </div>
   </div>
