@@ -1,13 +1,24 @@
 <template>
-  <div>
+  <div class="flex flex-col items-center">
     <article
       class="shadow-lg w-52 h-52 rounded-full flex items-center justify-center transition-colors duration-200"
       :class="selected ? 'border-2 border-primary parent' : ''"
       id="selectable"
       @click="toggleSelected"
     >
-      Selection item
+      <div v-if="image">
+        <img :src="image" :alt="title" />
+      </div>
     </article>
+
+    <div class="text-center w-1/2 my-3">
+      <h1 class="text-lg font-bold text-primary_dark">
+        {{ title }}
+      </h1>
+      <p class="text-gray-600">
+        {{ summary }}
+      </p>
+    </div>
     <transition name="fade">
       <div v-if="selected">
         <svg
@@ -32,20 +43,26 @@
     </transition>
   </div>
 </template>
+
 <script>
 export default {
   name: "selection-item",
-  props: ["img", "selected"],
-  data() {
-    return {
-      selected: false,
-    };
+  props: {
+    image: String,
+    itemNo: Number,
+    title: String,
+    summary: String,
+    datasetIndex: Number,
+    selected: false,
   },
+
+  data() {},
 
   methods: {
     toggleSelected() {
       console.log(this.selected);
-      this.selected = !this.selected;
+
+      this.$emit("select", this.datasetIndex);
     },
   },
 };
@@ -66,8 +83,8 @@ export default {
   height: 30px;
   border-radius: 50%;
   position: relative;
-  top: -165px;
-  left: 180px;
+  top: -18.3em;
+  left: 6em;
   stroke-width: 2;
   stroke: #fff;
   stroke-miterlimit: 10;
@@ -81,25 +98,5 @@ export default {
   stroke-dasharray: 48;
   stroke-dashoffset: 48;
   animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
-}
-
-@keyframes stroke {
-  100% {
-    stroke-dashoffset: 0;
-  }
-}
-@keyframes scale {
-  0%,
-  100% {
-    transform: none;
-  }
-  50% {
-    transform: scale3d(1.1, 1.1, 1);
-  }
-}
-@keyframes fill {
-  100% {
-    box-shadow: inset 0px 0px 0px 30px var(--primary);
-  }
 }
 </style>

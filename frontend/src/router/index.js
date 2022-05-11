@@ -1,25 +1,39 @@
-import { createRouter, createWebHashHistory } from "vue-router";
-import HomeView from "../views/HomeView.vue";
+import { createRouter, createWebHistory } from "vue-router";
+import DatasetSelection from "../views/DatasetSelection.vue";
+import CustomizeDataset from "../views/CustomizeDataset.vue";
+import CreateModel from "../views/CreateModel.vue";
+import Tour from "@/views/Tour.vue";
 
 const routes = [
   {
     path: "/",
     name: "home",
-    component: HomeView,
+    component: DatasetSelection,
   },
   {
-    path: "/about",
-    name: "about",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
+    path: "/dataset",
+    name: "dataset",
+    component: CustomizeDataset,
+  },
+  {
+    path: "/create",
+    name: "create",
+    component: CreateModel,
+  },
+  // {
+  //   path: "/run",
+  //   name: "run",
+  //   component: CreateModel,
+  // },
+  {
+    path: "/tour",
+    name: "tour",
+    component: Tour,
   },
 ];
 
 const router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHistory(),
   routes,
 });
 
