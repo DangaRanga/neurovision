@@ -27,7 +27,11 @@
         </header>
         <h4 class="text-primary font-semibold mb-3">Data Preview</h4>
         <section id="modal-body" class="rounded">
-          <data-table :headings="data.headings" :rows="data.rows"></data-table>
+          <data-table
+            :headings="data.headings"
+            :rows="data.rows"
+            :height="'h-40'"
+          ></data-table>
         </section>
       </div>
     </div>

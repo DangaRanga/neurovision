@@ -1,5 +1,8 @@
 <template>
-  <div class="shadow-md sm:rounded-lg overflow-scroll h-40 w-full p-0">
+  <div
+    class="shadow-md sm:rounded-lg overflow-scroll w-full p-0"
+    :class="height"
+  >
     <table class="w-full text-sm text-left">
       <thead class="text-xs text-gray-700 uppercase bg-gray-100">
         <tr>
@@ -37,5 +40,6 @@ import { defineProps } from "vue";
 const props = defineProps({
   rows: [Object],
   headings: [String],
+  height: String,
 });
 </script>

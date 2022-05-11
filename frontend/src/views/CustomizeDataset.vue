@@ -7,8 +7,9 @@
     >
       <data-table
         class="w-full mr-8"
-        :headings="heartDataset.headings"
-        :rows="heartDataset.rows"
+        :headings="dataset.headings"
+        :rows="dataset.rows"
+        :height="'h-96'"
       ></data-table>
     </div>
     <dataset-sidebar class="w-1/3" :analysis="analysisType" />
@@ -25,29 +26,17 @@ export default {
   data() {
     return {
       analysisType: "None",
-      heartDataset: {
-        headings: [
-          "PatientId",
-          "Species",
-          "ChestPainType",
-          "RestingBP",
-          "Cholesterol",
-          "MaxHR",
-          "ST_Slope",
-          "ST_Slope",
-          "ST_Slope",
-        ],
-        rows: [
-          [0, "Homo sapiens", "ATA", "150", "214", "168", "Up", "Up", "Up"],
-          [0, "Homo sapiens", "ATA", "150", "214", "168", "Up", "Up", "Up"],
-          [0, "Homo sapiens", "ATA", "150", "214", "168", "Up", "Up", "Up"],
-          [0, "Homo sapiens", "ATA", "150", "214", "168", "Up", "Up", "Up"],
-        ],
-      },
     };
   },
+  computed: {
+    dataset() {
+      return JSON.parse(localStorage.getItem("base-dataset"));
+    },
+  },
+
   created() {
     this.analysisType = this.$route.params.analysisType;
+    console.log(this.dataset);
   },
 };
 </script>
