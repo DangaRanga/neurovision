@@ -92,6 +92,9 @@ export default {
           nodes: [{ id: 0, layer: i + 1 }],
         });
       output.id = this.layers.length;
+      for (var i = 0; i < output.nodes.length; i++)
+        output.nodes[i].layer = this.layers.length;
+
       this.layers.push(output);
     },
     subLayer() {
