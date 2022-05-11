@@ -1,6 +1,5 @@
 <template>
-<v-tour name="myTour" :steps="steps"></v-tour>
-  <aside>
+  <aside id="v-step-0">
     <div
       v-if="!isRunning"
       class="bg-primary_light py-8 px-10 w-full h-full flex flex-col justify-between"
@@ -75,6 +74,7 @@
       </div>
     </div>
   </aside>
+  <v-tour name="myTour" :steps="steps"></v-tour>
 </template>
 
 <script>
@@ -89,52 +89,48 @@ export default {
   },
   data() {
     return {
-       steps: [
+      steps: [
         {
-          target: "#v-step-0", 
+          target: "#v-step-0",
           content: ` <strong>Let's customize the parameters for the Neural Network</strong>!`,
           params: {
             placement: "left",
           },
         },
         {
-          target: "#v-step-1",
+          target: "#v-step-0",
           content: `There are several different types of problems that can be modeled using neural networks.
           These include: <strong>Binary Classification, Multivariate Classification, Prediction and Regression.<\strong>`,
           params: {
-          placement: "left",
+            placement: "left",
           },
         },
         {
-          target: "#v-step-2",
-          content:
-            `<strong>Let us get some information on the Type of Analysis that the dataset is performing</strong>!`,
+          target: "#v-step-0",
+          content: `<strong>Let us get some information on the Type of Analysis that the dataset is performing</strong>!`,
           params: {
-            placement: "top",
+            placement: "left",
           },
         },
         {
-          target: "#v-step-3",
-          content:
-            `<strong>Let us get some information on the Training Data Percentage needed for this dataset</strong>!`,
+          target: "#v-step-0",
+          content: `<strong>Let us get some information on the Training Data Percentage needed for this dataset</strong>!`,
           params: {
-            placement: "top",
-          },
-        },
-         {
-          target: "#v-step-4",
-          content:
-            `<strong>Let us get some information on what Normalization is </strong>.`,
-          params: {
-            placement: "top",
+            placement: "left",
           },
         },
         {
-          target: "#v-step-5",
-          content:
-            `<strong>Hooray!, now that you've customized the dataset let's continue </strong>.`,
+          target: "#v-step-0",
+          content: `<strong>Let us get some information on what Normalization is </strong>.`,
           params: {
-            placement: "top",
+            placement: "left",
+          },
+        },
+        {
+          target: "#v-step-0",
+          content: `<strong>Hooray!, now that you've customized the dataset let's continue </strong>.`,
+          params: {
+            placement: "left",
           },
         },
       ],
