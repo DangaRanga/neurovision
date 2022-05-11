@@ -1,5 +1,5 @@
 <template>
-  <aside>
+  <aside id="v-step-0">
     <div class="bg-primary_light grid grid-cols-1 py-10 w-full">
       <div class="w-full pl-8 pr-12">
         <h3 class="text-lg font-bold py-2">
@@ -16,11 +16,11 @@
             <div
               class="flex flex-row flex-nowrap md:items-center lg:items-start md:flex-row md:flex-nowrap"
             >
-              <p class="w-4/5 text-s font-semibold py-2">Type of Analysis</p>
+              <p id="v-step-1" class="w-4/5 text-s font-semibold py-2">Type of Analysis</p>
               <img
                 :src="infographics_icon"
                 alt="train_info"
-                class="object-cover pt-2 mr-6 pr-10 items-center justify-center"
+              id="v-step-2" class="object-cover pt-2 mr-6 pr-10 items-center justify-center"
                 @click="showAnalysisType()"
               />
             </div>
@@ -47,7 +47,7 @@
               <p class="w-4/5 text-s font-semibold py-2">
                 Training Data Percentage
               </p>
-              <img
+              <img id="v-step-3"
                 :src="infographics_icon"
                 alt="train_info"
                 class="object-cover pt-2 mr-6 pr-10 items-center justify-center"
@@ -73,7 +73,7 @@
               <p class="w-4/5 text-s font-semibold py-2">
                 Perform Normalization?
               </p>
-              <img
+              <img id="v-step-4"
                 :src="infographics_icon"
                 alt="normalization_info"
                 class="object-cover pt-2 mr-6 pr-10 items-center justify-center"
@@ -102,7 +102,7 @@
             >
               Pervious Step
             </router-link>
-            <router-link
+            <router-link id="v-step-5"
               class="w-1/3 bg-primary text-center text-white text-xs font-semibold px-4 py-3 rounded shadow hover:shadow-md outline outline-1 lg:mr-1 lg:mb-0 ml-3 mb-3"
               :to="{
                 name: 'create',
@@ -130,6 +130,7 @@
       @close="closeModal"
     />
   </aside>
+<v-tour name="myTour" :steps="steps"></v-tour>
 </template>
 <script>
 // import DataTable from "@/components/elements/DataTable.vue";
@@ -145,6 +146,57 @@ export default {
   },
   data() {
     return {
+      steps: [
+        {
+          target: "#v-step-0", // We're using document.querySelector() under the hood
+          content: ` <strong>Let's get to customizing our Dataset</strong>!
+          Dataset customization involves 
+          Dataset customization is important because..`,
+          params: {
+            placement: "left",
+          },
+        },
+        {
+          target: "#v-step-1",
+          content: `There are several different types of problems that can be modeled using neural networks.
+          These include: <strong>Binary Classification, Multivariate Classification, Prediction and Regression.<\strong>`,
+          params: {
+          placement: "left",
+          },
+        },
+        {
+          target: "#v-step-2",
+          content:
+            `<strong>Let us get some information on the Type of Analysis that the dataset is performing</strong>!`,
+          params: {
+            placement: "top",
+          },
+        },
+        {
+          target: "#v-step-3",
+          content:
+            `<strong>Let us get some information on the Training Data Percentage needed for this dataset</strong>!`,
+          params: {
+            placement: "top",
+          },
+        },
+         {
+          target: "#v-step-4",
+          content:
+            `<strong>Let us get some information on what Normalization is </strong>.`,
+          params: {
+            placement: "top",
+          },
+        },
+        {
+          target: "#v-step-5",
+          content:
+            `<strong>Hooray!, now that you've customized the dataset let's continue </strong>.`,
+          params: {
+            placement: "top",
+          },
+        },
+      ],
       infographics_icon: infographics_icon,
       trainTitle: "Training Data Pecentage",
       trainInfo: "This is zxy, abc.",
@@ -155,7 +207,9 @@ export default {
       selected: this.analysis,
     };
   },
-
+   mounted: function () {
+    this.$tours["myTour"].start();
+  },
   methods: {
     showModal() {
       this.isModalVisible = true;
