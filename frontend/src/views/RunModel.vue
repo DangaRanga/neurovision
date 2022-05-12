@@ -2,24 +2,22 @@
   <div>
     <model-header />
     <div class="grid grid-cols-3 min-h-screen">
-      <div class="col-span-2 grid items-center">
-        <model-build />
-      </div>
+      <div class="bg-white col-span-2"><model-build /></div>
       <model-sidebar />
     </div>
   </div>
 </template>
 
 <script>
-import CMHeader from "@/components/elements/CMHeader.vue";
-import CMSidebar from "@/components/elements/CMSidebar.vue";
-import CModel from "@/components/elements/CModel.vue";
+import RMHeader from "@/components/elements/RMHeader.vue";
+import RMSidebar from "@/components/elements/RMSidebar.vue";
+import RModel from "@/components/elements/RModel.vue";
 
 export default {
   components: {
-    "model-header": CMHeader,
-    "model-sidebar": CMSidebar,
-    "model-build": CModel,
+    "model-header": RMHeader,
+    "model-sidebar": RMSidebar,
+    "model-build": RModel,
   },
   data() {
     return {

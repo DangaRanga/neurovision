@@ -1,7 +1,6 @@
 <template>
   <aside id="v-step-0">
     <div
-      v-if="!isRunning"
       class="bg-primary_light py-8 px-10 w-full h-full flex flex-col justify-between"
     >
       <div class="mb-8">
@@ -14,6 +13,7 @@
         </div>
         <div>
           <sidebar-input type="select" :title="title" :options="options" />
+          <sidebar-input type="input-d" title="Output Layer Activation Function" value="ReLu" />
         </div>
       </div>
       <div class="flex flex-col justify-center">
@@ -27,54 +27,15 @@
           <button
             className="w-1/3 bg-primary text-white font-semibold py-3 rounded shadow hover:shadow-md outline outline-1"
             type="button"
-            @click="changeState"
           >
             Next Step
           </button>
         </div>
-        <p class="px-4 mx-auto font-thin text-sm">Step 2 of 5</p>
+        <p class="px-4 mx-auto font-thin text-sm">Step 4 of 5</p>
       </div>
     </div>
-    <div
-      v-if="isRunning"
-      class="bg-primary_light py-8 px-10 w-full h-full flex flex-col justify-between"
-    >
-      <div class="mb-8">
-        <div class="mb-10">
-          <tabbed-menu :selected="selected" :changeSelected="changeSelected" />
-        </div>
-        <div>
-          <div v-if="selected == 1">
-            <sidebar-input
-              v-for="(header, i) in headers"
-              :key="i"
-              type="input"
-              :title="header"
-            />
-          </div>
-          <div v-if="selected == 2">
-            <div
-              v-for="(graph, i) in graphs"
-              :key="i"
-              class="w-2/3 h-56 bg-grey_dark mb-10 mx-auto"
-            ></div>
-          </div>
-        </div>
-      </div>
-      <div class="flex flex-col justify-center">
-        <div class="flex justify-center m-0 mb-4">
-          <button
-            className="w-3/5 bg-primary text-white font-bold py-3 rounded shadow hover:shadow-md outline-none focus:outline-none mr-2"
-            type="button"
-            @click="changeState"
-          >
-            Restart Simulation
-          </button>
-        </div>
-      </div>
-    </div>
+    <v-tour name="myTour" :steps="steps"></v-tour>
   </aside>
-  <v-tour name="myTour" :steps="steps"></v-tour>
 </template>
 
 <script>
@@ -82,7 +43,6 @@ import SidebarInput from "@/components/elements/SidebarInput.vue";
 import TabbedMenu from "@/components/elements/TabbedMenu.vue";
 
 export default {
-  props: ["isRunning", "changeState"],
   components: {
     "sidebar-input": SidebarInput,
     "tabbed-menu": TabbedMenu,
@@ -159,7 +119,7 @@ export default {
     };
   },
   mounted: function () {
-    this.$tours["myTour"].start();
+    // this.$tours["myTour"].start();
   },
   methods: {
     changeSelected(option) {
