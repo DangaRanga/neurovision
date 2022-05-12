@@ -1,13 +1,17 @@
 <template>
   <section>
-    <div class="controls">
-      <img @click="addLayer()" :src="add" alt="add" class="icon" />
-      <img @click="subLayer()" :src="minus" alt="sub" class="icon" />
+    <div class="flex justify-center items-center mb-5">
+      <img @click="addLayer()" :src="add" alt="add" class="mr-1" />
+      <img @click="subLayer()" :src="minus" alt="sub" class="mr-1" />
       <h2>{{ num }}</h2>
       <h2>Hidden Layers</h2>
     </div>
+    <div class="flex justify-center items-center mb-5">
+      <img @click="addNode(1)" :src="add" alt="add" class="mr-1" />
+      <img @click="subNode(1)" :src="minus" alt="sub" class="mr-1" />
+    </div>
+    <div class="border-t-1 border-gray-light h-full"></div>
     <div id="chart5"></div>
-    <div id="node" class="bg-primary"></div>
   </section>
 </template>
 
@@ -15,9 +19,9 @@
 import * as d3 from "d3";
 import add from "@/assets/icons/add.svg";
 import minus from "@/assets/icons/minus.svg";
-//hi
+
 export default {
-  name: "ModelBuild",
+  name: "CModel",
   data() {
     return {
       width: 900,
@@ -25,8 +29,8 @@ export default {
       margin: {
         left: 15,
         right: 15,
-        top: 15,
-        bottom: 15,
+        top: 50,
+        bottom: 50,
       },
       num: 1,
       add,
@@ -38,28 +42,20 @@ export default {
           nodes: [
             { id: 0, layer: 0 },
             { id: 1, layer: 0 },
-            { id: 2, layer: 0 },
-            { id: 3, layer: 0 },
-            { id: 4, layer: 0 },
           ],
         },
         {
           id: 1,
           name: "hidden-1",
-          nodes: [{ id: 0, layer: 1 }],
+          nodes: [
+            { id: 0, layer: 1 },
+            { id: 1, layer: 1 },
+          ],
         },
         {
           id: 2,
           name: "output",
           nodes: [{ id: 0, layer: 2 }],
-        },
-      ],
-      nodes: [
-        {
-          id: 0,
-          name: "ServiceGroup",
-          description: "Port : 80",
-          connection_count: 3,
         },
       ],
     };
@@ -82,15 +78,14 @@ export default {
 
       const input = this.layers[0];
       const output = this.layers[this.layers.length - 1];
+      
+      this.layers.splice(-1, 1);
+      this.layers = [...this.layers, {
+        id: this.layers.length,
+        name: `hidden-${this.layers.length}`,
+        nodes: [{ id: 0, layer: this.layers.length }],
+      }];
 
-      this.layers = [];
-      this.layers.push(input);
-      for (var i = 0; i < this.num; i++)
-        this.layers.push({
-          id: i + 1,
-          name: `hidden-${i + 1}`,
-          nodes: [{ id: 0, layer: i + 1 }],
-        });
       output.id = this.layers.length;
       for (var i = 0; i < output.nodes.length; i++)
         output.nodes[i].layer = this.layers.length;
@@ -111,18 +106,34 @@ export default {
         output.nodes[i].layer = this.layers.length;
       this.layers.push(output);
     },
-    addNode() {
-      return 0;
+    addNode(index) {
+      const layer = this.layers[index];
+      if(layer.nodes.length < 5){
+        layer.nodes.push({
+          id: layer.nodes.length,
+          layer: layer.id
+        });
+        this.createModel();
+      }else{
+        return ;
+      }
     },
-    subNode() {
-      return 0;
+    subNode(index) {
+      const layer = this.layers[index];
+      if(layer.nodes.length > 1){
+        layer.nodes.splice(-1, 1);
+        this.createModel();
+      }else{
+        return ;
+      }
     },
     createModel() {
+
       d3.select("#chart5").select("svg").remove();
       const svg = d3
         .select("#chart5")
         .append("svg")
-        .attr("width", this.width)
+        .attr("width", this.width) //TODO: responsive width
         .attr("height", this.height);
 
       const id = (d) => d.id;
@@ -132,44 +143,24 @@ export default {
         .domain(this.layers.map(id))
         .range([0, this.width]);
 
-      const nodes_scale = d3
-        .scaleBand()
-        .domain(this.layers.map(id))
-        .range([0, this.height / 2]);
-
       const c_scale = d3
         .scaleLinear()
         .domain([this.layers[0].id, this.layers[this.layers.length - 1].id])
         .range(["purple", "orange"]);
-
-      svg
-        .selectAll(".text")
-        .data(this.layers)
-        .enter()
-        .append("text")
-        .attr("text-anchor", "middle")
-        .attr("text-color", "#535353")
-        .attr("class", "text-center font-medium text-primary_dark")
-        .style("font-size", "28px")
-        .style("color", "#535353")
-        .text((d) => d.name)
-        .attr("x", (d) => l_scale(d.id) + 100);
 
       const layers = svg
         .selectAll(".layer")
         .data(this.layers)
         .enter()
         .append("g")
-        // .append("rect")
         .attr("width", l_scale.bandwidth())
         .attr("height", this.height)
         .attr("fill", (d) => c_scale(d.id))
         .attr("x", (d) => l_scale(d.id));
 
-      var x = d3.scaleBand().rangeRound([0, this.width]).padding(0.3);
       var y = d3.scaleLinear().rangeRound([0, this.height / 5]);
-      var colorRange = d3.schemeCategory10;
-      var color = d3.scaleOrdinal(colorRange);
+      var color = d3.scaleOrdinal(d3.schemeCategory10);
+      
       const nodes = layers
         .selectAll("rect")
         .data((d) => d.nodes)
@@ -179,37 +170,12 @@ export default {
         .style("fill", function (d) {
           return color(d.id + 1);
         })
-        .attr("width", 50)
-        .attr("height", 50)
-        .attr("class", "bg-grey_light")
-        .attr("r", 30)
+        .attr("r", 20)
         .attr("cy", function (d) {
           return y(d.id) + 50;
         })
         .attr("cx", (d) => l_scale(d.layer) + 50);
 
-      d3.select("#node").select("svg").remove();
-      // const svg2 = d3
-      //   .select("#node")
-      //   .append("svg")
-      //   .attr("width", this.width)
-      //   .attr("height", this.height);
-
-      // const circle = svg2
-      //   .selectAll(".circle")
-      //   .data(this.layers[1].nodes)
-      //   .enter()
-      //   .append("circle")
-      //   .attr("id", (d) => d.id)
-      //   .attr("width", 50)
-      //   .attr("height", 50)
-      //   .attr("class", "bg-grey")
-      //   .attr("fill", "green")
-      //   .attr("r", 30)
-      //   .attr("cx", 70)
-      //   .attr("cy", (d) => nodes_scale(d.id));
-
-      // svg2.merge(circle);
     },
   },
   mounted() {
@@ -217,18 +183,12 @@ export default {
   },
   updated() {
     this.createModel();
+    console.log("updated");
   },
 };
 </script>
 
 <style scoped>
-.controls {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
 .icon {
   width: 30px;
   margin-right: 5px;
