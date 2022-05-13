@@ -6,12 +6,29 @@
       <h2>{{ num }}</h2>
       <h2>Hidden Layers</h2>
     </div>
-    <div class="flex justify-center items-center mb-5">
-      <img @click="addNode(1)" :src="add" alt="add" class="mr-1" />
-      <img @click="subNode(1)" :src="minus" alt="sub" class="mr-1" />
-    </div>
+
     <div class="border-t-1 border-gray-light h-full"></div>
     <div id="chart5"></div>
+    <div class="flex justify-center items-center">
+      <div class="flex justify-center items-center mb-5 mr-16">
+        <img @click="addNode(1)" :src="add" alt="add" class="mr-1" />
+        <img @click="subNode(1)" :src="minus" alt="sub" class="mr-1" />
+      </div>
+      <div
+        v-if="layers.length >= 4"
+        class="flex justify-center items-center mb-5 mr-16"
+      >
+        <img @click="addNode(2)" :src="add" alt="add" class="mr-1" />
+        <img @click="subNode(2)" :src="minus" alt="sub" class="mr-1" />
+      </div>
+      <div
+        v-if="layers.length >= 5"
+        class="flex justify-center items-center mb-5"
+      >
+        <img @click="addNode(3)" :src="add" alt="add" class="mr-1" />
+        <img @click="subNode(3)" :src="minus" alt="sub" class="mr-1" />
+      </div>
+    </div>
     <div id="node" class="bg-primary"></div>
   </section>
 </template>
@@ -240,7 +257,6 @@ export default {
 
       var y = d3.scaleLinear().rangeRound([0, this.height / 5]);
       var color = d3.scaleOrdinal(d3.schemeCategory10);
-
       const nodes = layers
         .selectAll("rect")
         .data((d) => d.nodes)
