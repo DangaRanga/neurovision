@@ -70,7 +70,7 @@ export default {
   },
   methods: {
     addLayer() {
-      if (this.num < 5) {
+      if (this.num < 3) {
         this.num = this.num + 1;
       } else {
         return;

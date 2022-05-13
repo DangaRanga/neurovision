@@ -4,6 +4,7 @@
           <p class="text-s font-semibold my-4">{{ title }}</p>
           <select
             class="bg-white rounded-sm outline outline-1 outline-white focus:outline-primary h-12 pl-2 text-base w-full"
+            @change="changeValue($event)"
           >
             <option v-for="(item, i ) in options" :key=i :value=item.value > {{ item.title }}</option>
           </select>
@@ -49,11 +50,16 @@
 import infographics_icon from "@/assets/icons/infographics_icon.svg";
 
 export default {
-    props : ["type", "options", "title", "value"],
+    props : ["type", "options", "title", "value", "change"],
     data(){
         return {
             infographics_icon: infographics_icon,
         }
+    },
+    methods: {
+      changeValue(event){
+        console.log(event.target.value);
+      }
     }
 }
 </script>

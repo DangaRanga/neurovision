@@ -12,8 +12,10 @@
           </p>
         </div>
         <div>
-          <sidebar-input type="select" :title="title" :options="options" />
-          <sidebar-input type="input-d" title="Output Layer Activation Function" value="ReLu" />
+          <sidebar-input type="select" :title="'Hidden Layer 1' + title" :options="options" :change=changeActFcn />
+          <sidebar-input v-if="layers >= 2" type="select" :title="'Hidden Layer 2' + title" :options="options" />
+          <sidebar-input v-if="layers >= 3" type="select" :title="'Hidden Layer 3' + title" :options="options" />
+          <sidebar-input type="input-d" title="Output Layer Activation Function" :value=output />
         </div>
       </div>
       <div class="flex flex-col justify-center">
@@ -43,12 +45,23 @@ import SidebarInput from "@/components/elements/SidebarInput.vue";
 import TabbedMenu from "@/components/elements/TabbedMenu.vue";
 
 export default {
+  props: {
+    output: String,
+    layers: Number,
+  },
   components: {
     "sidebar-input": SidebarInput,
-    "tabbed-menu": TabbedMenu,
+    "tabbed-menu": TabbedMenu
   },
   data() {
     return {
+      options: [
+        { title: "ReLu", value: "relu" },
+        { title: "Sigmoid", value: "sigm" },
+        { title: "Softmax", value: "smax" },
+      ],
+      title: "Activation Function",
+      act_layers:  ["", "", ""],
       steps: [
         {
           target: "#v-step-0",
@@ -100,31 +113,17 @@ export default {
             placement: "left",
           },
         },
-      ],
-      selected: 1,
-      graphs: [1, 2, 3],
-      options: [
-        { title: "ReLu", value: "relu" },
-        { title: "Sigmoid", value: "sigm" },
-        { title: "Softmax", value: "smax" },
-      ],
-      title: "Activation Function",
-      headers: [
-        "Batch Size",
-        "Epochs",
-        "Learning Rate",
-        "Loss Function",
-        "Optimization Algorithm",
-      ],
+      ]
     };
+  },
+  methods: {
+    changeActFcn(index, value){
+      this.act_layers[index] = value;
+    },
   },
   mounted: function () {
     // this.$tours["myTour"].start();
   },
-  methods: {
-    changeSelected(option) {
-      this.selected = option;
-    },
-  },
+
 };
 </script>

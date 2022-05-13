@@ -5,7 +5,10 @@
       <div class="col-span-2 grid items-center">
         <model-build />
       </div>
-      <model-sidebar />
+      <model-sidebar 
+        output="ReLu" 
+        :layers="1"
+      />
     </div>
   </div>
 </template>
@@ -27,9 +30,6 @@ export default {
     };
   },
   methods: {
-    changeState() {
-      this.isRunning = !this.isRunning;
-    },
   },
   created() {
     this.isRunning = this.$route.params.isRunning == "true" ? true : false;
