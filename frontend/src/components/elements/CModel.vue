@@ -6,12 +6,31 @@
       <h2>{{ num }}</h2>
       <h2>Hidden Layers</h2>
     </div>
-    <div class="flex justify-center items-center mb-5">
-      <img @click="addNode(1)" :src="add" alt="add" class="mr-1" />
-      <img @click="subNode(1)" :src="minus" alt="sub" class="mr-1" />
-    </div>
+
     <div class="border-t-1 border-gray-light h-full"></div>
-    <div id="chart5"></div>
+    <div id="chart5" class="flex justify-center items-center mb-5"></div>
+
+    <div class="flex justify-center items-center">
+      <div class="flex justify-center items-center mb-5 mr-16">
+        <img @click="addNode(1)" :src="add" alt="add" class="mr-1" />
+        <img @click="subNode(1)" :src="minus" alt="sub" class="mr-1" />
+      </div>
+      <div
+        v-if="layers.length >= 4"
+        class="flex justify-center items-center mb-5 mr-16"
+      >
+        <img @click="addNode(2)" :src="add" alt="add" class="mr-1" />
+        <img @click="subNode(2)" :src="minus" alt="sub" class="mr-1" />
+      </div>
+      <div
+        v-if="layers.length >= 5"
+        class="flex justify-center items-center mb-5"
+      >
+        <img @click="addNode(3)" :src="add" alt="add" class="mr-1" />
+        <img @click="subNode(3)" :src="minus" alt="sub" class="mr-1" />
+      </div>
+    </div>
+    <div id="node" class="bg-primary"></div>
   </section>
 </template>
 
@@ -58,6 +77,7 @@ export default {
           nodes: [{ id: 0, layer: 2 }],
         },
       ],
+      mappings: [],
     };
   },
   computed: {
@@ -78,13 +98,16 @@ export default {
 
       const input = this.layers[0];
       const output = this.layers[this.layers.length - 1];
-      
+
       this.layers.splice(-1, 1);
-      this.layers = [...this.layers, {
-        id: this.layers.length,
-        name: `hidden-${this.layers.length}`,
-        nodes: [{ id: 0, layer: this.layers.length }],
-      }];
+      this.layers = [
+        ...this.layers,
+        {
+          id: this.layers.length,
+          name: `hidden-${this.layers.length}`,
+          nodes: [{ id: 0, layer: this.layers.length }],
+        },
+      ];
 
       output.id = this.layers.length;
       for (var i = 0; i < output.nodes.length; i++)
@@ -100,6 +123,10 @@ export default {
       }
 
       const output = this.layers[this.layers.length - 1];
+      let deleteLayer = this.layers[this.layers.length - 2];
+      console.log(deleteLayer);
+      this.deleteLayerMapping(deleteLayer.id);
+
       this.layers.splice(-2, 2);
       output.id = this.layers.length;
       for (var i = 0; i < output.nodes.length; i++)
@@ -108,27 +135,98 @@ export default {
     },
     addNode(index) {
       const layer = this.layers[index];
-      if(layer.nodes.length < 5){
+      if (layer.nodes.length < 5) {
         layer.nodes.push({
           id: layer.nodes.length,
-          layer: layer.id
+          layer: layer.id,
         });
+        this.createmapping();
         this.createModel();
-      }else{
-        return ;
+      } else {
+        return;
       }
     },
     subNode(index) {
       const layer = this.layers[index];
-      if(layer.nodes.length > 1){
+      console.log(layer);
+      if (layer.nodes.length > 1) {
+        let deletenode = layer.nodes[layer.nodes.length - 1];
+        this.deleteNodeMapping(deletenode.layer, deletenode.id);
+
         layer.nodes.splice(-1, 1);
         this.createModel();
-      }else{
-        return ;
+      } else {
+        return;
       }
     },
-    createModel() {
+    createmapping() {
+      const id = (d) => d.id;
+      let newmappings = [];
+      const l_scale = d3
+        .scaleBand()
+        .domain(this.layers.map(id))
+        .range([0, this.width]);
 
+      var y = d3.scaleLinear().rangeRound([0, this.height / 5]);
+
+      for (let layer = 0; layer < this.layers.length - 1; layer++) {
+        const sourcelayer = this.layers[layer];
+        // const nextlayer = this.layers[layer + 1];
+        const targetlayer = this.layers[layer + 1];
+
+        sourcelayer.nodes.forEach((sourcenode) => {
+          targetlayer.nodes.forEach((targetnode) => {
+            newmappings = [
+              ...newmappings,
+              {
+                sourceid: sourcenode.id,
+                sourcelayer: sourcenode.layer,
+                sourcex: l_scale(sourcenode.layer) + 68,
+                sourcey: y(sourcenode.id) + 50,
+                targetid: targetnode.id,
+                targetlayer: targetnode.layer,
+                targetx: l_scale(targetnode.layer) + 30,
+                targety: y(targetnode.id) + 50,
+              },
+            ];
+          });
+        });
+      }
+      this.mappings = newmappings;
+      console.log(this.mappings);
+    },
+    deleteNodeMapping(sourcelayer, sourceid) {
+      let removed;
+      for (let mapping = 0; mapping < this.mappings.length; mapping++) {
+        if (
+          this.mappings[mapping].sourcelayer == sourcelayer &&
+          this.mappings[mapping].sourceid == sourceid
+        ) {
+          removed = this.mappings.splice(mapping, 1);
+        } else {
+          if (
+            this.mappings[mapping].targetlayer == sourcelayer &&
+            this.mappings[mapping].targetid == sourceid
+          ) {
+            removed = this.mappings.splice(mapping, 1);
+          }
+        }
+      }
+    },
+    deleteLayerMapping(sourcelayer) {
+      let removed;
+      for (let mapping = 0; mapping < this.mappings.length; mapping++) {
+        if (this.mappings[mapping].sourcelayer == sourcelayer) {
+          removed = this.mappings.splice(mapping, 1);
+        } else {
+          if (this.mappings[mapping].targetlayer == sourcelayer) {
+            removed = this.mappings.splice(mapping, 1);
+          }
+        }
+      }
+    },
+
+    createModel() {
       d3.select("#chart5").select("svg").remove();
       const svg = d3
         .select("#chart5")
@@ -160,7 +258,6 @@ export default {
 
       var y = d3.scaleLinear().rangeRound([0, this.height / 5]);
       var color = d3.scaleOrdinal(d3.schemeCategory10);
-      
       const nodes = layers
         .selectAll("rect")
         .data((d) => d.nodes)
@@ -176,12 +273,28 @@ export default {
         })
         .attr("cx", (d) => l_scale(d.layer) + 50);
 
+      const len = 3;
+      const links = nodes
+        .select("circle")
+        .data(this.mappings)
+        .enter()
+        .append("line")
+        .style("stroke", "black")
+        .style("stroke-width", 3)
+        .attr("x1", (d) => d.sourcex)
+        .attr("y1", (d) => d.sourcey)
+        .attr("x2", (d) => d.targetx)
+        .attr("y2", (d) => d.targety);
+
+      // d3.select("#node").select("svg").remove();
     },
   },
   mounted() {
+    this.createmapping();
     this.createModel();
   },
   updated() {
+    this.createmapping();
     this.createModel();
     console.log("updated");
   },
