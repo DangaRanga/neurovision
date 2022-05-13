@@ -10,6 +10,7 @@
           :title="dataset.title"
           :summary="dataset.summary"
           :dataset-index="index"
+          :selected="index == selectedDataset"
           @select="selectDataset"
           v-bind="index"
         ></selector-item>
@@ -123,8 +124,10 @@ export default {
     },
 
     selectDataset(dataset) {
+      // Set the selected dataset
       this.selectedDataset = dataset;
-      console.log(this.datasets[dataset]);
+
+      // Fetch the data
       this.$http
         .get(
           `http://localhost:9090/api/data?dataset=${this.datasets[dataset].name}`,
@@ -137,6 +140,9 @@ export default {
             rows: newData.data,
           };
         });
+
+      // Cache the data in localstorage
+      localStorage.setItem("base-dataset", JSON.stringify(this.dataset));
     },
   },
   components: {

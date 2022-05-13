@@ -25,6 +25,23 @@
             placeholder="Enter text"
           />
       </div>
+      <div v-if="type == 'input-d'">
+          <div
+            class="flex flex-row justify-between mb-3"
+          >
+            <p class="text-base font-semibold">{{ title }}</p>
+            <img
+              :src="infographics_icon"
+              alt="info"
+              class="items-center"
+            />
+          </div>
+          <input
+            class="bg-white rounded outline outline-1 outline-white focus:outline-primary h-12 text-base w-full p-2"
+            :value=value
+            disabled
+          />
+      </div>
   </div>
 </template>
 
@@ -32,7 +49,7 @@
 import infographics_icon from "@/assets/icons/infographics_icon.svg";
 
 export default {
-    props : ["type", "options", "title"],
+    props : ["type", "options", "title", "value"],
     data(){
         return {
             infographics_icon: infographics_icon,
