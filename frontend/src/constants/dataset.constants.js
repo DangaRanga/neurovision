@@ -4,6 +4,9 @@ import {
   getIrisPredictionData,
 } from "@/controllers/dataControllers/dataset.controller";
 
+import Heart from "@/assets/icons/heart.svg";
+import Flower from "@/assets/icons/flower.svg";
+
 const housePredictionData = {
   title: "House Price Prediction",
   description: ` Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -30,7 +33,7 @@ const heartDiseaseData = {
   summary: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
         eiusmod tempor incididunt ut labore`,
   problemType: "Binary Classification",
-  image: "",
+  image: Heart,
   name: "heart_disease",
 };
 
@@ -45,7 +48,7 @@ const irisPredictionData = {
   summary: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore`,
   problemType: "Multivariate Classification",
-  image: "",
+  image: Flower,
   name: "iris",
   data: getIrisPredictionData(),
 };

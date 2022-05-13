@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="flex flex-col items-center justify-center border h-screen"
-    id="v-step-0"
-  >
+  <div class="flex flex-col items-center justify-center h-screen" id="v-step-0">
     <div class="grid grid-cols-3 mt-48" id="v-step-1">
       <article v-for="(dataset, index) in datasets" :key="index">
         <selector-item
@@ -40,8 +37,8 @@
         Next Step
       </router-link>
     </div>
-    <div class="my-3">
-      <p class="text-center font-medium text-primary_dark">
+    <div class="my-5">
+      <p class="text-center font-medium text-primary_dark mb-7">
         Not sure which to select? Preview each dataset to learn more!
       </p>
     </div>
@@ -126,10 +123,12 @@ export default {
     selectDataset(dataset) {
       // Set the selected dataset
       this.selectedDataset = dataset;
-      console.log(this.datasets[this.selectedDataset]);
+
+      // Extract key values
       this.analysisType = this.datasets[this.selectedDataset].problemType;
       this.title = this.datasets[this.selectedDataset].title;
       this.description = this.datasets[this.selectedDataset].description;
+
       // Fetch the data
       this.$http
         .get(
@@ -138,14 +137,16 @@ export default {
         )
         .then((response) => {
           const newData = response.data.dataset;
-          this.dataset = {
+          const data = {
             headings: newData.columns,
             rows: newData.data,
+            analysisType: this.analysisType,
+            title: this.title,
+            description: this.description,
           };
+          this.dataset = data;
+          localStorage.setItem("base-dataset", JSON.stringify(data));
         });
-
-      // Cache the data in localstorage
-      localStorage.setItem("base-dataset", JSON.stringify(this.dataset));
     },
   },
   components: {

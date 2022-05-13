@@ -7,15 +7,25 @@
       @click="toggleSelected"
     >
       <div v-if="image">
-        <img :src="image" :alt="title" />
+        <img
+          :src="image"
+          :alt="title"
+          :class="{ 'filter-primary': selected }"
+        />
       </div>
     </article>
 
     <div class="text-center w-1/2 my-3">
-      <h1 class="text-lg font-bold text-primary_dark">
+      <h1
+        class="text-lg font-bold text-primary_dark"
+        :class="{ 'text-primary': selected }"
+      >
         {{ title }}
       </h1>
-      <p class="text-gray-600">
+      <p
+        :class="{ 'text-primary': selected, 'text-gray-600': !selected }"
+        class="transition-colors duration-400"
+      >
         {{ summary }}
       </p>
     </div>
@@ -67,6 +77,10 @@ export default {
 };
 </script>
 <style scoped>
+.filter-primary {
+  filter: invert(54%) sepia(69%) saturate(3318%) hue-rotate(179deg)
+    brightness(104%) contrast(91%);
+}
 .checkmark__circle {
   stroke-dasharray: 166;
   stroke-dashoffset: 166;
