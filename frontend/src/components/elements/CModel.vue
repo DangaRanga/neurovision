@@ -8,7 +8,8 @@
     </div>
 
     <div class="border-t-1 border-gray-light h-full"></div>
-    <div id="chart5"></div>
+    <div id="chart5" class="flex justify-center items-center mb-5"></div>
+
     <div class="flex justify-center items-center">
       <div class="flex justify-center items-center mb-5 mr-16">
         <img @click="addNode(1)" :src="add" alt="add" class="mr-1" />
