@@ -27,7 +27,7 @@
       <h1 class="text-base text-secondary font-base my-auto">Hidden Layers</h1>
     </div>
 
-    <div class="border-t-1 border-gray-light h-full"></div>
+    <div class="border-t-2 border-r-2 border-l-2 border-secondary h-2 w-8/12 mx-auto"></div>
     <div id="chart5" class="flex justify-center items-center mb-5"></div>
 
     <div class="flex justify-center items-center">
