@@ -38,7 +38,10 @@
           viewBox="0 0 48 48"
           width="30px"
           fill="#5D5FEF"
-          @click="addNode(1)"
+          @click="() => {
+            this.addNode(1);
+            this.createModel();
+          }"
           class="mr-1"
         >
           <path d="M22.5 34H25.5V25.5H34V22.5H25.5V14H22.5V22.5H14V25.5H22.5ZM9 42Q7.8 42 6.9 41.1Q6 40.2 6 39V9Q6 7.8 6.9 6.9Q7.8 6 9 6H39Q40.2 6 41.1 6.9Q42 7.8 42 9V39Q42 40.2 41.1 41.1Q40.2 42 39 42Z"/>
@@ -68,7 +71,10 @@
           viewBox="0 0 48 48"
           width="30px"
           fill="#5D5FEF"
-          @click="addNode(2)"
+          @click="() => {
+            this.addNode(2);
+            this.createModel();
+          }"
           class="mr-1"
         >
           <path d="M22.5 34H25.5V25.5H34V22.5H25.5V14H22.5V22.5H14V25.5H22.5ZM9 42Q7.8 42 6.9 41.1Q6 40.2 6 39V9Q6 7.8 6.9 6.9Q7.8 6 9 6H39Q40.2 6 41.1 6.9Q42 7.8 42 9V39Q42 40.2 41.1 41.1Q40.2 42 39 42Z"/>
@@ -98,7 +104,10 @@
           viewBox="0 0 48 48"
           width="30px"
           fill="#5D5FEF"
-          @click="addNode(3)"
+          @click="() => {
+            this.addNode(3);
+            this.createModel();
+          }"
           class="mr-1"
         >
           <path d="M22.5 34H25.5V25.5H34V22.5H25.5V14H22.5V22.5H14V25.5H22.5ZM9 42Q7.8 42 6.9 41.1Q6 40.2 6 39V9Q6 7.8 6.9 6.9Q7.8 6 9 6H39Q40.2 6 41.1 6.9Q42 7.8 42 9V39Q42 40.2 41.1 41.1Q40.2 42 39 42Z"/>
@@ -130,7 +139,7 @@ import minus from "@/assets/icons/minus.svg";
 
 export default {
   name: "CModel",
-  props: ["num_hidden", "layers", "mappings", "addNode", "subNode", "addLayer", "subLayer", "width", "height"],
+  props: ["num_hidden", "layers", "addNode", "subNode", "addLayer", "subLayer", "width", "height"],
   data() {
     return {
       add,

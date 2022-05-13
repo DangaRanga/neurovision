@@ -102,7 +102,6 @@ export default {
 
       const output = this.layers[this.layers.length - 1];
       let deleteLayer = this.layers[this.layers.length - 2];
-      console.log(deleteLayer);
       this.deleteLayerMapping(deleteLayer.id);
 
       this.layers.splice(-2, 2);
@@ -131,6 +130,7 @@ export default {
         this.deleteNodeMapping(deletenode.layer, deletenode.id);
 
         layer.nodes.splice(-1, 1);
+        this.createmapping();
       } else {
         return;
       }
@@ -168,7 +168,6 @@ export default {
         });
       }
       this.mappings = newmappings;
-      console.log(this.mappings)
     },
     deleteNodeMapping(sourcelayer, sourceid) {
       let removed;

@@ -10,7 +10,6 @@
         <model-build 
           :num_hidden="num_hidden"
           :layers="layers"
-          :mappings="mappings"
           :addNode="addNode"
           :subNode="subNode"
           :subLayer="subLayer"
@@ -31,7 +30,6 @@
 import CMHeader from "@/components/elements/CMHeader.vue";
 import CMSidebar from "@/components/elements/CMSidebar.vue";
 import CModel from "@/components/elements/CModel.vue";
-import * as d3 from "d3";
 
 export default {
   components: {
@@ -66,7 +64,6 @@ export default {
           nodes: [{ id: 0, layer: 2, output: true }],
         },
       ],
-      mappings: [],
     };
   },
   methods: {
@@ -95,7 +92,6 @@ export default {
         output.nodes[i].layer = this.layers.length;
 
       this.layers.push(output);
-      this.createmapping();
     },
     subLayer() {
       if (this.num_hidden > 1) {
@@ -105,16 +101,12 @@ export default {
       }
 
       const output = this.layers[this.layers.length - 1];
-      let deleteLayer = this.layers[this.layers.length - 2];
-      console.log(deleteLayer);
-      this.deleteLayerMapping(deleteLayer.id);
 
       this.layers.splice(-2, 2);
       output.id = this.layers.length;
       for (var i = 0; i < output.nodes.length; i++)
         output.nodes[i].layer = this.layers.length;
       this.layers.push(output);
-      this.createmapping();
     },
     addNode(index) {
       const layer = this.layers[index];
@@ -123,7 +115,6 @@ export default {
           id: layer.nodes.length,
           layer: layer.id,
         });
-        this.createmapping();
       } else {
         return;
       }
@@ -131,82 +122,11 @@ export default {
     subNode(index) {
       const layer = this.layers[index];
       if (layer.nodes.length > 1) {
-        let deletenode = layer.nodes[layer.nodes.length - 1];
-        this.deleteNodeMapping(deletenode.layer, deletenode.id);
         layer.nodes.splice(-1, 1);
-        this.createmapping();
       } else {
         return;
       }
     },
-    createmapping() {
-      const id = (d) => d.id;
-      let newmappings = [];
-      const l_scale = d3
-        .scaleBand()
-        .domain(this.layers.map(id))
-        .range([0, this.width]);
-
-      var y = d3.scaleLinear().rangeRound([0, this.height / 5]);
-
-      for (let layer = 0; layer < this.layers.length - 1; layer++) {
-        const sourcelayer = this.layers[layer];
-        const targetlayer = this.layers[layer + 1];
-
-        sourcelayer.nodes.forEach((sourcenode) => {
-          targetlayer.nodes.forEach((targetnode) => {
-            newmappings = [
-              ...newmappings,
-              {
-                sourceid: sourcenode.id,
-                sourcelayer: sourcenode.layer,
-                sourcex: l_scale(sourcenode.layer) + 68,
-                sourcey: y(sourcenode.id) + 50,
-                targetid: targetnode.id,
-                targetlayer: targetnode.layer,
-                targetx: l_scale(targetnode.layer) + 30,
-                targety: y(targetnode.id) + 50,
-              },
-            ];
-          });
-        });
-      }
-      this.mappings = newmappings;
-      console.log(this.mappings)
-    },
-    deleteNodeMapping(sourcelayer, sourceid) {
-      let removed;
-      for (let mapping = 0; mapping < this.mappings.length; mapping++) {
-        if (
-          this.mappings[mapping].sourcelayer == sourcelayer &&
-          this.mappings[mapping].sourceid == sourceid
-        ) {
-          removed = this.mappings.splice(mapping, 1);
-        } else {
-          if (
-            this.mappings[mapping].targetlayer == sourcelayer &&
-            this.mappings[mapping].targetid == sourceid
-          ) {
-            removed = this.mappings.splice(mapping, 1);
-          }
-        }
-      }
-    },
-    deleteLayerMapping(sourcelayer) {
-      let removed;
-      for (let mapping = 0; mapping < this.mappings.length; mapping++) {
-        if (this.mappings[mapping].sourcelayer == sourcelayer) {
-          removed = this.mappings.splice(mapping, 1);
-        } else {
-          if (this.mappings[mapping].targetlayer == sourcelayer) {
-            removed = this.mappings.splice(mapping, 1);
-          }
-        }
-      }
-    },
-  },
-  mounted(){
-    this.createmapping();
   },
 };
 </script>
