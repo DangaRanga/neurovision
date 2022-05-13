@@ -111,14 +111,7 @@ export default {
         this.isModalVisible = true;
       }
     },
-    isSelected(title) {
-      if (title == this.selectDataset) {
-        console.log("This works");
-        return true;
-      } else {
-        return false;
-      }
-    },
+
     closeModal() {
       this.isModalVisible = false;
     },
