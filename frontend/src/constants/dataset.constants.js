@@ -6,6 +6,7 @@ import {
 
 import Heart from "@/assets/icons/heart.svg";
 import Flower from "@/assets/icons/flower.svg";
+import House from "@/assets/icons/house.svg";
 
 const housePredictionData = {
   title: "House Price Prediction",
@@ -18,7 +19,7 @@ const housePredictionData = {
   summary: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
       eiusmod tempor incididunt ut labore`,
   problemType: "Prediction",
-  image: "",
+  image: House,
   name: "house_price",
 };
 
