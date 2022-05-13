@@ -171,7 +171,7 @@ export default {
       var colorRange = d3.schemeCategory10;
       var color = d3.scaleOrdinal(colorRange);
       const nodes = layers
-        .selectAll("rect")
+        .selectAll("g")
         .data((d) => d.nodes)
         .enter()
         .append("circle")
