@@ -12,9 +12,29 @@
           </p>
         </div>
         <div>
-          <sidebar-input type="select" :title="'Hidden Layer 1' + title" :options="options" :change=changeActFcn />
-          <sidebar-input v-if="layers >= 2" type="select" :title="'Hidden Layer 2' + title" :options="options" />
-          <sidebar-input v-if="layers >= 3" type="select" :title="'Hidden Layer 3' + title" :options="options" />
+          <sidebar-input 
+            type="select" 
+            :title="'Hidden Layer 1 ' + title" 
+            :options="options" 
+            :change=changeActFcn 
+            :index="0" 
+          />
+          <sidebar-input 
+            v-if="layers >= 2" 
+            type="select" 
+            :title="'Hidden Layer 2 ' + title" 
+            :options="options" 
+            :change=changeActFcn
+            :index="1" 
+          />
+          <sidebar-input 
+            v-if="layers >= 3" 
+            type="select" 
+            :title="'Hidden Layer 3 ' + title" 
+            :options="options" 
+            :change=changeActFcn
+            :index="2" 
+          />
           <sidebar-input type="input-d" title="Output Layer Activation Function" :value=output />
         </div>
       </div>

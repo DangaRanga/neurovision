@@ -1,12 +1,124 @@
 <template>
   <section>
-    <div class="controls">
-      <img @click="addLayer()" :src="add" alt="add" class="icon" />
-      <img @click="subLayer()" :src="minus" alt="sub" class="icon" />
-      <h2>{{ num }}</h2>
-      <h2>Hidden Layers</h2>
+    <div class="flex justify-center items-center mb-5">
+      <svg 
+        xmlns="http://www.w3.org/2000/svg" 
+        height="30px"
+        viewBox="0 0 48 48"
+        width="30px"
+        fill="#5D5FEF"
+        @click="addLayer()"
+        class="mr-1"
+      >
+        <path d="M22.5 34H25.5V25.5H34V22.5H25.5V14H22.5V22.5H14V25.5H22.5ZM9 42Q7.8 42 6.9 41.1Q6 40.2 6 39V9Q6 7.8 6.9 6.9Q7.8 6 9 6H39Q40.2 6 41.1 6.9Q42 7.8 42 9V39Q42 40.2 41.1 41.1Q40.2 42 39 42Z"/>
+      </svg>
+      <svg 
+        xmlns="http://www.w3.org/2000/svg" 
+        height="30px"
+        viewBox="0 0 48 48"
+        width="30px"
+        fill="#535353"
+        @click="subLayer()"
+        class="mr-1"
+      >
+        <path d="M12.5 25.4H35.55V22.4H12.5ZM9 42Q7.8 42 6.9 41.1Q6 40.2 6 39V9Q6 7.8 6.9 6.9Q7.8 6 9 6H39Q40.2 6 41.1 6.9Q42 7.8 42 9V39Q42 40.2 41.1 41.1Q40.2 42 39 42Z"/>
+      </svg>
+      <h1 class="text-base text-secondary font-extrabold my-auto mr-2 ">{{ num_hidden }}</h1>
+      <h1 class="text-base text-secondary font-base my-auto">Hidden Layers</h1>
     </div>
-    <div id="chart5"></div>
+
+    <div class="border-t-1 border-gray-light h-full"></div>
+    <div id="chart5" class="flex justify-center items-center mb-5"></div>
+
+    <div class="flex justify-center items-center">
+      <div class="flex justify-center items-center mb-5 mr-16">
+        <svg 
+          xmlns="http://www.w3.org/2000/svg" 
+          height="30px"
+          viewBox="0 0 48 48"
+          width="30px"
+          fill="#5D5FEF"
+          @click="addNode(1)"
+          class="mr-1"
+        >
+          <path d="M22.5 34H25.5V25.5H34V22.5H25.5V14H22.5V22.5H14V25.5H22.5ZM9 42Q7.8 42 6.9 41.1Q6 40.2 6 39V9Q6 7.8 6.9 6.9Q7.8 6 9 6H39Q40.2 6 41.1 6.9Q42 7.8 42 9V39Q42 40.2 41.1 41.1Q40.2 42 39 42Z"/>
+        </svg>
+        <svg 
+          xmlns="http://www.w3.org/2000/svg" 
+          height="30px"
+          viewBox="0 0 48 48"
+          width="30px"
+          fill="#535353"
+          @click="() => {
+            this.subNode(1);
+            this.createModel()
+          }"
+          class="mr-1"
+        >
+          <path d="M12.5 25.4H35.55V22.4H12.5ZM9 42Q7.8 42 6.9 41.1Q6 40.2 6 39V9Q6 7.8 6.9 6.9Q7.8 6 9 6H39Q40.2 6 41.1 6.9Q42 7.8 42 9V39Q42 40.2 41.1 41.1Q40.2 42 39 42Z"/>
+        </svg>
+      </div>
+      <div
+        v-if="layers.length >= 4"
+        class="flex justify-center items-center mb-5 mr-16"
+      >
+        <svg 
+          xmlns="http://www.w3.org/2000/svg" 
+          height="30px"
+          viewBox="0 0 48 48"
+          width="30px"
+          fill="#5D5FEF"
+          @click="addNode(2)"
+          class="mr-1"
+        >
+          <path d="M22.5 34H25.5V25.5H34V22.5H25.5V14H22.5V22.5H14V25.5H22.5ZM9 42Q7.8 42 6.9 41.1Q6 40.2 6 39V9Q6 7.8 6.9 6.9Q7.8 6 9 6H39Q40.2 6 41.1 6.9Q42 7.8 42 9V39Q42 40.2 41.1 41.1Q40.2 42 39 42Z"/>
+        </svg>
+        <svg 
+          xmlns="http://www.w3.org/2000/svg" 
+          height="30px"
+          viewBox="0 0 48 48"
+          width="30px"
+          fill="#535353"
+          @click="() => {
+            this.subNode(2);
+            this.createModel();
+          }"
+          class="mr-1"
+        >
+          <path d="M12.5 25.4H35.55V22.4H12.5ZM9 42Q7.8 42 6.9 41.1Q6 40.2 6 39V9Q6 7.8 6.9 6.9Q7.8 6 9 6H39Q40.2 6 41.1 6.9Q42 7.8 42 9V39Q42 40.2 41.1 41.1Q40.2 42 39 42Z"/>
+        </svg>
+      </div>
+      <div
+        v-if="layers.length >= 5"
+        class="flex justify-center items-center mb-5"
+      >
+        <svg 
+          xmlns="http://www.w3.org/2000/svg" 
+          height="30px"
+          viewBox="0 0 48 48"
+          width="30px"
+          fill="#5D5FEF"
+          @click="addNode(3)"
+          class="mr-1"
+        >
+          <path d="M22.5 34H25.5V25.5H34V22.5H25.5V14H22.5V22.5H14V25.5H22.5ZM9 42Q7.8 42 6.9 41.1Q6 40.2 6 39V9Q6 7.8 6.9 6.9Q7.8 6 9 6H39Q40.2 6 41.1 6.9Q42 7.8 42 9V39Q42 40.2 41.1 41.1Q40.2 42 39 42Z"/>
+        </svg>
+        <svg 
+          xmlns="http://www.w3.org/2000/svg" 
+          height="30px"
+          viewBox="0 0 48 48"
+          width="30px"
+          fill="#535353"
+          @click="() => {
+            this.subNode(3);
+            this.createModel();
+          }"
+          class="mr-1"
+        >
+          <path d="M12.5 25.4H35.55V22.4H12.5ZM9 42Q7.8 42 6.9 41.1Q6 40.2 6 39V9Q6 7.8 6.9 6.9Q7.8 6 9 6H39Q40.2 6 41.1 6.9Q42 7.8 42 9V39Q42 40.2 41.1 41.1Q40.2 42 39 42Z"/>
+        </svg>
+      </div>
+    </div>
     <div id="node" class="bg-primary"></div>
   </section>
 </template>
@@ -15,53 +127,20 @@
 import * as d3 from "d3";
 import add from "@/assets/icons/add.svg";
 import minus from "@/assets/icons/minus.svg";
-//hi
+
 export default {
-  name: "ModelBuild",
+  name: "CModel",
+  props: ["num_hidden", "layers", "mappings", "addNode", "subNode", "addLayer", "subLayer", "width", "height"],
   data() {
     return {
-      width: 900,
-      height: 500,
       margin: {
         left: 15,
         right: 15,
-        top: 15,
-        bottom: 15,
+        top: 50,
+        bottom: 50,
       },
-      num: 1,
       add,
       minus,
-      layers: [
-        {
-          id: 0,
-          name: "input",
-          nodes: [
-            { id: 0, layer: 0 },
-            { id: 1, layer: 0 },
-            { id: 2, layer: 0 },
-            { id: 3, layer: 0 },
-            { id: 4, layer: 0 },
-          ],
-        },
-        {
-          id: 1,
-          name: "hidden-1",
-          nodes: [{ id: 0, layer: 1 }],
-        },
-        {
-          id: 2,
-          name: "output",
-          nodes: [{ id: 0, layer: 2 }],
-        },
-      ],
-      nodes: [
-        {
-          id: 0,
-          name: "ServiceGroup",
-          description: "Port : 80",
-          connection_count: 3,
-        },
-      ],
     };
   },
   computed: {
@@ -73,50 +152,6 @@ export default {
     },
   },
   methods: {
-    addLayer() {
-      if (this.num < 5) {
-        this.num = this.num + 1;
-      } else {
-        return;
-      }
-
-      const input = this.layers[0];
-      const output = this.layers[this.layers.length - 1];
-
-      this.layers = [];
-      this.layers.push(input);
-      for (var i = 0; i < this.num; i++)
-        this.layers.push({
-          id: i + 1,
-          name: `hidden-${i + 1}`,
-          nodes: [{ id: 0, layer: i + 1 }],
-        });
-      output.id = this.layers.length;
-      for (var i = 0; i < output.nodes.length; i++)
-        output.nodes[i].layer = this.layers.length;
-
-      this.layers.push(output);
-    },
-    subLayer() {
-      if (this.num > 1) {
-        this.num = this.num - 1;
-      } else {
-        return;
-      }
-
-      const output = this.layers[this.layers.length - 1];
-      this.layers.splice(-2, 2);
-      output.id = this.layers.length;
-      for (var i = 0; i < output.nodes.length; i++)
-        output.nodes[i].layer = this.layers.length;
-      this.layers.push(output);
-    },
-    addNode() {
-      return 0;
-    },
-    subNode() {
-      return 0;
-    },
     createModel() {
       d3.select("#chart5").select("svg").remove();
       const svg = d3
@@ -132,103 +167,68 @@ export default {
         .domain(this.layers.map(id))
         .range([0, this.width]);
 
-      const nodes_scale = d3
-        .scaleBand()
-        .domain(this.layers.map(id))
-        .range([0, this.height / 2]);
-
       const c_scale = d3
         .scaleLinear()
         .domain([this.layers[0].id, this.layers[this.layers.length - 1].id])
         .range(["purple", "orange"]);
-
-      svg
-        .selectAll(".text")
-        .data(this.layers)
-        .enter()
-        .append("text")
-        .attr("text-anchor", "middle")
-        .attr("text-color", "#535353")
-        .attr("class", "text-center font-medium text-primary_dark")
-        .style("font-size", "28px")
-        .style("color", "#535353")
-        .text((d) => d.name)
-        .attr("x", (d) => l_scale(d.id) + 100);
 
       const layers = svg
         .selectAll(".layer")
         .data(this.layers)
         .enter()
         .append("g")
-        // .append("rect")
         .attr("width", l_scale.bandwidth())
         .attr("height", this.height)
         .attr("fill", (d) => c_scale(d.id))
         .attr("x", (d) => l_scale(d.id));
 
-      var x = d3.scaleBand().rangeRound([0, this.width]).padding(0.3);
       var y = d3.scaleLinear().rangeRound([0, this.height / 5]);
-      var colorRange = d3.schemeCategory10;
-      var color = d3.scaleOrdinal(colorRange);
+      var color = d3.scaleOrdinal(d3.schemeCategory10);
       const nodes = layers
-        .selectAll("g")
+        .selectAll("rect")
         .data((d) => d.nodes)
         .enter()
         .append("circle")
         .attr("id", (d) => d.id)
         .style("fill", function (d) {
-          return color(d.id + 1);
+          if(d.layer == 0){
+            return "#20A4F3"
+          }else if(d.output){
+            return "#20A4F3"
+          }else{
+            return "#5D5FEF"
+          }
         })
-        .attr("width", 50)
-        .attr("height", 50)
-        .attr("class", "bg-grey_light")
-        .attr("r", 30)
+        .attr("r", 20)
         .attr("cy", function (d) {
           return y(d.id) + 50;
         })
         .attr("cx", (d) => l_scale(d.layer) + 50);
 
-      d3.select("#node").select("svg").remove();
-      // const svg2 = d3
-      //   .select("#node")
-      //   .append("svg")
-      //   .attr("width", this.width)
-      //   .attr("height", this.height);
-
-      // const circle = svg2
-      //   .selectAll(".circle")
-      //   .data(this.layers[1].nodes)
-      //   .enter()
-      //   .append("circle")
-      //   .attr("id", (d) => d.id)
-      //   .attr("width", 50)
-      //   .attr("height", 50)
-      //   .attr("class", "bg-grey")
-      //   .attr("fill", "green")
-      //   .attr("r", 30)
-      //   .attr("cx", 70)
-      //   .attr("cy", (d) => nodes_scale(d.id));
-
-      // svg2.merge(circle);
+      const len = 3;
+      const links = nodes
+        .select("circle")
+        .data(this.mappings)
+        .enter()
+        .append("line")
+        .style("stroke", "grey")
+        .style("stroke-width", 2)
+        .attr("x1", (d) => d.sourcex)
+        .attr("y1", (d) => d.sourcey)
+        .attr("x2", (d) => d.targetx)
+        .attr("y2", (d) => d.targety);
     },
   },
   mounted() {
     this.createModel();
   },
-  updated() {
+  updated(){
     this.createModel();
-  },
+  }
 };
 </script>
 
 <style scoped>
-.controls {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
 .icon {
   width: 30px;
   margin-right: 5px;

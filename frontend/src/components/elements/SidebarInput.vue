@@ -50,7 +50,7 @@
 import infographics_icon from "@/assets/icons/infographics_icon.svg";
 
 export default {
-    props : ["type", "options", "title", "value", "change"],
+    props : ["type", "options", "title", "value", "change", "index"],
     data(){
         return {
             infographics_icon: infographics_icon,
@@ -58,7 +58,14 @@ export default {
     },
     methods: {
       changeValue(event){
-        console.log(event.target.value);
+        const value = event.target.value;
+        if(value == "sigm"){
+          this.change(this.index, "Sigmoid");
+        }else if(value == "smax"){
+          this.change(this.index, "Softmax");
+        }else{
+          this.change(this.index, "ReLu");
+        }
       }
     }
 }

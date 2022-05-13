@@ -1,10 +1,30 @@
 <template>
   <section>
     <div class="flex justify-center items-center mb-5">
-      <img @click="addLayer()" :src="add" alt="add" class="mr-1" />
-      <img @click="subLayer()" :src="minus" alt="sub" class="mr-1" />
-      <h2>{{ num }}</h2>
-      <h2>Hidden Layers</h2>
+      <svg 
+        xmlns="http://www.w3.org/2000/svg" 
+        height="30px"
+        viewBox="0 0 48 48"
+        width="30px"
+        fill="#5D5FEF"
+        @click="addLayer()"
+        class="mr-1"
+      >
+        <path d="M22.5 34H25.5V25.5H34V22.5H25.5V14H22.5V22.5H14V25.5H22.5ZM9 42Q7.8 42 6.9 41.1Q6 40.2 6 39V9Q6 7.8 6.9 6.9Q7.8 6 9 6H39Q40.2 6 41.1 6.9Q42 7.8 42 9V39Q42 40.2 41.1 41.1Q40.2 42 39 42Z"/>
+      </svg>
+      <svg 
+        xmlns="http://www.w3.org/2000/svg" 
+        height="30px"
+        viewBox="0 0 48 48"
+        width="30px"
+        fill="#535353"
+        @click="subLayer()"
+        class="mr-1"
+      >
+        <path d="M12.5 25.4H35.55V22.4H12.5ZM9 42Q7.8 42 6.9 41.1Q6 40.2 6 39V9Q6 7.8 6.9 6.9Q7.8 6 9 6H39Q40.2 6 41.1 6.9Q42 7.8 42 9V39Q42 40.2 41.1 41.1Q40.2 42 39 42Z"/>
+      </svg>
+      <h1 class="text-base text-secondary font-extrabold my-auto mr-2 ">{{ num_hidden }}</h1>
+      <h1 class="text-base text-secondary font-base my-auto">Hidden Layers</h1>
     </div>
 
     <div class="border-t-1 border-gray-light h-full"></div>
@@ -12,22 +32,91 @@
 
     <div class="flex justify-center items-center">
       <div class="flex justify-center items-center mb-5 mr-16">
-        <img @click="addNode(1)" :src="add" alt="add" class="mr-1" />
-        <img @click="subNode(1)" :src="minus" alt="sub" class="mr-1" />
+        <svg 
+          xmlns="http://www.w3.org/2000/svg" 
+          height="30px"
+          viewBox="0 0 48 48"
+          width="30px"
+          fill="#5D5FEF"
+          @click="addNode(1)"
+          class="mr-1"
+        >
+          <path d="M22.5 34H25.5V25.5H34V22.5H25.5V14H22.5V22.5H14V25.5H22.5ZM9 42Q7.8 42 6.9 41.1Q6 40.2 6 39V9Q6 7.8 6.9 6.9Q7.8 6 9 6H39Q40.2 6 41.1 6.9Q42 7.8 42 9V39Q42 40.2 41.1 41.1Q40.2 42 39 42Z"/>
+        </svg>
+        <svg 
+          xmlns="http://www.w3.org/2000/svg" 
+          height="30px"
+          viewBox="0 0 48 48"
+          width="30px"
+          fill="#535353"
+          @click="() => {
+            this.subNode(1);
+            this.createModel()
+          }"
+          class="mr-1"
+        >
+          <path d="M12.5 25.4H35.55V22.4H12.5ZM9 42Q7.8 42 6.9 41.1Q6 40.2 6 39V9Q6 7.8 6.9 6.9Q7.8 6 9 6H39Q40.2 6 41.1 6.9Q42 7.8 42 9V39Q42 40.2 41.1 41.1Q40.2 42 39 42Z"/>
+        </svg>
       </div>
       <div
         v-if="layers.length >= 4"
         class="flex justify-center items-center mb-5 mr-16"
       >
-        <img @click="addNode(2)" :src="add" alt="add" class="mr-1" />
-        <img @click="subNode(2)" :src="minus" alt="sub" class="mr-1" />
+        <svg 
+          xmlns="http://www.w3.org/2000/svg" 
+          height="30px"
+          viewBox="0 0 48 48"
+          width="30px"
+          fill="#5D5FEF"
+          @click="addNode(2)"
+          class="mr-1"
+        >
+          <path d="M22.5 34H25.5V25.5H34V22.5H25.5V14H22.5V22.5H14V25.5H22.5ZM9 42Q7.8 42 6.9 41.1Q6 40.2 6 39V9Q6 7.8 6.9 6.9Q7.8 6 9 6H39Q40.2 6 41.1 6.9Q42 7.8 42 9V39Q42 40.2 41.1 41.1Q40.2 42 39 42Z"/>
+        </svg>
+        <svg 
+          xmlns="http://www.w3.org/2000/svg" 
+          height="30px"
+          viewBox="0 0 48 48"
+          width="30px"
+          fill="#535353"
+          @click="() => {
+            this.subNode(2);
+            this.createModel();
+          }"
+          class="mr-1"
+        >
+          <path d="M12.5 25.4H35.55V22.4H12.5ZM9 42Q7.8 42 6.9 41.1Q6 40.2 6 39V9Q6 7.8 6.9 6.9Q7.8 6 9 6H39Q40.2 6 41.1 6.9Q42 7.8 42 9V39Q42 40.2 41.1 41.1Q40.2 42 39 42Z"/>
+        </svg>
       </div>
       <div
         v-if="layers.length >= 5"
         class="flex justify-center items-center mb-5"
       >
-        <img @click="addNode(3)" :src="add" alt="add" class="mr-1" />
-        <img @click="subNode(3)" :src="minus" alt="sub" class="mr-1" />
+        <svg 
+          xmlns="http://www.w3.org/2000/svg" 
+          height="30px"
+          viewBox="0 0 48 48"
+          width="30px"
+          fill="#5D5FEF"
+          @click="addNode(3)"
+          class="mr-1"
+        >
+          <path d="M22.5 34H25.5V25.5H34V22.5H25.5V14H22.5V22.5H14V25.5H22.5ZM9 42Q7.8 42 6.9 41.1Q6 40.2 6 39V9Q6 7.8 6.9 6.9Q7.8 6 9 6H39Q40.2 6 41.1 6.9Q42 7.8 42 9V39Q42 40.2 41.1 41.1Q40.2 42 39 42Z"/>
+        </svg>
+        <svg 
+          xmlns="http://www.w3.org/2000/svg" 
+          height="30px"
+          viewBox="0 0 48 48"
+          width="30px"
+          fill="#535353"
+          @click="() => {
+            this.subNode(3);
+            this.createModel();
+          }"
+          class="mr-1"
+        >
+          <path d="M12.5 25.4H35.55V22.4H12.5ZM9 42Q7.8 42 6.9 41.1Q6 40.2 6 39V9Q6 7.8 6.9 6.9Q7.8 6 9 6H39Q40.2 6 41.1 6.9Q42 7.8 42 9V39Q42 40.2 41.1 41.1Q40.2 42 39 42Z"/>
+        </svg>
       </div>
     </div>
     <div id="node" class="bg-primary"></div>
@@ -41,197 +130,20 @@ import minus from "@/assets/icons/minus.svg";
 
 export default {
   name: "CModel",
+  props: ["num_hidden", "layers", "mappings", "addNode", "subNode", "addLayer", "subLayer", "width", "height"],
   data() {
     return {
-      width: 900,
-      height: 500,
-      margin: {
-        left: 15,
-        right: 15,
-        top: 50,
-        bottom: 50,
-      },
-      num: 1,
       add,
       minus,
-      layers: [
-        {
-          id: 0,
-          name: "input",
-          nodes: [
-            { id: 0, layer: 0 },
-            { id: 1, layer: 0 },
-          ],
-        },
-        {
-          id: 1,
-          name: "hidden-1",
-          nodes: [
-            { id: 0, layer: 1 },
-            { id: 1, layer: 1 },
-          ],
-        },
-        {
-          id: 2,
-          name: "output",
-          nodes: [{ id: 0, layer: 2 }],
-        },
-      ],
-      mappings: [],
     };
   },
-  computed: {
-    boundedWidth: function () {
-      return this.width - this.margin.left - this.margin.right;
-    },
-    boundedHeight: function () {
-      return this.height - this.margin.top - this.margin.bottom;
-    },
-  },
   methods: {
-    addLayer() {
-      if (this.num < 3) {
-        this.num = this.num + 1;
-      } else {
-        return;
-      }
-
-      const input = this.layers[0];
-      const output = this.layers[this.layers.length - 1];
-
-      this.layers.splice(-1, 1);
-      this.layers = [
-        ...this.layers,
-        {
-          id: this.layers.length,
-          name: `hidden-${this.layers.length}`,
-          nodes: [{ id: 0, layer: this.layers.length }],
-        },
-      ];
-
-      output.id = this.layers.length;
-      for (var i = 0; i < output.nodes.length; i++)
-        output.nodes[i].layer = this.layers.length;
-
-      this.layers.push(output);
-    },
-    subLayer() {
-      if (this.num > 1) {
-        this.num = this.num - 1;
-      } else {
-        return;
-      }
-
-      const output = this.layers[this.layers.length - 1];
-      let deleteLayer = this.layers[this.layers.length - 2];
-      console.log(deleteLayer);
-      this.deleteLayerMapping(deleteLayer.id);
-
-      this.layers.splice(-2, 2);
-      output.id = this.layers.length;
-      for (var i = 0; i < output.nodes.length; i++)
-        output.nodes[i].layer = this.layers.length;
-      this.layers.push(output);
-    },
-    addNode(index) {
-      const layer = this.layers[index];
-      if (layer.nodes.length < 5) {
-        layer.nodes.push({
-          id: layer.nodes.length,
-          layer: layer.id,
-        });
-        this.createmapping();
-        this.createModel();
-      } else {
-        return;
-      }
-    },
-    subNode(index) {
-      const layer = this.layers[index];
-      console.log(layer);
-      if (layer.nodes.length > 1) {
-        let deletenode = layer.nodes[layer.nodes.length - 1];
-        this.deleteNodeMapping(deletenode.layer, deletenode.id);
-
-        layer.nodes.splice(-1, 1);
-        this.createModel();
-      } else {
-        return;
-      }
-    },
-    createmapping() {
-      const id = (d) => d.id;
-      let newmappings = [];
-      const l_scale = d3
-        .scaleBand()
-        .domain(this.layers.map(id))
-        .range([0, this.width]);
-
-      var y = d3.scaleLinear().rangeRound([0, this.height / 5]);
-
-      for (let layer = 0; layer < this.layers.length - 1; layer++) {
-        const sourcelayer = this.layers[layer];
-        // const nextlayer = this.layers[layer + 1];
-        const targetlayer = this.layers[layer + 1];
-
-        sourcelayer.nodes.forEach((sourcenode) => {
-          targetlayer.nodes.forEach((targetnode) => {
-            newmappings = [
-              ...newmappings,
-              {
-                sourceid: sourcenode.id,
-                sourcelayer: sourcenode.layer,
-                sourcex: l_scale(sourcenode.layer) + 68,
-                sourcey: y(sourcenode.id) + 50,
-                targetid: targetnode.id,
-                targetlayer: targetnode.layer,
-                targetx: l_scale(targetnode.layer) + 30,
-                targety: y(targetnode.id) + 50,
-              },
-            ];
-          });
-        });
-      }
-      this.mappings = newmappings;
-      console.log(this.mappings);
-    },
-    deleteNodeMapping(sourcelayer, sourceid) {
-      let removed;
-      for (let mapping = 0; mapping < this.mappings.length; mapping++) {
-        if (
-          this.mappings[mapping].sourcelayer == sourcelayer &&
-          this.mappings[mapping].sourceid == sourceid
-        ) {
-          removed = this.mappings.splice(mapping, 1);
-        } else {
-          if (
-            this.mappings[mapping].targetlayer == sourcelayer &&
-            this.mappings[mapping].targetid == sourceid
-          ) {
-            removed = this.mappings.splice(mapping, 1);
-          }
-        }
-      }
-    },
-    deleteLayerMapping(sourcelayer) {
-      let removed;
-      for (let mapping = 0; mapping < this.mappings.length; mapping++) {
-        if (this.mappings[mapping].sourcelayer == sourcelayer) {
-          removed = this.mappings.splice(mapping, 1);
-        } else {
-          if (this.mappings[mapping].targetlayer == sourcelayer) {
-            removed = this.mappings.splice(mapping, 1);
-          }
-        }
-      }
-    },
-
     createModel() {
       d3.select("#chart5").select("svg").remove();
       const svg = d3
         .select("#chart5")
         .append("svg")
-        .attr("width", this.width) //TODO: responsive width
+        .attr("width", this.width)
         .attr("height", this.height);
 
       const id = (d) => d.id;
@@ -251,13 +163,10 @@ export default {
         .data(this.layers)
         .enter()
         .append("g")
-        .attr("width", l_scale.bandwidth())
-        .attr("height", this.height)
-        .attr("fill", (d) => c_scale(d.id))
-        .attr("x", (d) => l_scale(d.id));
+        .style("transform", `translate(${30}px, ${0}px)`);
 
       var y = d3.scaleLinear().rangeRound([0, this.height / 5]);
-      var color = d3.scaleOrdinal(d3.schemeCategory10);
+
       const nodes = layers
         .selectAll("rect")
         .data((d) => d.nodes)
@@ -265,7 +174,13 @@ export default {
         .append("circle")
         .attr("id", (d) => d.id)
         .style("fill", function (d) {
-          return color(d.id + 1);
+          if(d.layer == 0){
+            return "#20A4F3"
+          }else if(d.output){
+            return "#20A4F3"
+          }else{
+            return "#5D5FEF"
+          }
         })
         .attr("r", 20)
         .attr("cy", function (d) {
@@ -273,42 +188,13 @@ export default {
         })
         .attr("cx", (d) => l_scale(d.layer) + 50);
 
-      const len = 3;
-      const links = nodes
-        .select("circle")
-        .data(this.mappings)
-        .enter()
-        .append("line")
-        .style("stroke", "black")
-        .style("stroke-width", 3)
-        .attr("x1", (d) => d.sourcex)
-        .attr("y1", (d) => d.sourcey)
-        .attr("x2", (d) => d.targetx)
-        .attr("y2", (d) => d.targety);
-
-      // d3.select("#node").select("svg").remove();
     },
   },
   mounted() {
-    this.createmapping();
     this.createModel();
   },
-  updated() {
-    this.createmapping();
+  updated(){
     this.createModel();
-    console.log("updated");
-  },
+  }
 };
 </script>
-
-<style scoped>
-.icon {
-  width: 30px;
-  margin-right: 5px;
-}
-
-h2 {
-  margin: 0;
-  margin-right: 10px;
-}
-</style>
