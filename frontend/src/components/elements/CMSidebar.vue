@@ -40,18 +40,25 @@
       </div>
       <div class="flex flex-col justify-center">
         <div class="flex justify-center m-0 mb-4">
-          <button
-            className="w-2/5 bg-grey_dark text-white font-bold py-3 rounded shadow hover:shadow-md outline-none focus:outline-none mr-2"
-            type="button"
+          <router-link
+            className="w-2/5 bg-grey_dark text-white text-center font-bold py-3 rounded shadow hover:shadow-md outline-none focus:outline-none mr-2"
+            :to="{
+              name: 'dataset',
+              params: { isRunning: true },
+            }"
           >
-            Previous Step
-          </button>
-          <button
-            className="w-1/3 bg-primary text-white font-semibold py-3 rounded shadow hover:shadow-md outline outline-1"
-            type="button"
+            Pervious Step
+          </router-link>
+          <router-link
+            id="v-step-5"
+            className="w-1/3 bg-primary text-white text-center font-semibold py-3 rounded shadow hover:shadow-md outline outline-1"
+            :to="{
+              name: 'run',
+              params: { isRunning: false },
+            }"
           >
             Next Step
-          </button>
+          </router-link>
         </div>
         <p class="px-4 mx-auto font-thin text-sm">Step 4 of 5</p>
       </div>

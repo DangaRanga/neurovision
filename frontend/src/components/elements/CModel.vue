@@ -162,11 +162,6 @@ export default {
         .domain(this.layers.map(id))
         .range([0, this.width]);
 
-      const c_scale = d3
-        .scaleLinear()
-        .domain([this.layers[0].id, this.layers[this.layers.length - 1].id])
-        .range(["purple", "orange"]);
-
       const layers = svg
         .selectAll(".layer")
         .data(this.layers)

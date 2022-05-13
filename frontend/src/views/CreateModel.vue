@@ -3,20 +3,22 @@
     <model-header />
     <div class="grid grid-cols-3 min-h-screen">
       <div class="col-span-2 grid items-center">
-        <div class="mx-auto mt-10 mb-10 flex flex-col align-center">
-          <h1 class="font-extrabold text-4xl">Build Your Neural Network</h1>
-          <h1 class="mx-auto mt-2 font-semibold text-lg text-grey">Build the structure of your neural network</h1>
-        </div>
-        <model-build 
-          :num_hidden="num_hidden"
-          :layers="layers"
-          :addNode="addNode"
-          :subNode="subNode"
-          :subLayer="subLayer"
-          :addLayer="addLayer"
-          :width="width"
-          :height="height"
-        />
+          <div>
+            <div class="flex flex-col justify-center items-center mt-20 mb-20">
+              <h1 class="mx-auto font-extrabold text-4xl">Build Your Neural Network</h1>
+              <h1 class="mx-auto mt-2 font-semibold text-lg text-grey">Build the structure of your neural network</h1>
+            </div>
+            <model-build 
+              :num_hidden="num_hidden"
+              :layers="layers"
+              :addNode="addNode"
+              :subNode="subNode"
+              :subLayer="subLayer"
+              :addLayer="addLayer"
+              :width="width"
+              :height="height"
+            /> 
+          </div>
       </div>
       <model-sidebar 
         output="ReLu" 
