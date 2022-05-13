@@ -12,7 +12,12 @@
         :height="'h-96'"
       ></data-table>
     </div>
-    <dataset-sidebar class="w-1/3" :analysis="analysisType" />
+    <dataset-sidebar
+      class="w-1/3"
+      :analysisType="analysisType"
+      :datasettitle="title"
+      :description="description"
+    />
   </div>
 </template>
 <script>
@@ -25,7 +30,9 @@ export default {
   },
   data() {
     return {
-      analysisType: "None",
+      analysisType: "",
+      title: "",
+      description: "",
     };
   },
   computed: {
@@ -34,8 +41,16 @@ export default {
     },
   },
 
-  created() {
+  mounted() {
     this.analysisType = this.$route.params.analysisType;
+    this.title = this.$route.params.title;
+    this.description = this.$route.params.description;
+    console.log(this.analysisType);
+  },
+  update() {
+    this.analysisType = this.$route.params.analysisType;
+    this.title = this.$route.params.title;
+    this.description = this.$route.params.description;
     console.log(this.dataset);
   },
 };
