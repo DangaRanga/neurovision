@@ -171,7 +171,7 @@ export default {
       var colorRange = d3.schemeCategory10;
       var color = d3.scaleOrdinal(colorRange);
       const nodes = layers
-        .selectAll("rect")
+        .selectAll("g")
         .data((d) => d.nodes)
         .enter()
         .append("circle")
@@ -188,26 +188,54 @@ export default {
         })
         .attr("cx", (d) => l_scale(d.layer) + 50);
 
-      d3.select("#node").select("svg").remove();
-      // const svg2 = d3
-      //   .select("#node")
-      //   .append("svg")
-      //   .attr("width", this.width)
-      //   .attr("height", this.height);
+      const links = nodes
+        .selectAll("circle")
+        .data((d) => d.nodes)
+        .enter()
+        .append("line")
+        .attr("class", "link")
+        .attr("style", "stroke:black")
+        .attr("x1", function (d) {
+          return 50;
+        }) //... (x coordinate source node)
+        .attr("y1", function (d) {
+          return y(d.id) + 50;
+        }) //... (y coordinate source node)
+        .attr("x2", function (d) {
+          return 200;
+        }) //... (x coordinate target node)
+        .attr("y2", function (d) {
+          return y(d.id + 1) + 50;
+        }); //... (y coordinate target node)
 
-      // const circle = svg2
-      //   .selectAll(".circle")
-      //   .data(this.layers[1].nodes)
-      //   .enter()
-      //   .append("circle")
-      //   .attr("id", (d) => d.id)
-      //   .attr("width", 50)
-      //   .attr("height", 50)
-      //   .attr("class", "bg-grey")
-      //   .attr("fill", "green")
-      //   .attr("r", 30)
-      //   .attr("cx", 70)
-      //   .attr("cy", (d) => nodes_scale(d.id));
+      d3.select("#node").select("svg").remove();
+      const svg2 = d3
+        .select("#node")
+        .append("svg")
+        .attr("width", this.width)
+        .attr("height", this.height);
+
+      const circle = svg2
+        .selectAll(".circle")
+        .data(this.layers[1].nodes)
+        .enter()
+        .append("circle")
+        .attr("id", (d) => d.id)
+        .attr("width", 50)
+        .attr("height", 50)
+        .attr("class", "bg-grey")
+        .attr("fill", "green")
+        .attr("r", 30)
+        .attr("cx", 70)
+        .attr("cy", 90);
+
+      const links = circle
+        .selectAll("circle")
+        .data(this.layers[1].nodes)
+        .enter()
+        .append("line")
+        .attr("class", "link")
+        .attr("style", "stroke:black");
 
       // svg2.merge(circle);
     },

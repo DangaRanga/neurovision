@@ -14,7 +14,7 @@ const housePredictionData = {
       pariatur.`,
   summary: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
       eiusmod tempor incididunt ut labore`,
-  problemType: "Regression",
+  problemType: "Prediction",
   image: "",
   name: "house_price",
 };
@@ -44,7 +44,7 @@ const irisPredictionData = {
           pariatur.`,
   summary: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore`,
-  problemType: "Multi Classification",
+  problemType: "Multivariate Classification",
   image: "",
   name: "iris",
   data: getIrisPredictionData(),

@@ -1,17 +1,6 @@
 <template>
   <div>
     <div
-      v-if="!isRunning"
-      class="flex flex-row-reverse bg-grey_dark h-18 py-4 px-2 drop-shadow-lg"
-    >
-      <button
-        class="text-white bg-primary hover:bg-blue-500 rounded-md py-2 px-4 mx-3 transition-colors duration-200"
-      >
-        Preview Dataset
-      </button>
-    </div>
-    <div
-      v-if="isRunning"
       class="flex justify-between bg-grey_dark h-18 py-3 px-2 items-center drop-shadow-lg"
     >
       <div class="flex items-center">
@@ -76,9 +65,6 @@
 import HeaderDisplayItem from "@/components/elements/HeaderDisplayItem.vue";
 
 export default {
-  props: {
-    isRunning: Boolean,
-  },
   components: {
     "header-display-item": HeaderDisplayItem,
   },
@@ -93,10 +79,6 @@ export default {
         { header: "Loss Function", value: "MSE" },
       ],
     };
-  },
-  create() {
-    console.log("HELLLOOOO");
-    console.log(this.isRunning);
   },
 };
 </script>

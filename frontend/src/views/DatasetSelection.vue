@@ -30,7 +30,11 @@
         id="v-step-3"
         :to="{
           name: 'dataset',
-          params: { analysisType: 'prediction' },
+          params: {
+            analysisType: analysisType,
+            title: title,
+            description: description,
+          },
         }"
       >
         Next Step
@@ -65,6 +69,9 @@ export default {
   data() {
     return {
       datasets: [heartDiseaseData, irisPredictionData, housePredictionData],
+      analysisType: "Prediction",
+      title: "Testing",
+      description: "This is a test",
       selectedDataset: undefined,
       isModalVisible: false,
       data: null,
@@ -119,7 +126,10 @@ export default {
     selectDataset(dataset) {
       // Set the selected dataset
       this.selectedDataset = dataset;
-
+      console.log(this.datasets[this.selectedDataset]);
+      this.analysisType = this.datasets[this.selectedDataset].problemType;
+      this.title = this.datasets[this.selectedDataset].title;
+      this.description = this.datasets[this.selectedDataset].description;
       // Fetch the data
       this.$http
         .get(
