@@ -16,77 +16,23 @@
               :value="analysisType"
               :id="'v-step-' + 1"
             />
-            <div
-              class="flex flex-row flex-nowrap md:items-center lg:items-start md:flex-row md:flex-nowrap"
-            >
-              <p class="w-4/5 text-s font-semibold py-2">Type of Analysis</p>
-              <img
-                :src="infographics_icon"
-                alt="train_info"
-                id="v-step-2"
-                class="object-cover pt-2 mr-6 pr-10 items-center justify-center"
-              />
-            </div>
-            <div
-              name="datasettype"
-              id="datasettype"
-              class="bg-white rounded-sm outline outline-1 outline-white w-2/3 md:w-5/6 h-8 text-s"
-            >
-              {{ analysisType }}
-            </div>
           </div>
-          <div class="py-4">
-            <div
-              class="flex flex-row flex-nowrap md:items-center lg:items-start md:flex-row md:flex-nowrap"
-            >
-              <p class="w-4/5 text-s font-semibold py-2">
-                Training Data Percentage
-              </p>
-              <img
-                id="v-step-3"
-                :src="infographics_icon"
-                alt="train_info"
-                class="object-cover pt-2 mr-6 pr-10 items-center justify-center"
-                @click="showTrain()"
-              />
-            </div>
-            <select
-              name="datasplit"
-              id="datasplit"
-              class="bg-white rounded-sm outline outline-1 outline-white w-2/3 md:w-5/6 h-8 text-s"
-            >
-              <option value="10">10%</option>
-              <option value="20">20%</option>
-              <option value="30">30%</option>
-              <option value="40">40%</option>
-              <option value="50">50%</option>
-            </select>
-          </div>
-          <div class="py-4">
-            <div
-              class="flex flex-row flex-nowrap md:items-center lg:items-start md:flex-row md:flex-nowrap"
-            >
-              <p class="w-4/5 text-s font-semibold py-2">
-                Perform Normalization?
-              </p>
-              <img
-                id="v-step-4"
-                :src="infographics_icon"
-                alt="normalization_info"
-                class="object-cover pt-2 mr-6 pr-10 items-center justify-center"
-                @click="showNormalization()"
-              />
-            </div>
-            <select
-              name="normalize"
-              id="normalize"
-              class="bg-white rounded-sm outline outline-1 outline-white w-2/3 md:w-5/6 h-8 text-s"
-            >
-              <option value="yes">Yes</option>
-              <option value="no">No</option>
-            </select>
-          </div>
-
+          <sidebar-input
+            type="select"
+            title="Training Data Percentage"
+            :options="splitoptions"
+            :change="changeActFcn"
+            :index="2"
+            :id="'v-step-' + 2"
+          />
+          <sidebar-input
+            type="select"
+            title="Perform Normalization"
+            :options="normalizeoptions"
+            :change="changeActFcn"
+            :index="2"
+            :id="'v-step-' + 3"
+          />
           <div
             class="px-4 pt-12 mt-6 mb-4 flex justify-center m-0 mb-4 sm:flex-row sm:text-left sm:items-baseline"
           >
@@ -100,7 +46,7 @@
               Pervious Step
             </router-link>
             <router-link
-              id="v-step-5"
+              id="v-step-4"
               class="w-1/3 bg-primary text-center text-white text-xs font-semibold px-4 py-3 rounded shadow hover:shadow-md outline outline-1 lg:mr-1 lg:mb-0 ml-3 mb-3"
               :to="{
                 name: 'create',
@@ -148,6 +94,17 @@ export default {
   },
   data() {
     return {
+      splitoptions: [
+        { title: "10%", value: "10" },
+        { title: "20%", value: "20" },
+        { title: "30%", value: "30" },
+        { title: "40%", value: "40" },
+        { title: "50%", value: "50" },
+      ],
+      normalizeoptions: [
+        { title: "Yes", value: "yes" },
+        { title: "No", value: "no" },
+      ],
       steps: [
         {
           target: "#v-step-0", // We're using document.querySelector() under the hood
@@ -161,37 +118,31 @@ export default {
         {
           target: "#v-step-1",
           content: `There are several different types of problems that can be modeled using neural networks.
-          These include: <strong>Binary Classification, Multivariate Classification, Prediction and Regression.<\strong>`,
+          These include: <strong>Binary Classification, Multivariate Classification, Prediction and Regression.<\strong>
+          Let us get some information on the Type of Analysis that the dataset is performing!`,
           params: {
             placement: "left",
           },
         },
         {
           target: "#v-step-2",
-          content: `<strong>Let us get some information on the Type of Analysis that the dataset is performing</strong>!`,
+          content: `<strong>Let us get some information on the Training Data Percentage needed for this dataset</strong>!`,
           params: {
-            placement: "top",
+            placement: "left",
           },
         },
         {
           target: "#v-step-3",
-          content: `<strong>Let us get some information on the Training Data Percentage needed for this dataset</strong>!`,
+          content: `<strong>Let us get some information on what Normalization is </strong>.`,
           params: {
-            placement: "top",
+            placement: "left",
           },
         },
         {
           target: "#v-step-4",
-          content: `<strong>Let us get some information on what Normalization is </strong>.`,
-          params: {
-            placement: "top",
-          },
-        },
-        {
-          target: "#v-step-5",
           content: `<strong>Hooray!, now that you've customized the dataset let's continue </strong>.`,
           params: {
-            placement: "top",
+            placement: "left",
           },
         },
       ],
