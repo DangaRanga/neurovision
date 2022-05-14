@@ -76,8 +76,8 @@
       v-show="isModalVisible"
       @close="closeModal"
     />
+    <v-tour name="myTour" :steps="steps"></v-tour>
   </aside>
-  <v-tour name="myTour" :steps="steps"></v-tour>
 </template>
 <script>
 // import DataTable from "@/components/elements/DataTable.vue";
