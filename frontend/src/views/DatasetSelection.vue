@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col items-center justify-center h-screen" id="v-step-0">
-    <div class="grid grid-cols-3 mt-48" id="v-step-1">
+    <div class="grid grid-cols-3 mt-24" id="v-step-1">
       <article v-for="(dataset, index) in datasets" :key="index">
         <selector-item
           :image="dataset.image"
