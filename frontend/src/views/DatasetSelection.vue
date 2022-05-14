@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col items-center justify-center h-screen" id="v-step-0">
-    <div class="grid grid-cols-3 mt-48" id="v-step-1">
+    <div class="grid grid-cols-3 mt-24" id="v-step-1">
       <article v-for="(dataset, index) in datasets" :key="index">
         <selector-item
           :image="dataset.image"
@@ -47,6 +47,7 @@
       v-if="isModalVisible && selectDataset"
       @close="closeModal"
       :title="datasets[selectedDataset].title"
+      :description="datasets[selectedDataset].description"
       :data="dataset"
       :problem-type="datasets[selectedDataset].problemType"
     />
@@ -67,8 +68,8 @@ export default {
     return {
       datasets: [heartDiseaseData, irisPredictionData, housePredictionData],
       analysisType: "Prediction",
-      title: "Testing",
-      description: "This is a test",
+      title: "",
+      description: "",
       selectedDataset: undefined,
       isModalVisible: false,
       data: null,
@@ -124,10 +125,13 @@ export default {
       // Set the selected dataset
       this.selectedDataset = dataset;
 
+      const datasetObj = this.datasets[this.selectedDataset];
+
       // Extract key values
-      this.analysisType = this.datasets[this.selectedDataset].problemType;
-      this.title = this.datasets[this.selectedDataset].title;
-      this.description = this.datasets[this.selectedDataset].description;
+      this.analysisType = datasetObj.problemType;
+      this.title = datasetObj.title;
+      this.description = datasetObj.description;
+      this.summary = datasetObj.summary;
 
       // Fetch the data
       this.$http
@@ -142,7 +146,7 @@ export default {
             rows: newData.data,
             analysisType: this.analysisType,
             title: this.title,
-            description: this.description,
+            description: this.summary,
           };
           this.dataset = data;
           localStorage.setItem("base-dataset", JSON.stringify(data));

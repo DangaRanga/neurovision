@@ -15,8 +15,8 @@
     <d-sidebar
       class="w-1/3"
       :analysisType="analysisType"
-      :datasettitle="title"
-      :description="description"
+      :datasettitle="dataset.title"
+      :description="dataset.description"
     />
   </div>
 </template>
