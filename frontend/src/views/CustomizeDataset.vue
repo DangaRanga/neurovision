@@ -12,7 +12,7 @@
         :height="'h-96'"
       ></data-table>
     </div>
-    <dataset-sidebar
+    <d-sidebar
       class="w-1/3"
       :analysisType="analysisType"
       :datasettitle="dataset.title"
@@ -21,12 +21,12 @@
   </div>
 </template>
 <script>
-import DatasetSideBar from "@/components/elements/DatasetSideBar.vue";
 import DataTable from "@/components/elements/DataTable.vue";
+import DSideBar from "@/components/elements/DSidebar.vue";
 export default {
   components: {
-    "dataset-sidebar": DatasetSideBar,
     "data-table": DataTable,
+    "d-sidebar": DSideBar,
   },
   data() {
     return {

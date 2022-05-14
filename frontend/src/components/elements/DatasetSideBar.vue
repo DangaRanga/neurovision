@@ -110,9 +110,7 @@
               Next Step
             </button> -->
           </div>
-          <div class="flex">
-            <p class="mx-auto">Step 2 of 5</p>
-          </div>
+          <p class="px-4 mx-auto font-thin text-sm">Step 2 of 5</p>
         </form>
       </div>
     </div>
@@ -132,6 +130,7 @@ import infographics_icon from "@/assets/icons/infographics_icon.svg";
 
 // Component imports
 import InfograpicModal from "@/components/elements/Infographic.vue";
+import SidebarInput from "@/components/elements/SidebarInput.vue";
 
 // Library imports
 import { customizationTour } from "@/controllers/tour/dataCustomization.js";
@@ -140,6 +139,7 @@ import * as infographics from "@/constants/datasetSelection.js";
 export default {
   components: {
     Modal: InfograpicModal,
+    "sidebar-input": SidebarInput,
   },
   props: {
     analysisType: String,

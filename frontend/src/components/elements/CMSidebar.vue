@@ -12,30 +12,36 @@
           </p>
         </div>
         <div>
-          <sidebar-input 
-            type="select" 
-            :title="'Hidden Layer 1 ' + title" 
-            :options="options" 
-            :change=changeActFcn 
-            :index="0" 
+          <sidebar-input
+            type="select"
+            :title="'Hidden Layer 1 ' + title"
+            :options="options"
+            :change="changeActFcn"
+            :index="0"
+            :id="'v-step-' + 1"
           />
-          <sidebar-input 
-            v-if="layers >= 2" 
-            type="select" 
-            :title="'Hidden Layer 2 ' + title" 
-            :options="options" 
-            :change=changeActFcn
-            :index="1" 
+          <sidebar-input
+            v-if="layers >= 2"
+            type="select"
+            :title="'Hidden Layer 2 ' + title"
+            :options="options"
+            :change="changeActFcn"
+            :index="1"
           />
-          <sidebar-input 
-            v-if="layers >= 3" 
-            type="select" 
-            :title="'Hidden Layer 3 ' + title" 
-            :options="options" 
-            :change=changeActFcn
-            :index="2" 
+          <sidebar-input
+            v-if="layers >= 3"
+            type="select"
+            :title="'Hidden Layer 3 ' + title"
+            :options="options"
+            :change="changeActFcn"
+            :index="2"
           />
-          <sidebar-input type="input-d" title="Output Layer Activation Function" :value=output />
+          <sidebar-input
+            type="input-d"
+            title="Output Layer Activation Function"
+            :value="output"
+            :id="'v-step-' + 2"
+          />
         </div>
       </div>
       <div class="flex flex-col justify-center">
@@ -76,7 +82,7 @@ export default {
   },
   components: {
     "sidebar-input": SidebarInput,
-    "tabbed-menu": TabbedMenu
+    "tabbed-menu": TabbedMenu,
   },
   data() {
     return {
@@ -86,7 +92,7 @@ export default {
         { title: "Softmax", value: "smax" },
       ],
       title: "Activation Function",
-      act_layers:  ["", "", ""],
+      act_layers: ["", "", ""],
       steps: [
         {
           target: "#v-step-0",
@@ -138,11 +144,11 @@ export default {
             placement: "left",
           },
         },
-      ]
+      ],
     };
   },
   methods: {
-    changeActFcn(index, value){
+    changeActFcn(index, value) {
       this.act_layers[index] = value;
     },
     update(){
@@ -152,6 +158,5 @@ export default {
   mounted: function () {
     // this.$tours["myTour"].start();
   },
-
 };
 </script>
