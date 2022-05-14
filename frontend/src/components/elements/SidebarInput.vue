@@ -1,7 +1,15 @@
 <template>
   <div class="mb-10">
     <div v-if="type == 'select'" :id="id">
-      <p class="text-s font-semibold my-4">{{ title }}</p>
+      <div class="flex flex-row justify-between mb-3">
+        <p class="text-s font-semibold my-4">{{ title }}</p>
+        <img
+          :src="infographics_icon"
+          alt="info"
+          class="items-center"
+          @click="functionName()"
+        />
+      </div>
       <select
         class="bg-white rounded-sm outline outline-1 outline-white focus:outline-primary h-12 pl-2 text-base w-full"
         @change="changeValue($event)"
@@ -18,7 +26,7 @@
           :src="infographics_icon"
           alt="info"
           class="items-center"
-          @click="functionname"
+          @click="functionName()"
         />
       </div>
       <input
@@ -34,7 +42,7 @@
           :src="infographics_icon"
           alt="info"
           class="items-center"
-          :@click="functionname"
+          @click="functionName()"
         />
       </div>
       <input
