@@ -15,6 +15,7 @@
               title="Type of Analysis"
               :value="analysisType"
               :id="'v-step-' + 1"
+              :functionName="showAnalysisType"
             />
           </div>
           <sidebar-input
@@ -24,6 +25,7 @@
             :change="changeActFcn"
             :index="2"
             :id="'v-step-' + 2"
+            :functionName="showTrain"
           />
           <sidebar-input
             type="select"
@@ -32,6 +34,7 @@
             :change="changeActFcn"
             :index="2"
             :id="'v-step-' + 3"
+            :functionName="showNormalization"
           />
           <div
             class="px-4 pt-12 mt-6 mb-4 flex justify-center m-0 mb-4 sm:flex-row sm:text-left sm:items-baseline"
