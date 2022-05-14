@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-on:progress="nextStep">
     <model-header />
     <div class="grid grid-cols-3 min-h-screen">
       <div class="col-span-2 grid items-center">
@@ -32,6 +32,7 @@
 import CMHeader from "@/components/elements/CMHeader.vue";
 import CMSidebar from "@/components/elements/CMSidebar.vue";
 import CModel from "@/components/elements/CModel.vue";
+// import router from "@/router";
 
 export default {
   components: {
@@ -76,7 +77,6 @@ export default {
         return;
       }
 
-      const input = this.layers[0];
       const output = this.layers[this.layers.length - 1];
 
       this.layers.splice(-1, 1);
@@ -129,6 +129,9 @@ export default {
         return;
       }
     },
+    nextStep(){
+      console.log("Event fired")
+    }
   },
 };
 </script>
