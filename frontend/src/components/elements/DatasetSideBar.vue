@@ -1,15 +1,15 @@
 <template>
   <aside id="v-step-0">
-    <div class="bg-primary_light grid grid-cols-1 py-10 w-full">
-      <div class="w-full pl-8 pr-12">
+    <div class="bg-primary_light grid grid-cols-1 py-6 px-7 w-full h-screen">
+      <div class="w-full">
         <h3 class="text-lg font-bold py-2">Dataset - {{ datasettitle }}</h3>
         <p class="text-s font-regular py-2">
           {{ description }}
         </p>
       </div>
       <div class="w-full">
-        <form class="pl-10 py-6">
-          <div class="py-4">
+        <form class="">
+          <div class="my-4">
             <div
               class="flex flex-row flex-nowrap md:items-center lg:items-start md:flex-row md:flex-nowrap"
             >
@@ -20,19 +20,19 @@
                 :src="infographics_icon"
                 alt="train_info"
                 id="v-step-2"
-                class="object-cover pt-2 mr-6 pr-10 items-center justify-center"
+                class="object-cover pt-2 ml-6 cursor-pointer"
                 @click="showAnalysisType()"
               />
             </div>
             <div
               name="datasettype"
               id="datasettype"
-              class="bg-white rounded-sm outline outline-1 outline-white w-2/3 md:w-5/6 h-8 text-s"
+              class="bg-white rounded-md w-full py-2 px-2 text-s"
             >
               {{ analysisType }}
             </div>
           </div>
-          <div class="py-4">
+          <div class="my-4">
             <div
               class="flex flex-row flex-nowrap md:items-center lg:items-start md:flex-row md:flex-nowrap"
             >
@@ -43,14 +43,14 @@
                 id="v-step-3"
                 :src="infographics_icon"
                 alt="train_info"
-                class="object-cover pt-2 mr-6 pr-10 items-center justify-center"
+                class="object-cover pt-2 ml-6 cursor-pointer"
                 @click="showTrain()"
               />
             </div>
             <select
               name="datasplit"
               id="datasplit"
-              class="bg-white rounded-sm outline outline-1 outline-white w-2/3 md:w-5/6 h-8 text-s"
+              class="bg-white rounded-md w-full py-2 px-2 text-s"
             >
               <option value="10">10%</option>
               <option value="20">20%</option>
@@ -70,35 +70,33 @@
                 id="v-step-4"
                 :src="infographics_icon"
                 alt="normalization_info"
-                class="object-cover pt-2 mr-6 pr-10 items-center justify-center"
+                class="object-cover pt-2 ml-6 cursor-pointer"
                 @click="showNormalization()"
               />
             </div>
             <select
               name="normalize"
               id="normalize"
-              class="bg-white rounded-sm outline outline-1 outline-white w-2/3 md:w-5/6 h-8 text-s"
+              class="bg-white rounded-md w-full py-2 px-2 text-s"
             >
               <option value="yes">Yes</option>
               <option value="no">No</option>
             </select>
           </div>
 
-          <div
-            class="px-4 pt-12 mt-6 mb-4 flex flex-col text-center sm:flex-row sm:text-left sm:items-baseline"
-          >
+          <div class="mt-6 mb-4 flex justify-center">
             <router-link
-              className="w-1/3 bg-grey_dark text-white text-xs font-bold px-4 py-3 rounded shadow hover:shadow-md outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3"
+              className=" bg-gray-500 hover:bg-gray-600 text-white text-xs font-bold mr-5 px-4 py-3 rounded shadow hover:shadow-md transition-colors duration-200"
               :to="{
                 name: 'create',
                 params: { isRunning: true },
               }"
             >
-              Pervious Step
+              Previous Step
             </router-link>
             <router-link
               id="v-step-5"
-              class="w-1/3 bg-primary text-center text-white text-xs font-semibold px-4 py-3 rounded shadow hover:shadow-md outline outline-1 lg:mr-1 lg:mb-0 ml-3 mb-3"
+              class="bg-primary text-center text-white text-xs font-semibold px-4 py-3 rounded shadow hover:shadow-md hover:bg-blue-500 transition-colors duration-200"
               :to="{
                 name: 'create',
                 params: { isRunning: false },
@@ -113,7 +111,9 @@
               Next Step
             </button> -->
           </div>
-          <p class="px-4 mx-auto">Step 2 of 5</p>
+          <div class="flex">
+            <p class="mx-auto">Step 2 of 5</p>
+          </div>
         </form>
       </div>
     </div>
