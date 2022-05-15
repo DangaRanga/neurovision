@@ -100,16 +100,16 @@ export default {
   },
   methods: {
     changeActFcn(data) {
-      switch(data.value){
+      switch (data.value) {
         case "sigm":
           this.act_layers[data.index] = "Sigmoid";
-        break;
+          break;
         case "smax":
           this.act_layers[data.index] = "Softmax";
-        break;
+          break;
         case "relu":
           this.act_layers[data.index] = "ReLu";
-        break;
+          break;
       }
     },
     showTour() {
@@ -126,3 +126,8 @@ export default {
   },
 };
 </script>
+<style scoped>
+.v-tour__target--highlighted {
+  box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.5);
+}
+</style>

@@ -190,3 +190,8 @@ export default {
   },
 };
 </script>
+<style scoped>
+.v-tour__target--highlighted {
+  box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.5);
+}
+</style>

@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col items-center">
     <article
-      class="shadow-lg w-52 h-52 rounded-full flex items-center justify-center transition-colors duration-200"
+      class="shadow-lg w-52 h-52 rounded-full flex items-center justify-center transition-colors duration-200 cursor-pointer hover:bg-primary_light"
       :class="{ 'border-2 border-primary parent': selected }"
       id="selectable"
       @click="toggleSelected"
