@@ -57,7 +57,7 @@
           </router-link>
           <button
             id="v-step-5"
-            @click="update()"
+            @click="update"
             className="w-1/3 bg-primary text-white text-center font-semibold py-3 rounded shadow hover:shadow-md outline outline-1"
           >
             Next Step
@@ -152,11 +152,11 @@ export default {
       this.act_layers[index] = value;
     },
     update(){
-      this.$emit("progress");
+      this.$emit("progress", { activation: this.act_layers });
     },
   },
   mounted: function () {
-    // this.$tours["myTour"].start();
+    this.$tours["myTour"].start();
   },
 };
 </script>

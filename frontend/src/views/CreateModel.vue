@@ -1,5 +1,5 @@
 <template>
-  <div v-on:progress="nextStep">
+  <div>
     <model-header />
     <div class="grid grid-cols-3 min-h-screen">
       <div class="col-span-2 grid items-center">
@@ -23,6 +23,7 @@
       <model-sidebar 
         output="ReLu" 
         :layers="num_hidden"
+        @progress="nextStep"
       />
     </div>
   </div>
@@ -32,7 +33,6 @@
 import CMHeader from "@/components/elements/CMHeader.vue";
 import CMSidebar from "@/components/elements/CMSidebar.vue";
 import CModel from "@/components/elements/CModel.vue";
-// import router from "@/router";
 
 export default {
   components: {
@@ -129,8 +129,26 @@ export default {
         return;
       }
     },
-    nextStep(){
-      console.log("Event fired")
+    nextStep(data){
+
+      const activations = data.activation;
+      var result = [];
+      for(var i = 0; i < this.num_hidden; i++){
+        if(activations[i] == ""){
+          result.push("ReLu");
+        }else{
+          result.push(activations[i])
+        }
+      }
+
+      this.$router.push({
+        name: "run",
+        params: {
+          struct: JSON.stringify(this.layers),
+          activation: result,
+          hidden: this.num_hidden,
+        },
+      });
     }
   },
 };
