@@ -31,6 +31,6 @@ def initialize_dataset(dataset_name):
 def initialize_from_json(data):
 
     #Create DataFrame from Dataset Received from Request
-    dataframe = pd.DataFrame.from_records(data["data"], columns=data["columns"], index=data["index"])
+    dataframe = pd.DataFrame.from_records(data["rows"], columns=data["headings"], index=data["index"])
 
     return dataframe
