@@ -52,6 +52,7 @@ import TabbedMenu from "@/components/elements/TabbedMenu.vue";
 import { modelTour } from "@/controllers/tour/animationCustomization.js";
 
 export default {
+  props: ["batch", "epoch", "lrate", "loss"],
   components: {
     "sidebar-input": SidebarInput,
     "tabbed-menu": TabbedMenu,
@@ -89,6 +90,12 @@ export default {
         },
       ],
     };
+  },
+  created(){
+    this.batch_size = this.batch || 1;
+    this.epochs = this.epoch || 100;
+    this.l_rate = this.lrate || 0.01;
+    this.loss_f = this.loss || "MSE";
   },
   mounted: function () {
     if (this.isTourVisible) {

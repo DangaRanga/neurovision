@@ -22,7 +22,11 @@
         </div>
       </div>
       <model-sidebar 
-        @restart="updateHeader" 
+        @restart="updateHeader"
+        :batch="headers[0].value"
+        :epoch="headers[1].value"
+        :lrate="headers[2].value"
+        :loss="headers[3].value"
       />
     </div>
     <div v-if="isHidden" class="grid items-center min-h-screen">
@@ -63,9 +67,9 @@ export default {
       mappings: [],
       isHidden: true,
       headers: [
-        { header: "Batch Size", value: 0 },
-        { header: "Epoch No.", value: 0 },
-        { header: "Learning Rate", value: 0 },
+        { header: "Batch Size", value: 1 },
+        { header: "Epoch No.", value: 100 },
+        { header: "Learning Rate", value: 0.01 },
         { header: "Loss Function", value: "MSE" },
         { header: "Problem Type", value: "Classification" },
       ]
@@ -149,7 +153,57 @@ export default {
           }
         })
       }
-    }
+    },
+    buildModel(){
+      //HTTP Request to Build and Run Model
+      // {
+      //    "data": Dataset
+      //    "prob":"HRT", 
+      //    "layers":[5,5], 
+      //    "activations":["relu","relu"], 
+      //    "lr":0.5, 
+      //    "batch_size":10, 
+      //    "epochs":10
+      //    "train": 80
+      // }
+      this.$http
+      .get(
+        `http://127.0.0.1:9090/api/model/run`,
+        {}
+      )
+      .then((response) => {
+        const newData = response.data.dataset;
+        const data = {
+          headings: newData.columns,
+          rows: newData.data,
+          analysisType: this.analysisType,
+          title: this.title,
+          description: this.summary,
+        };
+        this.dataset = data;
+        localStorage.setItem("base-dataset", JSON.stringify(data));
+      });
+    },
+    runModel(){
+      //HTTP Request to Run Model
+      this.$http
+      .get(
+        `http://127.0.0.1:9090/api/data?dataset=${this.datasets[dataset].name}`,
+        {}
+      )
+      .then((response) => {
+        const newData = response.data.dataset;
+        const data = {
+          headings: newData.columns,
+          rows: newData.data,
+          analysisType: this.analysisType,
+          title: this.title,
+          description: this.summary,
+        };
+        this.dataset = data;
+        localStorage.setItem("base-dataset", JSON.stringify(data));
+      });
+    },
   },
   created(){
     this.num_hidden = this.$route.params.hidden || 1;
@@ -185,5 +239,9 @@ export default {
     });  
     this.createmapping();
   },
+  mounted(){
+    // this.buildModel();
+    // this.runModel();
+  }
 };
 </script>
