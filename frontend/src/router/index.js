@@ -1,6 +1,8 @@
 import { createRouter, createWebHistory } from "vue-router";
 import DatasetSelection from "../views/DatasetSelection.vue";
 import CustomizeDataset from "../views/CustomizeDataset.vue";
+import PreQuiz from "../views/PreQuiz.vue";
+import PostQuiz from "../views/PostQuiz.vue";
 import CreateModel from "../views/CreateModel.vue";
 import RunModel from "../views/RunModel.vue";
 import Tour from "@/views/Tour.vue";
@@ -30,6 +32,16 @@ const routes = [
     path: "/tour",
     name: "tour",
     component: Tour,
+  },
+  {
+    path: "/prequiz",
+    name: "prequiz",
+    component: PreQuiz,
+  },
+  {
+    path: "/postquiz",
+    name: "postquiz",
+    component: PostQuiz,
   },
 ];
 
