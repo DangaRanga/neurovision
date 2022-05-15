@@ -73,13 +73,10 @@ export default {
         { title: "Learning Rate", type: "input-n", value: "", options: [] , change: this.changeParam },
         {
           title: "Loss Function",
-          type: "select",
-          value: "",
-          options: [
-            { title: "Mean Squared Error", value: "mse" },
-            { title: "Binary Cross-Entropy", value: "bce" },
-          ],
-          change: this.changeLoss,
+          type: "input-d",
+          value: "Mean Squared Error (MSE)",
+          options: [],
+          change: "",
         },
         {
           title: "Optimization Algorithm",

@@ -65,7 +65,7 @@
     </div>
     <div class="mt-2">
       <p class="text-center font-medium text-primary_dark">
-        It is recommened that new users start application with the pre-quiz!
+        It is recommened that new users start the application with the pre-quiz!
       </p>
     </div>
   </div>

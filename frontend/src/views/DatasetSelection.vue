@@ -1,5 +1,9 @@
 <template>
-  <div class="flex flex-col items-center justify-center h-screen" id="v-step-0">
+  <div class="flex flex-col items-center justify-center h-screen">
+    <div class="flex flex-col justify-center items-center" id="v-step-0">
+      <span class="font-bold text-3xl">Welcome to Neurovision</span>
+      <span class="font-light text-sm" >Select your dataset to start learning about neural networks</span>
+    </div>
     <div class="grid grid-cols-3 mt-24" id="v-step-1">
       <article v-for="(dataset, index) in datasets" :key="index">
         <selector-item
@@ -43,6 +47,7 @@
       </p>
     </div>
 
+    <v-tour name="myTour" :steps="steps"></v-tour>
     <dataset-preview-modal
       v-if="isModalVisible && selectDataset"
       @close="closeModal"
@@ -51,7 +56,6 @@
       :data="dataset"
       :problem-type="datasets[selectedDataset].problemType"
     />
-    <v-tour name="myTour" :steps="steps"></v-tour>
   </div>
 </template>
 <script>
@@ -148,6 +152,7 @@ export default {
             analysisType: this.analysisType,
             title: this.title,
             description: this.summary,
+            index: newData.index,
           };
           this.dataset = data;
           localStorage.setItem("base-dataset", JSON.stringify(data));
