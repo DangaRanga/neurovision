@@ -16,7 +16,9 @@
               :title="header.title"
               :value="header.value"
               :options="header.options"
+              :change="header.change"
               :id="'v-step-' + (i + 1)"
+              :index="i"
             />
           </div>
           <div v-if="selected == 2">
@@ -31,6 +33,7 @@
       <div class="flex flex-col justify-center" id="v-step-6">
         <div class="flex justify-center m-0 mb-4">
           <button
+            @click="update"
             className="w-3/5 bg-primary text-white font-bold py-3 rounded shadow hover:shadow-md outline-none focus:outline-none mr-2"
             type="button"
           >
@@ -46,6 +49,7 @@
 <script>
 import SidebarInput from "@/components/elements/SidebarInput.vue";
 import TabbedMenu from "@/components/elements/TabbedMenu.vue";
+import { modelTour } from "@/controllers/tour/animationCustomization.js";
 
 export default {
   components: {
@@ -54,70 +58,17 @@ export default {
   },
   data() {
     return {
-      steps: [
-        {
-          target: "#v-step-0",
-          content: ` <strong>Let's customize the parameters for the Neural Network</strong>!`,
-          params: {
-            placement: "left",
-          },
-        },
-        {
-          target: "#v-step-1",
-          content: `<strong>Click to view information on Batch Size parameters<\strong>`,
-          params: {
-            placement: "left",
-          },
-        },
-        {
-          target: "#v-step-2",
-          content: `<strong>Click to view information on Epochs parameter</strong>!`,
-          params: {
-            placement: "left",
-          },
-        },
-        {
-          target: "#v-step-3",
-          content: `<strong>Click to view information on the Learning Rate of a Neural Network </strong>!`,
-          params: {
-            placement: "left",
-          },
-        },
-        {
-          target: "#v-step-4",
-          content: `<strong>Find out what is meant by the Loss Function of a Neural Network </strong>.`,
-          params: {
-            placement: "left",
-          },
-        },
-        {
-          target: "#v-step-5",
-          content: `<strong>Let's look at what is the purpose of an Optimization Algorithm </strong>.`,
-          params: {
-            placement: "left",
-          },
-        },
-        {
-          target: "#v-step-6",
-          content: `<strong>Hooray!, now that you've learnt how to customize the parameters, here comes the fun part ! 
-          <br /> <br /> Let's start the simulation and observe the changes in the Neural Network</strong> !`,
-          params: {
-            placement: "left",
-          },
-        },
-      ],
+      batch_size: 1,
+      epochs: 100,
+      l_rate: 0.01,
+      loss_f: "MSE",
+      steps: modelTour,
       selected: 1,
       graphs: [1, 2, 3],
-      options: [
-        { title: "ReLu", value: "relu" },
-        { title: "Sigmoid", value: "sigm" },
-        { title: "Softmax", value: "smax" },
-      ],
-      title: "Activation Function",
       headers: [
-        { title: "Batch Size", type: "input", value: "", options: [] },
-        { title: "Epochs", type: "input", value: "", options: [] },
-        { title: "Learning Rate", type: "input", value: "", options: [] },
+        { title: "Batch Size", type: "input", value: "", options: [] , change: "" },
+        { title: "Epochs", type: "input", value: "", options: [] , change: "" },
+        { title: "Learning Rate", type: "input", value: "", options: [] , change: "" },
         {
           title: "Loss Function",
           type: "select",
@@ -126,12 +77,14 @@ export default {
             { title: "Mean Squared Error", value: "mse" },
             { title: "Binary Cross-Entropy", value: "bce" },
           ],
+          change: this.changeLoss,
         },
         {
           title: "Optimization Algorithm",
           type: "input-d",
-          value: "Stocrastic Gradient Decent",
+          value: "Stochastic Gradient Descent",
           options: [],
+          change: "" 
         },
       ],
     };
@@ -143,6 +96,29 @@ export default {
     changeSelected(option) {
       this.selected = option;
     },
+    changeLoss(data) {
+      switch(data.value){
+        case "mse":
+          this.loss_f = "MSE";
+        break;
+        case "bce":
+          this.loss_f = "Binary Cross Entropy";
+        break;
+        default:
+          this.loss_f = "MSE"
+        break;
+      };
+    },
+    update(){
+      // validation before sending data
+      
+      this.$emit("restart", [
+        { title: "Batch Size", value: this.batch_size },
+        { title: "Epoch No.", value : this.epochs },
+        { title: "Learning Rate", value: this.l_rate },
+        { title: "Loss Function", value: this.loss_f }
+      ]);
+    }
   },
 };
 </script>

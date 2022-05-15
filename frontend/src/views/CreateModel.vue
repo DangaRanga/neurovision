@@ -148,6 +148,7 @@ export default {
           struct: JSON.stringify(this.layers),
           activation: result,
           hidden: this.num_hidden,
+          problem: this.dataset.analysisType || "Regression"
         },
       });
     }

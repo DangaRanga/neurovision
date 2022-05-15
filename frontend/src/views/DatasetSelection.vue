@@ -136,7 +136,7 @@ export default {
       // Fetch the data
       this.$http
         .get(
-          `http://localhost:9090/api/data?dataset=${this.datasets[dataset].name}`,
+          `http://127.0.0.1:9090/api/data?dataset=${this.datasets[dataset].name}`,
           {}
         )
         .then((response) => {

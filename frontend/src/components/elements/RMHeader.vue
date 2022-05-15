@@ -33,7 +33,7 @@
           </svg>
         </div>
         <header-display-item
-          v-for="(item, i) in hitems"
+          v-for="(item, i) in headers"
           :key="i"
           :header="item.header"
           :value="item.value"
@@ -44,7 +44,7 @@
           class="text-white h-10 w-10 p-0.5 mr-1 transition-colors duration-200"
         >
           <svg
-            v-if="!isHidden"
+            v-if="isHidden"
             @click="close"
             xmlns="http://www.w3.org/2000/svg"
             height="35px"
@@ -58,7 +58,7 @@
             />
           </svg> 
           <svg
-            v-if="isHidden"
+            v-if="!isHidden"
             @click="close"
             xmlns="http://www.w3.org/2000/svg"
             height="35px"
@@ -81,20 +81,12 @@
 import HeaderDisplayItem from "@/components/elements/HeaderDisplayItem.vue";
 
 export default {
-  props: ["isHidden", "close"],
+  props: ["isHidden", "close", "headers"],
   components: {
     "header-display-item": HeaderDisplayItem,
   },
   data() {
     return {
-      hitems: [
-        { header: "Epoch No.", value: 0 },
-        { header: "Batch Size", value: 0 },
-        { header: "Learning Rate", value: 0 },
-        { header: "Model Accuracy", value: 0 },
-        { header: "Problem Type", value: "Classification" },
-        { header: "Loss Function", value: "MSE" },
-      ],
     };
   },
 };
