@@ -1,6 +1,10 @@
 <template>
   <div>
-    <model-header :isHidde=isHidden :close=close />
+    <model-header 
+      :isHidden=isHidden 
+      :close=close 
+      :headers="headers"
+    />
     <div v-if="!isHidden" class="grid grid-cols-3 min-h-screen">
       <div class="col-span-2 grid items-center">
         <div>
@@ -17,7 +21,9 @@
           />
         </div>
       </div>
-      <model-sidebar />
+      <model-sidebar 
+        @restart="updateHeader" 
+      />
     </div>
     <div v-if="isHidden" class="grid items-center min-h-screen">
       <div class="flex flex-col justify-center items-center mt-20 mb-20">
@@ -56,6 +62,13 @@ export default {
       layers: [],
       mappings: [],
       isHidden: true,
+      headers: [
+        { header: "Batch Size", value: 0 },
+        { header: "Epoch No.", value: 0 },
+        { header: "Learning Rate", value: 0 },
+        { header: "Loss Function", value: "MSE" },
+        { header: "Problem Type", value: "Classification" },
+      ]
     };
   },
   methods: {
@@ -125,6 +138,17 @@ export default {
     },
     close(){
       this.isHidden = !this.isHidden;
+    },
+    updateHeader(data){
+      for(var obj in data){
+        this.headers = this.headers.map( d => {
+          if(d.header == data[obj].title){
+            return  { header: d.header , value: data[obj].value }
+          }else{
+            return d;
+          }
+        })
+      }
     }
   },
   created(){
@@ -152,6 +176,13 @@ export default {
         },
       ];
     this.activation = this.$route.params.activation || ["ReLu"];
+    this.headers = this.headers.map(d => {
+      if(d.header == "Problem Type"){
+        return {header: d.header, value: this.$route.params.problem || "Regression"};
+      }else{
+        return d;
+      }
+    });  
     this.createmapping();
   },
 };

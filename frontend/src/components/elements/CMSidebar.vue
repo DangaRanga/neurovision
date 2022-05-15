@@ -38,7 +38,7 @@
           />
           <sidebar-input
             type="input-d"
-            title="Output Layer Activation Function"
+            :title="'Output Layer ' + title"
             :value="output"
             :id="'v-step-' + 2"
           />
@@ -73,6 +73,7 @@
 <script>
 import SidebarInput from "@/components/elements/SidebarInput.vue";
 import TabbedMenu from "@/components/elements/TabbedMenu.vue";
+import { buildTour } from "@/controllers/tour/buildCustomization";
 
 export default {
   emits: ["progress"],
@@ -94,66 +95,25 @@ export default {
       ],
       title: "Activation Function",
       act_layers: ["", "", ""],
-      steps: [
-        {
-          target: "#v-step-0",
-          content: ` <strong>Let's customize the parameters for the Neural Network</strong>!`,
-          params: {
-            placement: "left",
-          },
-        },
-        {
-          target: "#v-step-0",
-          content: `<strong>Click to view information on Batch Size parameters<\strong>`,
-          params: {
-            placement: "left",
-          },
-        },
-        {
-          target: "#v-step-0",
-          content: `<strong>Click to view information on Epochs parameter</strong>!`,
-          params: {
-            placement: "left",
-          },
-        },
-        {
-          target: "#v-step-0",
-          content: `<strong>Click to view information on the Learning Rate of a Neural Network </strong>!`,
-          params: {
-            placement: "left",
-          },
-        },
-        {
-          target: "#v-step-0",
-          content: `<strong>Find out what is meant by the Loss Function of a Neural Network </strong>.`,
-          params: {
-            placement: "left",
-          },
-        },
-        {
-          target: "#v-step-0",
-          content: `<strong>Let's look at what is the purpose of an Optimization Algorithm </strong>.`,
-          params: {
-            placement: "left",
-          },
-        },
-        {
-          target: "#v-step-0",
-          content: `<strong>Hooray!, now that you've learnt how to customize the parameters, here comes the fun part ! 
-          <br /> <br /> Let's start the simulation and observe the changes in the Neural Network</strong> !`,
-          params: {
-            placement: "left",
-          },
-        },
-      ],
+      steps: buildTour,
     };
   },
   methods: {
+    changeActFcn(data) {
+      switch(data.value){
+        case "sigm":
+          this.act_layers[data.index] = "Sigmoid";
+        break;
+        case "smax":
+          this.act_layers[data.index] = "Softmax";
+        break;
+        case "relu":
+          this.act_layers[data.index] = "ReLu";
+        break;
+      }
+    },
     showTour() {
       this.$tours["myTour"].start();
-    },
-    changeActFcn(index, value) {
-      this.act_layers[index] = value;
     },
     update() {
       this.$emit("progress", { activation: this.act_layers });
