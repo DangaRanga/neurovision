@@ -5,12 +5,18 @@ import PreQuiz from "../views/PreQuiz.vue";
 import PostQuiz from "../views/PostQuiz.vue";
 import CreateModel from "../views/CreateModel.vue";
 import RunModel from "../views/RunModel.vue";
+import Landing from "@/views/Landing.vue";
 import Tour from "@/views/Tour.vue";
 
 const routes = [
   {
     path: "/",
-    name: "home",
+    name: "landing",
+    component: Landing,
+  },
+  {
+    path: "/select",
+    name: "select",
     component: DatasetSelection,
   },
   {
