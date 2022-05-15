@@ -65,6 +65,7 @@ export default {
       steps: modelTour,
       selected: 1,
       graphs: [1, 2, 3],
+      isTourVisible: localStorage.getItem("isTourVisible") === "true",
       headers: [
         { title: "Batch Size", type: "input", value: "", options: [] , change: "" },
         { title: "Epochs", type: "input", value: "", options: [] , change: "" },
@@ -90,9 +91,14 @@ export default {
     };
   },
   mounted: function () {
-    this.$tours["myTour"].start();
+    if (this.isTourVisible) {
+      this.showTour();
+    }
   },
   methods: {
+    showTour() {
+      this.$tours["myTour"].start();
+    },
     changeSelected(option) {
       this.selected = option;
     },
@@ -111,7 +117,7 @@ export default {
     },
     update(){
       // validation before sending data
-      
+
       this.$emit("restart", [
         { title: "Batch Size", value: this.batch_size },
         { title: "Epoch No.", value : this.epochs },

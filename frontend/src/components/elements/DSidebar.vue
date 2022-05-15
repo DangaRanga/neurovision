@@ -76,6 +76,7 @@
       v-show="isModalVisible"
       @close="closeModal"
     />
+    <!-- <div v-if="isTourVisible == true"> -->
     <v-tour name="myTour" :steps="steps"></v-tour>
   </aside>
 </template>
@@ -114,16 +115,21 @@ export default {
       trainTitle: "Training Data Pecentage",
       trainInfo: "This is zxy, abc.",
       isModalVisible: false,
+      isTourVisible: localStorage.getItem("isTourVisible") === "true",
       message: "Helloo",
       title: "My Title",
       selected: this.analysis,
     };
   },
   mounted: function () {
-    console.log(this.analysisType);
-    this.$tours["myTour"].start();
+    if (this.isTourVisible) {
+      this.showTour();
+    }
   },
   methods: {
+    showTour() {
+      this.$tours["myTour"].start();
+    },
     showModal() {
       this.isModalVisible = true;
     },

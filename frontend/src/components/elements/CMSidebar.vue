@@ -87,6 +87,7 @@ export default {
   },
   data() {
     return {
+      isTourVisible: localStorage.getItem("isTourVisible") === "true",
       options: [
         { title: "ReLu", value: "relu" },
         { title: "Sigmoid", value: "sigm" },
@@ -110,14 +111,18 @@ export default {
           this.act_layers[data.index] = "ReLu";
         break;
       }
-      
     },
-    update(){
+    showTour() {
+      this.$tours["myTour"].start();
+    },
+    update() {
       this.$emit("progress", { activation: this.act_layers });
     },
   },
   mounted: function () {
-    this.$tours["myTour"].start();
+    if (this.isTourVisible) {
+      this.showTour();
+    }
   },
 };
 </script>
