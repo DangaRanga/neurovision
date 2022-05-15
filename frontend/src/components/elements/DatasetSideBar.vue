@@ -115,6 +115,7 @@
       </div>
     </div>
 
+    <v-tour name="myTour" :steps="steps"></v-tour>
     <Modal
       :topic="title"
       :message="message"
@@ -122,7 +123,6 @@
       @close="closeModal"
     />
   </aside>
-  <v-tour name="myTour" :steps="steps"></v-tour>
 </template>
 <script>
 // Asset imports

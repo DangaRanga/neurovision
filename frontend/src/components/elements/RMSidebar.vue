@@ -107,13 +107,10 @@ export default {
         },
         {
           title: "Loss Function",
-          type: "select",
-          value: "",
-          options: [
-            { title: "Mean Squared Error", value: "mse" },
-            { title: "Binary Cross-Entropy", value: "bce" },
-          ],
-          change: this.changeLoss,
+          type: "input-d",
+          value: "Mean Squared Error (MSE)",
+          options: [],
+          change: "",
         },
         {
           title: "Optimization Algorithm",

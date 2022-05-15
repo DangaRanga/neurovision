@@ -9,7 +9,7 @@
       <span class="font-bold text-3xl mx-4">Welcome to Neurovision!</span>
     </div>
     <div
-      class="flex flex-col justify-between my-4 w-2/5 items-center justify-center"
+      class="flex flex-col my-4 w-2/5 items-center justify-center"
     >
       <span
         class="font-regular text-xl text-center mx-4 mb-4 items-center justify-center"
@@ -21,7 +21,7 @@
       >
     </div>
     <div
-      class="flex flex-col justify-between mt-12 w-2/5 items-center justify-center"
+      class="flex flex-col mt-12 w-2/5 items-center justify-center"
     >
       <span
         class="font-bold text-2xl text-center mx-4 mb-4 items-center justify-center"
@@ -30,7 +30,7 @@
     </div>
     <div class="mx-auto my-4">
       <router-link
-        class="text-white bg-primary hover:bg-blue-500 rounded-md py-3 px-4 mx-3 transition-colors duration-200 cursor-pointer hover:bg-blue-700"
+        class="text-white bg-primary rounded-md py-3 px-4 mx-3 transition-colors duration-200 cursor-pointer hover:bg-blue-700"
         id="v-step-3"
         :to="{
           name: 'prequiz',
@@ -44,7 +44,7 @@
         Start Pre Quiz
       </router-link>
       <router-link
-        class="text-white bg-gray-500 hover:bg-blue-500 rounded-md py-3 px-4 mx-3 transition-colors duration-200 cursor-pointer hover:bg-blue-700"
+        class="text-white bg-gray-500 rounded-md py-3 px-4 mx-3 transition-colors duration-200 cursor-pointer hover:bg-blue-700"
         id="v-step-3"
         :to="{
           name: 'select',
@@ -53,7 +53,7 @@
         Start Without Tutorial
       </router-link>
       <router-link
-        class="text-white bg-gray-500 hover:bg-blue-500 rounded-md py-3 px-4 mx-3 transition-colors duration-200 cursor-pointer hover:bg-blue-700"
+        class="text-white bg-gray-500 rounded-md py-3 px-4 mx-3 transition-colors duration-200 cursor-pointer hover:bg-blue-700"
         id="v-step-3"
         @click="showTour()"
         :to="{
@@ -64,8 +64,8 @@
       </router-link>
     </div>
     <div class="mt-2">
-      <p class="text-xl text-center font-medium text-primary_dark">
-        It is recommened that new users start application with the pre-quiz!
+      <p class="text-center font-medium text-primary_dark">
+        It is recommened that new users start the application with the pre-quiz!
       </p>
     </div>
   </div>

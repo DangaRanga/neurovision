@@ -22,7 +22,7 @@
         </div>
       </div>
       <model-sidebar 
-        @restart="updateHeader"
+        @restart="updateParams"
         :batch="headers[0].value"
         :epoch="headers[1].value"
         :lrate="headers[2].value"
@@ -143,7 +143,7 @@ export default {
     close(){
       this.isHidden = !this.isHidden;
     },
-    updateHeader(data){
+    updateParams(data){
       for(var obj in data){
         this.headers = this.headers.map( d => {
           if(d.header == data[obj].title){
@@ -154,7 +154,7 @@ export default {
         })
       }
     },
-    buildModel(){
+    updateModel(){
       //HTTP Request to Build and Run Model
       // {
       //    "data": Dataset
@@ -169,7 +169,16 @@ export default {
       this.$http
       .get(
         `http://127.0.0.1:9090/api/model/run`,
-        {}
+        {
+          "data": Dataset,
+          "prob":"HRT", 
+          "layers":[5,5], 
+          "activations":["relu","relu"], 
+          "lr":0.5, 
+          "batch_size":10, 
+          "epochs":10,
+          "train": 80
+        }
       )
       .then((response) => {
         const newData = response.data.dataset;
