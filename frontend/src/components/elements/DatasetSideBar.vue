@@ -226,4 +226,9 @@ export default {
     },
   },
 };
+
+// Make tour optional
+// Integrate the tour component back
+// Pre-quiz and post quiz pages
+//
 </script>
