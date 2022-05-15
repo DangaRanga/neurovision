@@ -81,7 +81,7 @@
       </p>
       <div v-if="type == 'prequiz'">
         <div class="flex justify-center my-8">
-          <button
+          <!-- <button
             @click="showTour(false)"
             className="justify-center w-4/5 mx-2 my-4 bg-primary_dark text-white text-lg font-medium uppercase rounded outline outline-1 outline-white appearance-none cursor-pointer p-4"
           >
@@ -92,7 +92,27 @@
             className="justify-center w-4/5 mx-2 my-4 bg-primary_dark text-white text-lg font-medium uppercase rounded outline outline-1 outline-white appearance-none cursor-pointer p-4"
           >
             Start With Tutorial
-          </button>
+          </button> -->
+          <router-link
+            class="justify-center mx-2 my-4 bg-primary_dark text-white text-lg text-center font-medium uppercase outline outline-1 outline-white appearance-none cursor-pointer p-4 hover:bg-gray-500 rounded-md py-3 px-4 transition-colors duration-200"
+            id="v-step-3"
+            @click="showTour(false)"
+            :to="{
+              name: 'select',
+            }"
+          >
+            Start Without Tutorial
+          </router-link>
+          <router-link
+            class="justify-center mx-2 my-4 bg-primary_dark text-white text-lg text-center font-medium uppercase outline outline-1 outline-white appearance-none cursor-pointer p-4 hover:bg-gray-500 rounded-md py-3 px-4 transition-colors duration-200"
+            id="v-step-3"
+            @click="showTour(true)"
+            :to="{
+              name: 'select',
+            }"
+          >
+            Start With Tutorial
+          </router-link>
         </div>
       </div>
       <div v-if="type == 'postquiz'">

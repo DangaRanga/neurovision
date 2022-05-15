@@ -1,12 +1,5 @@
 <template>
-  <div class="flex flex-col items-center justify-center h-screen">
-    <button
-      @click="showTour()"
-      class="text-white bg-gray-500 font-semibold rounded-md py-3 px-4 hover:bg-gray-600 transition-colors duration-200"
-      id="v-step-0"
-    >
-      Start Tutorial
-    </button>
+  <div class="flex flex-col items-center justify-center h-screen" id="v-step-0">
     <div class="grid grid-cols-3 mt-24" id="v-step-1">
       <article v-for="(dataset, index) in datasets" :key="index">
         <selector-item
@@ -79,7 +72,7 @@ export default {
       description: "",
       selectedDataset: undefined,
       isModalVisible: false,
-      isTourVisible: false,
+      isTourVisible: localStorage.getItem("isTourVisible") === "true",
       data: null,
       dataset: {
         headings: [],
@@ -89,9 +82,6 @@ export default {
         {
           target: "#v-step-0", // We're using document.querySelector() under the hood
           content: `Welcome to <strong>Neurovision.</strong> Where we learn all the basis of neural networks! `,
-          params: {
-            placement: "right",
-          },
         },
         {
           target: "#v-step-1",
@@ -164,8 +154,6 @@ export default {
         });
     },
     showTour() {
-      this.isTourVisible = true;
-      localStorage.setItem("isTourVisible", JSON.stringify(this.isTourVisible));
       this.$tours["myTour"].start();
     },
   },
@@ -186,7 +174,9 @@ export default {
     },
   },
   mounted: function () {
-    localStorage.setItem("isTourVisible", JSON.stringify(this.isTourVisible));
+    if (this.isTourVisible) {
+      this.showTour();
+    }
   },
 };
 </script>
