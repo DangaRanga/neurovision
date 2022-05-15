@@ -1,11 +1,10 @@
 <template>
   <div class="flex flex-col items-center justify-center h-screen">
-    <div class="flex flex-row justify-between mb-4">
+    <div class="flex flex-row justify-between items-center mb-4">
       <img
         :src="neurovision_logo"
         alt="info"
         class="items-center mx-4"
-        @click="functionName()"
       />
       <span class="font-bold text-3xl mx-4">Welcome to Neurovision!</span>
     </div>
@@ -14,8 +13,8 @@
     >
       <span
         class="font-regular text-xl text-center mx-4 mb-4 items-center justify-center"
-        >An Educational tool that walks users through the construction of a
-        basic neural network model whislt giving insites on various concepts of
+        >An educational tool that walks users through the construction of a
+        basic neural network model whilst giving insights on various concepts of
         neural networks. The aim of this application is to allow users to gain a
         better understanding of neural networks, how they work and some basic
         concepts involved.</span
