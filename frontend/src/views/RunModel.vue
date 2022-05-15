@@ -128,7 +128,7 @@ export default {
     }
   },
   created(){
-    this.num_hidden = this.$route.params.hidden && 1;
+    this.num_hidden = this.$route.params.hidden || 1;
     this.layers = this.$route.params.struct ? JSON.parse(this.$route.params.struct) : [
         {
           id: 0,
@@ -151,7 +151,7 @@ export default {
           nodes: [{ id: 0, layer: 2, output: true }],
         },
       ];
-    this.activation = this.$route.params.activation && ["ReLu"];
+    this.activation = this.$route.params.activation || ["ReLu"];
     this.createmapping();
   },
 };
