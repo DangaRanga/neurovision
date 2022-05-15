@@ -1,6 +1,6 @@
 <template>
   <div>
-    <model-header />
+    <model-header :show="showDatasetPreviewModal" />
     <div class="grid grid-cols-3 min-h-screen">
       <div class="col-span-2 grid items-center">
           <div>
@@ -26,6 +26,14 @@
         @progress="nextStep"
       />
     </div>
+    <dataset-preview-modal
+      v-if="isModalVisible"
+      @close="closeModal"
+      :title="dataset.title"
+      :description="dataset.description"
+      :data="dataset"
+      :problem-type="dataset.analysisType"
+    />
   </div>
 </template>
 
@@ -33,41 +41,28 @@
 import CMHeader from "@/components/elements/CMHeader.vue";
 import CMSidebar from "@/components/elements/CMSidebar.vue";
 import CModel from "@/components/elements/CModel.vue";
+import DatasetPreviewModal from "@/components/elements/DatasetPreviewModal.vue";
 
 export default {
   components: {
     "model-header": CMHeader,
     "model-sidebar": CMSidebar,
     "model-build": CModel,
+    "dataset-preview-modal": DatasetPreviewModal,
   },
   data() {
     return {
       width: 800,
       height: 500,
       num_hidden: 1,
-      layers: [
-        {
-          id: 0,
-          name: "input",
-          nodes: [
-            { id: 0, layer: 0 },
-            { id: 1, layer: 0 },
-          ],
-        },
-        {
-          id: 1,
-          name: "hidden-1",
-          nodes: [
-            { id: 0, layer: 1 },
-          ],
-        },
-        {
-          id: 2,
-          name: "output",
-          nodes: [{ id: 0, layer: 2, output: true }],
-        },
-      ],
+      layers: [],
+      isModalVisible: false,
     };
+  },
+  computed: {
+    dataset() {
+      return JSON.parse(localStorage.getItem("base-dataset"));
+    },
   },
   methods: {
     addLayer() {
@@ -129,6 +124,12 @@ export default {
         return;
       }
     },
+    showDatasetPreviewModal() {
+      this.isModalVisible = true;
+    },
+    closeModal() {
+      this.isModalVisible = false;
+    },
     nextStep(data){
 
       const activations = data.activation;
@@ -151,5 +152,29 @@ export default {
       });
     }
   },
+  created(){
+    this.layers = this.$router.params || [
+        {
+          id: 0,
+          name: "input",
+          nodes: [
+            { id: 0, layer: 0 },
+            { id: 1, layer: 0 },
+          ],
+        },
+        {
+          id: 1,
+          name: "hidden-1",
+          nodes: [
+            { id: 0, layer: 1 },
+          ],
+        },
+        {
+          id: 2,
+          name: "output",
+          nodes: [{ id: 0, layer: 2, output: true }],
+        },
+      ];
+  }
 };
 </script>

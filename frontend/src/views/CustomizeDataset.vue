@@ -45,13 +45,11 @@ export default {
     this.analysisType = this.$route.params.analysisType;
     this.title = this.$route.params.title;
     this.description = this.$route.params.description;
-    console.log(this.analysisType);
   },
   update() {
     this.analysisType = this.$route.params.analysisType;
     this.title = this.$route.params.title;
     this.description = this.$route.params.description;
-    console.log(this.dataset);
   },
 };
 </script>

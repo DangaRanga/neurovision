@@ -17,11 +17,9 @@ def initialize_dataset(dataset_name):
     dataset_locations = {
         "heart_disease": "Heart Disease -  Binary Classification/Heart Disease - Training.csv",
         "house_price": "House Price Prediction - Regression/House Price Prediction - Training.csv",
-        "iris": "Iris Prediction - Multi Classification\Iris Prediction - Training.csv"
+        "iris": "Iris Prediction - Multi Classification/Iris Prediction - Training.csv"
     }
-
-    print(dataset_locations.get(dataset_name))
-
+    
     # Create path for respective dataset
     dataset_path = os.path.join(base_path, dataset_locations.get(dataset_name))
 
