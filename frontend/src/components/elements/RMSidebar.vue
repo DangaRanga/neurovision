@@ -108,6 +108,7 @@ export default {
       ],
       selected: 1,
       graphs: [1, 2, 3],
+      isTourVisible: localStorage.getItem("isTourVisible") === "true",
       options: [
         { title: "ReLu", value: "relu" },
         { title: "Sigmoid", value: "sigm" },
@@ -130,16 +131,21 @@ export default {
         {
           title: "Optimization Algorithm",
           type: "input-d",
-          value: "Stocrastic Gradient Decent",
+          value: "Stocrastic Gradient Descent",
           options: [],
         },
       ],
     };
   },
   mounted: function () {
-    this.$tours["myTour"].start();
+    if (this.isTourVisible) {
+      this.showTour();
+    }
   },
   methods: {
+    showTour() {
+      this.$tours["myTour"].start();
+    },
     changeSelected(option) {
       this.selected = option;
     },
