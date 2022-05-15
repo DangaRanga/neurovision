@@ -8,10 +8,10 @@ from tensorflow.keras.optimizers import SGD, Adam
 class ModelHandler(object):
 
     problems = {
-        "HRT": Dense(1, "sigmoid"),
-        "HPR": Dense(1, "relu"),
-        "IRP": Dense(3, "softmax"), 
-        "RGR": Dense(1)
+        "heart_disease": Dense(1, "sigmoid"),
+        "house_price": Dense(1, "relu"),
+        "iris": Dense(3, "softmax"), 
+        "regression": Dense(1)
     }
 
     """
@@ -22,12 +22,12 @@ class ModelHandler(object):
         4. batch_size - size of batch
         5. epochs - number of epochs 
         6. problem - The problem based on Dataset 
-        ?? loss function -> binary_crossentropy, mse
-        ?? optimizer -> Adam, SGD
+        ?? loss function -> mse [binary_crossentropy, + others in possible development]
+        ?? optimizer -> SGD [Adam + others in possible development]
     """
     def __init__(self, **kwargs) -> None:
         if "prob" in kwargs.keys():
-          self.prob = "RGR"
+          self.prob = "regression"
         else: 
           self.prob = kwargs.prob
 
@@ -86,11 +86,6 @@ class ModelHandler(object):
             "loss_hist": hist.history['loss'],
             "acc_hist": hist.history['accuracy']
         }
-    
-    ## TBD
-    def getWeights(self):
-      for i in self.model.layers:
-          print(i.weights)
 
     def evaluate(self, features, output) -> dict:
         eval = self.model.evaluate(features, 
