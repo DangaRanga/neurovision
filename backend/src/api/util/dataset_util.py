@@ -27,3 +27,10 @@ def initialize_dataset(dataset_name):
     dataframe = pd.read_csv(dataset_path)
 
     return dataframe
+
+def initialize_from_json(data):
+
+    #Create DataFrame from Dataset Received from Request
+    dataframe = pd.DataFrame.from_records(data["data"], columns=data["columns"], index=data["index"])
+
+    return dataframe

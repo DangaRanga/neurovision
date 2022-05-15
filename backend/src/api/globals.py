@@ -1,2 +1,0 @@
-datahandler = None
-modelhandler = None
