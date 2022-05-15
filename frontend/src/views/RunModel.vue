@@ -1,7 +1,7 @@
 <template>
   <div>
-    <model-header />
-    <div class="grid grid-cols-3 min-h-screen">
+    <model-header :isHidde=isHidden :close=close />
+    <div v-if="!isHidden" class="grid grid-cols-3 min-h-screen">
       <div class="col-span-2 grid items-center">
         <div>
           <div class="flex flex-col justify-center items-center mb-20">
@@ -18,6 +18,19 @@
         </div>
       </div>
       <model-sidebar />
+    </div>
+    <div v-if="isHidden" class="grid items-center min-h-screen">
+      <div class="flex flex-col justify-center items-center mt-20 mb-20">
+        <h1 class="mx-auto font-extrabold text-4xl">Playground</h1>
+        <h1 class="mx-auto mt-2 font-semibold text-lg text-grey">Test the structure of your neural network</h1>
+      </div>
+      <model-build 
+        :num_hidden="num_hidden"
+        :layers="layers"
+        :mappings="mappings"
+        :width="width"
+        :height="height"
+      />
     </div>
   </div>
 </template>
@@ -39,46 +52,10 @@ export default {
       width: 900,
       height: 500,
       num_hidden: 1,
-      layers: [
-        {
-          id: 0,
-          name: "input",
-          nodes: [
-            { id: 0, layer: 0 },
-            { id: 1, layer: 0 },
-            { id: 2, layer: 0 },
-          ],
-        },
-        {
-          id: 1,
-          name: "hidden-1",
-          nodes: [
-            { id: 0, layer: 1 },
-            { id: 1, layer: 1 },
-            { id: 2, layer: 1 },
-            { id: 3, layer: 1 },
-          ],
-        },
-        {
-          id: 2,
-          name: "hidden-2",
-          nodes: [
-            { id: 0, layer: 2 },
-            { id: 1, layer: 2 },
-            { id: 2, layer: 2 },
-          ],
-        },
-        {
-          id: 3,
-          name: "output",
-          nodes: [
-            { id: 0, layer: 3 , output: true},
-            { id: 1, layer: 3 , output: true},
-            { id: 2, layer: 3 , output: true},
-          ],
-        },
-      ],
+      activation: [],
+      layers: [],
       mappings: [],
+      isHidden: true,
     };
   },
   methods: {
@@ -146,8 +123,35 @@ export default {
         }
       }
     },
+    close(){
+      this.isHidden = !this.isHidden;
+    }
   },
-  mounted(){
+  created(){
+    this.num_hidden = this.$route.params.hidden && 1;
+    this.layers = this.$route.params.struct ? JSON.parse(this.$route.params.struct) : [
+        {
+          id: 0,
+          name: "input",
+          nodes: [
+            { id: 0, layer: 0 },
+            { id: 1, layer: 0 },
+          ],
+        },
+        {
+          id: 1,
+          name: "hidden-1",
+          nodes: [
+            { id: 0, layer: 1 },
+          ],
+        },
+        {
+          id: 2,
+          name: "output",
+          nodes: [{ id: 0, layer: 2, output: true }],
+        },
+      ];
+    this.activation = this.$route.params.activation && ["ReLu"];
     this.createmapping();
   },
 };

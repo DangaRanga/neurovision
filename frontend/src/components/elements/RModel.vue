@@ -43,7 +43,7 @@ export default {
         .data(this.layers)
         .enter()
         .append("g")
-        .style("transform", `translate(${65}px, ${0}px)`);
+        .style("transform", `translate(${80}px, ${0}px)`);
 
       var y = d3.scaleLinear().rangeRound([0, this.height / 5]);
       var color = d3.scaleOrdinal(d3.schemeCategory10);

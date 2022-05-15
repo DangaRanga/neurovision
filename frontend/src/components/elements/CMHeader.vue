@@ -21,14 +21,6 @@ export default {
   },
   data() {
     return {
-      hitems: [
-        { header: "Epoch No.", value: 0 },
-        { header: "Batch Size", value: 0 },
-        { header: "Learning Rate", value: 0 },
-        { header: "Model Accuracy", value: 0 },
-        { header: "Problem Type", value: "Classification" },
-        { header: "Loss Function", value: "MSE" },
-      ],
     };
   },
 };

@@ -23,6 +23,7 @@
       <model-sidebar 
         output="ReLu" 
         :layers="num_hidden"
+        @progress="nextStep"
       />
     </div>
   </div>
@@ -76,7 +77,6 @@ export default {
         return;
       }
 
-      const input = this.layers[0];
       const output = this.layers[this.layers.length - 1];
 
       this.layers.splice(-1, 1);
@@ -129,6 +129,27 @@ export default {
         return;
       }
     },
+    nextStep(data){
+
+      const activations = data.activation;
+      var result = [];
+      for(var i = 0; i < this.num_hidden; i++){
+        if(activations[i] == ""){
+          result.push("ReLu");
+        }else{
+          result.push(activations[i])
+        }
+      }
+
+      this.$router.push({
+        name: "run",
+        params: {
+          struct: JSON.stringify(this.layers),
+          activation: result,
+          hidden: this.num_hidden,
+        },
+      });
+    }
   },
 };
 </script>
