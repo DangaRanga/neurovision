@@ -12,8 +12,10 @@
             <sidebar-input
               v-for="(header, i) in headers"
               :key="i"
-              type="input"
-              :title="header"
+              :type="header.type"
+              :title="header.title"
+              :value="header.value"
+              :options="header.options"
               :id="'v-step-' + (i + 1)"
             />
           </div>
@@ -113,11 +115,24 @@ export default {
       ],
       title: "Activation Function",
       headers: [
-        "Batch Size",
-        "Epochs",
-        "Learning Rate",
-        "Loss Function",
-        "Optimization Algorithm",
+        { title: "Batch Size", type: "input", value: "", options: [] },
+        { title: "Epochs", type: "input", value: "", options: [] },
+        { title: "Learning Rate", type: "input", value: "", options: [] },
+        {
+          title: "Loss Function",
+          type: "select",
+          value: "",
+          options: [
+            { title: "Mean Squared Error", value: "mse" },
+            { title: "Binary Cross-Entropy", value: "bce" },
+          ],
+        },
+        {
+          title: "Optimization Algorithm",
+          type: "input-d",
+          value: "Stocrastic Gradient Decent",
+          options: [],
+        },
       ],
     };
   },

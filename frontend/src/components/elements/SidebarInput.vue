@@ -32,7 +32,8 @@
       <input
         class="bg-white rounded outline outline-1 outline-white focus:outline-primary h-12 text-base w-full p-2"
         value=""
-        placeholder="Enter text"
+        placeholder="Enter number"
+        type="number"
       />
     </div>
     <div v-if="type == 'input-d'" :id="id">
