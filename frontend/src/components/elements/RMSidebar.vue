@@ -44,7 +44,12 @@
         </div>
       </div>
     </div>
-    <v-tour name="myTour" :steps="steps"></v-tour>
+    <v-tour
+      name="myTour"
+      :steps="steps"
+      :options="myOptions"
+      class="text-xl"
+    ></v-tour>
   </aside>
 </template>
 
@@ -69,6 +74,15 @@ export default {
       selected: 1,
       graphs: [1, 2, 3],
       isTourVisible: localStorage.getItem("isTourVisible") === "true",
+      myOptions: {
+        useKeyboardNavigation: false,
+        labels: {
+          buttonSkip: "Skip Tour",
+          buttonPrevious: "Previous Step",
+          buttonNext: "Next Step",
+          buttonStop: "Finish",
+        },
+      },
       headers: [
         {
           title: "Batch Size",
@@ -111,7 +125,7 @@ export default {
       ],
     };
   },
-  created(){
+  created() {
     this.batch_size = this.batch || 1;
     this.epochs = this.epoch || 100;
     this.l_rate = this.lrate || 0.01;

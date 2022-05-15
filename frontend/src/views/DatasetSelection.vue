@@ -11,7 +11,7 @@
         >Select your dataset to start learning about neural networks!</span
       >
     </div>
-    <div class="grid grid-cols-3 mt-24" id="v-step-1">
+    <div class="grid grid-cols-3 mt-24 py-4" id="v-step-1">
       <article v-for="(dataset, index) in datasets" :key="index">
         <selector-item
           :image="dataset.image"
@@ -62,7 +62,12 @@
       :data="dataset"
       :problem-type="datasets[selectedDataset].problemType"
     />
-    <v-tour name="myTour" :steps="steps"></v-tour>
+    <v-tour
+      name="myTour"
+      :steps="steps"
+      :options="myOptions"
+      class="text-xl w-4/5"
+    ></v-tour>
   </div>
 </template>
 <script>
@@ -91,6 +96,15 @@ export default {
         rows: [],
       },
       steps: datasetSelectionTour,
+      myOptions: {
+        useKeyboardNavigation: false,
+        labels: {
+          buttonSkip: "Skip Tour",
+          buttonPrevious: "Previous Step",
+          buttonNext: "Next Step",
+          buttonStop: "Finish",
+        },
+      },
     };
   },
   methods: {
