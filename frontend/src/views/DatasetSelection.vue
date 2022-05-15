@@ -1,5 +1,16 @@
 <template>
-  <div class="flex flex-col items-center justify-center h-screen" id="v-step-0">
+  <div class="flex flex-col items-center justify-center h-screen">
+    <div class="flex flex-row justify-between mb-4" id="v-step-0">
+      <span class="font-bold text-3xl mx-4">Welcome to Neurovision!</span>
+    </div>
+    <div
+      class="flex flex-col justify-between my-4 w-2/5 items-center justify-center"
+    >
+      <span
+        class="font-regular text-xl text-center mx-4 mb-4 items-center justify-center"
+        >Select your dataset to start learning about neural networks!</span
+      >
+    </div>
     <div class="grid grid-cols-3 mt-24" id="v-step-1">
       <article v-for="(dataset, index) in datasets" :key="index">
         <selector-item
@@ -62,6 +73,7 @@ import {
   irisPredictionData,
   housePredictionData,
 } from "@/constants/dataset.constants";
+import { datasetSelectionTour } from "@/controllers/tour/datasetSelection.js";
 
 export default {
   data() {
@@ -78,35 +90,7 @@ export default {
         headings: [],
         rows: [],
       },
-      steps: [
-        {
-          target: "#v-step-0", // We're using document.querySelector() under the hood
-          content: `Welcome to <strong>Neurovision.</strong> Where we learn all the basis of neural networks! `,
-        },
-        {
-          target: "#v-step-1",
-          content:
-            "<strong>Let's Get Started!!</strong> First select a dataset for building the neural network model!",
-          params: {
-            placement: "top",
-          },
-        },
-        {
-          target: "#v-step-2",
-          content:
-            "<strong>Great!!</strong> Next preview the contents of the dataset selected.",
-          params: {
-            placement: "top",
-          },
-        },
-        {
-          target: "#v-step-3",
-          content: "Now that you have previewed the dateset let's move on!!!",
-          params: {
-            placement: "top",
-          },
-        },
-      ],
+      steps: datasetSelectionTour,
     };
   },
   methods: {
@@ -180,3 +164,8 @@ export default {
   },
 };
 </script>
+<style scoped>
+.v-tour__target--highlighted {
+  box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.5);
+}
+</style>

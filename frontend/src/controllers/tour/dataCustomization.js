@@ -6,6 +6,7 @@ export const customizationTour = [
     Dataset customization is important because..`,
     params: {
       placement: "left",
+      highlight: true,
     },
   },
   {
@@ -15,6 +16,7 @@ export const customizationTour = [
     Let us get some information on the Type of Analysis that the dataset is performing!`,
     params: {
       placement: "left",
+      highlight: true,
     },
   },
   {
@@ -22,6 +24,7 @@ export const customizationTour = [
     content: `<strong>Let us get some information on the Training Data Percentage needed for this dataset</strong>!`,
     params: {
       placement: "left",
+      highlight: true,
     },
   },
   {
@@ -29,6 +32,7 @@ export const customizationTour = [
     content: `<strong>Let us get some information on what Normalization is </strong>.`,
     params: {
       placement: "left",
+      highlight: true,
     },
   },
   {
@@ -36,6 +40,7 @@ export const customizationTour = [
     content: `<strong>Hooray!, now that you've customized the dataset let's continue </strong>.`,
     params: {
       placement: "left",
+      highlight: true,
     },
   },
 ];

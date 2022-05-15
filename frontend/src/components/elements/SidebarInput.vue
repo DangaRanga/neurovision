@@ -95,12 +95,17 @@ export default {
   methods: {
     changeValue(event) {
       const value = event.target.value;
-      this.change({index: this.index, value: value});
+      this.change({ index: this.index, value: value });
     },
-    changeInput(event){
+    changeInput(event) {
       const value = event.target.value;
-      this.change({index: this.index, value: value });
-    }
+      this.change({ index: this.index, value: value });
+    },
   },
 };
 </script>
+<style scoped>
+.v-tour__target--highlighted {
+  box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.5);
+}
+</style>

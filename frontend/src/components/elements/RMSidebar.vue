@@ -2,9 +2,10 @@
   <aside>
     <div
       class="bg-primary_light py-8 px-10 w-full h-full flex flex-col justify-between"
+      id="v-step-0"
     >
       <div class="mb-8">
-        <div class="mb-10" id="v-step-0">
+        <div class="mb-10">
           <tabbed-menu :selected="selected" :changeSelected="changeSelected" />
         </div>
         <div>
@@ -30,12 +31,13 @@
           </div>
         </div>
       </div>
-      <div class="flex flex-col justify-center" id="v-step-6">
+      <div class="flex flex-col justify-center">
         <div class="flex justify-center m-0 mb-4">
           <button
             @click="update"
             className="w-3/5 bg-primary text-white font-bold py-3 rounded shadow hover:shadow-md outline-none focus:outline-none mr-2"
             type="button"
+            id="v-step-6"
           >
             Restart Simulation
           </button>
@@ -67,9 +69,27 @@ export default {
       graphs: [1, 2, 3],
       isTourVisible: localStorage.getItem("isTourVisible") === "true",
       headers: [
-        { title: "Batch Size", type: "input-n", value: "", options: [] , change: this.changeParam },
-        { title: "Epochs", type: "input-n", value: "", options: [] , change: this.changeParam },
-        { title: "Learning Rate", type: "input-n", value: "", options: [] , change: this.changeParam },
+        {
+          title: "Batch Size",
+          type: "input-n",
+          value: "",
+          options: [],
+          change: this.changeParam,
+        },
+        {
+          title: "Epochs",
+          type: "input-n",
+          value: "",
+          options: [],
+          change: this.changeParam,
+        },
+        {
+          title: "Learning Rate",
+          type: "input-n",
+          value: "",
+          options: [],
+          change: this.changeParam,
+        },
         {
           title: "Loss Function",
           type: "select",
@@ -85,7 +105,7 @@ export default {
           type: "input-d",
           value: "Stochastic Gradient Descent",
           options: [],
-          change: "" 
+          change: "",
         },
       ],
     };
@@ -102,42 +122,47 @@ export default {
     changeSelected(option) {
       this.selected = option;
     },
-    changeParam(data){
-      switch(data.index){
+    changeParam(data) {
+      switch (data.index) {
         case 0:
           this.batch_size = data.value;
-        break;
+          break;
         case 1:
           this.epochs = data.value;
-        break;
+          break;
         case 2:
           this.l_rate = data.value;
-        break;
+          break;
       }
     },
     changeLoss(data) {
-      switch(data.value){
+      switch (data.value) {
         case "mse":
           this.loss_f = "MSE";
-        break;
+          break;
         case "bce":
           this.loss_f = "Binary Cross Entropy";
-        break;
+          break;
         default:
-          this.loss_f = "MSE"
-        break;
-      };
+          this.loss_f = "MSE";
+          break;
+      }
     },
-    update(){
+    update() {
       // validation before sending data
 
       this.$emit("restart", [
         { title: "Batch Size", value: this.batch_size },
-        { title: "Epoch No.", value : this.epochs },
+        { title: "Epoch No.", value: this.epochs },
         { title: "Learning Rate", value: this.l_rate },
-        { title: "Loss Function", value: this.loss_f }
+        { title: "Loss Function", value: this.loss_f },
       ]);
-    }
+    },
   },
 };
 </script>
+<style scoped>
+.v-tour__target--highlighted {
+  box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.5);
+}
+</style>

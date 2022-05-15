@@ -11,13 +11,17 @@
       class="bg-primary p-4 max-w-2xl w-full flex flex-col rounded outline outline-2 outline-white"
       v-if="!quizCompleted"
     >
-      <div class="flex flex-row justify-between mb-4">
-        <span class="font-medium text-xl">{{
+      <div class="flex flex-row justify-between mb-6">
+        <span class="font-medium text-xl mr-2">{{
           getCurrentQuestion.question
         }}</span>
-        <span class="font-medium text-xl"
-          >Score {{ score }}/{{ questions.length }}</span
+        <div
+          class="bg-violet-400 ml-4 w-44 h-12 rounded outline outline-1 outline-white flex flex-col items-center justify-center text-base"
         >
+          <span class="font-medium text-xl"
+            >Score {{ score }}/{{ questions.length }}</span
+          >
+        </div>
       </div>
 
       <div class="mb-4">
@@ -80,19 +84,12 @@
         Your score is {{ score }}/{{ questions.length }}
       </p>
       <div v-if="type == 'prequiz'">
-        <div class="flex justify-center my-8">
-          <!-- <button
-            @click="showTour(false)"
-            className="justify-center w-4/5 mx-2 my-4 bg-primary_dark text-white text-lg font-medium uppercase rounded outline outline-1 outline-white appearance-none cursor-pointer p-4"
-          >
-            Start Without Tutorial
-          </button>
-          <button
-            @click="showTour(true)"
-            className="justify-center w-4/5 mx-2 my-4 bg-primary_dark text-white text-lg font-medium uppercase rounded outline outline-1 outline-white appearance-none cursor-pointer p-4"
-          >
-            Start With Tutorial
-          </button> -->
+        <div class="mt-4">
+          <p class="text-xl mx-auto text-center font-regular text-primary_dark">
+            It is recommened that new users start with the tutorial!
+          </p>
+        </div>
+        <div class="flex justify-center my-4">
           <router-link
             class="justify-center mx-2 my-4 bg-primary_dark text-white text-lg text-center font-medium uppercase outline outline-1 outline-white appearance-none cursor-pointer p-4 hover:bg-gray-500 rounded-md py-3 px-4 transition-colors duration-200"
             id="v-step-3"

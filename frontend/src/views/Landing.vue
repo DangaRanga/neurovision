@@ -31,7 +31,7 @@
     </div>
     <div class="mx-auto my-4">
       <router-link
-        class="text-white bg-primary hover:bg-blue-500 rounded-md py-3 px-4 mx-3 transition-colors duration-200"
+        class="text-white bg-primary hover:bg-blue-500 rounded-md py-3 px-4 mx-3 transition-colors duration-200 cursor-pointer hover:bg-blue-700"
         id="v-step-3"
         :to="{
           name: 'prequiz',
@@ -45,7 +45,7 @@
         Start Pre Quiz
       </router-link>
       <router-link
-        class="text-white bg-gray-500 hover:bg-blue-500 rounded-md py-3 px-4 mx-3 transition-colors duration-200"
+        class="text-white bg-gray-500 hover:bg-blue-500 rounded-md py-3 px-4 mx-3 transition-colors duration-200 cursor-pointer hover:bg-blue-700"
         id="v-step-3"
         :to="{
           name: 'select',
@@ -54,7 +54,7 @@
         Start Without Tutorial
       </router-link>
       <router-link
-        class="text-white bg-gray-500 hover:bg-blue-500 rounded-md py-3 px-4 mx-3 transition-colors duration-200"
+        class="text-white bg-gray-500 hover:bg-blue-500 rounded-md py-3 px-4 mx-3 transition-colors duration-200 cursor-pointer hover:bg-blue-700"
         id="v-step-3"
         @click="showTour()"
         :to="{
@@ -65,7 +65,7 @@
       </router-link>
     </div>
     <div class="mt-2">
-      <p class="text-center font-medium text-primary_dark">
+      <p class="text-xl text-center font-medium text-primary_dark">
         It is recommened that new users start application with the pre-quiz!
       </p>
     </div>

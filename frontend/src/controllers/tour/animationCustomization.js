@@ -4,6 +4,7 @@ export const modelTour = [
     content: ` <strong>Let's customize the parameters for the Neural Network</strong>!`,
     params: {
       placement: "left",
+      highlight: true,
     },
   },
   {
@@ -11,6 +12,7 @@ export const modelTour = [
     content: `<strong>Click to view information on Batch Size parameters<\strong>`,
     params: {
       placement: "left",
+      highlight: true,
     },
   },
   {
@@ -18,6 +20,7 @@ export const modelTour = [
     content: `<strong>Click to view information on Epochs parameter</strong>!`,
     params: {
       placement: "left",
+      highlight: true,
     },
   },
   {
@@ -25,6 +28,7 @@ export const modelTour = [
     content: `<strong>Click to view information on the Learning Rate of a Neural Network </strong>!`,
     params: {
       placement: "left",
+      highlight: true,
     },
   },
   {
@@ -32,6 +36,7 @@ export const modelTour = [
     content: `<strong>Find out what is meant by the Loss Function of a Neural Network </strong>.`,
     params: {
       placement: "left",
+      highlight: true,
     },
   },
   {
@@ -39,6 +44,7 @@ export const modelTour = [
     content: `<strong>Let's look at what is the purpose of an Optimization Algorithm </strong>.`,
     params: {
       placement: "left",
+      highlight: true,
     },
   },
   {
@@ -47,6 +53,7 @@ export const modelTour = [
     <br /> <br /> Let's start the simulation and observe the changes in the Neural Network</strong> !`,
     params: {
       placement: "left",
+      highlight: true,
     },
   },
 ];
