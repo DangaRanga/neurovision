@@ -1,11 +1,8 @@
 <template>
-  <nav>
+  <div>
     <navbar />
     <router-view />
-    <!-- <dataset-selection /> -->
-    <!-- <create-model /> -->
-    <!-- <customize-dataset /> -->
-  </nav>
+  </div>
 </template>
 <script>
 import NavBar from "@/components/elements/NavBar.vue";
