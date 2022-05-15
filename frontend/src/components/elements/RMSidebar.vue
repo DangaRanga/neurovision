@@ -67,9 +67,9 @@ export default {
       graphs: [1, 2, 3],
       isTourVisible: localStorage.getItem("isTourVisible") === "true",
       headers: [
-        { title: "Batch Size", type: "input", value: "", options: [] , change: "" },
-        { title: "Epochs", type: "input", value: "", options: [] , change: "" },
-        { title: "Learning Rate", type: "input", value: "", options: [] , change: "" },
+        { title: "Batch Size", type: "input-n", value: "", options: [] , change: this.changeParam },
+        { title: "Epochs", type: "input-n", value: "", options: [] , change: this.changeParam },
+        { title: "Learning Rate", type: "input-n", value: "", options: [] , change: this.changeParam },
         {
           title: "Loss Function",
           type: "select",
@@ -101,6 +101,19 @@ export default {
     },
     changeSelected(option) {
       this.selected = option;
+    },
+    changeParam(data){
+      switch(data.index){
+        case 0:
+          this.batch_size = data.value;
+        break;
+        case 1:
+          this.epochs = data.value;
+        break;
+        case 2:
+          this.l_rate = data.value;
+        break;
+      }
     },
     changeLoss(data) {
       switch(data.value){

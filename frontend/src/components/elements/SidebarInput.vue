@@ -33,7 +33,25 @@
         class="bg-white rounded outline outline-1 outline-white focus:outline-primary h-12 text-base w-full p-2"
         value=""
         placeholder="Enter number"
+        @input="changeInput($event)"
+      />
+    </div>
+    <div v-if="type == 'input-n'" :id="id">
+      <div class="flex flex-row justify-between mb-3">
+        <p class="text-base font-semibold">{{ title }}</p>
+        <img
+          :src="infographics_icon"
+          alt="info"
+          class="items-center"
+          @click="functionName()"
+        />
+      </div>
+      <input
+        class="bg-white rounded outline outline-1 outline-white focus:outline-primary h-12 text-base w-full p-2"
+        value=""
+        placeholder="Enter number"
         type="number"
+        @input="changeInput($event)"
       />
     </div>
     <div v-if="type == 'input-d'" :id="id">
@@ -79,6 +97,10 @@ export default {
       const value = event.target.value;
       this.change({index: this.index, value: value});
     },
+    changeInput(event){
+      const value = event.target.value;
+      this.change({index: this.index, value: value });
+    }
   },
 };
 </script>

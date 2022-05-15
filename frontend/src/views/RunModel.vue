@@ -176,6 +176,13 @@ export default {
         },
       ];
     this.activation = this.$route.params.activation || ["ReLu"];
+    this.headers = this.headers.map(d => {
+      if(d.header == "Problem Type"){
+        return {header: d.header, value: this.$route.params.problem || "Regression"};
+      }else{
+        return d;
+      }
+    });  
     this.createmapping();
   },
 };
