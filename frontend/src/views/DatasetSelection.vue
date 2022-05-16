@@ -3,15 +3,8 @@
     <div class="flex flex-row justify-between mt-4 mb-2" id="v-step-0">
       <span class="font-extrabold text-4xl">Welcome to Neurovision!</span>
     </div>
-<<<<<<< HEAD
-    <div class="flex flex-col my-4 w-2/5 items-center justify-center">
-=======
-    <div
-      class="flex flex-col w-2/5 items-center justify-center mb-10"
-    >
->>>>>>> 0241312e09632a195baca776ab9e7adbaef2790b
-      <span
-        class="font-medium text-grey text-lg items-center justify-center"
+    <div class="flex flex-col w-2/5 items-center justify-center mb-10">
+      <span class="font-medium text-grey text-lg items-center justify-center"
         >Select your dataset to start learning about neural networks!</span
       >
     </div>
