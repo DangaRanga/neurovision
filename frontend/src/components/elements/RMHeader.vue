@@ -39,7 +39,17 @@
           :value="item.value"
         />
       </div>
-      <div>
+      <div class="flex items-center">
+        <div>
+          <router-link
+            className="w-2/5 bg-primary text-white text-center font-bold py-3 px-4 rounded shadow hover:shadow-md outline-none focus:outline-none mr-2"
+            :to="{
+              name: 'postquiz',
+            }"
+          >
+            Take Post Quiz
+          </router-link>
+        </div>
         <div
           class="text-white h-10 w-10 p-0.5 mr-1 transition-colors duration-200"
         >
