@@ -3,11 +3,8 @@
     <div class="flex flex-row justify-between mt-4 mb-2" id="v-step-0">
       <span class="font-extrabold text-4xl">Welcome to Neurovision!</span>
     </div>
-    <div
-      class="flex flex-col w-2/5 items-center justify-center mb-10"
-    >
-      <span
-        class="font-medium text-grey text-lg items-center justify-center"
+    <div class="flex flex-col w-2/5 items-center justify-center mb-10">
+      <span class="font-medium text-grey text-lg items-center justify-center"
         >Select your dataset to start learning about neural networks!</span
       >
     </div>
@@ -137,7 +134,7 @@ export default {
       // Fetch the data
       this.$http
         .get(
-          `http://127.0.0.1:9090/api/data?dataset=${this.datasets[dataset].name}`,
+          `${process.env.VUE_APP_API_URL}/data?dataset=${this.datasets[dataset].name}`,
           {}
         )
         .then((response) => {
@@ -149,7 +146,7 @@ export default {
             title: this.title,
             description: this.summary,
             index: newData.index,
-            name: name,
+            name: datasetObj.name,
           };
           this.dataset = data;
           localStorage.setItem("base-dataset", JSON.stringify(data));
