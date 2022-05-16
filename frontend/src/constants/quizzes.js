@@ -56,7 +56,7 @@ export const postquiz = [
   },
   {
     question:
-      "Which is an example of a type of analysis neurall networks can perform?",
+      "Which is an example of a type of analysis Neural Networks can perform?",
     answer: 4,
     options: [
       "Binary Classification",
