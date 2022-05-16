@@ -1,6 +1,8 @@
 <template>
   <aside id="v-step-0">
-    <div class="bg-primary_light grid grid-cols-1 py-10 w-full">
+    <div
+      class="bg-primary_light py-8 px-10 w-full h-full flex flex-col justify-between"
+    >
       <div class="w-full pl-8 pr-12">
         <h3 class="text-lg font-bold py-2">Dataset - {{ datasettitle }}</h3>
         <p class="text-s font-regular py-2">

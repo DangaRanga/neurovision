@@ -123,7 +123,7 @@ export default {
       this.selectedDataset = dataset;
 
       const datasetObj = this.datasets[this.selectedDataset];
-      const name = this.this.datasets[dataset].name;
+      const name = this.datasets[dataset].name;
 
       // Extract key values
       this.analysisType = datasetObj.problemType;
