@@ -97,7 +97,7 @@ export const postquiz = [
       "Normalization",
       "Loss Function",
       "Learning Rate",
-      "Optimazation Algorithm",
+      "Optimization Algorithm",
     ],
     selected: null,
   },
