@@ -1,15 +1,21 @@
 <template>
   <div class="flex flex-col items-center justify-center h-screen">
-    <div class="flex flex-row justify-between mb-4" id="v-step-0">
-      <span class="font-bold text-3xl mx-4">Welcome to Neurovision!</span>
+    <div class="flex flex-row justify-between mt-4 mb-2" id="v-step-0">
+      <span class="font-extrabold text-4xl">Welcome to Neurovision!</span>
     </div>
+<<<<<<< HEAD
     <div class="flex flex-col my-4 w-2/5 items-center justify-center">
+=======
+    <div
+      class="flex flex-col w-2/5 items-center justify-center mb-10"
+    >
+>>>>>>> 0241312e09632a195baca776ab9e7adbaef2790b
       <span
-        class="font-regular text-xl text-center mx-4 mb-4 items-center justify-center"
+        class="font-medium text-grey text-lg items-center justify-center"
         >Select your dataset to start learning about neural networks!</span
       >
     </div>
-    <div class="grid grid-cols-3 mt-24" id="v-step-1">
+    <div class="grid grid-cols-3" id="v-step-1">
       <article v-for="(dataset, index) in datasets" :key="index">
         <selector-item
           :image="dataset.image"
@@ -22,7 +28,7 @@
         ></selector-item>
       </article>
     </div>
-    <div class="mx-auto">
+    <div class="mx-auto mt-10">
       <button
         @click="showDatasetPreviewModal()"
         class="text-white bg-gray-500 font-semibold rounded-md py-3 px-4 hover:bg-gray-600 transition-colors duration-200"
@@ -46,8 +52,8 @@
         Next Step
       </router-link>
     </div>
-    <div class="my-5">
-      <p class="text-center font-medium text-primary_dark mb-7">
+    <div class="mt-5 mb-2">
+      <p class="text-center font-medium text-primary_dark mb-4">
         Not sure which to select? Preview each dataset to learn more!
       </p>
     </div>
@@ -61,6 +67,12 @@
       :data="dataset"
       :problem-type="datasets[selectedDataset].problemType"
     />
+    <v-tour
+      name="myTour"
+      :steps="steps"
+      :options="myOptions"
+      class="text-xl w-4/5"
+    ></v-tour>
   </div>
 </template>
 <script>
@@ -89,6 +101,15 @@ export default {
         rows: [],
       },
       steps: datasetSelectionTour,
+      myOptions: {
+        useKeyboardNavigation: false,
+        labels: {
+          buttonSkip: "Skip Tour",
+          buttonPrevious: "Previous Step",
+          buttonNext: "Next Step",
+          buttonStop: "Finish",
+        },
+      },
     };
   },
   methods: {
@@ -109,6 +130,7 @@ export default {
       this.selectedDataset = dataset;
 
       const datasetObj = this.datasets[this.selectedDataset];
+      const name = this.this.datasets[dataset].name;
 
       // Extract key values
       this.analysisType = datasetObj.problemType;

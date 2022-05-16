@@ -76,8 +76,12 @@
       v-show="isModalVisible"
       @close="closeModal"
     />
-    <!-- <div v-if="isTourVisible == true"> -->
-    <v-tour name="myTour" :steps="steps"></v-tour>
+    <v-tour
+      name="myTour"
+      :steps="steps"
+      :options="myOptions"
+      class="text-xl"
+    ></v-tour>
   </aside>
 </template>
 <script>
@@ -110,6 +114,15 @@ export default {
         { title: "Yes", value: "yes" },
         { title: "No", value: "no" },
       ],
+      myOptions: {
+        useKeyboardNavigation: false,
+        labels: {
+          buttonSkip: "Skip Tour",
+          buttonPrevious: "Previous Step",
+          buttonNext: "Next Step",
+          buttonStop: "Finish",
+        },
+      },
       steps: customizationTour,
       infographics_icon: infographics_icon,
       trainTitle: "Training Data Pecentage",
