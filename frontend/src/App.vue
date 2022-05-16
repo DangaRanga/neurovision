@@ -33,6 +33,30 @@ export default {
   cursor: pointer;
 }
 
+.v-step {
+  background-color: white !important;
+  border: 3px solid #20a4f3 !important;
+  font-size: 0.8em !important;
+  border-radius: 15px !important;
+}
+
+.v-step__arrow {
+  display: none;
+}
+.v-step__button {
+  color: #20a4f3 !important;
+}
+
+.v-step__content {
+  color: #282828;
+}
+
+.v-step__header {
+  color: #282828;
+  border-radius: 15px !important;
+  background-color: white !important;
+}
+
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.3s;

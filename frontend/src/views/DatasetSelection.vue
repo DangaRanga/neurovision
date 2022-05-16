@@ -51,7 +51,6 @@
       </p>
     </div>
 
-    <v-tour name="myTour" :steps="steps"></v-tour>
     <dataset-preview-modal
       v-if="isModalVisible && selectDataset"
       @close="closeModal"

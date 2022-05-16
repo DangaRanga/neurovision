@@ -233,6 +233,10 @@ def model():
             # Create Model with Defined Charcateristics
             modelhandler.createModel()
 
+            # Set inputs and outputs
+            datahandler.setInputs()
+            datahandler.setOutput()
+
             # Split Dataset Into Training and Test Data
             datahandler.dataset_split(request.json["train"])
             training_features = datahandler.x_train
@@ -251,7 +255,7 @@ def model():
                 "msg": "Model Animation was successful",
                 "evaluation": eval_result,
                 "training": training_result,
-                **request.json
+
             }), 200
         except Exception as e:
             return jsonify({"msg": "An Internal Error Has Occured"}), 500

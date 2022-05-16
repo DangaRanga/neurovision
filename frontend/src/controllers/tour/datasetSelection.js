@@ -35,7 +35,7 @@ export const datasetSelectionTour = [
       in the dataset and have a look at the records</p>`,
     params: {
       placement: "left",
-      highlight: true,
+      highlight: false,
     },
   },
   {
@@ -47,7 +47,7 @@ export const datasetSelectionTour = [
       next step of the process, <strong>Customizing the Dataset</strong></p> `,
     params: {
       placement: "right",
-      highlight: true,
+      highlight: false,
     },
   },
 ];
