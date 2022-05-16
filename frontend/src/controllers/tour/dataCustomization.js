@@ -21,8 +21,8 @@ export const customizationTour = [
      to be modeled. There are several types of problems that can be modeled using neural networks:
      <br />1. Binary Classification <br /> 2. Multivariate Classification <br /> 3. Prediction <br /> 4. Regression 
 
-     <br /><br /><strong><em style="color:#E5E5E5;">To gain more information on the specific type of analysis the dataset selected 
-     relates to after this tour click the infographic tooltip icon on the right!</em></strong> </p>`,
+     <br /><br /><em style="color:#c4c4c4;">To gain more information on the specific type of analysis the dataset selected 
+     relates to after this tour click the infographic tooltip icon on the right!</em> </p>`,
     params: {
       placement: "left",
       highlight: true,
