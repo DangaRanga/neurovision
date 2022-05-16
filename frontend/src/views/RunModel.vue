@@ -221,6 +221,7 @@ export default {
       const hlayer = this.layers
         .filter((d) => d.name.contains("hidden"))
         .map((d) => d.nodes.length);
+        
       this.$http
         .post(`http:127.0.0.1:9090/api/model/run`, {
           data: dataset,
