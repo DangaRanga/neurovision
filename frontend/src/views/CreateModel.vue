@@ -6,7 +6,7 @@
           <div>
             <div class="flex flex-col justify-center items-center mt-20 mb-20">
               <h1 class="mx-auto font-extrabold text-4xl">Build Your Neural Network</h1>
-              <h1 class="mx-auto mt-2 font-semibold text-lg text-grey">Build the structure of your neural network</h1>
+              <h1 class="mx-auto mt-2 font-medium text-lg text-grey">Build the structure of your neural network</h1>
             </div>
             <model-build 
               :num_hidden="num_hidden"

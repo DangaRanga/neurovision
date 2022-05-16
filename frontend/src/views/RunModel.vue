@@ -32,7 +32,7 @@
     <div v-if="isHidden" class="grid items-center min-h-screen">
       <div class="flex flex-col justify-center items-center mt-20 mb-20">
         <h1 class="mx-auto font-extrabold text-4xl">Playground</h1>
-        <h1 class="mx-auto mt-2 font-semibold text-lg text-grey">Test the structure of your neural network</h1>
+        <h1 class="mx-auto mt-2 font-medium text-lg text-grey">Test the structure of your neural network</h1>
       </div>
       <model-build 
         :num_hidden="num_hidden"
@@ -166,8 +166,11 @@ export default {
       //    "epochs":10
       //    "train": 80
       // }
+
+      //get modified-dataset from the localstorage
+      // const JSON.parse(localStorage.getItem("base-dataset"));
       this.$http
-      .get(
+      .post(
         `http://127.0.0.1:9090/api/model/run`,
         {
           "data": Dataset,
@@ -179,26 +182,6 @@ export default {
           "epochs":10,
           "train": 80
         }
-      )
-      .then((response) => {
-        const newData = response.data.dataset;
-        const data = {
-          headings: newData.columns,
-          rows: newData.data,
-          analysisType: this.analysisType,
-          title: this.title,
-          description: this.summary,
-        };
-        this.dataset = data;
-        localStorage.setItem("base-dataset", JSON.stringify(data));
-      });
-    },
-    runModel(){
-      //HTTP Request to Run Model
-      this.$http
-      .get(
-        `http://127.0.0.1:9090/api/data?dataset=${this.datasets[dataset].name}`,
-        {}
       )
       .then((response) => {
         const newData = response.data.dataset;

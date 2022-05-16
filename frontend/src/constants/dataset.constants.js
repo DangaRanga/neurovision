@@ -18,7 +18,7 @@ const housePredictionData = {
       pariatur.`,
   summary: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
       eiusmod tempor incididunt ut labore`,
-  problemType: "Prediction",
+  problemType: "Regression",
   image: House,
   name: "house_price",
 };
