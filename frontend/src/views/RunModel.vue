@@ -49,6 +49,7 @@
 import RMHeader from "@/components/elements/RMHeader.vue";
 import RMSidebar from "@/components/elements/RMSidebar.vue";
 import RModel from "@/components/elements/RModel.vue";
+import { modelResults } from "@/constants/modelResults.js";
 import * as d3 from "d3";
 
 export default {
@@ -74,56 +75,11 @@ export default {
         { header: "Loss Function", value: "MSE" },
         { header: "Problem Type", value: "Classification" },
       ],
+      evaluation: {},
+      training: {},
     };
   },
 
-  /*
-  {
-    "evaluation": {
-        "acc": 0.792682945728302,
-        "loss": 0.17111462354660034
-    },
-    "msg": "Model Animation was successful",
-    "training": {
-        "acc_hist": [
-            0.7370030283927917,
-            0.7737002968788147,
-            0.7844036817550659,
-            0.7874617576599121,
-            0.7874617576599121,
-            0.7920489311218262,
-            0.7599388360977173,
-            0.7614678740501404,
-            0.781345546245575,
-            0.7874617576599121
-        ],
-        "epochs": [
-            0,
-            1,
-            2,
-            3,
-            4,
-            5,
-            6,
-            7,
-            8,
-            9
-        ],
-        "loss_hist": [
-            0.19275249540805817,
-            0.1763024926185608,
-            0.17461353540420532,
-            0.17622500658035278,
-            0.18131525814533234,
-            0.17129993438720703,
-            0.17610156536102295,
-            0.17808084189891815,
-            0.1759219914674759,
-            0.1757834404706955
-        ]
-    }
-}
-  */
   methods: {
     createmapping() {
       const id = (d) => d.id;
@@ -202,51 +158,59 @@ export default {
           }
         });
       }
+      this.updateModel();
     },
-    updateModel() {
-      //HTTP Request to Build and Run Model
-      // {
-      //    "data": Dataset
-      //    "prob":"HRT",
-      //    "layers":[5,5],
-      //    "activations":["relu","relu"],
-      //    "lr":0.5,
-      //    "batch_size":10,
-      //    "epochs":10
-      //    "train": 80
-      // }
-      //get modified-dataset from the localstorage
-      const dataset = JSON.parse(localStorage.getItem("final-dataset"));
-      const train = localStorage.getItem("train");
-      const hlayer = this.layers
-        .filter((d) => d.name.contains("hidden"))
-        .map((d) => d.nodes.length);
-        
+    finalDataset(){
       this.$http
-        .post(`http:127.0.0.1:9090/api/model/run`, {
-          data: dataset,
-          layers: hlayer || [1],
-          activations: this.activation.map((d) => d.toLowerCase()) || ["relu"],
-          lr: this.headers[2].value || 0.5,
-          batch_size: this.headers[0].value || 1,
-          epochs: this.headers[1].value || 10,
-          prob: this.problem,
-          train: train || 80,
-        })
-        .then((response) => {
-          const newData = response.data;
-          console.log(response.data);
-          /*
+        .get(
+          `${process.env.VUE_APP_API_URL}/data/qprep?dataset=${this.problem}`, 
+          {}
+        ).then((response) => {
+          const newData = response.data.dataset;
+        
           const data = {
             headings: newData.columns,
             rows: newData.data,
-            analysisType: this.analysisType,
-            title: this.title,
-            description: this.summary,
+            index: newData.index,
+            name: this.problem,
           };
-          this.dataset = data;
-          localStorage.setItem("model-result", JSON.stringify(data));*/
+
+          localStorage.setItem("final-dataset", JSON.stringify(data));
         });
+    },
+    updateModel() {
+      
+      const dataset = JSON.parse(localStorage.getItem("final-dataset"));
+      const train = localStorage.getItem("train");
+      const hlayer = this.layers
+        .filter((d) => d.name.includes("hidden"))
+        .map((d) => d.nodes.length);
+      const act = this.activation.map((d) => d.toLowerCase());
+
+      // Mock Request 
+      const result = modelResults;
+      this.evaluation = result.evaluation;
+      this.training = result.training;
+
+      // this.$http
+      //   .post(
+      //     `${process.env.VUE_APP_API_URL}/model/run`, 
+      //     {
+      //       data: dataset,
+      //       layers: hlayer || [1],
+      //       activations: act || ["relu"],
+      //       lr: this.headers[2].value || 0.5,
+      //       batch_size: this.headers[0].value || 1,
+      //       epochs: this.headers[1].value || 10,
+      //       prob: this.problem,
+      //       train: train || 80,
+      //     }
+      //   ).then((response) => {
+      //     const newData = response.data;
+
+      //     this.evaluation = newData.evaluation;
+      //     this.training = newData.training;
+      //   });
     },
   },
   created() {
@@ -288,7 +252,8 @@ export default {
     this.createmapping();
   },
   mounted() {
-    // this.updateModel();
+    // this.finalDataset();
+    this.updateModel();
   },
 };
 </script>
