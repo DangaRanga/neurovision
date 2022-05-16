@@ -13,7 +13,7 @@ from ..controllers.prep import prepHRT, prepHPR, prepIRS
 @app.route("/api/data", methods=["GET"])
 def get_data():
     dataset_names = ['heart_disease', 'house_price', 'iris']
-    
+
     if request.method == "GET":
         # Retrieve and initialize dataset based on request
         selection = request.args.get('dataset')
@@ -32,6 +32,7 @@ def get_data():
 
     return jsonify({"msg": "Method not Allowed"}), 405
 
+
 """
 This route deals with the removal of a undesirable feature in a dataset
 
@@ -42,25 +43,28 @@ This route deals with the removal of a undesirable feature in a dataset
 #    "featureName": "Species",
 # }
 """
+
+
 @app.route("/api/data/rfeature", methods=["POST"])
 def remove_feature():
     if request.method == 'POST':
         try:
-            #Reformat Data from request to Dataframe
+            # Reformat Data from request to Dataframe
             dataset = dataset_util.initialize_from_json(request.json["data"])
 
-            #Create DataHandler with Dataframe
+            # Create DataHandler with Dataframe
             datahandler = DataHandler(dataset)
 
-            #Removal of Feature from Dataset
+            # Removal of Feature from Dataset
             datahandler.removeFeature(request.json["featureName"])
 
-            #Return Dataset
+            # Return Dataset
             result = datahandler.toJSON()
             return jsonify({"msg": "Feature has been removed succesfully", "dataset": result}), 200
         except Exception as e:
             return jsonify({"msg": "An Internal Error Has Occured"}), 500
     return jsonify({"msg": "Method not Allowed"}), 405
+
 
 """
 This route deals with the removal of invalid data
@@ -71,25 +75,28 @@ This route deals with the removal of invalid data
 #    "prob": "heart_disease", 
 # }
 """
+
+
 @app.route("/api/data/rinvalid", methods=["POST"])
 def remove_invalid():
     if request.method == 'POST':
         try:
-            #Reformat Data from request to Dataframe
+            # Reformat Data from request to Dataframe
             dataset = dataset_util.initialize_from_json(request.json["data"])
 
-            #Create DataHandler with Dataframe
+            # Create DataHandler with Dataframe
             datahandler = DataHandler(dataset)
 
-            #Removal of Invalid Dataset Values
+            # Removal of Invalid Dataset Values
             datahandler.removeInvalidData()
 
-            #Return Dataset
+            # Return Dataset
             result = datahandler.toJSON()
             return jsonify({"msg": "Invalid Data has been removed succesfully", "dataset": result}), 200
         except Exception as e:
             return jsonify({"msg": "An Internal Error Has Occured"}), 500
     return jsonify({"msg": "Method not Allowed"}), 405
+
 
 """
 This route deals with the translation of the data
@@ -100,25 +107,28 @@ This route deals with the translation of the data
 #    "prob": "heart_disease", 
 # }
 """
+
+
 @app.route("/api/data/translate", methods=["POST"])
 def translate_data():
     if request.method == 'POST':
         try:
-            #Reformat Data from request to Dataframe
+            # Reformat Data from request to Dataframe
             dataset = dataset_util.initialize_from_json(request.json["data"])
 
-            #Create DataHandler with Dataframe
+            # Create DataHandler with Dataframe
             datahandler = DataHandler(dataset)
 
-            #Translate Dataset Values
+            # Translate Dataset Values
             datahandler.translateData()
 
-            #Return Dataset
+            # Return Dataset
             result = datahandler.toJSON()
             return jsonify({"msg": "Features have been tanslated succesfully", "dataset": result}), 200
         except Exception as e:
             return jsonify({"msg": "An Internal Error Has Occured"}), 500
     return jsonify({"msg": "Method not Allowed"}), 405
+
 
 """
 This route deals with the normalization of the data
@@ -129,20 +139,22 @@ This route deals with the normalization of the data
 #    "prob": "heart_disease", 
 # }
 """
+
+
 @app.route("/api/data/normalize", methods=["POST"])
 def normalize_data():
     if request.method == 'POST':
         try:
-            #Reformat Data from request to Dataframe
+            # Reformat Data from request to Dataframe
             dataset = dataset_util.initialize_from_json(request.json["data"])
 
-            #Create DataHandler with Dataframe
+            # Create DataHandler with Dataframe
             datahandler = DataHandler(dataset)
 
-            #Normalize Dataset Values with {}
+            # Normalize Dataset Values with {}
             datahandler.normalizeData()
 
-            #Return Dataset
+            # Return Dataset
             result = datahandler.toJSON()
             return jsonify({"msg": "Dataset has been normalized", "dataset": result}), 200
         except Exception as e:
@@ -155,10 +167,12 @@ Developer - Backdoor
 This route goes through all the phases of feature extraction to present 
 the final dataset for Model Building
 """
+
+
 @app.route("/api/data/qprep", methods=["GET"])
 def get_prep():
     dataset_names = ['heart_disease', 'house_price', 'iris']
-    
+
     if request.method == "GET":
         # Retrieve and initialize dataset based on request
         selection = request.args.get('dataset')
@@ -201,31 +215,34 @@ It returns the training history as well as the evaluation metrics to be displaye
 #    "train": 80
 # }
 """
+
+
 @app.route("/api/model/run", methods=["POST"])
 def model():
     if request.method == 'POST':
         try:
-            #Reformat Data from request to Dataframe
+            # Reformat Data from request to Dataframe
             dataset = dataset_util.initialize_from_json(request.json["data"])
 
-            #Create DataHandler with Dataframe
+            # Create DataHandler with Dataframe
             datahandler = DataHandler(dataset)
 
-            #Create Model Handler Object from Request
+            # Create Model Handler Object from Request
             modelhandler = ModelHandler(**request.json)
 
-            #Create Model with Defined Charcateristics
+            # Create Model with Defined Charcateristics
             modelhandler.createModel()
 
-            #Split Dataset Into Training and Test Data
+            # Split Dataset Into Training and Test Data
             datahandler.dataset_split(request.json["train"])
             training_features = datahandler.x_train
             training_output = datahandler.y_train
 
-            #Train the Model Using Training Data
-            training_result = modelhandler.train(training_features, training_output)
+            # Train the Model Using Training Data
+            training_result = modelhandler.train(
+                training_features, training_output)
 
-            #Evauluate the Model Using Test Data
+            # Evauluate the Model Using Test Data
             test_features = datahandler.x_test
             test_output = datahandler.y_test
             eval_result = modelhandler.evaluate(test_features, test_output)
@@ -243,14 +260,16 @@ def model():
 #Example: request
 # {
 #    "data": Dataset
-#    "prob":"HRT", 
-#    "layers":[5,5], 
-#    "activations":["relu","relu"], 
-#    "lr":0.5, 
-#    "batch_size":10, 
+#    "prob":"HRT",
+#    "layers":[5,5],
+#    "activations":["relu","relu"],
+#    "lr":0.5,
+#    "batch_size":10,
 #    "epochs":10
 #    "train": 80
 # }
+
+
 @app.route("/api/model/predict", methods=["POST"])
 def predict():
     global modelhandler

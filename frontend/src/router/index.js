@@ -1,10 +1,11 @@
 import { createRouter, createWebHistory } from "vue-router";
-import DatasetSelection from "../views/DatasetSelection.vue";
-import CustomizeDataset from "../views/CustomizeDataset.vue";
-import PreQuiz from "../views/PreQuiz.vue";
-import PostQuiz from "../views/PostQuiz.vue";
-import CreateModel from "../views/CreateModel.vue";
-import RunModel from "../views/RunModel.vue";
+import DatasetSelection from "@/views/DatasetSelection.vue";
+import CustomizeDataset from "@/views/CustomizeDataset.vue";
+import PreQuiz from "@/views/PreQuiz.vue";
+import PostQuiz from "@/views/PostQuiz.vue";
+import CreateModel from "@/views/CreateModel.vue";
+import FeatureExtraction from "@/views/FeatureExtraction";
+import RunModel from "@/views/RunModel.vue";
 import Landing from "@/views/Landing.vue";
 import Tour from "@/views/Tour.vue";
 
@@ -48,6 +49,11 @@ const routes = [
     path: "/postquiz",
     name: "postquiz",
     component: PostQuiz,
+  },
+  {
+    path: "/feature-extraction",
+    name: "feature-extraction",
+    component: FeatureExtraction,
   },
 ];
 
