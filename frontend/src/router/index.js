@@ -4,7 +4,7 @@ import CustomizeDataset from "@/views/CustomizeDataset.vue";
 import PreQuiz from "@/views/PreQuiz.vue";
 import PostQuiz from "@/views/PostQuiz.vue";
 import CreateModel from "@/views/CreateModel.vue";
-import FeatureExtraction from "@/views/FeatureExtraction";
+import FeatureEngineering from "@/views/FeatureEngineering.vue";
 import RunModel from "@/views/RunModel.vue";
 import Landing from "@/views/Landing.vue";
 import Tour from "@/views/Tour.vue";
@@ -51,9 +51,9 @@ const routes = [
     component: PostQuiz,
   },
   {
-    path: "/feature-extraction",
-    name: "feature-extraction",
-    component: FeatureExtraction,
+    path: "/feature",
+    name: "feature",
+    component: FeatureEngineering,
   },
 ];
 
