@@ -22,7 +22,7 @@
             type="select"
             title="Training Data Percentage"
             :options="splitoptions"
-            :change="changeActFcn"
+            :change="changeTrain"
             :index="2"
             :id="'v-step-' + 2"
             :functionName="showTrain"
@@ -31,57 +31,47 @@
             type="select"
             title="Perform Normalization"
             :options="normalizeoptions"
-            :change="changeActFcn"
+            :change="changeNormal"
             :index="2"
             :id="'v-step-' + 3"
             :functionName="showNormalization"
           />
           <div
-            class="px-4 pt-12 mt-6 mb-4 flex justify-center m-0 mb-4 sm:flex-row sm:text-left sm:items-baseline"
+            class="px-4 pt-12 mt-6 mb-4 flex justify-center m-0 sm:flex-row sm:text-left sm:items-baseline"
           >
             <router-link
               className="w-1/3 bg-grey_dark text-white text-xs font-bold px-4 py-3 rounded shadow hover:shadow-md outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3"
               :to="{
-                name: 'create',
-                params: { isRunning: true },
+                name: 'select',
               }"
             >
-              Pervious Step
+              Previous Step
             </router-link>
-            <router-link
+            <button
               id="v-step-4"
+              @click="nextStep"
               class="w-1/3 bg-primary text-center text-white text-xs font-semibold px-4 py-3 rounded shadow hover:shadow-md outline outline-1 lg:mr-1 lg:mb-0 ml-3 mb-3"
-              :to="{
-                name: 'create',
-                params: { isRunning: false },
-              }"
             >
               Next Step
-            </router-link>
-            <!-- <button
-              className="w-1/3 bg-primary text-white text-xs font-semibold px-4 py-3 rounded shadow hover:shadow-md outline outline-1 lg:mr-1 lg:mb-0 ml-3 mb-3"
-              type="button"
-            >
-              Next Step
-            </button> -->
+            </button>
           </div>
           <p class="px-4 mx-auto font-thin text-sm">Step 2 of 5</p>
         </form>
       </div>
     </div>
 
-    <Modal
-      :topic="title"
-      :message="message"
-      v-show="isModalVisible"
-      @close="closeModal"
-    />
     <v-tour
       name="myTour"
       :steps="steps"
       :options="myOptions"
       class="text-xl"
     ></v-tour>
+    <Modal
+      :topic="title"
+      :message="message"
+      v-show="isModalVisible"
+      @close="closeModal"
+    />
   </aside>
 </template>
 <script>
@@ -125,8 +115,8 @@ export default {
       },
       steps: customizationTour,
       infographics_icon: infographics_icon,
-      trainTitle: "Training Data Pecentage",
-      trainInfo: "This is zxy, abc.",
+      trainSplit: 10,
+      normalizeDataset: true,
       isModalVisible: false,
       isTourVisible: localStorage.getItem("isTourVisible") === "true",
       message: "Helloo",
@@ -200,6 +190,29 @@ export default {
 
       this.showModal();
     },
+    changeTrain(data){
+      this.trainSplit = Number(data.value);
+    },
+    changeNormal(data){
+      switch(data.value){
+        case "yes":
+          this.normalizeDataset = true;
+        break;
+        case "no":
+          this.normalizeDataset = false;
+        break;
+        default:
+          this.normalizeDataset = true;
+        break;
+      }
+    },
+    nextStep(){
+      localStorage.setItem("train", this.trainSplit);
+      localStorage.setItem("normalize", this.normalizeDataset);
+      this.$router.push({
+        name: "create",
+      })
+    }
   },
 };
 </script>
