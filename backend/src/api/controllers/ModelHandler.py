@@ -26,40 +26,40 @@ class ModelHandler(object):
         ?? optimizer -> SGD [Adam + others in possible development]
     """
     def __init__(self, **kwargs) -> None:
-        if "prob" in kwargs.keys():
+        if "prob" not in kwargs.keys():
           self.prob = "regression"
         else: 
-          self.prob = kwargs.prob
+          self.prob = kwargs["prob"]
 
         # Checking for the layers 
-        if "layers" in kwargs.keys():
+        if "layers" not in kwargs.keys():
           self.layers = [1]
         else: 
-          self.layers = kwargs.layers
+          self.layers = kwargs["layers"]
         
          # Checking for the activation
-        if "activations" in kwargs.keys():
+        if "activations" not in kwargs.keys():
           self.activations = ["relu"]
         else: 
-          self.activations = kwargs.activations
+          self.activations = kwargs["activations"]
 
          # Checking for the batch_size
-        if "batch_size" in kwargs.keys():
+        if "batch_size" not in kwargs.keys():
           self.batch_size = 1
         else: 
-          self.batch_size = kwargs.batch_size
+          self.batch_size = kwargs["batch_size"]
         
          # Checking for the epochs
-        if "epochs" in kwargs.keys():
+        if "epochs" not in kwargs.keys():
           self.epochs = 10
         else: 
-          self.epochs = kwargs.epochs
+          self.epochs = kwargs["epochs"]
 
          # Checking for the learning rate : lr
-        if "lr" in kwargs.keys():
+        if "lr" not in kwargs.keys():
           self.lr = 0.05
         else: 
-          self.lr = kwargs.lr
+          self.lr = kwargs["lr"]
 
     def createModel(self) -> None:
         options = []
