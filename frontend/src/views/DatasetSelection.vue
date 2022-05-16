@@ -63,6 +63,12 @@
       :data="dataset"
       :problem-type="datasets[selectedDataset].problemType"
     />
+    <v-tour
+      name="myTour"
+      :steps="steps"
+      :options="myOptions"
+      class="text-xl w-4/5"
+    ></v-tour>
   </div>
 </template>
 <script>
@@ -91,6 +97,15 @@ export default {
         rows: [],
       },
       steps: datasetSelectionTour,
+      myOptions: {
+        useKeyboardNavigation: false,
+        labels: {
+          buttonSkip: "Skip Tour",
+          buttonPrevious: "Previous Step",
+          buttonNext: "Next Step",
+          buttonStop: "Finish",
+        },
+      },
     };
   },
   methods: {

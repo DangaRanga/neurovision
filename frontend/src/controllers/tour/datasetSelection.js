@@ -1,7 +1,10 @@
 export const datasetSelectionTour = [
   {
     target: "#v-step-0",
-    content: `Welcome to <strong>Neurovision.</strong> Where we learn all the basis of neural networks! `,
+    header: {
+      title: "<strong>Welcome to Neurovision</strong>",
+    },
+    content: `Where we learn all the basis of neural networks! `,
     params: {
       placement: "right",
       highlight: true,
@@ -9,8 +12,13 @@ export const datasetSelectionTour = [
   },
   {
     target: "#v-step-1",
-    content:
-      "<strong>Let's Get Started!!</strong> First select a dataset for building the neural network model!",
+    header: {
+      title: "<strong>Select Dataset</strong>",
+    },
+    content: `This is where we select a dataset for building the neural network model. 
+      As shown there are currently three (3) datasets to chose from. 
+      Each dataset represents a different type of analysis that can be performed. <br /> <br />
+      <strong>Go ahead and select a dataset.</strong>`,
     params: {
       placement: "top",
       highlight: true,
@@ -18,8 +26,13 @@ export const datasetSelectionTour = [
   },
   {
     target: "#v-step-2",
-    content:
-      "<strong>Great!!</strong> Next preview the contents of the dataset selected.",
+    header: {
+      title: "<strong>Preview Dataset</strong>",
+    },
+    content: `Given that you have selected a dataset for modeling, you can now preview the 
+      contents of that dataset. By previewing dataset you will be able to see the name of the 
+      dataset, its description, the type of analysis that dataset relates to, the number of records 
+      in the dataset and have a look at the records`,
     params: {
       placement: "left",
       highlight: true,
@@ -27,7 +40,11 @@ export const datasetSelectionTour = [
   },
   {
     target: "#v-step-3",
-    content: "Now that you have previewed the dateset let's move on!!!",
+    header: {
+      title: "<strong>Next Step</strong>",
+    },
+    content: `Assuming that you have previewed the dataset selected it is now time to move to the 
+      next step of the process, <strong>Customizing the Dataset</strong> `,
     params: {
       placement: "right",
       highlight: true,

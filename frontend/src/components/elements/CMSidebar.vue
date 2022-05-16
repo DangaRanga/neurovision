@@ -66,7 +66,12 @@
         <p class="px-4 mx-auto font-thin text-sm">Step 4 of 5</p>
       </div>
     </div>
-    <v-tour name="myTour" :steps="steps"></v-tour>
+    <v-tour
+      name="myTour"
+      :steps="steps"
+      :options="myOptions"
+      class="text-xl"
+    ></v-tour>
   </aside>
 </template>
 
@@ -93,6 +98,15 @@ export default {
         { title: "Sigmoid", value: "sigm" },
         { title: "Softmax", value: "smax" },
       ],
+      myOptions: {
+        useKeyboardNavigation: false,
+        labels: {
+          buttonSkip: "Skip Tour",
+          buttonPrevious: "Previous Step",
+          buttonNext: "Next Step",
+          buttonStop: "Finish",
+        },
+      },
       title: "Activation Function",
       act_layers: ["", "", ""],
       steps: buildTour,
