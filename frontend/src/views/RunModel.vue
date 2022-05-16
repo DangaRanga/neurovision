@@ -1,18 +1,16 @@
 <template>
   <div>
-    <model-header 
-      :isHidden=isHidden 
-      :close=close 
-      :headers="headers"
-    />
+    <model-header :isHidden="isHidden" :close="close" :headers="headers" />
     <div v-if="!isHidden" class="grid grid-cols-3 min-h-screen">
       <div class="col-span-2 grid items-center">
         <div>
           <div class="flex flex-col justify-center items-center mb-20">
             <h1 class="mx-auto font-extrabold text-4xl">Playground</h1>
-            <h1 class="mx-auto mt-2 font-semibold text-lg text-grey">Test the structure of your neural network</h1>
+            <h1 class="mx-auto mt-2 font-semibold text-lg text-grey">
+              Test the structure of your neural network
+            </h1>
           </div>
-          <model-build 
+          <model-build
             :num_hidden="num_hidden"
             :layers="layers"
             :mappings="mappings"
@@ -21,7 +19,7 @@
           />
         </div>
       </div>
-      <model-sidebar 
+      <model-sidebar
         @restart="updateParams"
         :batch="headers[0].value"
         :epoch="headers[1].value"
@@ -32,9 +30,11 @@
     <div v-if="isHidden" class="grid items-center min-h-screen">
       <div class="flex flex-col justify-center items-center mt-20 mb-20">
         <h1 class="mx-auto font-extrabold text-4xl">Playground</h1>
-        <h1 class="mx-auto mt-2 font-medium text-lg text-grey">Test the structure of your neural network</h1>
+        <h1 class="mx-auto mt-2 font-medium text-lg text-grey">
+          Test the structure of your neural network
+        </h1>
       </div>
-      <model-build 
+      <model-build
         :num_hidden="num_hidden"
         :layers="layers"
         :mappings="mappings"
@@ -72,7 +72,7 @@ export default {
         { header: "Learning Rate", value: 0.01 },
         { header: "Loss Function", value: "MSE" },
         { header: "Problem Type", value: "Classification" },
-      ]
+      ],
     };
   },
   methods: {
@@ -140,29 +140,29 @@ export default {
         }
       }
     },
-    close(){
+    close() {
       this.isHidden = !this.isHidden;
     },
-    updateParams(data){
-      for(var obj in data){
-        this.headers = this.headers.map( d => {
-          if(d.header == data[obj].title){
-            return  { header: d.header , value: data[obj].value }
-          }else{
+    updateParams(data) {
+      for (var obj in data) {
+        this.headers = this.headers.map((d) => {
+          if (d.header == data[obj].title) {
+            return { header: d.header, value: data[obj].value };
+          } else {
             return d;
           }
-        })
+        });
       }
     },
-    updateModel(){
+    updateModel() {
       //HTTP Request to Build and Run Model
       // {
       //    "data": Dataset
-      //    "prob":"HRT", 
-      //    "layers":[5,5], 
-      //    "activations":["relu","relu"], 
-      //    "lr":0.5, 
-      //    "batch_size":10, 
+      //    "prob":"HRT",
+      //    "layers":[5,5],
+      //    "activations":["relu","relu"],
+      //    "lr":0.5,
+      //    "batch_size":10,
       //    "epochs":10
       //    "train": 80
       // }
@@ -170,70 +170,70 @@ export default {
       //get modified-dataset from the localstorage
       // const JSON.parse(localStorage.getItem("base-dataset"));
       this.$http
-      .post(
-        `http://127.0.0.1:9090/api/model/run`,
-        {
-          "data": Dataset,
-          "prob":"HRT", 
-          "layers":[5,5], 
-          "activations":["relu","relu"], 
-          "lr":0.5, 
-          "batch_size":10, 
-          "epochs":10,
-          "train": 80
-        }
-      )
-      .then((response) => {
-        const newData = response.data.dataset;
-        const data = {
-          headings: newData.columns,
-          rows: newData.data,
-          analysisType: this.analysisType,
-          title: this.title,
-          description: this.summary,
-        };
-        this.dataset = data;
-        localStorage.setItem("base-dataset", JSON.stringify(data));
-      });
+        .post(`http://127.0.0.1:9090/api/model/run`, {
+          data: Dataset,
+          prob: "HRT",
+          layers: [5, 5],
+          activations: ["relu", "relu"],
+          lr: 0.5,
+          batch_size: 10,
+          epochs: 10,
+          train: 80,
+        })
+        .then((response) => {
+          const newData = response.data.dataset;
+          const data = {
+            headings: newData.columns,
+            rows: newData.data,
+            analysisType: this.analysisType,
+            title: this.title,
+            description: this.summary,
+          };
+          this.dataset = data;
+          localStorage.setItem("base-dataset", JSON.stringify(data));
+        });
     },
   },
-  created(){
+  created() {
     this.num_hidden = this.$route.params.hidden || 1;
-    this.layers = this.$route.params.struct ? JSON.parse(this.$route.params.struct) : [
-        {
-          id: 0,
-          name: "input",
-          nodes: [
-            { id: 0, layer: 0 },
-            { id: 1, layer: 0 },
-          ],
-        },
-        {
-          id: 1,
-          name: "hidden-1",
-          nodes: [
-            { id: 0, layer: 1 },
-          ],
-        },
-        {
-          id: 2,
-          name: "output",
-          nodes: [{ id: 0, layer: 2, output: true }],
-        },
-      ];
+    this.layers = this.$route.params.struct
+      ? JSON.parse(this.$route.params.struct)
+      : [
+          {
+            id: 0,
+            name: "input",
+            nodes: [
+              { id: 0, layer: 0 },
+              { id: 1, layer: 0 },
+            ],
+          },
+          {
+            id: 1,
+            name: "hidden-1",
+            nodes: [{ id: 0, layer: 1 }],
+          },
+          {
+            id: 2,
+            name: "output",
+            nodes: [{ id: 0, layer: 2, output: true }],
+          },
+        ];
     this.activation = this.$route.params.activation || ["ReLu"];
-    this.headers = this.headers.map(d => {
-      if(d.header == "Problem Type"){
-        return {header: d.header, value: this.$route.params.problem || "Regression"};
-      }else{
+    this.headers = this.headers.map((d) => {
+      if (d.header == "Problem Type") {
+        return {
+          header: d.header,
+          value: this.$route.params.problem || "Regression",
+        };
+      } else {
         return d;
       }
-    });  
+    });
     this.createmapping();
   },
-  mounted(){
+  mounted() {
     // this.buildModel();
     // this.runModel();
-  }
+  },
 };
 </script>
