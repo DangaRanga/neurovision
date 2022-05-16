@@ -40,6 +40,9 @@ export default {
   border-radius: 15px !important;
 }
 
+.v-step__arrow {
+  display: none;
+}
 .v-step__button {
   color: #20a4f3 !important;
 }

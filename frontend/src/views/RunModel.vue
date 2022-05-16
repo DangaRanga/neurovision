@@ -59,6 +59,7 @@ export default {
   },
   data() {
     return {
+      problem: "regression",
       width: 900,
       height: 500,
       num_hidden: 1,
@@ -166,22 +167,27 @@ export default {
       //    "epochs":10
       //    "train": 80
       // }
-
       //get modified-dataset from the localstorage
-      // const JSON.parse(localStorage.getItem("base-dataset"));
+      const dataset = JSON.parse(localStorage.getItem("final-dataset"));
+      const train = localStorage.getItem("train");
+      const hlayer = this.layers
+        .filter((d) => d.name.contains("hidden"))
+        .map((d) => d.nodes.length);
       this.$http
-        .post(`http://127.0.0.1:9090/api/model/run`, {
-          data: Dataset,
-          prob: "HRT",
-          layers: [5, 5],
-          activations: ["relu", "relu"],
-          lr: 0.5,
-          batch_size: 10,
-          epochs: 10,
-          train: 80,
+        .post(`http:127.0.0.1:9090/api/model/run`, {
+          data: dataset,
+          layers: hlayer || [1],
+          activations: this.activation.map((d) => d.toLowerCase()) || ["relu"],
+          lr: this.headers[2].value || 0.5,
+          batch_size: this.headers[0].value || 1,
+          epochs: this.headers[1].value || 10,
+          prob: this.problem,
+          train: train || 80,
         })
         .then((response) => {
-          const newData = response.data.dataset;
+          const newData = response.data;
+          console.log(response.data);
+          /*
           const data = {
             headings: newData.columns,
             rows: newData.data,
@@ -190,7 +196,7 @@ export default {
             description: this.summary,
           };
           this.dataset = data;
-          localStorage.setItem("base-dataset", JSON.stringify(data));
+          localStorage.setItem("model-result", JSON.stringify(data));*/
         });
     },
   },
@@ -219,6 +225,7 @@ export default {
           },
         ];
     this.activation = this.$route.params.activation || ["ReLu"];
+    this.problem = this.$route.params.name || "regression";
     this.headers = this.headers.map((d) => {
       if (d.header == "Problem Type") {
         return {
@@ -232,8 +239,7 @@ export default {
     this.createmapping();
   },
   mounted() {
-    // this.buildModel();
-    // this.runModel();
+    // this.updateModel();
   },
 };
 </script>

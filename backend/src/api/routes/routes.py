@@ -220,41 +220,44 @@ It returns the training history as well as the evaluation metrics to be displaye
 @app.route("/api/model/run", methods=["POST"])
 def model():
     if request.method == 'POST':
-        try:
-            # Reformat Data from request to Dataframe
-            dataset = dataset_util.initialize_from_json(request.json["data"])
 
-            # Create DataHandler with Dataframe
-            datahandler = DataHandler(dataset)
+        # Reformat Data from request to Dataframe
+        dataset = dataset_util.initialize_from_json(request.json["data"])
 
-            # Create Model Handler Object from Request
-            modelhandler = ModelHandler(**request.json)
+        # Create DataHandler with Dataframe
+        datahandler = DataHandler(dataset)
 
-            # Create Model with Defined Charcateristics
-            modelhandler.createModel()
+        # Create Model Handler Object from Request
+        modelhandler = ModelHandler(**request.json)
 
-            # Split Dataset Into Training and Test Data
-            datahandler.dataset_split(request.json["train"])
-            training_features = datahandler.x_train
-            training_output = datahandler.y_train
+        # Create Model with Defined Charcateristics
+        modelhandler.createModel()
 
-            # Train the Model Using Training Data
-            training_result = modelhandler.train(
-                training_features, training_output)
+        # Set inputs and outputs
+        datahandler.setInputs()
+        datahandler.setOutput()
 
-            # Evauluate the Model Using Test Data
-            test_features = datahandler.x_test
-            test_output = datahandler.y_test
-            eval_result = modelhandler.evaluate(test_features, test_output)
+        # Split Dataset Into Training and Test Data
+        datahandler.dataset_split(request.json["train"])
+        training_features = datahandler.x_train
+        training_output = datahandler.y_train
 
-            return jsonify({
-                "msg": "Model Animation was successful",
-                "evaluation": eval_result,
-                "training": training_result,
-                **request.json
-            }), 200
-        except Exception as e:
-            return jsonify({"msg": "An Internal Error Has Occured"}), 500
+        # Train the Model Using Training Data
+        training_result = modelhandler.train(
+            training_features, training_output)
+
+        # Evauluate the Model Using Test Data
+        test_features = datahandler.x_test
+        test_output = datahandler.y_test
+        eval_result = modelhandler.evaluate(test_features, test_output)
+
+        return jsonify({
+            "msg": "Model Animation was successful",
+            "evaluation": eval_result,
+            "training": training_result,
+
+        }), 200
+
     return jsonify({"msg": "Method not Allowed"}), 405
 
 #Example: request
