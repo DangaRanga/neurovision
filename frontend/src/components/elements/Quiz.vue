@@ -114,12 +114,14 @@
       </div>
       <div v-if="type == 'postquiz'">
         <div class="flex justify-center m-0 mb-4">
-          <button
-            @click="showTour(true)"
-            className="justify-center w-4/5 mx-2 my-4 bg-primary_dark text-white text-lg font-medium uppercase rounded outline outline-1 outline-white appearance-none cursor-pointer p-4"
-          >
-            Give Us Your Feedback
-          </button>
+          <a href="https://forms.gle/KZMuPAW4CdWA4Hbc6">
+            <button
+              @click="showTour(false)"
+              className="justify-center w-4/5 mx-2 my-4 bg-primary_dark text-white text-lg font-medium uppercase rounded outline outline-1 outline-white appearance-none cursor-pointer p-4"
+            >
+              Give Us Your Feedback
+            </button>
+          </a>
         </div>
       </div>
     </section>
