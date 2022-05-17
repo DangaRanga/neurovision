@@ -1,9 +1,9 @@
 <template>
   <div>
-    <model-header 
-      :isHidden="isHidden" 
-      :close="toggleHidden" 
-      :headers="headers" 
+    <model-header
+      :isHidden="isHidden"
+      :close="toggleHidden"
+      :headers="headers"
       :toggleRunning="toggleRunning"
       :isRunning="isRunning"
     />
@@ -110,21 +110,21 @@ export default {
     };
   },
   computed: {
-    dataset(){
+    dataset() {
       return JSON.parse(localStorage.getItem("base-dataset"));
     },
-    accuracy(){
+    accuracy() {
       return {
         epochs: this.training.epochs,
-        acc: this.training.acc_hist
+        acc: this.training.acc_hist,
       };
     },
-    loss(){
+    loss() {
       return {
         epochs: this.training.epochs,
-        loss: this.training.acc_hist
+        loss: this.training.acc_hist,
       };
-    }
+    },
   },
   methods: {
     createmapping() {
@@ -194,7 +194,7 @@ export default {
     toggleHidden() {
       this.isHidden = !this.isHidden;
     },
-    toggleRunning(){
+    toggleRunning() {
       this.isRunning = !this.isRunning;
     },
     updateParams(data) {
@@ -211,7 +211,6 @@ export default {
       this.isRunning = false;
     },
     async updateModel() {
-      
       const dataSnap = JSON.parse(localStorage.getItem("data-snap"));
 
       this.problem = dataSnap.problem;
@@ -226,12 +225,15 @@ export default {
         .map((d) => Number(d.nodes.length));
       const act = this.activation.map((d) => d.toLowerCase());
 
-      localStorage.setItem("data-snap", JSON.stringify({
-        num_hidden: this.num_hidden,
-        layers: this.layers,
-        problem: this.problem,
-        activation: this.activation
-      }));
+      localStorage.setItem(
+        "data-snap",
+        JSON.stringify({
+          num_hidden: this.num_hidden,
+          layers: this.layers,
+          problem: this.problem,
+          activation: this.activation,
+        })
+      );
 
       const BASE_URL = process.env.VUE_APP_API_URL;
       const route = BASE_URL + '/model/run';
@@ -281,7 +283,6 @@ export default {
     },
   },
   created() {
-
     const dataSnap = JSON.parse(localStorage.getItem("data-snap"));
 
     this.num_hidden = this.$route.params.hidden || dataSnap.num_hidden;
@@ -301,12 +302,15 @@ export default {
       }
     });
 
-    localStorage.setItem("data-snap", JSON.stringify({
-      num_hidden: this.num_hidden,
-      layers: this.layers,
-      problem: this.problem,
-      activation: this.activation
-    }));
+    localStorage.setItem(
+      "data-snap",
+      JSON.stringify({
+        num_hidden: this.num_hidden,
+        layers: this.layers,
+        problem: this.problem,
+        activation: this.activation,
+      })
+    );
 
     this.createmapping();
   },
