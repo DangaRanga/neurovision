@@ -80,29 +80,27 @@
 
     <section
       v-else
-      class="bg-primary p-4 max-w-2xl w-full flex flex-col rounded outline outline-2 outline-white"
+      class="bg-white border py-6 px-5 max-w-2xl w-full flex flex-col rounded"
     >
       <div></div>
-      <h2 class="text-2xl font-medium mb-2 justify-center mx-auto">
+      <h2 class="text-2xl font-semibold mb-2 justify-center mx-auto">
         You have finished the quiz!
       </h2>
-      <p class="text-2xl font-medium mb-4 justify-center mx-auto">
+      <p class="text-2xl mb-4 justify-center mx-auto">
         Your score is {{ score }}/{{ questions.length }}
       </p>
-      <p
-        class="text-2xl text-purple-900 font-medium mb-4 justify-center mx-auto"
-      >
+      <p class="text-xl text-primary font-medium mb-4 justify-center mx-auto">
         Feedback: {{ quizfeedback }}
       </p>
       <div v-if="type == 'prequiz'">
-        <div class="mt-4">
-          <p class="text-xl mx-auto text-center font-regular text-primary_dark">
+        <div class="">
+          <p class="text-md mx-auto text-center font-regular text-primary_dark">
             It is recommened that new users start with the tutorial!
           </p>
         </div>
         <div class="flex justify-center my-4">
           <router-link
-            class="justify-center mx-2 my-4 bg-primary_dark text-white text-lg text-center font-medium uppercase outline outline-1 outline-white appearance-none cursor-pointer p-4 hover:bg-gray-500 rounded-md py-3 px-4 transition-colors duration-200"
+            class="justify-center mx-2 my-4 text-primary border border-primary hover:bg-blue-50 last:text-lg text-center font-medium uppercase outline outline-1 outline-white appearance-none cursor-pointer rounded py-3 px-4 transition-colors duration-200"
             id="v-step-3"
             @click="showTour(false)"
             :to="{
@@ -112,7 +110,7 @@
             Start Without Tutorial
           </router-link>
           <router-link
-            class="justify-center mx-2 my-4 bg-primary_dark text-white text-lg text-center font-medium uppercase outline outline-1 outline-white appearance-none cursor-pointer p-4 hover:bg-gray-500 rounded-md py-3 px-4 transition-colors duration-200"
+            class="justify-center mx-2 my-4 bg-primary text-white hover:bg-blue-500 text-lg text-center font-medium cursor-pointer uppercase rounded py-3 px-4 transition-colors duration-200"
             id="v-step-3"
             @click="showTour(true)"
             :to="{
@@ -193,32 +191,32 @@ export default {
         switch (this.score) {
           case 0:
             {
-              this.quizfeedback = "Pervious Knowledge Very Limited";
+              this.quizfeedback = "Previous Knowledge Very Limited";
             }
             break;
           case 1:
             {
-              this.quizfeedback = "Pervious Knowledge Limited";
+              this.quizfeedback = "Previous Knowledge Limited";
             }
             break;
           case 2:
             {
-              this.quizfeedback = "Pervious Knowledge Average";
+              this.quizfeedback = "Previous Knowledge Average";
             }
             break;
           case 3:
             {
-              this.quizfeedback = "Pervious Knowledge Good";
+              this.quizfeedback = "Previous Knowledge Good";
             }
             break;
           case 4:
             {
-              this.quizfeedback = "Pervious Knowledge Very Good";
+              this.quizfeedback = "Previous Knowledge Very Good";
             }
             break;
           case 5:
             {
-              this.quizfeedback = "Pervious Knowledge Execellent";
+              this.quizfeedback = "Previous Knowledge Excellent";
             }
             break;
           default:
