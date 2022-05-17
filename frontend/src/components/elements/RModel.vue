@@ -95,15 +95,17 @@ export default {
           .style("stroke-width", 5)
           .attr("stroke-dasharray", 10 + " " + 10)
           .attr("stroke-dashoffset", 250)
-
+          .interrupt()
+          .selection()
           .transition()
           .style("stroke", "green")
           .duration(700)
           .ease(d3.easeQuadIn)
           .attr("stroke-dashoffset", 100)
-          .on("end", () => {
+          .on("end", (event) => {
             if (epoch > 1) {
-              backward(epoch);
+              console.log(event);
+              // backward(epoch);
             }
           });
       }
@@ -118,6 +120,7 @@ export default {
           .style("stroke", "green")
           .on("end", forward(epoch - 1));
       }
+
       const epochs = this.epochs;
       if (this.isRunning) {
         forward(epochs);
