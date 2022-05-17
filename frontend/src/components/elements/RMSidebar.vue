@@ -68,7 +68,7 @@ import TabbedMenu from "@/components/elements/TabbedMenu.vue";
 import { modelTour } from "@/controllers/tour/animationCustomization.js";
 
 export default {
-  props: ["batch", "epoch", "lrate", "loss"],
+  props: ["batch", "epoch", "lrate", "loss", "numRecords"],
   components: {
     "sidebar-input": SidebarInput,
     "tabbed-menu": TabbedMenu,
@@ -195,13 +195,13 @@ export default {
     changeParam(data) {
       switch (data.index) {
         case 0:
-          this.batch_size = Number(data.value);
+          this.batch_size = data.value;
           break;
         case 1:
-          this.epochs = Number(data.value);
+          this.epochs = data.value;
           break;
         case 2:
-          this.l_rate = Number(data.value);
+          this.l_rate = data.value;
           break;
       }
     },
@@ -219,7 +219,19 @@ export default {
       }
     },
     update() {
-      // validation before sending data
+      try{
+        this.batch_size = Number(this.batch_size);
+        this.epochs = Number(this.epochs);
+        this.l_rate = Number(this.l_rate);
+
+        if(this.batch_size > this.numRecords) throw "Batch Size Exceeds Dataset Records";
+        if(this.batch_size <= 0) throw "Batch Size should be valid and greater than zero";
+        if(this.epochs <= 0) throw "Epochs should be valid and greater than zero";
+        if(this.l_rate <= 0) throw "Learning Rate should be valid and greater than zero";
+      }catch(e){
+        console.log(e); // Display to the User than Param Update is Illegal
+        return;
+      }
 
       this.$emit("restart", [
         { title: "Batch Size", value: this.batch_size },

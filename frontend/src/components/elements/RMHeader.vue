@@ -5,9 +5,11 @@
     >
       <div class="flex items-center">
         <div
+          @click="toggleRunning"
           class="text-white bg-primary hover:bg-blue-500 rounded-full h-10 w-10 p-0.5 ml-2 transition-colors duration-200"
         >
           <svg
+            v-if="!isRunning"
             xmlns="http://www.w3.org/2000/svg"
             height="35px"
             viewBox="0 0 24 24"
@@ -16,6 +18,16 @@
           >
             <path d="M0 0h24v24H0z" fill="none" />
             <path d="M8 5v14l11-7z" />
+          </svg>
+          <svg
+            v-if="isRunning"
+            width="35px" 
+            height="35px" 
+            viewBox="0 0 24 24" 
+            fill="none" 
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path d="M8 7H11V17H8V7ZM13 7H16V17H13V7Z" fill="white"/>
           </svg>
         </div>
         <div
@@ -89,12 +101,14 @@
 
 <script>
 import HeaderDisplayItem from "@/components/elements/HeaderDisplayItem.vue";
+import Landing from "@/views/Landing.vue";
 
 export default {
-  props: ["isHidden", "close", "headers"],
+  props: ["isHidden", "close", "headers", "toggleRunning", "isRunning"],
   components: {
     "header-display-item": HeaderDisplayItem,
-  },
+    Landing
+},
   data() {
     return {
     };

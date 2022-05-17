@@ -9,10 +9,17 @@ import * as d3 from "d3";
 
 export default {
   name: "CModel",
-  props: ["num_hidden", "layers", "mappings", "width", "height"],
+  props: [
+    "num_hidden",
+    "layers",
+    "mappings",
+    "width",
+    "height",
+    "epochs",
+    "isRunning",
+  ],
   data() {
-    return {
-    };
+    return {};
   },
   computed: {
     boundedWidth: function () {
@@ -46,7 +53,7 @@ export default {
         .style("transform", `translate(${80}px, ${0}px)`);
 
       var y = d3.scaleLinear().rangeRound([0, this.height / 5]);
-      var color = d3.scaleOrdinal(d3.schemeCategory10);
+
       const nodes = layers
         .selectAll("rect")
         .data((d) => d.nodes)
@@ -54,12 +61,12 @@ export default {
         .append("circle")
         .attr("id", (d) => d.id)
         .style("fill", function (d) {
-          if(d.layer == 0){
-            return "#20A4F3"
-          }else if(d.output){
-            return "#20A4F3"
-          }else{
-            return "#5D5FEF"
+          if (d.layer == 0) {
+            return "#20A4F3";
+          } else if (d.output) {
+            return "#20A4F3";
+          } else {
+            return "#5D5FEF";
           }
         })
         .attr("r", 20)
@@ -75,19 +82,54 @@ export default {
         .enter()
         .append("line")
         .style("stroke", "grey")
-        .style("stroke-width", 2)
+        .style("stroke-width", 3)
         .attr("x1", (d) => d.sourcex)
         .attr("y1", (d) => d.sourcey)
         .attr("x2", (d) => d.targetx)
         .attr("y2", (d) => d.targety);
+
+      function forward(epoch) {
+        console.log(epoch);
+        links
+          .style("stroke", "green")
+          .style("stroke-width", 5)
+          .attr("stroke-dasharray", 10 + " " + 10)
+          .attr("stroke-dashoffset", 250)
+
+          .transition()
+          .style("stroke", "green")
+          .duration(700)
+          .ease(d3.easeQuadIn)
+          .attr("stroke-dashoffset", 100)
+          .on("end", () => {
+            if (epoch > 1) {
+              backward(epoch);
+            }
+          });
+      }
+
+      function backward(epoch) {
+        links
+          .transition()
+          .style("stroke", "green")
+          .duration(100)
+          .ease(d3.easeLinear)
+          .attr("stroke-dashoffset", 250)
+          .style("stroke", "green")
+          .on("end", forward(epoch - 1));
+      }
+      const epochs = this.epochs;
+      if (this.isRunning) {
+        forward(epochs);
+      }
     },
   },
   mounted() {
     this.createModel();
   },
-  updated(){
+  updated() {
     this.createModel();
-  }
+  },
 };
 </script>
 

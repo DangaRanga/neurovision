@@ -3,28 +3,28 @@
     <model-header :show="showDatasetPreviewModal" />
     <div class="grid grid-cols-3 min-h-screen">
       <div class="col-span-2 grid items-center">
-          <div>
-            <div class="flex flex-col justify-center items-center mt-20 mb-20">
-              <h1 class="mx-auto font-extrabold text-4xl">Build Your Neural Network</h1>
-              <h1 class="mx-auto mt-2 font-medium text-lg text-grey">Build the structure of your neural network</h1>
-            </div>
-            <model-build 
-              :num_hidden="num_hidden"
-              :layers="layers"
-              :addNode="addNode"
-              :subNode="subNode"
-              :subLayer="subLayer"
-              :addLayer="addLayer"
-              :width="width"
-              :height="height"
-            /> 
+        <div>
+          <div class="flex flex-col justify-center items-center mt-20 mb-20">
+            <h1 class="mx-auto font-extrabold text-4xl">
+              Build Your Neural Network
+            </h1>
+            <h1 class="mx-auto mt-2 font-medium text-lg text-grey">
+              Build the structure of your neural network
+            </h1>
           </div>
+          <model-build
+            :num_hidden="num_hidden"
+            :layers="layers"
+            :addNode="addNode"
+            :subNode="subNode"
+            :subLayer="subLayer"
+            :addLayer="addLayer"
+            :width="width"
+            :height="height"
+          />
+        </div>
       </div>
-      <model-sidebar 
-        output="ReLu" 
-        :layers="num_hidden"
-        @progress="nextStep"
-      />
+      <model-sidebar output="ReLu" :layers="num_hidden" @progress="nextStep" />
     </div>
     <dataset-preview-modal
       v-if="isModalVisible"
@@ -130,15 +130,14 @@ export default {
     closeModal() {
       this.isModalVisible = false;
     },
-    nextStep(data){
-
+    nextStep(data) {
       const activations = data.activation;
       var result = [];
-      for(var i = 0; i < this.num_hidden; i++){
-        if(activations[i] == ""){
+      for (var i = 0; i < this.num_hidden; i++) {
+        if (activations[i] == "") {
           result.push("ReLu");
-        }else{
-          result.push(activations[i])
+        } else {
+          result.push(activations[i]);
         }
       }
 
@@ -152,31 +151,29 @@ export default {
           name: this.dataset.name,
         },
       });
-    }
+    },
   },
-  created(){
+  created() {
     this.layers = this.$router.params || [
-        {
-          id: 0,
-          name: "input",
-          nodes: [
-            { id: 0, layer: 0 },
-            { id: 1, layer: 0 },
-          ],
-        },
-        {
-          id: 1,
-          name: "hidden-1",
-          nodes: [
-            { id: 0, layer: 1 },
-          ],
-        },
-        {
-          id: 2,
-          name: "output",
-          nodes: [{ id: 0, layer: 2, output: true }],
-        },
-      ];
-  }
+      {
+        id: 0,
+        name: "input",
+        nodes: [
+          { id: 0, layer: 0 },
+          { id: 1, layer: 0 },
+        ],
+      },
+      {
+        id: 1,
+        name: "hidden-1",
+        nodes: [{ id: 0, layer: 1 }],
+      },
+      {
+        id: 2,
+        name: "output",
+        nodes: [{ id: 0, layer: 2, output: true }],
+      },
+    ];
+  },
 };
 </script>
