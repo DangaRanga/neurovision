@@ -1,5 +1,25 @@
 <template>
   <section>
+    <div v-if="isRunning == true" class="flex justify-center items-center mb-5">
+      <div
+        id="epochs"
+        class="bg-violet-400 ml-4 w-44 h-12 rounded outline outline-1 outline-white flex flex-col items-center justify-center text-base"
+      >
+        Epoch: {{ epochNum }}
+      </div>
+      <div
+        id="epochs"
+        class="bg-violet-400 ml-4 w-44 h-12 rounded outline outline-1 outline-white flex flex-col items-center justify-center text-base"
+      >
+        Accuracy: {{ accuracy[epochNum - 1] }}
+      </div>
+      <div
+        id="epochs"
+        class="bg-violet-400 ml-4 w-44 h-12 rounded outline outline-1 outline-white flex flex-col items-center justify-center text-base"
+      >
+        Loss: {{ loss[epochNum - 1] }}
+      </div>
+    </div>
     <div id="chart5" class="flex justify-center items-center mb-5"></div>
   </section>
 </template>
@@ -19,7 +39,12 @@ export default {
     "isRunning",
   ],
   data() {
-    return {};
+    return {
+      epochNum: 1,
+      epochWatcher: 5,
+      accuracy: [1.2, 2.3, 15.7, 25.9, 36.4],
+      loss: [5.2, 7.3, 16.7, 29.9, 46.4],
+    };
   },
   computed: {
     boundedWidth: function () {
@@ -30,6 +55,19 @@ export default {
     },
   },
   methods: {
+    // epochNumTimer() {
+    //   if (this.epochNum < 100) {
+    //     setTimeout(() => {
+    //       this.epochNum += 1;
+    //     }, 700);
+    //   }
+    // },
+    increaseEpoch(epoch) {
+      if (epoch == this.epochWatcher) {
+        this.epochNum += 1;
+        this.epochWatcher -= 1;
+      }
+    },
     createModel() {
       d3.select("#chart5").select("svg").remove();
       const svg = d3
@@ -86,16 +124,21 @@ export default {
         .attr("x1", (d) => d.sourcex)
         .attr("y1", (d) => d.sourcey)
         .attr("x2", (d) => d.targetx)
-        .attr("y2", (d) => d.targety);
+        .attr("y2", (d) => d.targety)
+        .interrupt();
 
+      const increase = (epoch) => this.increaseEpoch(epoch);
       function forward(epoch) {
         console.log(epoch);
         links
+          .interrupt()
+          .selection()
           .style("stroke", "green")
           .style("stroke-width", 5)
           .attr("stroke-dasharray", 10 + " " + 10)
           .attr("stroke-dashoffset", 250)
           .interrupt()
+          .selection()
           .transition()
           .style("stroke", "green")
           .duration(700)
@@ -104,7 +147,8 @@ export default {
           .on("end", (event) => {
             if (epoch > 1) {
               // console.log(event);
-              backward(epoch);
+              increase(epoch);
+              forward(epoch - 1);
             }
           });
       }
@@ -113,16 +157,23 @@ export default {
         links
           .transition()
           .style("stroke", "green")
-          .duration(100)
+          .duration(1)
           .ease(d3.easeLinear)
-          .attr("stroke-dashoffset", 250)
+          .attr("stroke-dashoffset", 20)
           .style("stroke", "green")
-          .on("end", forward(epoch - 1));
+          .on("end", (event) => {
+            if (epoch > 1) {
+              // console.log(event);
+              increase(epoch);
+              forward(epoch - 1);
+            }
+          });
       }
 
       const epochs = this.epochs;
       if (this.isRunning) {
-        forward(epochs);
+        // this.epochNumTimer();
+        forward(5);
       }
     },
   },
@@ -132,6 +183,9 @@ export default {
   updated() {
     this.createModel();
   },
+  // watch() {
+  //   this.epochNum = this.epochWatcher;
+  // },
 };
 </script>
 
