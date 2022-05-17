@@ -170,6 +170,9 @@ export default {
       } else {
         this.$router.push({
           name: "create",
+          params: {
+            name: this.dataset.name
+          }
         });
       }
     },

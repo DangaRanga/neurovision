@@ -227,7 +227,4 @@ export default {
   },
 };
 
-// Make tour optional
-// Pre-quiz and post quiz pages
-// Change Inputs to Dropdowns with Specific Options or Put Validation on Inputs
 </script>

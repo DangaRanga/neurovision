@@ -25,11 +25,13 @@
             />
           </div>
           <div v-if="selected == 2">
-            <div
-              v-for="(graph, i) in graphs"
+            <graph
+              v-for="(values, i) in graphs"
               :key="i"
-              class="w-2/3 h-56 bg-grey_dark mb-10 mx-auto"
-            ></div>
+              :values="values"
+              :width="50"
+              :height="220"
+            />
           </div>
         </div>
       </div>
@@ -65,7 +67,9 @@
 import InfograpicModal from "@/components/elements/Infographic.vue";
 import SidebarInput from "@/components/elements/SidebarInput.vue";
 import TabbedMenu from "@/components/elements/TabbedMenu.vue";
+import Graph from "@/components/elements/Graph.vue";
 import { modelTour } from "@/controllers/tour/animationCustomization.js";
+
 
 export default {
   props: ["batch", "epoch", "lrate", "loss", "numRecords"],
@@ -73,7 +77,8 @@ export default {
     "sidebar-input": SidebarInput,
     "tabbed-menu": TabbedMenu,
     "modal": InfograpicModal,
-  },
+    "graph": Graph,
+},
   data() {
     return {
       title: "",
@@ -85,7 +90,7 @@ export default {
       loss_f: "MSE",
       steps: modelTour,
       selected: 1,
-      graphs: [1, 2, 3],
+      graphs: [],
       isTourVisible: localStorage.getItem("isTourVisible") === "true",
       myOptions: {
         useKeyboardNavigation: false,
@@ -145,6 +150,7 @@ export default {
     this.epochs = this.epoch || 100;
     this.l_rate = this.lrate || 0.01;
     this.loss_f = this.loss || "MSE";
+    this.graphs = this.graph;
   },
   mounted: function () {
     if (this.isTourVisible) {

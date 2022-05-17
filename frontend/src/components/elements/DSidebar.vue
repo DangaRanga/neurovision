@@ -207,8 +207,8 @@ export default {
       }
     },
     nextStep() {
-      localStorage.setItem("train", this.trainSplit);
-      localStorage.setItem("normalize", this.normalizeDataset);
+      localStorage.setItem("train", this.trainSplit || 10);
+      localStorage.setItem("normalize", this.normalizeDataset || true);
       this.$router.push({
         name: "feature",
       });

@@ -25,6 +25,7 @@
             :isRunning="isRunning"
             :epochs="headers[1].value"
             :toggleRunning="toggleRunning"
+            :training="training"
           />
         </div>
       </div>
@@ -34,8 +35,9 @@
         :epoch="headers[1].value"
         :lrate="headers[2].value"
         :loss="headers[3].value"
-        :numRecords="this.fdataset.rows.length"
+        :numRecords="fdataset.rows.length"
         :isRunning="isRunning"
+        :graph="[accuracy, loss]"
       />
     </div>
     <div v-if="isHidden" class="grid items-center min-h-screen">
@@ -54,6 +56,7 @@
         :isRunning="isRunning"
         :epochs="headers[1].value"
         :toggleRunning="toggleRunning"
+        :training="training"
       />
     </div>
   </div>
@@ -100,6 +103,18 @@ export default {
     fdataset(){
       return JSON.parse(localStorage.getItem("final-dataset"));
     },
+    accuracy(){
+      return {
+        epochs: this.training.epochs,
+        acc: this.training.acc_hist
+      };
+    },
+    loss(){
+      return {
+        epochs: this.training.epochs,
+        loss: this.training.acc_hist
+      };
+    }
   },
   methods: {
     createmapping() {
