@@ -76,6 +76,7 @@ import {
   housePredictionData,
 } from "@/constants/dataset.constants";
 import { datasetSelectionTour } from "@/controllers/tour/datasetSelection.js";
+import { dangerNotification } from "@/controllers/toasts/toasts.js";
 
 export default {
   data() {
@@ -107,7 +108,9 @@ export default {
   methods: {
     showDatasetPreviewModal() {
       if (this.selectedDataset === undefined) {
-        console.log("No Dataset selected");
+        dangerNotification(
+          "No Dataset selected. Please select a dataset to continue"
+        );
       } else {
         this.isModalVisible = true;
       }
