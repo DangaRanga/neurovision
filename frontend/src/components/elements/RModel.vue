@@ -37,7 +37,8 @@ export default {
     "height",
     "epochs",
     "isRunning",
-    "toggleRunning"
+    "toggleRunning",
+    "training",
   ],
   data() {
     return {
@@ -45,6 +46,8 @@ export default {
       epochWatcher: 5,
       accuracy: [1.2, 2.3, 15.7, 25.9, 36.4],
       loss: [5.2, 7.3, 16.7, 29.9, 46.4],
+      // accuracy: this.training.acc_hist,
+      // loss: this.training.loss_hist,
     };
   },
   computed: {
@@ -70,6 +73,7 @@ export default {
       }
     },
     createModel() {
+      // console.log(this.training);
       d3.select("#chart5").select("svg").remove();
       const svg = d3
         .select("#chart5")
@@ -130,12 +134,10 @@ export default {
 
       const update = () => {
         this.toggleRunning();
-        this.epochNum = 1;
       };
 
       const increase = (epoch) => this.increaseEpoch(epoch);
       function forward(epoch) {
-
         links
           .interrupt()
           .selection()
@@ -155,9 +157,8 @@ export default {
               // console.log(event);
               increase(epoch);
               forward(epoch - 1);
-            }else {
+            } else {
               update();
-
             }
           });
       }
@@ -183,6 +184,8 @@ export default {
       if (this.isRunning) {
         // this.epochNumTimer();
         forward(5);
+      } else {
+        this.epochNum = 1;
       }
     },
   },
@@ -190,6 +193,7 @@ export default {
     this.createModel();
   },
   updated() {
+    console.log(this.training);
     this.createModel();
   },
   // watch() {
