@@ -25,6 +25,7 @@
         :epoch="headers[1].value"
         :lrate="headers[2].value"
         :loss="headers[3].value"
+        :numRecords="this.fdataset.rows.length"
       />
     </div>
     <div v-if="isHidden" class="grid items-center min-h-screen">
@@ -49,7 +50,6 @@
 import RMHeader from "@/components/elements/RMHeader.vue";
 import RMSidebar from "@/components/elements/RMSidebar.vue";
 import RModel from "@/components/elements/RModel.vue";
-import { modelResults } from "@/constants/modelResults.js";
 import * as d3 from "d3";
 
 export default {
@@ -79,7 +79,14 @@ export default {
       training: {},
     };
   },
-
+  computed: {
+    dataset(){
+      return JSON.parse(localStorage.getItem("base-dataset"));
+    },
+    fdataset(){
+      return JSON.parse(localStorage.getItem("final-dataset"));
+    },
+  },
   methods: {
     createmapping() {
       const id = (d) => d.id;
@@ -162,7 +169,7 @@ export default {
     },
     updateModel() {
       
-      const dataset = JSON.parse(localStorage.getItem("final-dataset"));
+      const dataset = this.fdataset;
       const train = Number(localStorage.getItem("train"));
       const hlayer = this.layers
         .filter((d) => d.name.includes("hidden"))
@@ -232,12 +239,12 @@ export default {
           },
         ];
     this.activation = this.$route.params.activation || ["ReLu"];
-    this.problem = this.$route.params.name || "regression";
+    this.problem = this.$route.params.name || this.dataset.name;
     this.headers = this.headers.map((d) => {
       if (d.header == "Problem Type") {
         return {
           header: d.header,
-          value: this.$route.params.problem || "Regression",
+          value: this.$route.params.problem || this.dataset.analysisType,
         };
       } else {
         return d;
