@@ -1,6 +1,12 @@
 <template>
   <div>
-    <model-header :isHidden="isHidden" :close="close" :headers="headers" />
+    <model-header 
+      :isHidden="isHidden" 
+      :close="toggleHidden" 
+      :headers="headers" 
+      :toggleRunning="toggleRunning"
+      :isRunning="isRunning"
+    />
     <div v-if="!isHidden" class="grid grid-cols-3 min-h-screen">
       <div class="col-span-2 grid items-center">
         <div>
@@ -16,6 +22,8 @@
             :mappings="mappings"
             :width="width"
             :height="height"
+            :isRunning="isRunning"
+            :epochs="headers[1].value"
           />
         </div>
       </div>
@@ -25,6 +33,8 @@
         :epoch="headers[1].value"
         :lrate="headers[2].value"
         :loss="headers[3].value"
+        :numRecords="this.fdataset.rows.length"
+        :isRunning="isRunning"
       />
     </div>
     <div v-if="isHidden" class="grid items-center min-h-screen">
@@ -40,6 +50,8 @@
         :mappings="mappings"
         :width="width"
         :height="height"
+        :isRunning="isRunning"
+        :epochs="headers[1].value"
       />
     </div>
   </div>
@@ -49,7 +61,6 @@
 import RMHeader from "@/components/elements/RMHeader.vue";
 import RMSidebar from "@/components/elements/RMSidebar.vue";
 import RModel from "@/components/elements/RModel.vue";
-import { modelResults } from "@/constants/modelResults.js";
 import * as d3 from "d3";
 
 export default {
@@ -60,6 +71,7 @@ export default {
   },
   data() {
     return {
+      isRunning: false,
       problem: "regression",
       width: 900,
       height: 500,
@@ -79,7 +91,14 @@ export default {
       training: {},
     };
   },
-
+  computed: {
+    dataset(){
+      return JSON.parse(localStorage.getItem("base-dataset"));
+    },
+    fdataset(){
+      return JSON.parse(localStorage.getItem("final-dataset"));
+    },
+  },
   methods: {
     createmapping() {
       const id = (d) => d.id;
@@ -145,8 +164,11 @@ export default {
         }
       }
     },
-    close() {
+    toggleHidden() {
       this.isHidden = !this.isHidden;
+    },
+    toggleRunning(){
+      this.isRunning = !this.isRunning;
     },
     updateParams(data) {
       for (var obj in data) {
@@ -159,10 +181,11 @@ export default {
         });
       }
       this.updateModel();
+      this.isRunning = false;
     },
     updateModel() {
       
-      const dataset = JSON.parse(localStorage.getItem("final-dataset"));
+      const dataset = this.fdataset;
       const train = Number(localStorage.getItem("train"));
       const hlayer = this.layers
         .filter((d) => d.name.includes("hidden"))
@@ -232,12 +255,12 @@ export default {
           },
         ];
     this.activation = this.$route.params.activation || ["ReLu"];
-    this.problem = this.$route.params.name || "regression";
+    this.problem = this.$route.params.name || this.dataset.name;
     this.headers = this.headers.map((d) => {
       if (d.header == "Problem Type") {
         return {
           header: d.header,
-          value: this.$route.params.problem || "Regression",
+          value: this.$route.params.problem || this.dataset.analysisType,
         };
       } else {
         return d;

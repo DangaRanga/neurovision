@@ -9,11 +9,17 @@ import * as d3 from "d3";
 
 export default {
   name: "CModel",
-  props: ["num_hidden", "layers", "mappings", "width", "height"],
+  props: [
+    "num_hidden",
+    "layers",
+    "mappings",
+    "width",
+    "height",
+    "epochs",
+    "isRunning",
+  ],
   data() {
-    return {
-      isRunning: true,
-    };
+    return {};
   },
   computed: {
     boundedWidth: function () {
@@ -47,7 +53,7 @@ export default {
         .style("transform", `translate(${80}px, ${0}px)`);
 
       var y = d3.scaleLinear().rangeRound([0, this.height / 5]);
-      var color = d3.scaleOrdinal(d3.schemeCategory10);
+
       const nodes = layers
         .selectAll("rect")
         .data((d) => d.nodes)
@@ -112,7 +118,7 @@ export default {
           .style("stroke", "green")
           .on("end", forward(epoch - 1));
       }
-      const epochs = 5;
+      const epochs = this.epochs;
       if (this.isRunning) {
         forward(epochs);
       }
