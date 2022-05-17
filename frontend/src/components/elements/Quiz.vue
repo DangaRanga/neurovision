@@ -8,21 +8,25 @@
     </h1>
 
     <section
-      class="bg-primary p-4 max-w-2xl w-full flex flex-col rounded outline outline-2 outline-white"
+      class="bg-white border py-6 px-5 max-w-2xl w-full flex flex-col rounded outline outline-2 outline-white"
       v-if="!quizCompleted"
     >
-      <div class="flex flex-row justify-between mb-6">
-        <span class="font-medium text-xl mr-2">{{
-          getCurrentQuestion.question
-        }}</span>
+      <div class="flex flex-row justify-between mb-2">
+        <span class="font-medium text-xl mr-2">
+          Question # {{ currentQuestion + 1 }}</span
+        >
+
         <div
-          class="bg-violet-400 ml-4 w-44 h-12 rounded outline outline-1 outline-white flex flex-col items-center justify-center text-base"
+          class="bg-primary_light ml-4 w-44 h-12 rounded outline outline-1 outline-white flex flex-col items-center justify-center text-base"
         >
           <span class="font-medium text-xl"
             >Score {{ score }}/{{ questions.length }}</span
           >
         </div>
       </div>
+      <span class="font-medium text-xl mr-2 mb-4">{{
+        getCurrentQuestion.question
+      }}</span>
 
       <div class="mb-4">
         <label
@@ -30,14 +34,15 @@
           :key="index"
           :for="'option' + index"
           id="option"
-          :class="`  bg-primary_light p-4 mb-4 block rounded outline outline-1 outline-white focus:outline-grey_light 
-                    active:bg-grey_light hover:bg-grey_light h-16 text-base cursor-pointer${
-                      getCurrentQuestion.selected == index
-                        ? index == getCurrentQuestion.answer
-                          ? 'correct'
-                          : 'wrong'
-                        : ''
-                    } ${
+          class="border border-gray-300 p-4 mb-4 block rounded outline outline-1 outline-white focus:outline-grey_light active:bg-grey_light hover:bg-primary_light hover:border-blue-400 h-16 text-base hover:cursor-pointer transition-colors duration-400"
+          :class="` 
+                     ${
+                       getCurrentQuestion.selected == index
+                         ? index == getCurrentQuestion.answer
+                           ? 'border-green-400 bg-green-100'
+                           : 'border-red-400 bg-red-100'
+                         : ''
+                     } ${
             getCurrentQuestion.selected != null &&
             index != getCurrentQuestion.selected
               ? 'disabled'
@@ -54,14 +59,14 @@
             :disabled="getCurrentQuestion.selected"
             @change="SetAnswer($event)"
           />
-          <span>{{ option }}</span>
+          <span class="ml-3">{{ option }}</span>
         </label>
       </div>
 
       <button
         @click="NextQuestion()"
         :disabled="!getCurrentQuestion.selected"
-        class="justify-center w-3/5 mx-auto my-4 bg-primary_dark text-white text-lg font-medium uppercase rounded outline outline-1 outline-white appearance-none cursor-pointer p-4"
+        class="justify-center mx-auto bg-primary hover:bg-blue-500 text-white text- font-medium rounded cursor-pointer px-4 py-3 transition-colors duration-400"
       >
         {{
           getCurrentQuestion.index == questions.length - 1
@@ -77,11 +82,17 @@
       v-else
       class="bg-primary p-4 max-w-2xl w-full flex flex-col rounded outline outline-2 outline-white"
     >
+      <div></div>
       <h2 class="text-2xl font-medium mb-2 justify-center mx-auto">
         You have finished the quiz!
       </h2>
       <p class="text-2xl font-medium mb-4 justify-center mx-auto">
         Your score is {{ score }}/{{ questions.length }}
+      </p>
+      <p
+        class="text-2xl text-purple-900 font-medium mb-4 justify-center mx-auto"
+      >
+        Feedback: {{ quizfeedback }}
       </p>
       <div v-if="type == 'prequiz'">
         <div class="mt-4">
@@ -136,6 +147,7 @@ export default {
       questions: this.quizquestions,
       quizCompleted: false,
       currentQuestion: 0,
+      quizfeedback: "",
     };
   },
   mounted() {
@@ -170,11 +182,90 @@ export default {
         this.currentQuestion++;
         return;
       }
-
+      this.getQuizFeedback();
       this.quizCompleted = true;
     },
     showTour(tour) {
       localStorage.setItem("isTourVisible", JSON.stringify(tour));
+    },
+    getQuizFeedback() {
+      if (this.type == "prequiz") {
+        switch (this.score) {
+          case 0:
+            {
+              this.quizfeedback = "Pervious Knowledge Very Limited";
+            }
+            break;
+          case 1:
+            {
+              this.quizfeedback = "Pervious Knowledge Limited";
+            }
+            break;
+          case 2:
+            {
+              this.quizfeedback = "Pervious Knowledge Average";
+            }
+            break;
+          case 3:
+            {
+              this.quizfeedback = "Pervious Knowledge Good";
+            }
+            break;
+          case 4:
+            {
+              this.quizfeedback = "Pervious Knowledge Very Good";
+            }
+            break;
+          case 5:
+            {
+              this.quizfeedback = "Pervious Knowledge Execellent";
+            }
+            break;
+          default:
+            {
+              this.quizfeedback = "No feedback available at this time";
+            }
+            break;
+        }
+      } else if (this.type == "postquiz") {
+        switch (this.score) {
+          case 0:
+            {
+              this.quizfeedback = "Knowledge Gained Very Limited";
+            }
+            break;
+          case 1:
+            {
+              this.quizfeedback = "Knowledge Gained Limited";
+            }
+            break;
+          case 2:
+            {
+              this.quizfeedback = "Knowledge Gained Average";
+            }
+            break;
+          case 3:
+            {
+              this.quizfeedback = "Knowledge Gained Good";
+            }
+            break;
+          case 4:
+            {
+              this.quizfeedback = "Knowledge Gained Very Good";
+            }
+            break;
+          case 5:
+            {
+              this.quizfeedback = "Knowledge Gained Execellent";
+            }
+            break;
+          default:
+            {
+              this.quizfeedback = "No feedback available at this time";
+            }
+            break;
+        }
+      }
     },
   },
 };
@@ -189,6 +280,11 @@ export default {
 }
 
 input[type="radio"]:checked {
-  background-color: #2cce7d;
+  background-color: #78eeb3;
+}
+
+input[type="radio"] + label span:hover,
+input[type="radio"] + label:hover span {
+  transform: scale(1.2);
 }
 </style>

@@ -63,7 +63,7 @@ export default {
 
     removeFeature() {
       // Remove feature from dataset
-      const feature = this.removeableFeatures.pop();
+      const feature = this.removeableFeatures.pop(0);
 
       // Skip to next step if all features are already extracted
       if (this.removeableFeatures.length === 0) {
