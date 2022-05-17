@@ -12,6 +12,7 @@ export default {
   props: ["num_hidden", "layers", "mappings", "width", "height"],
   data() {
     return {
+      isRunning: true,
     };
   },
   computed: {
@@ -54,12 +55,12 @@ export default {
         .append("circle")
         .attr("id", (d) => d.id)
         .style("fill", function (d) {
-          if(d.layer == 0){
-            return "#20A4F3"
-          }else if(d.output){
-            return "#20A4F3"
-          }else{
-            return "#5D5FEF"
+          if (d.layer == 0) {
+            return "#20A4F3";
+          } else if (d.output) {
+            return "#20A4F3";
+          } else {
+            return "#5D5FEF";
           }
         })
         .attr("r", 20)
@@ -75,19 +76,49 @@ export default {
         .enter()
         .append("line")
         .style("stroke", "grey")
-        .style("stroke-width", 2)
+        .style("stroke-width", 3)
         .attr("x1", (d) => d.sourcex)
         .attr("y1", (d) => d.sourcey)
         .attr("x2", (d) => d.targetx)
         .attr("y2", (d) => d.targety);
+
+      function forward() {
+        links
+          .style("stroke", "green")
+          .style("stroke-width", 8)
+          .attr("stroke-dasharray", 8 + " " + 8)
+          .attr("stroke-dashoffset", 250)
+
+          .transition()
+          .style("stroke", "green")
+          .duration(1000)
+          .ease(d3.easeQuadIn)
+          .attr("stroke-dashoffset", 100)
+          .on("end", backward);
+      }
+
+      function backward() {
+        links
+          .transition()
+          .style("stroke", "green")
+          .duration(1000)
+          .ease(d3.easeLinear)
+          .attr("stroke-dashoffset", 250)
+          .style("stroke", "green")
+          .on("end", forward);
+      }
+      const epochs = 4;
+      if (this.isRunning) {
+        forward();
+      }
     },
   },
   mounted() {
     this.createModel();
   },
-  updated(){
+  updated() {
     this.createModel();
-  }
+  },
 };
 </script>
 
