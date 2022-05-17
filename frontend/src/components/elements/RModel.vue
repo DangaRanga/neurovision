@@ -17,6 +17,7 @@ export default {
     "height",
     "epochs",
     "isRunning",
+    "toggleRunning"
   ],
   data() {
     return {};
@@ -88,8 +89,13 @@ export default {
         .attr("x2", (d) => d.targetx)
         .attr("y2", (d) => d.targety);
 
+      const update = () => {
+        this.toggleRunning();
+        console.log("called")
+      };
+
       function forward(epoch) {
-        console.log(epoch);
+
         links
           .style("stroke", "green")
           .style("stroke-width", 5)
@@ -104,6 +110,8 @@ export default {
           .on("end", () => {
             if (epoch > 1) {
               backward(epoch);
+            }else {
+              update();
             }
           });
       }
@@ -118,7 +126,7 @@ export default {
           .style("stroke", "green")
           .on("end", forward(epoch - 1));
       }
-      const epochs = this.epochs;
+      const epochs = 10; //this.epochs;
       if (this.isRunning) {
         forward(epochs);
       }

@@ -24,6 +24,7 @@
             :height="height"
             :isRunning="isRunning"
             :epochs="headers[1].value"
+            :toggleRunning="toggleRunning"
           />
         </div>
       </div>
@@ -52,6 +53,7 @@
         :height="height"
         :isRunning="isRunning"
         :epochs="headers[1].value"
+        :toggleRunning="toggleRunning"
       />
     </div>
   </div>
