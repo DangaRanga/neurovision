@@ -11,18 +11,22 @@
       class="bg-primary p-4 max-w-2xl w-full flex flex-col rounded outline outline-2 outline-white"
       v-if="!quizCompleted"
     >
-      <div class="flex flex-row justify-between mb-6">
-        <span class="font-medium text-xl mr-2">{{
-          getCurrentQuestion.question
-        }}</span>
+      <div class="flex flex-row justify-between mb-2">
+        <span class="font-medium text-xl mr-2">
+          Question # {{ currentQuestion + 1 }}</span
+        >
+
         <div
-          class="bg-violet-400 ml-4 w-44 h-12 rounded outline outline-1 outline-white flex flex-col items-center justify-center text-base"
+          class="bg-violet-400 ml-4 w-44 h-10 rounded outline outline-1 outline-white flex flex-col items-center justify-center text-base"
         >
           <span class="font-medium text-xl"
             >Score {{ score }}/{{ questions.length }}</span
           >
         </div>
       </div>
+      <span class="font-medium text-xl mr-2 mb-4">{{
+        getCurrentQuestion.question
+      }}</span>
 
       <div class="mb-4">
         <label
@@ -77,11 +81,17 @@
       v-else
       class="bg-primary p-4 max-w-2xl w-full flex flex-col rounded outline outline-2 outline-white"
     >
+      <div></div>
       <h2 class="text-2xl font-medium mb-2 justify-center mx-auto">
         You have finished the quiz!
       </h2>
       <p class="text-2xl font-medium mb-4 justify-center mx-auto">
         Your score is {{ score }}/{{ questions.length }}
+      </p>
+      <p
+        class="text-2xl text-purple-900 font-medium mb-4 justify-center mx-auto"
+      >
+        Feedback: {{ quizfeedback }}
       </p>
       <div v-if="type == 'prequiz'">
         <div class="mt-4">
@@ -136,6 +146,7 @@ export default {
       questions: this.quizquestions,
       quizCompleted: false,
       currentQuestion: 0,
+      quizfeedback: "",
     };
   },
   mounted() {
@@ -170,11 +181,90 @@ export default {
         this.currentQuestion++;
         return;
       }
-
+      this.getQuizFeedback();
       this.quizCompleted = true;
     },
     showTour(tour) {
       localStorage.setItem("isTourVisible", JSON.stringify(tour));
+    },
+    getQuizFeedback() {
+      if (this.type == "prequiz") {
+        switch (this.score) {
+          case 0:
+            {
+              this.quizfeedback = "Pervious Knowledge Very Limited";
+            }
+            break;
+          case 1:
+            {
+              this.quizfeedback = "Pervious Knowledge Limited";
+            }
+            break;
+          case 2:
+            {
+              this.quizfeedback = "Pervious Knowledge Average";
+            }
+            break;
+          case 3:
+            {
+              this.quizfeedback = "Pervious Knowledge Good";
+            }
+            break;
+          case 4:
+            {
+              this.quizfeedback = "Pervious Knowledge Very Good";
+            }
+            break;
+          case 5:
+            {
+              this.quizfeedback = "Pervious Knowledge Execellent";
+            }
+            break;
+          default:
+            {
+              this.quizfeedback = "No feedback available at this time";
+            }
+            break;
+        }
+      } else if (this.type == "postquiz") {
+        switch (this.score) {
+          case 0:
+            {
+              this.quizfeedback = "Knowledge Gained Very Limited";
+            }
+            break;
+          case 1:
+            {
+              this.quizfeedback = "Knowledge Gained Limited";
+            }
+            break;
+          case 2:
+            {
+              this.quizfeedback = "Knowledge Gained Average";
+            }
+            break;
+          case 3:
+            {
+              this.quizfeedback = "Knowledge Gained Good";
+            }
+            break;
+          case 4:
+            {
+              this.quizfeedback = "Knowledge Gained Very Good";
+            }
+            break;
+          case 5:
+            {
+              this.quizfeedback = "Knowledge Gained Execellent";
+            }
+            break;
+          default:
+            {
+              this.quizfeedback = "No feedback available at this time";
+            }
+            break;
+        }
+      }
     },
   },
 };
