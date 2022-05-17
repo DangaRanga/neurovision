@@ -15,7 +15,7 @@
       </div>
     </article>
 
-    <div class="text-center w-1/2 my-3">
+    <div class="text-center my-3 w-3/5 text-sm">
       <h1
         class="text-lg font-bold text-primary_dark"
         :class="{ 'text-primary': selected }"
@@ -68,7 +68,7 @@ export default {
   },
 
   data() {
-    return {}
+    return {};
   },
 
   methods: {
@@ -98,8 +98,8 @@ export default {
   height: 30px;
   border-radius: 50%;
   position: relative;
-  top: -18.3em;
-  left: 6em;
+  top: -16.3em;
+  left: 5.6em;
   stroke-width: 2;
   stroke: #fff;
   stroke-miterlimit: 10;

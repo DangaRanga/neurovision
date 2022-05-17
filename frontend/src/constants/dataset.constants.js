@@ -16,8 +16,7 @@ const housePredictionData = {
   of data scientists and machine learning practitioners, we are using a wide range of property sales records
   in an unknown format with unknown data quality issues in order to clean the data and use it to make 
   predictions. `,
-  summary: `House Price Prediction is the analysis of the relationship between house features and 
-  other factors to determine how they can be used to predict house prices.`,
+  summary: `Predict the value of a house based on various key attributes about the house!`,
   problemType: "Linear Regression",
   image: House,
   name: "house_price",
@@ -29,9 +28,7 @@ const heartDiseaseData = {
    disease based on the features presented in the data. Through the use of clinical parameters, we attempt 
    to predict if a patient has this disease or not through the use of logistic regression 
    also known as classification.`,
-  summary: ` Heart Disease is the combination of several heart-related diseases that affect the cardiovascular system. 
-  Heart Disease Classification, therefore, uses both modifiable and non-modifiable features of an individual
-  to diagnose or detect whether a patient has heart disease or not.`,
+  summary: `Predict how likely someone is to recieve a heart attack given various factors!`,
   problemType: "Binary Classification",
   image: Heart,
   name: "heart_disease",
@@ -47,9 +44,7 @@ const irisPredictionData = {
   determination of the flowers together so that we can begin to clean our data and analyze the 
   relationships between features and target variables. As such, having cleaned and explored the data, 
   we are better able to make accurate predictions on the Iris dataset.`,
-  summary: ` Iris Prediction stems from the Iris dataset which comprises four features. 
-  These features include the length and width of both sepals and petals for fifty samples of the Iris 
-  species that were used to develop a linear discriminant model in order to classify the Iris species.`,
+  summary: `Iris Prediction involves predicting variations in iris petals and sepals. `,
   problemType: "Multivariate Classification",
   image: Flower,
   name: "iris",

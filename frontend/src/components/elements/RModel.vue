@@ -91,7 +91,6 @@ export default {
 
       const update = () => {
         this.toggleRunning();
-        console.log("called")
       };
 
       function forward(epoch) {
@@ -101,14 +100,15 @@ export default {
           .style("stroke-width", 5)
           .attr("stroke-dasharray", 10 + " " + 10)
           .attr("stroke-dashoffset", 250)
-
+          .interrupt()
           .transition()
           .style("stroke", "green")
           .duration(700)
           .ease(d3.easeQuadIn)
           .attr("stroke-dashoffset", 100)
-          .on("end", () => {
+          .on("end", (event) => {
             if (epoch > 1) {
+              // console.log(event);
               backward(epoch);
             }else {
               update();
@@ -126,7 +126,8 @@ export default {
           .style("stroke", "green")
           .on("end", forward(epoch - 1));
       }
-      const epochs = 10; //this.epochs;
+
+      const epochs = this.epochs;
       if (this.isRunning) {
         forward(epochs);
       }

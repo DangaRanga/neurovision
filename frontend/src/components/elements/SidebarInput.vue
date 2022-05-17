@@ -6,7 +6,7 @@
         <img
           :src="infographics_icon"
           alt="info"
-          class="items-center"
+          class="items-center hover:cursor-pointer"
           @click="check()"
         />
       </div>
@@ -25,7 +25,7 @@
         <img
           :src="infographics_icon"
           alt="info"
-          class="items-center"
+          class="items-center hover:cursor-pointer"
           @click="check()"
         />
       </div>
@@ -42,7 +42,7 @@
         <img
           :src="infographics_icon"
           alt="info"
-          class="items-center"
+          class="items-center hover:cursor-pointer"
           @click="check()"
         />
       </div>
@@ -60,7 +60,7 @@
         <img
           :src="infographics_icon"
           alt="info"
-          class="items-center"
+          class="items-center hover:cursor-pointer"
           @click="check()"
         />
       </div>
@@ -86,7 +86,7 @@ export default {
     "index",
     "id",
     "functionName",
-    "variation"
+    "variation",
   ],
   data() {
     return {
@@ -102,9 +102,9 @@ export default {
       const value = event.target.value;
       this.change({ index: this.index, value: value });
     },
-    check(){
+    check() {
       this.variation ? this.functionName(this.index) : this.functionName();
-    }
+    },
   },
 };
 </script>

@@ -21,6 +21,7 @@ neuroVisionApp.use(VueAxios, axios);
 // Set up other plugins
 neuroVisionApp.use(router);
 neuroVisionApp.use(Vue3Tour);
+
 //require("vue-tour/dist/vue-tour.css");
 //neuroVisionApp.use(VueTour);
 

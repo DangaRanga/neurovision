@@ -1,7 +1,7 @@
 <template>
   <aside id="v-step-0">
     <div
-      class="bg-primary_light py-8 px-10 w-full h-full flex flex-col justify-between"
+      class="bg-primary_light pr-5 py-5 w-full h-full flex flex-col justify-between"
     >
       <div class="w-full pl-8 pr-12">
         <h3 class="text-lg font-bold py-2">Dataset - {{ datasettitle }}</h3>
@@ -38,11 +38,9 @@
             :id="'v-step-' + 3"
             :functionName="showNormalization"
           />
-          <div
-            class="px-4 pt-12 mt-6 mb-4 flex justify-center m-0 sm:flex-row sm:text-left sm:items-baseline"
-          >
+          <div class="my-6 flex justify-center">
             <router-link
-              className="w-1/3 bg-grey_dark text-white text-xs font-bold px-4 py-3 rounded shadow hover:shadow-md outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3"
+              className="mr-3 bg-grey_dark text-white text-xs font-semibold px-4 py-3 rounded shadow hover:shadow-md hover:bg-gray-600 transition-colors"
               :to="{
                 name: 'select',
               }"
@@ -52,7 +50,7 @@
             <button
               id="v-step-4"
               @click="nextStep"
-              class="w-1/3 bg-primary text-center text-white text-xs font-semibold px-4 py-3 rounded shadow hover:shadow-md outline outline-1 lg:mr-1 lg:mb-0 ml-3 mb-3"
+              class="bg-primary text-center text-white text-xs font-semibold px-4 py-3 rounded shadow hover:shadow-md hover:bg-blue-500 transition-colors duration-200"
             >
               Next Step
             </button>
@@ -192,29 +190,29 @@ export default {
 
       this.showModal();
     },
-    changeTrain(data){
+    changeTrain(data) {
       this.trainSplit = Number(data.value);
     },
-    changeNormal(data){
-      switch(data.value){
+    changeNormal(data) {
+      switch (data.value) {
         case "yes":
           this.normalizeDataset = true;
-        break;
+          break;
         case "no":
           this.normalizeDataset = false;
-        break;
+          break;
         default:
           this.normalizeDataset = true;
-        break;
+          break;
       }
     },
-    nextStep(){
+    nextStep() {
       localStorage.setItem("train", this.trainSplit);
       localStorage.setItem("normalize", this.normalizeDataset);
       this.$router.push({
-        name: "create",
-      })
-    }
+        name: "feature",
+      });
+    },
   },
 };
 </script>

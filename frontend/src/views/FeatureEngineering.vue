@@ -1,7 +1,7 @@
 <template>
   <main class="flex flex-col items-center my-5">
-    <h1 class="text-3xl font-bold my-3 text-grey">Feature Engineering</h1>
-    <p class="text-grey">{{ rationale }}</p>
+    <h1 class="text-3xl font-bold my-3 text-grey">{{ title }}</h1>
+    <p class="text-grey w-1/2 text-center">{{ rationale }}</p>
     <div class="w-4/5 my-5">
       <data-table
         class="w-full mr-8"
@@ -11,7 +11,12 @@
         :index_highlighted="featureIndex"
       ></data-table>
     </div>
-    <button @click="performFeatureEngineering()">test</button>
+    <button
+      class="text-white bg-primary hover:bg-blue-500 rounded-md py-3 px-4 mx-3 transition-colors duration-200"
+      @click="performFeatureEngineering()"
+    >
+      Next Step
+    </button>
   </main>
 </template>
 <script>
@@ -29,6 +34,7 @@ export default {
       dataset: JSON.parse(localStorage.getItem("base-dataset")),
       engineeringStep: 1,
       featureIndex: -1,
+      title: `Feature Engineering`,
       rationale: `Here we will make the necessary changes to our dataset to prepare it for
       predictions!`,
     };
@@ -43,7 +49,8 @@ export default {
       const feature = this.removeableFeatures[0];
 
       // Update description of action being performed
-      this.rationale = feature.reason;
+      this.title = `Selecting Feature to be Extracted`;
+      this.rationale = `Currently the feature "${feature.name}" will not add variation to our dataset to assist our model to learn different patterns`;
 
       // Highlight the feature
       const datasetColumn = this.dataset.headings.indexOf(feature.name);
@@ -57,23 +64,32 @@ export default {
     removeFeature() {
       // Remove feature from dataset
       const feature = this.removeableFeatures.pop();
-      console.log(`Feature is ${feature.name}`);
 
+      // Skip to next step if all features are already extracted
+      if (this.removeableFeatures.length === 0) {
+        this.engineeringStep = 3;
+      }
       // Remove the feature and refresh dataset
       this.featureEngineeringQuery("/data/rfeature", feature.name);
 
       // Unhighlight next feature
       this.featureIndex = -1;
 
+      // Update description of action being performed
+      this.title = `Removed Feature ${feature.name}`;
+      this.rationale = `Currently the feature "${feature.name}" will not add variation to our dataset to assist our model to learn different patterns`;
+
       // Restart steps until all features are extracted
       if (this.removeableFeatures.length > 0) {
         this.engineeringStep = 1;
-      } else {
-        this.engineeringStep = 3;
       }
     },
 
     removeInvalid() {
+      // Update description of action being performed
+      this.title = `Removing Invalid Records`;
+      this.rationale = `Invalid records such as empty fields, and NaN are being removed and/or replaced as necessary`;
+
       // Remove the feature and refresh dataset
       this.featureEngineeringQuery("/data/rinvalid");
 
@@ -85,11 +101,19 @@ export default {
       // Translate dataset data
       this.featureEngineeringQuery("/data/translate");
 
+      // Update description of action being performed
+      this.title = `Translating Data`;
+      this.rationale = `The data is now being translated in a machine-ready format. As such, the categorical (text-based) fields are being converted to numerical fields, and data outliers are removed.`;
+
       // Move to next step
       this.engineeringStep = 5;
     },
 
     normalizeData() {
+      // Update description of action being performed
+      this.title = `Normalizing Data`;
+      this.rationale = `Normalization is a scaling technique in which values are shifted and rescaled so that they end up ranging between 0 and 1. This primarily serves to create a general distribution and ratio of the data`;
+
       // Perform dataset normalization
       this.featureEngineeringQuery("/data/normalize");
 
@@ -144,7 +168,9 @@ export default {
       } else if (this.engineeringStep === 5) {
         this.normalizeData();
       } else {
-        // Navigate to next page
+        this.$router.push({
+          name: "create",
+        });
       }
     },
   },
