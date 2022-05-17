@@ -82,34 +82,39 @@ export default {
         .attr("x2", (d) => d.targetx)
         .attr("y2", (d) => d.targety);
 
-      function forward() {
+      function forward(epoch) {
+        console.log(epoch);
         links
           .style("stroke", "green")
-          .style("stroke-width", 8)
-          .attr("stroke-dasharray", 8 + " " + 8)
+          .style("stroke-width", 5)
+          .attr("stroke-dasharray", 10 + " " + 10)
           .attr("stroke-dashoffset", 250)
 
           .transition()
           .style("stroke", "green")
-          .duration(1000)
+          .duration(700)
           .ease(d3.easeQuadIn)
           .attr("stroke-dashoffset", 100)
-          .on("end", backward);
+          .on("end", () => {
+            if (epoch > 1) {
+              backward(epoch);
+            }
+          });
       }
 
-      function backward() {
+      function backward(epoch) {
         links
           .transition()
           .style("stroke", "green")
-          .duration(1000)
+          .duration(100)
           .ease(d3.easeLinear)
           .attr("stroke-dashoffset", 250)
           .style("stroke", "green")
-          .on("end", forward);
+          .on("end", forward(epoch - 1));
       }
-      const epochs = 4;
+      const epochs = 5;
       if (this.isRunning) {
-        forward();
+        forward(epochs);
       }
     },
   },
