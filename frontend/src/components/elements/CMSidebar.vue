@@ -10,8 +10,8 @@
             This function is included in an artificial neural network in an effort to aid the network in 
             learning complex patterns in the data. It imitates the simulation of a biological neuron in 
             order to generate the output of a neuron given a set of input. Types of activation functions 
-            within the scope of this application include: Binary,Linear,Sigmoid,ReLU,Tanh, Exponential 
-            Linear Unit, Softplus, Swish,Softsign, Parametric ReLU and ReLU6
+            within the scope of this application include: Binary, Linear, Sigmoid, ReLu, Tanh, Exponential 
+            Linear Unit, Softplus, Swish, Softsign, Parametric ReLU and ReLU6
           </p>
         </div>
         <div>
