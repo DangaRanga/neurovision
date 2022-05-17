@@ -1,14 +1,12 @@
 <template>
-  <div class="flex flex-col items-center justify-center h-screen">
-    <div class="flex flex-row justify-between mt-4 mb-2" id="v-step-0">
-      <span class="font-extrabold text-4xl">Welcome to Neurovision!</span>
+  <div class="flex flex-col items-center justify-center h-screen mt-5">
+    <div class="flex flex-row justify-between" id="v-step-0">
+      <h1 class="font-bold text-4xl my-2">Welcome to Neurovision!</h1>
     </div>
-    <div class="flex flex-col w-2/5 items-center justify-center mb-10">
-      <span class="font-medium text-grey text-lg items-center justify-center"
-        >Select your dataset to start learning about neural networks!</span
-      >
-    </div>
-    <div class="grid grid-cols-3" id="v-step-1">
+    <p class="font-medium text-grey text-lg text-center mb-3">
+      Select your dataset to start learning about neural networks!
+    </p>
+    <div class="grid grid-cols-3 mt-5" id="v-step-1">
       <article v-for="(dataset, index) in datasets" :key="index">
         <selector-item
           :image="dataset.image"

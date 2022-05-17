@@ -98,8 +98,8 @@ export default {
   height: 30px;
   border-radius: 50%;
   position: relative;
-  top: -18.3em;
-  left: 6em;
+  top: -16.3em;
+  left: 5.6em;
   stroke-width: 2;
   stroke: #fff;
   stroke-miterlimit: 10;
