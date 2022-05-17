@@ -61,7 +61,7 @@ export default {
   },
   computed: {
     dataset() {
-      return JSON.parse(localStorage.getItem("base-dataset"));
+      return JSON.parse(localStorage.getItem("final-dataset"));
     },
   },
   methods: {

@@ -34,11 +34,6 @@
         id="v-step-3"
         :to="{
           name: 'prequiz',
-          params: {
-            analysisType: analysisType,
-            title: title,
-            description: description,
-          },
         }"
       >
         Start Pre Quiz

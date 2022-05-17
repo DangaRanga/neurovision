@@ -20,6 +20,7 @@
               :change="header.change"
               :id="'v-step-' + (i + 1)"
               :index="i"
+              :functionName="header.method"
             />
           </div>
           <div v-if="selected == 2">
@@ -50,10 +51,17 @@
       :options="myOptions"
       class="text-xl"
     ></v-tour>
+    <modal
+      :topic="title"
+      :message="message"
+      v-show="isModalVisible"
+      @close="toggleModal"
+    />
   </aside>
 </template>
 
 <script>
+import InfograpicModal from "@/components/elements/Infographic.vue";
 import SidebarInput from "@/components/elements/SidebarInput.vue";
 import TabbedMenu from "@/components/elements/TabbedMenu.vue";
 import { modelTour } from "@/controllers/tour/animationCustomization.js";
@@ -63,9 +71,13 @@ export default {
   components: {
     "sidebar-input": SidebarInput,
     "tabbed-menu": TabbedMenu,
+    "modal": InfograpicModal,
   },
   data() {
     return {
+      title: "",
+      message: "",
+      isModalVisible: false,
       batch_size: 1,
       epochs: 100,
       l_rate: 0.01,
@@ -90,6 +102,7 @@ export default {
           value: "",
           options: [],
           change: this.changeParam,
+          method: this.showMessage(1)
         },
         {
           title: "Epochs",
@@ -97,6 +110,7 @@ export default {
           value: "",
           options: [],
           change: this.changeParam,
+          method: this.showMessage
         },
         {
           title: "Learning Rate",
@@ -104,6 +118,7 @@ export default {
           value: "",
           options: [],
           change: this.changeParam,
+          method: this.showMessage
         },
         {
           title: "Loss Function",
@@ -111,6 +126,7 @@ export default {
           value: "Mean Squared Error (MSE)",
           options: [],
           change: "",
+          method: this.showMessage
         },
         {
           title: "Optimization Algorithm",
@@ -118,6 +134,7 @@ export default {
           value: "Stochastic Gradient Descent",
           options: [],
           change: "",
+          method: this.showMessage
         },
       ],
     };
@@ -136,6 +153,19 @@ export default {
   methods: {
     showTour() {
       this.$tours["myTour"].start();
+    },
+    toggleModal() {
+      this.isModalVisible = !this.isModalVisible;
+    },
+    showMessage(index) {
+      switch(index){
+        case 1:
+          this.title = "Batch Size";
+          this.message = `The term batch size refers to as the number of training examples used in a single iteration. 
+          It controls the number of training samples that are worked through before updating the internal parameters of the model.`;
+        break;
+      }
+      this.toggleModal();
     },
     changeSelected(option) {
       this.selected = option;

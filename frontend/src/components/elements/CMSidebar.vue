@@ -7,8 +7,11 @@
         <div class="mb-10">
           <h3 class="text-2xl font-bold m-0">Activation Functions</h3>
           <p class="text-sm font-regular mt-4">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dictum enim
-            pellentesque auctor ipsum integer feugiat risus nulla sed
+            This function is included in an artificial neural network in an effort to aid the network in 
+            learning complex patterns in the data. It imitates the simulation of a biological neuron in 
+            order to generate the output of a neuron given a set of input. Types of activation functions 
+            within the scope of this application include: Binary, Linear, Sigmoid, ReLu, Tanh, Exponential 
+            Linear Unit, Softplus, Swish, Softsign, Parametric ReLU and ReLU6
           </p>
         </div>
         <div>
@@ -19,6 +22,7 @@
             :change="changeActFcn"
             :index="0"
             :id="'v-step-' + 1"
+            :functionName="showMessage"
           />
           <sidebar-input
             v-if="layers >= 2"
@@ -72,12 +76,18 @@
       :options="myOptions"
       class="text-xl"
     ></v-tour>
+    <modal
+      :topic="title"
+      :message="message"
+      v-show="isModalVisible"
+      @close="toggleModal"
+    />
   </aside>
 </template>
 
 <script>
+import InfograpicModal from "@/components/elements/Infographic.vue";
 import SidebarInput from "@/components/elements/SidebarInput.vue";
-import TabbedMenu from "@/components/elements/TabbedMenu.vue";
 import { buildTour } from "@/controllers/tour/buildCustomization";
 
 export default {
@@ -88,10 +98,13 @@ export default {
   },
   components: {
     "sidebar-input": SidebarInput,
-    "tabbed-menu": TabbedMenu,
+    "modal": InfograpicModal,
   },
   data() {
     return {
+      title: "",
+      message: "",
+      isModalVisible: false,
       isTourVisible: localStorage.getItem("isTourVisible") === "true",
       options: [
         { title: "ReLu", value: "relu" },
@@ -132,6 +145,21 @@ export default {
     update() {
       this.$emit("progress", { activation: this.act_layers });
     },
+    toggleModal() {
+      this.isModalVisible = !this.isModalVisible;
+    },
+    showMessage(index) {
+      switch(index){
+        case 1:
+          this.title = "Training Data Percentage";
+          this.message = `Refers to the percentage of data being used to train and teach the model 
+          the hidden features or patterns in the data.
+          Example: Training data is fed to the neural network continuously, in order for the model to 
+          continue to learn the features of the data. `;
+        break;
+      }
+      this.toggleModal();
+    }
   },
   mounted: function () {
     if (this.isTourVisible) {
