@@ -212,7 +212,8 @@ export default {
     },
     async updateModel() {
       const dataSnap = JSON.parse(localStorage.getItem("data-snap"));
-
+      this.isLoading = true;
+      
       this.problem = dataSnap.problem;
       this.layers = dataSnap.layers;
       this.activation = dataSnap.activation;

@@ -44,16 +44,16 @@ export default {
     return {
       epochNum: 1,
       epochWatcher: this.epochs,
-      accuracy: [
-        0.0012, 0.0023, 0.0157, 0.0259, 0.03604, 0.0412, 0.0423, 0.0457, 0.0559,
-        0.0664,
-      ],
-      loss: [
-        0.0052, 0.0073, 0.0167, 0.0299, 0.0356, 0.0456, 0.0493, 0.0512, 0.0612,
-        0.0653,
-      ],
-      // accuracy: this.training.acc_hist,
-      // loss: this.training.loss_hist,
+      // accuracy: [
+      //   0.0012, 0.0023, 0.0157, 0.0259, 0.03604, 0.0412, 0.0423, 0.0457, 0.0559,
+      //   0.0664,
+      // ],
+      // loss: [
+      //   0.0052, 0.0073, 0.0167, 0.0299, 0.0356, 0.0456, 0.0493, 0.0512, 0.0612,
+      //   0.0653,
+      // ],
+      accuracy: this.training.acc_hist,
+      loss: this.training.loss_hist,
     };
   },
   computed: {
@@ -73,10 +73,10 @@ export default {
     //   }
     // },
     getAccuracy() {
-      return this.accuracy[(this.epochNum - 1) % 10];
+      return Number(this.accuracy[(this.epochNum - 1)].toFixed(7)); // % 10];
     },
     getLoss() {
-      return this.loss[(this.epochNum - 1) % 10];
+      return Number(this.loss[(this.epochNum - 1)].toFixed(7)); // % 10];
     },
     increaseEpoch(epoch) {
       if (epoch == this.epochWatcher) {
