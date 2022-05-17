@@ -163,10 +163,10 @@ export default {
     updateModel() {
       
       const dataset = JSON.parse(localStorage.getItem("final-dataset"));
-      const train = localStorage.getItem("train");
+      const train = Number(localStorage.getItem("train"));
       const hlayer = this.layers
         .filter((d) => d.name.includes("hidden"))
-        .map((d) => d.nodes.length);
+        .map((d) => Number(d.nodes.length));
       const act = this.activation.map((d) => d.toLowerCase());
 
       this.$http

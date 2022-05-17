@@ -102,7 +102,7 @@ export default {
           value: "",
           options: [],
           change: this.changeParam,
-          method: this.showMessage(1)
+          method: this.showMessage
         },
         {
           title: "Epochs",
@@ -158,8 +158,9 @@ export default {
       this.isModalVisible = !this.isModalVisible;
     },
     showMessage(index) {
+      console.log(index);
       switch(index){
-        case 1:
+        case 0:
           this.title = "Batch Size";
           this.message = `The term batch size refers to as the number of training examples used in a single iteration. 
           It controls the number of training samples that are worked through before updating the internal parameters of the model.`;
@@ -173,13 +174,13 @@ export default {
     changeParam(data) {
       switch (data.index) {
         case 0:
-          this.batch_size = data.value;
+          this.batch_size = Number(data.value);
           break;
         case 1:
-          this.epochs = data.value;
+          this.epochs = Number(data.value);
           break;
         case 2:
-          this.l_rate = data.value;
+          this.l_rate = Number(data.value);
           break;
       }
     },

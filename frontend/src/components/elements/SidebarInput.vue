@@ -85,7 +85,7 @@ export default {
     "change",
     "index",
     "id",
-    "functionName",
+    "functionName"
   ],
   data() {
     return {
