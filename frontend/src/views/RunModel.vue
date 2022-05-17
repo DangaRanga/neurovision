@@ -261,7 +261,6 @@ export default {
       }
     });
 
-    console.log(this.activation)
     localStorage.setItem("data-snap", JSON.stringify({
       num_hidden: this.num_hidden,
       layers: this.layers,

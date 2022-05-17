@@ -24,7 +24,7 @@
           />
         </div>
       </div>
-      <model-sidebar output="ReLu" :layers="num_hidden" @progress="nextStep" />
+      <model-sidebar :layers="num_hidden" :output="outputA" @progress="nextStep" />
     </div>
     <dataset-preview-modal
       v-if="isModalVisible"
@@ -58,6 +58,7 @@ export default {
       num_hidden: 1,
       layers: [],
       isModalVisible: false,
+      outputA: "",
     };
   },
   computed: {
@@ -155,7 +156,7 @@ export default {
       }
 
       localStorage.setItem("layer-struct", JSON.stringify(this.layers));
-      
+
       this.$router.push({
         name: "run",
         params: {
@@ -222,6 +223,7 @@ export default {
               { id: 0, layer: 2 , output: true},
             ],
           }
+          this.output = "ReLu";
         break;
         case "heart_disease":
           output = {
@@ -231,6 +233,7 @@ export default {
               { id: 0, layer: 2,  output: true},
             ],
           }
+          this.output = "Sigmoid";
         break;
         case "iris":
           output = {
@@ -242,6 +245,7 @@ export default {
               { id: 2, layer: 2,  output: true},
             ],
           }
+          this.output = "Softmax";
         break;
       }
       return output;
