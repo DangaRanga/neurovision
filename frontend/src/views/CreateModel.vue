@@ -13,6 +13,7 @@
             </h1>
           </div>
           <model-build
+            v-if="isLoading"
             :num_hidden="num_hidden"
             :layers="layers"
             :addNode="addNode"
@@ -59,6 +60,7 @@ export default {
       layers: [],
       isModalVisible: false,
       outputA: "",
+      isLoading: true
     };
   },
   computed: {

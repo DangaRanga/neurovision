@@ -16,17 +16,23 @@
               Test the structure of your neural network
             </h1>
           </div>
-          <model-build
-            :num_hidden="num_hidden"
-            :layers="layers"
-            :mappings="mappings"
-            :width="width"
-            :height="height"
-            :isRunning="isRunning"
-            :epochs="headers[1].value"
-            :toggleRunning="toggleRunning"
-            :training="training"
-          />
+          <div>
+            <model-build
+              v-if="!isLoading"
+              :num_hidden="num_hidden"
+              :layers="layers"
+              :mappings="mappings"
+              :width="width"
+              :height="height"
+              :isRunning="isRunning"
+              :epochs="headers[1].value"
+              :toggleRunning="toggleRunning"
+              :training="training"
+            />
+            <div v-if="isLoading" class="flex flex-col justify-center items-center">
+              <h1  class="mx-auto font-extrabold text-4xl">Loading....</h1>
+            </div>
+          </div>
         </div>
       </div>
       <model-sidebar
@@ -47,17 +53,23 @@
           Test the structure of your neural network
         </h1>
       </div>
-      <model-build
-        :num_hidden="num_hidden"
-        :layers="layers"
-        :mappings="mappings"
-        :width="width"
-        :height="height"
-        :isRunning="isRunning"
-        :epochs="headers[1].value"
-        :toggleRunning="toggleRunning"
-        :training="training"
-      />
+      <div>
+        <model-build
+          v-if="!isLoading"
+          :num_hidden="num_hidden"
+          :layers="layers"
+          :mappings="mappings"
+          :width="width"
+          :height="height"
+          :isRunning="isRunning"
+          :epochs="headers[1].value"
+          :toggleRunning="toggleRunning"
+          :training="training"
+        />
+        <div v-if="isLoading" class="flex flex-col justify-center items-center">
+          <h1 class="mx-auto font-extrabold text-4xl">Loading....</h1>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -77,6 +89,7 @@ export default {
   data() {
     return {
       isRunning: false,
+      isLoading: true,
       problem: "regression",
       width: 900,
       height: 500,
@@ -197,7 +210,7 @@ export default {
       this.updateModel();
       this.isRunning = false;
     },
-    updateModel() {
+    async updateModel() {
       
       const dataSnap = JSON.parse(localStorage.getItem("data-snap"));
 
@@ -220,10 +233,14 @@ export default {
         activation: this.activation
       }));
 
-      this.$http
-        .post(
-          `${process.env.VUE_APP_API_URL}/model/run`, 
-          {
+      const BASE_URL = process.env.VUE_APP_API_URL;
+      const route = BASE_URL + '/model/run';
+
+      let response = await fetch(route, {
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
             data: dataset,
             layers: hlayer || [1],
             activations: act || ["relu"],
@@ -232,12 +249,35 @@ export default {
             epochs: this.headers[1].value || 10,
             prob: this.problem,
             train: train || 80,
-          }
-        ).then((response) => {
-          const newData = response.data;
+        }),
+        method: "POST"
+      });
+      let json = await response.json() || {}
+      if (response.ok){
+          const newData = json;
           this.evaluation = newData.evaluation;
           this.training = newData.training;
-        });
+          this.isLoading = !this.isLoading;
+      }
+
+      // this.$http
+      //   .post(
+      //     `${process.env.VUE_APP_API_URL}/model/run`, 
+      //     {
+      //       data: dataset,
+      //       layers: hlayer || [1],
+      //       activations: act || ["relu"],
+      //       lr: this.headers[2].value || 0.5,
+      //       batch_size: this.headers[0].value || 1,
+      //       epochs: this.headers[1].value || 10,
+      //       prob: this.problem,
+      //       train: train || 80,
+      //     }
+      //   ).then((response) => {
+      //     const newData = response.data;
+      //     this.evaluation = newData.evaluation;
+      //     this.training = newData.training;
+      //   });
     },
   },
   created() {
