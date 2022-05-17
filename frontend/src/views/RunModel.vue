@@ -160,6 +160,35 @@ export default {
       }
       this.updateModel();
     },
+    updateModel() {
+      
+      const dataset = JSON.parse(localStorage.getItem("final-dataset"));
+      const train = localStorage.getItem("train");
+      const hlayer = this.layers
+        .filter((d) => d.name.includes("hidden"))
+        .map((d) => d.nodes.length);
+      const act = this.activation.map((d) => d.toLowerCase());
+
+      this.$http
+        .post(
+          `${process.env.VUE_APP_API_URL}/model/run`, 
+          {
+            data: dataset,
+            layers: hlayer || [1],
+            activations: act || ["relu"],
+            lr: this.headers[2].value || 0.5,
+            batch_size: this.headers[0].value || 1,
+            epochs: this.headers[1].value || 10,
+            prob: this.problem,
+            train: train || 80,
+          }
+        ).then((response) => {
+          const newData = response.data;
+
+          this.evaluation = newData.evaluation;
+          this.training = newData.training;
+        });
+    },
     finalDataset(){
       this.$http
         .get(
@@ -177,40 +206,6 @@ export default {
 
           localStorage.setItem("final-dataset", JSON.stringify(data));
         });
-    },
-    updateModel() {
-      
-      const dataset = JSON.parse(localStorage.getItem("final-dataset"));
-      const train = localStorage.getItem("train");
-      const hlayer = this.layers
-        .filter((d) => d.name.includes("hidden"))
-        .map((d) => d.nodes.length);
-      const act = this.activation.map((d) => d.toLowerCase());
-
-      // Mock Request 
-      const result = modelResults;
-      this.evaluation = result.evaluation;
-      this.training = result.training;
-
-      // this.$http
-      //   .post(
-      //     `${process.env.VUE_APP_API_URL}/model/run`, 
-      //     {
-      //       data: dataset,
-      //       layers: hlayer || [1],
-      //       activations: act || ["relu"],
-      //       lr: this.headers[2].value || 0.5,
-      //       batch_size: this.headers[0].value || 1,
-      //       epochs: this.headers[1].value || 10,
-      //       prob: this.problem,
-      //       train: train || 80,
-      //     }
-      //   ).then((response) => {
-      //     const newData = response.data;
-
-      //     this.evaluation = newData.evaluation;
-      //     this.training = newData.training;
-      //   });
     },
   },
   created() {
@@ -252,7 +247,6 @@ export default {
     this.createmapping();
   },
   mounted() {
-    // this.finalDataset();
     this.updateModel();
   },
 };

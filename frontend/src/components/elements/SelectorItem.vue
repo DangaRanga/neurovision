@@ -67,7 +67,9 @@ export default {
     selected: false,
   },
 
-  data() {},
+  data() {
+    return {}
+  },
 
   methods: {
     toggleSelected() {
