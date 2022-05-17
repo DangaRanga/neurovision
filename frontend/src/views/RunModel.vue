@@ -184,7 +184,6 @@ export default {
           }
         ).then((response) => {
           const newData = response.data;
-
           this.evaluation = newData.evaluation;
           this.training = newData.training;
         });

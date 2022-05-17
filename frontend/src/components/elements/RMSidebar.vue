@@ -21,6 +21,7 @@
               :id="'v-step-' + (i + 1)"
               :index="i"
               :functionName="header.method"
+              :variation="true"
             />
           </div>
           <div v-if="selected == 2">
@@ -158,12 +159,32 @@ export default {
       this.isModalVisible = !this.isModalVisible;
     },
     showMessage(index) {
-      console.log(index);
       switch(index){
         case 0:
           this.title = "Batch Size";
           this.message = `The term batch size refers to as the number of training examples used in a single iteration. 
           It controls the number of training samples that are worked through before updating the internal parameters of the model.`;
+        break;
+        case 1:
+          this.title = "Epochs";
+          this.message = `Epochs refers to the number of passes a machine learning algorithm has finished in an entire training dataset.`;
+        break;
+        case 2:
+          this.title = "Learning Rate";
+          this.message = `The learning rate of a neural network is the rate that controls the amount of 
+     change to the model in response to the estimated error each time the model weights are updated.`;
+        break;
+        case 3:
+          this.title = "Loss Function";
+          this.message = `A Loss Function is the method by which a specific algorithm is observed to 
+    measure how well it models the given data. The loss function typically measures how far an estimated 
+    value is from its true value in order to gradually reduce the error in predictions.`;
+        break;
+        case 4:
+          this.title = "Optimization Algorithm";
+          this.message = `An optimization algorithm is a process that compares numerous solutions iteratively 
+     until an ideal solution is identified. It is referred to as a  collection of mathematical techniques used 
+     for machine learning to discover the best possible option given the limitations.`;
         break;
       }
       this.toggleModal();

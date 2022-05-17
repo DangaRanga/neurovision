@@ -7,7 +7,7 @@
           :src="infographics_icon"
           alt="info"
           class="items-center"
-          @click="functionName()"
+          @click="check()"
         />
       </div>
       <select
@@ -26,7 +26,7 @@
           :src="infographics_icon"
           alt="info"
           class="items-center"
-          @click="functionName()"
+          @click="check()"
         />
       </div>
       <input
@@ -43,7 +43,7 @@
           :src="infographics_icon"
           alt="info"
           class="items-center"
-          @click="functionName()"
+          @click="check()"
         />
       </div>
       <input
@@ -61,7 +61,7 @@
           :src="infographics_icon"
           alt="info"
           class="items-center"
-          @click="functionName()"
+          @click="check()"
         />
       </div>
       <input
@@ -85,7 +85,8 @@ export default {
     "change",
     "index",
     "id",
-    "functionName"
+    "functionName",
+    "variation"
   ],
   data() {
     return {
@@ -101,6 +102,9 @@ export default {
       const value = event.target.value;
       this.change({ index: this.index, value: value });
     },
+    check(){
+      this.variation ? this.functionName(this.index) : this.functionName();
+    }
   },
 };
 </script>

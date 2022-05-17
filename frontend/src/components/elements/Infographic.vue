@@ -21,7 +21,6 @@
             :src="back_icon"
             alt="back_icon"
             class="object-cover items-center justify-center mx-auto"
-            @click="showAnalysisType()"
           />
         </button>
       </footer>
