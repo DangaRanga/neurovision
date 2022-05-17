@@ -2,7 +2,7 @@ export const prequiz = [
   {
     question: "A neural network is a network or circuit of neurons.",
     answer: 0,
-    options: ["True", "false"],
+    options: ["True", "False"],
     selected: null,
   },
   {

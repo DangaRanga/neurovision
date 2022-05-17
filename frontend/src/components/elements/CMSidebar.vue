@@ -7,12 +7,15 @@
         <div class="mb-10">
           <h3 class="text-2xl font-bold m-0">Activation Functions</h3>
           <p class="text-sm font-regular mt-4">
-            This function is included in an artificial neural network in an effort to aid the network in 
-            learning complex patterns in the data. It imitates the simulation of a biological neuron in 
-            order to generate the output of a neuron given a set of input. Similarly to a biological neuron, it fires when inputs
-            are large enough or pass a threshold value otherwise, it does nothing. Types of activation functions 
-            within the scope of this application include: Binary, Linear, Sigmoid, ReLu, Tanh, Exponential 
-            Linear Unit, Softplus, Swish, Softsign, Parametric ReLU and ReLU6
+            This function is included in an artificial neural network in an
+            effort to aid the network in learning complex patterns in the data.
+            It imitates the simulation of a biological neuron in order to
+            generate the output of a neuron given a set of input. Similarly to a
+            biological neuron, it fires when inputs are large enough or pass a
+            threshold value otherwise, it does nothing. Types of activation
+            functions within the scope of this application include: Binary,
+            Linear, Sigmoid, ReLu, Tanh, Exponential Linear Unit, Softplus,
+            Swish, Softsign, Parametric ReLU and ReLU6
           </p>
         </div>
         <div>
@@ -58,7 +61,7 @@
         </div>
       </div>
       <div class="flex flex-col justify-center">
-        <div class="flex justify-center m-0 mb-4">
+        <div class="flex justify-center m-0 mb-4" @click="resetDataset()">
           <router-link
             className="w-2/5 bg-grey_dark text-white text-center font-bold py-3 rounded shadow hover:shadow-md outline-none focus:outline-none mr-2"
             :to="{
@@ -107,7 +110,7 @@ export default {
   },
   components: {
     "sidebar-input": SidebarInput,
-    "modal": InfograpicModal,
+    modal: InfograpicModal,
   },
   data() {
     return {
@@ -148,6 +151,10 @@ export default {
           break;
       }
     },
+    resetDataset() {
+      const backupDataset = localStorage.getItem("backup-dataset");
+      localStorage.setItem("base-dataset", backupDataset);
+    },
     showTour() {
       this.$tours["myTour"].start();
     },
@@ -158,7 +165,7 @@ export default {
       this.isModalVisible = !this.isModalVisible;
     },
     showMessage(index) {
-      switch(index){
+      switch (index) {
         case 0:
         case 1:
         case 2:
@@ -166,16 +173,16 @@ export default {
           this.message = `An activation function is a function used in artificial neural networks which 
           outputs a small value for small inputs, and a larger value if its inputs exceed a threshold. 
           This activation function is for Hidden Layer ${index + 1}`;
-        break;
+          break;
         case 3:
           this.heading = "Output Layer Activation Function";
           this.message = `An activation function is a function used in artificial neural networks which 
           outputs a small value for small inputs, and a larger value if its inputs exceed a threshold. 
-          This activation function is for the Output Layer`
-        break;
+          This activation function is for the Output Layer`;
+          break;
       }
       this.toggleModal();
-    }
+    },
   },
   mounted: function () {
     if (this.isTourVisible) {
