@@ -11,13 +11,13 @@
         id="epochs"
         class="bg-violet-400 ml-4 w-44 h-12 rounded outline outline-1 outline-white flex flex-col items-center justify-center text-base"
       >
-        Accuracy: {{ accuracy[epochNum - 1] }}
+        Accuracy: {{ getAccuracy() }}
       </div>
       <div
         id="epochs"
         class="bg-violet-400 ml-4 w-44 h-12 rounded outline outline-1 outline-white flex flex-col items-center justify-center text-base"
       >
-        Loss: {{ loss[epochNum - 1] }}
+        Loss: {{ getLoss() }}
       </div>
     </div>
     <div id="chart5" class="flex justify-center items-center mb-5"></div>
@@ -43,9 +43,15 @@ export default {
   data() {
     return {
       epochNum: 1,
-      epochWatcher: 5,
-      accuracy: [1.2, 2.3, 15.7, 25.9, 36.4],
-      loss: [5.2, 7.3, 16.7, 29.9, 46.4],
+      epochWatcher: this.epochs,
+      accuracy: [
+        0.0012, 0.0023, 0.0157, 0.0259, 0.03604, 0.0412, 0.0423, 0.0457, 0.0559,
+        0.0664,
+      ],
+      loss: [
+        0.0052, 0.0073, 0.0167, 0.0299, 0.0356, 0.0456, 0.0493, 0.0512, 0.0612,
+        0.0653,
+      ],
       // accuracy: this.training.acc_hist,
       // loss: this.training.loss_hist,
     };
@@ -66,6 +72,12 @@ export default {
     //     }, 700);
     //   }
     // },
+    getAccuracy() {
+      return this.accuracy[(this.epochNum - 1) % 10];
+    },
+    getLoss() {
+      return this.loss[(this.epochNum - 1) % 10];
+    },
     increaseEpoch(epoch) {
       if (epoch == this.epochWatcher) {
         this.epochNum += 1;
@@ -183,7 +195,7 @@ export default {
       const epochs = this.epochs;
       if (this.isRunning) {
         // this.epochNumTimer();
-        forward(5);
+        forward(epochs);
       } else {
         this.epochNum = 1;
       }

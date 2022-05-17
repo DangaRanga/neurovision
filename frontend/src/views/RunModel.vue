@@ -237,9 +237,7 @@ export default {
           // console.log(response.data);
           const newData = response.data;
           this.evaluation = newData.evaluation;
-          console.log(this.evaluation);
           this.training = newData.training;
-          console.log(this.training);
         });
     },
   },
