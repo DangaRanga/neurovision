@@ -144,21 +144,20 @@ This route deals with the normalization of the data
 @app.route("/api/data/normalize", methods=["POST"])
 def normalize_data():
     if request.method == 'POST':
-        try:
-            # Reformat Data from request to Dataframe
-            dataset = dataset_util.initialize_from_json(request.json["data"])
 
-            # Create DataHandler with Dataframe
-            datahandler = DataHandler(dataset)
+        # Reformat Data from request to Dataframe
+        dataset = dataset_util.initialize_from_json(request.json["data"])
 
-            # Normalize Dataset Values with {}
-            datahandler.normalizeData()
+        # Create DataHandler with Dataframe
+        datahandler = DataHandler(dataset)
 
-            # Return Dataset
-            result = datahandler.toJSON()
-            return jsonify({"msg": "Dataset has been normalized", "dataset": result}), 200
-        except Exception as e:
-            return jsonify({"msg": "An Internal Error Has Occured"}), 500
+        # Normalize Dataset Values with {}
+        datahandler.normalizeData()
+
+        # Return Dataset
+        result = datahandler.toJSON()
+        return jsonify({"msg": "Dataset has been normalized", "dataset": result}), 200
+
     return jsonify({"msg": "Method not Allowed"}), 405
 
 

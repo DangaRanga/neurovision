@@ -9,7 +9,8 @@
           <p class="text-sm font-regular mt-4">
             This function is included in an artificial neural network in an effort to aid the network in 
             learning complex patterns in the data. It imitates the simulation of a biological neuron in 
-            order to generate the output of a neuron given a set of input. Types of activation functions 
+            order to generate the output of a neuron given a set of input. Similarly to a biological neuron, it fires when inputs
+            are large enough or pass a threshold value otherwise, it does nothing. Types of activation functions 
             within the scope of this application include: Binary, Linear, Sigmoid, ReLu, Tanh, Exponential 
             Linear Unit, Softplus, Swish, Softsign, Parametric ReLU and ReLU6
           </p>
@@ -23,6 +24,7 @@
             :index="0"
             :id="'v-step-' + 1"
             :functionName="showMessage"
+            :variation="true"
           />
           <sidebar-input
             v-if="layers >= 2"
@@ -31,6 +33,8 @@
             :options="options"
             :change="changeActFcn"
             :index="1"
+            :functionName="showMessage"
+            :variation="true"
           />
           <sidebar-input
             v-if="layers >= 3"
@@ -39,12 +43,17 @@
             :options="options"
             :change="changeActFcn"
             :index="2"
+            :functionName="showMessage"
+            :variation="true"
           />
           <sidebar-input
             type="input-d"
             :title="'Output Layer ' + title"
             :value="output"
             :id="'v-step-' + 2"
+            :index="3"
+            :functionName="showMessage"
+            :variation="true"
           />
         </div>
       </div>
@@ -57,7 +66,7 @@
               params: { isRunning: true },
             }"
           >
-            Pervious Step
+            Previous Step
           </router-link>
           <button
             id="v-step-5"
@@ -77,7 +86,7 @@
       class="text-xl"
     ></v-tour>
     <modal
-      :topic="title"
+      :topic="heading"
       :message="message"
       v-show="isModalVisible"
       @close="toggleModal"
@@ -102,7 +111,7 @@ export default {
   },
   data() {
     return {
-      title: "",
+      heading: "",
       message: "",
       isModalVisible: false,
       isTourVisible: localStorage.getItem("isTourVisible") === "true",
@@ -150,12 +159,19 @@ export default {
     },
     showMessage(index) {
       switch(index){
+        case 0:
         case 1:
-          this.title = "Training Data Percentage";
-          this.message = `Refers to the percentage of data being used to train and teach the model 
-          the hidden features or patterns in the data.
-          Example: Training data is fed to the neural network continuously, in order for the model to 
-          continue to learn the features of the data. `;
+        case 2:
+          this.heading = `Hidden Layer ${index + 1} Activation Function`;
+          this.message = `An activation function is a function used in artificial neural networks which 
+          outputs a small value for small inputs, and a larger value if its inputs exceed a threshold. 
+          This activation function is for Hidden Layer ${index + 1}`;
+        break;
+        case 3:
+          this.heading = "Output Layer Activation Function";
+          this.message = `An activation function is a function used in artificial neural networks which 
+          outputs a small value for small inputs, and a larger value if its inputs exceed a threshold. 
+          This activation function is for the Output Layer`
         break;
       }
       this.toggleModal();

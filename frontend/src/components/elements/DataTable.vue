@@ -10,6 +10,7 @@
             v-for="(heading, index) in headings"
             class="px-6 py-3"
             :key="index"
+            :class="{ 'bg-red-100 text-red-900': index_highlighted === index }"
           >
             {{ heading }}
           </th>
@@ -25,6 +26,9 @@
             v-for="(detail, detailIndex) in row"
             :key="detailIndex"
             class="px-6 py-4"
+            :class="{
+              'bg-red-100 ': index_highlighted === detailIndex,
+            }"
           >
             {{ detail }}
           </td>
@@ -39,5 +43,6 @@ const props = defineProps({
   rows: [Object],
   headings: [String],
   height: String,
+  index_highlighted: Number,
 });
 </script>
