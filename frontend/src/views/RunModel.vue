@@ -1,6 +1,12 @@
 <template>
   <div>
-    <model-header :isHidden="isHidden" :close="close" :headers="headers" />
+    <model-header 
+      :isHidden="isHidden" 
+      :close="toggleHidden" 
+      :headers="headers" 
+      :toggleRunning="toggleRunning"
+      :isRunning="isRunning"
+    />
     <div v-if="!isHidden" class="grid grid-cols-3 min-h-screen">
       <div class="col-span-2 grid items-center">
         <div>
@@ -16,6 +22,8 @@
             :mappings="mappings"
             :width="width"
             :height="height"
+            :isRunning="isRunning"
+            :epochs="headers[1].value"
           />
         </div>
       </div>
@@ -26,6 +34,7 @@
         :lrate="headers[2].value"
         :loss="headers[3].value"
         :numRecords="this.fdataset.rows.length"
+        :isRunning="isRunning"
       />
     </div>
     <div v-if="isHidden" class="grid items-center min-h-screen">
@@ -41,6 +50,8 @@
         :mappings="mappings"
         :width="width"
         :height="height"
+        :isRunning="isRunning"
+        :epochs="headers[1].value"
       />
     </div>
   </div>
@@ -60,6 +71,7 @@ export default {
   },
   data() {
     return {
+      isRunning: false,
       problem: "regression",
       width: 900,
       height: 500,
@@ -152,8 +164,11 @@ export default {
         }
       }
     },
-    close() {
+    toggleHidden() {
       this.isHidden = !this.isHidden;
+    },
+    toggleRunning(){
+      this.isRunning = !this.isRunning;
     },
     updateParams(data) {
       for (var obj in data) {
@@ -166,6 +181,7 @@ export default {
         });
       }
       this.updateModel();
+      this.isRunning = false;
     },
     updateModel() {
       
