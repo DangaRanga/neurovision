@@ -96,7 +96,6 @@ export default {
           .attr("stroke-dasharray", 10 + " " + 10)
           .attr("stroke-dashoffset", 250)
           .interrupt()
-          .selection()
           .transition()
           .style("stroke", "green")
           .duration(700)
@@ -104,8 +103,8 @@ export default {
           .attr("stroke-dashoffset", 100)
           .on("end", (event) => {
             if (epoch > 1) {
-              console.log(event);
-              // backward(epoch);
+              // console.log(event);
+              backward(epoch);
             }
           });
       }

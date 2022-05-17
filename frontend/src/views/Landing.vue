@@ -1,16 +1,10 @@
 <template>
   <div class="flex flex-col items-center justify-center h-screen">
     <div class="flex flex-row justify-between items-center mb-4">
-      <img
-        :src="neurovision_logo"
-        alt="info"
-        class="items-center mx-4"
-      />
+      <img :src="neurovision_logo" alt="info" class="items-center mx-4" />
       <span class="font-bold text-3xl mx-4">Welcome to Neurovision!</span>
     </div>
-    <div
-      class="flex flex-col my-4 w-2/5 items-center justify-center"
-    >
+    <div class="flex flex-col my-4 w-2/5 items-center justify-center">
       <span
         class="font-regular text-xl text-center mx-4 mb-4 items-center justify-center"
         >An educational tool that walks users through the construction of a
@@ -20,13 +14,17 @@
         concepts involved.</span
       >
     </div>
-    <div
-      class="flex flex-col mt-12 w-2/5 items-center justify-center"
-    >
+    <div class="flex flex-col mt-12 w-2/5 items-center justify-center">
       <span
-        class="font-bold text-2xl text-center mx-4 mb-4 items-center justify-center"
+        class="font-bold text-2xl text-center mx-4 items-center justify-center"
         >Select Option to Start Application</span
       >
+      <div class="mt-2">
+        <p class="text-center font-medium mb-4 text-primary_dark">
+          It is recommened that new users start the application with the
+          pre-quiz!
+        </p>
+      </div>
     </div>
     <div class="mx-auto my-4">
       <router-link
@@ -57,11 +55,6 @@
       >
         Start With Tutorial
       </router-link>
-    </div>
-    <div class="mt-2">
-      <p class="text-center font-medium text-primary_dark">
-        It is recommened that new users start the application with the pre-quiz!
-      </p>
     </div>
   </div>
 </template>
