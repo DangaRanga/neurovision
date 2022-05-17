@@ -168,7 +168,9 @@ export default {
       } else if (this.engineeringStep === 5) {
         this.normalizeData();
       } else {
-        // Navigate to next page
+        this.$router.push({
+          name: "create",
+        });
       }
     },
   },
