@@ -154,6 +154,8 @@ export default {
         }
       }
 
+      localStorage.setItem("layer-struct", JSON.stringify(this.layers));
+      
       this.$router.push({
         name: "run",
         params: {
@@ -217,7 +219,7 @@ export default {
             id: 2,
             name: "input",
             nodes: [
-              { id: 0, layer: 2 },
+              { id: 0, layer: 2 , output: true},
             ],
           }
         break;
@@ -226,7 +228,7 @@ export default {
             id: 2,
             name: "input",
             nodes: [
-              { id: 0, layer: 2 },
+              { id: 0, layer: 2,  output: true},
             ],
           }
         break;
@@ -235,9 +237,9 @@ export default {
             id: 2,
             name: "input",
             nodes: [
-              { id: 0, layer: 2 },
-              { id: 1, layer: 2 },
-              { id: 2, layer: 2 },
+              { id: 0, layer: 2,  output: true},
+              { id: 1, layer: 2,  output: true},
+              { id: 2, layer: 2,  output: true},
             ],
           }
         break;

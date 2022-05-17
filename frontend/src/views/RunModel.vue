@@ -35,7 +35,7 @@
         :epoch="headers[1].value"
         :lrate="headers[2].value"
         :loss="headers[3].value"
-        :numRecords="fdataset.rows.length"
+        :numRecords="dataset.rows.length"
         :isRunning="isRunning"
         :graph="[accuracy, loss]"
       />
@@ -99,9 +99,6 @@ export default {
   computed: {
     dataset(){
       return JSON.parse(localStorage.getItem("base-dataset"));
-    },
-    fdataset(){
-      return JSON.parse(localStorage.getItem("final-dataset"));
     },
     accuracy(){
       return {
@@ -202,12 +199,26 @@ export default {
     },
     updateModel() {
       
-      const dataset = this.fdataset;
+      const dataSnap = JSON.parse(localStorage.getItem("data-snap"));
+
+      this.problem = dataSnap.problem;
+      this.layers = dataSnap.layers;
+      this.activation = dataSnap.activation;
+      this.num_hidden = dataSnap.num_hidden;
+
+      const dataset = this.dataset;
       const train = Number(localStorage.getItem("train"));
       const hlayer = this.layers
         .filter((d) => d.name.includes("hidden"))
         .map((d) => Number(d.nodes.length));
       const act = this.activation.map((d) => d.toLowerCase());
+
+      localStorage.setItem("data-snap", JSON.stringify({
+        num_hidden: this.num_hidden,
+        layers: this.layers,
+        problem: this.problem,
+        activation: this.activation
+      }));
 
       this.$http
         .post(
@@ -228,50 +239,16 @@ export default {
           this.training = newData.training;
         });
     },
-    finalDataset(){
-      this.$http
-        .get(
-          `${process.env.VUE_APP_API_URL}/data/qprep?dataset=${this.problem}`, 
-          {}
-        ).then((response) => {
-          const newData = response.data.dataset;
-        
-          const data = {
-            headings: newData.columns,
-            rows: newData.data,
-            index: newData.index,
-            name: this.problem,
-          };
-
-          localStorage.setItem("final-dataset", JSON.stringify(data));
-        });
-    },
   },
   created() {
-    this.num_hidden = this.$route.params.hidden || 1;
+
+    const dataSnap = JSON.parse(localStorage.getItem("data-snap"));
+
+    this.num_hidden = this.$route.params.hidden || dataSnap.num_hidden;
     this.layers = this.$route.params.struct
       ? JSON.parse(this.$route.params.struct)
-      : [
-          {
-            id: 0,
-            name: "input",
-            nodes: [
-              { id: 0, layer: 0 },
-              { id: 1, layer: 0 },
-            ],
-          },
-          {
-            id: 1,
-            name: "hidden-1",
-            nodes: [{ id: 0, layer: 1 }],
-          },
-          {
-            id: 2,
-            name: "output",
-            nodes: [{ id: 0, layer: 2, output: true }],
-          },
-        ];
-    this.activation = this.$route.params.activation || ["ReLu"];
+      : JSON.parse(localStorage.getItem("layer-struct"));
+    this.activation = this.$route.params.activation || dataSnap.activation;
     this.problem = this.$route.params.name || this.dataset.name;
     this.headers = this.headers.map((d) => {
       if (d.header == "Problem Type") {
@@ -283,6 +260,15 @@ export default {
         return d;
       }
     });
+
+    console.log(this.activation)
+    localStorage.setItem("data-snap", JSON.stringify({
+      num_hidden: this.num_hidden,
+      layers: this.layers,
+      problem: this.problem,
+      activation: this.activation
+    }));
+
     this.createmapping();
   },
   mounted() {

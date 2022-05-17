@@ -64,11 +64,11 @@ class ModelHandler(object):
     def createModel(self) -> None:
         options = []
 
+        print(self.layers)
         for i, num in enumerate(self.layers):
-            options.append(Dense(num, self.activations[i]))
+            options.append(Dense(num, self.activations[i], name="dense-{}".format(i)))
 
         options.append(self.problems[self.prob])
-
         self.model = Sequential(options)
 
         optimizer = SGD(self.lr)

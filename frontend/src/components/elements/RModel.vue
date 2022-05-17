@@ -89,7 +89,7 @@ export default {
         .data(this.layers)
         .enter()
         .append("g")
-        .style("transform", `translate(${80}px, ${0}px)`);
+        .style("transform", `translate(${40}px, ${0}px)`);
 
       var y = d3.scaleLinear().rangeRound([0, this.height / 5]);
 
@@ -130,7 +130,7 @@ export default {
 
       const update = () => {
         this.toggleRunning();
-        this.epochNum = 0;
+        this.epochNum = 1;
       };
 
       const increase = (epoch) => this.increaseEpoch(epoch);
