@@ -63,7 +63,7 @@ export default {
 
     removeFeature() {
       // Remove feature from dataset
-      const feature = this.removeableFeatures.pop(0);
+      const feature = this.removeableFeatures.pop();
 
       // Skip to next step if all features are already extracted
       if (this.removeableFeatures.length === 0) {
@@ -155,7 +155,6 @@ export default {
           localStorage.setItem("base-dataset", JSON.stringify(data));
         });
     },
-
     performFeatureEngineering() {
       if (this.engineeringStep === 1) {
         this.highlightFeature();
@@ -170,9 +169,6 @@ export default {
       } else {
         this.$router.push({
           name: "create",
-          params: {
-            name: this.dataset.name
-          }
         });
       }
     },
@@ -184,6 +180,9 @@ export default {
       house_price: houseFeatures,
       iris: irisFeatures,
     };
+
+    // Cache a backup dataset to make reverting easy
+    localStorage.setItem("backup-dataset", JSON.stringify(this.dataset));
 
     this.removeableFeatures = datasetObj[this.dataset.name];
   },

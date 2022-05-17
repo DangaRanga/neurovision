@@ -33,18 +33,15 @@ export default {
       analysisType: "",
       title: "",
       description: "",
+      dataset: [],
     };
-  },
-  computed: {
-    dataset() {
-      return JSON.parse(localStorage.getItem("base-dataset"));
-    },
   },
 
   mounted() {
     this.analysisType = this.$route.params.analysisType;
     this.title = this.$route.params.title;
     this.description = this.$route.params.description;
+    this.dataset = JSON.parse(localStorage.getItem("base-dataset"));
   },
   update() {
     this.analysisType = this.$route.params.analysisType;
