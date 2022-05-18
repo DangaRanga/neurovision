@@ -25,7 +25,11 @@
           />
         </div>
       </div>
-      <model-sidebar :layers="num_hidden" :output="outputA" @progress="nextStep" />
+      <model-sidebar
+        :layers="num_hidden"
+        :output="'ReLu'"
+        @progress="nextStep"
+      />
     </div>
     <dataset-preview-modal
       v-if="isModalVisible"
@@ -60,7 +64,7 @@ export default {
       layers: [],
       isModalVisible: false,
       outputA: "",
-      isLoading: true
+      isLoading: true,
     };
   },
   computed: {
@@ -73,9 +77,7 @@ export default {
       if (this.num_hidden < 3) {
         this.num_hidden = this.num_hidden + 1;
       } else {
-        dangerNotification(
-          "Constraint: Maximum Number of Hidden Layers is 3"
-        );
+        dangerNotification("Constraint: Maximum Number of Hidden Layers is 3");
         return;
       }
 
@@ -101,9 +103,7 @@ export default {
       if (this.num_hidden > 1) {
         this.num_hidden = this.num_hidden - 1;
       } else {
-        dangerNotification(
-          "Constraint: Minimum Number of Hidden Layers is 1"
-        );
+        dangerNotification("Constraint: Minimum Number of Hidden Layers is 1");
         return;
       }
 
@@ -170,9 +170,9 @@ export default {
         },
       });
     },
-    setInputs(name){
+    setInputs(name) {
       var input = {};
-      switch(name){
+      switch (name) {
         case "house_price":
           input = {
             id: 0,
@@ -184,8 +184,8 @@ export default {
               { id: 3, layer: 0 },
               { id: 4, layer: 0 },
             ],
-          }
-        break;
+          };
+          break;
         case "heart_disease":
           input = {
             id: 0,
@@ -197,8 +197,8 @@ export default {
               { id: 3, layer: 0 },
               { id: 4, layer: 0 },
             ],
-          }
-        break;
+          };
+          break;
         case "iris":
           input = {
             id: 0,
@@ -209,61 +209,55 @@ export default {
               { id: 2, layer: 0 },
               { id: 3, layer: 0 },
             ],
-          }
-        break;
+          };
+          break;
       }
       return input;
     },
-    setOutputs(name){
+    setOutputs(name) {
       var output = {};
-      switch(name){
+      switch (name) {
         case "house_price":
           output = {
             id: 2,
             name: "input",
-            nodes: [
-              { id: 0, layer: 2 , output: true},
-            ],
-          }
+            nodes: [{ id: 0, layer: 2, output: true }],
+          };
           this.output = "ReLu";
-        break;
+          break;
         case "heart_disease":
           output = {
             id: 2,
             name: "input",
-            nodes: [
-              { id: 0, layer: 2,  output: true},
-            ],
-          }
+            nodes: [{ id: 0, layer: 2, output: true }],
+          };
           this.output = "Sigmoid";
-        break;
+          break;
         case "iris":
           output = {
             id: 2,
             name: "input",
             nodes: [
-              { id: 0, layer: 2,  output: true},
-              { id: 1, layer: 2,  output: true},
-              { id: 2, layer: 2,  output: true},
+              { id: 0, layer: 2, output: true },
+              { id: 1, layer: 2, output: true },
+              { id: 2, layer: 2, output: true },
             ],
-          }
+          };
           this.output = "Softmax";
-        break;
+          break;
       }
       return output;
-    }
+    },
   },
   created() {
     const name = this.dataset.name;
-     this.layers.push(this.setInputs(name));
-     this.layers.push({
-       id: 1,
-        name: "hidden-1",
-        nodes: [
-          { id: 0, layer: 1 },
-        ],
-     })
-     this.layers.push(this.setOutputs(name));
+    this.layers.push(this.setInputs(name));
+    this.layers.push({
+      id: 1,
+      name: "hidden-1",
+      nodes: [{ id: 0, layer: 1 }],
+    });
+    this.layers.push(this.setOutputs(name));
   },
 };
 </script>

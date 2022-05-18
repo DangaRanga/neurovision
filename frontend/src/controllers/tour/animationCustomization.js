@@ -36,7 +36,7 @@ export const modelTour = [
       title: "<strong>Epochs</strong>",
     },
     content: `<p align='left'> Epochs refers to the number of passes a machine learning algorithm has finished 
-     in an entire training dataset. Typically th number of epochs is large, often hundreds or thousands. This
+     in an entire training dataset. Typically th number of epochs is large, often hundreds (100s) or thousands (1000s). This
      allows the learning algorithm to run until the error from the model has been sufficiently minimized. 
 
      <br /><br /><strong><em style="color:#E5E5E5;">To gain more information on epochs after this tour
