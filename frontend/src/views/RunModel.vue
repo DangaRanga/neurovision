@@ -29,8 +29,11 @@
               :toggleRunning="toggleRunning"
               :training="training"
             />
-            <div v-if="isLoading" class="flex flex-col justify-center items-center">
-              <h1  class="mx-auto font-extrabold text-4xl">Loading....</h1>
+            <div
+              v-if="isLoading"
+              class="flex flex-col justify-center items-center"
+            >
+              <h1 class="mx-auto font-extrabold text-4xl">Loading....</h1>
             </div>
           </div>
         </div>
@@ -67,7 +70,7 @@
           :training="training"
         />
         <div v-if="isLoading" class="flex flex-col justify-center items-center">
-          <h1 class="mx-auto font-extrabold text-4xl">Loading....</h1>
+          <div class="loader">Loading...</div>
         </div>
       </div>
     </div>
@@ -213,7 +216,7 @@ export default {
     async updateModel() {
       const dataSnap = JSON.parse(localStorage.getItem("data-snap"));
       this.isLoading = true;
-      
+
       this.problem = dataSnap.problem;
       this.layers = dataSnap.layers;
       this.activation = dataSnap.activation;
@@ -237,35 +240,35 @@ export default {
       );
 
       const BASE_URL = process.env.VUE_APP_API_URL;
-      const route = BASE_URL + '/model/run';
+      const route = BASE_URL + "/model/run";
 
       let response = await fetch(route, {
         headers: {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
-            data: dataset,
-            layers: hlayer || [1],
-            activations: act || ["relu"],
-            lr: this.headers[2].value || 0.5,
-            batch_size: this.headers[0].value || 1,
-            epochs: this.headers[1].value || 10,
-            prob: this.problem,
-            train: train || 80,
+          data: dataset,
+          layers: hlayer || [1],
+          activations: act || ["relu"],
+          lr: this.headers[2].value || 0.5,
+          batch_size: this.headers[0].value || 1,
+          epochs: this.headers[1].value || 10,
+          prob: this.problem,
+          train: train || 80,
         }),
-        method: "POST"
+        method: "POST",
       });
-      let json = await response.json() || {}
-      if (response.ok){
-          const newData = json;
-          this.evaluation = newData.evaluation;
-          this.training = newData.training;
-          this.isLoading = !this.isLoading;
+      let json = (await response.json()) || {};
+      if (response.ok) {
+        const newData = json;
+        this.evaluation = newData.evaluation;
+        this.training = newData.training;
+        this.isLoading = !this.isLoading;
       }
 
       // this.$http
       //   .post(
-      //     `${process.env.VUE_APP_API_URL}/model/run`, 
+      //     `${process.env.VUE_APP_API_URL}/model/run`,
       //     {
       //       data: dataset,
       //       layers: hlayer || [1],
@@ -320,3 +323,171 @@ export default {
   },
 };
 </script>
+<style scoped>
+.loader {
+  margin: 100px auto;
+  font-size: 25px;
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  position: relative;
+  text-indent: -9999em;
+  -webkit-animation: load5 1.1s infinite ease;
+  animation: load5 1.1s infinite ease;
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+}
+@-webkit-keyframes load5 {
+  0%,
+  100% {
+    box-shadow: 0em -2.6em 0em 0em #04adff,
+      1.8em -1.8em 0 0em rgba(4, 173, 255, 0.2),
+      2.5em 0em 0 0em rgba(4, 173, 255, 0.2),
+      1.75em 1.75em 0 0em rgba(4, 173, 255, 0.2),
+      0em 2.5em 0 0em rgba(4, 173, 255, 0.2),
+      -1.8em 1.8em 0 0em rgba(4, 173, 255, 0.2),
+      -2.6em 0em 0 0em rgba(4, 173, 255, 0.5),
+      -1.8em -1.8em 0 0em rgba(4, 173, 255, 0.7);
+  }
+  12.5% {
+    box-shadow: 0em -2.6em 0em 0em rgba(4, 173, 255, 0.7),
+      1.8em -1.8em 0 0em #04adff, 2.5em 0em 0 0em rgba(4, 173, 255, 0.2),
+      1.75em 1.75em 0 0em rgba(4, 173, 255, 0.2),
+      0em 2.5em 0 0em rgba(4, 173, 255, 0.2),
+      -1.8em 1.8em 0 0em rgba(4, 173, 255, 0.2),
+      -2.6em 0em 0 0em rgba(4, 173, 255, 0.2),
+      -1.8em -1.8em 0 0em rgba(4, 173, 255, 0.5);
+  }
+  25% {
+    box-shadow: 0em -2.6em 0em 0em rgba(4, 173, 255, 0.5),
+      1.8em -1.8em 0 0em rgba(4, 173, 255, 0.7), 2.5em 0em 0 0em #04adff,
+      1.75em 1.75em 0 0em rgba(4, 173, 255, 0.2),
+      0em 2.5em 0 0em rgba(4, 173, 255, 0.2),
+      -1.8em 1.8em 0 0em rgba(4, 173, 255, 0.2),
+      -2.6em 0em 0 0em rgba(4, 173, 255, 0.2),
+      -1.8em -1.8em 0 0em rgba(4, 173, 255, 0.2);
+  }
+  37.5% {
+    box-shadow: 0em -2.6em 0em 0em rgba(4, 173, 255, 0.2),
+      1.8em -1.8em 0 0em rgba(4, 173, 255, 0.5),
+      2.5em 0em 0 0em rgba(4, 173, 255, 0.7), 1.75em 1.75em 0 0em #04adff,
+      0em 2.5em 0 0em rgba(4, 173, 255, 0.2),
+      -1.8em 1.8em 0 0em rgba(4, 173, 255, 0.2),
+      -2.6em 0em 0 0em rgba(4, 173, 255, 0.2),
+      -1.8em -1.8em 0 0em rgba(4, 173, 255, 0.2);
+  }
+  50% {
+    box-shadow: 0em -2.6em 0em 0em rgba(4, 173, 255, 0.2),
+      1.8em -1.8em 0 0em rgba(4, 173, 255, 0.2),
+      2.5em 0em 0 0em rgba(4, 173, 255, 0.5),
+      1.75em 1.75em 0 0em rgba(4, 173, 255, 0.7), 0em 2.5em 0 0em #04adff,
+      -1.8em 1.8em 0 0em rgba(4, 173, 255, 0.2),
+      -2.6em 0em 0 0em rgba(4, 173, 255, 0.2),
+      -1.8em -1.8em 0 0em rgba(4, 173, 255, 0.2);
+  }
+  62.5% {
+    box-shadow: 0em -2.6em 0em 0em rgba(4, 173, 255, 0.2),
+      1.8em -1.8em 0 0em rgba(4, 173, 255, 0.2),
+      2.5em 0em 0 0em rgba(4, 173, 255, 0.2),
+      1.75em 1.75em 0 0em rgba(4, 173, 255, 0.5),
+      0em 2.5em 0 0em rgba(4, 173, 255, 0.7), -1.8em 1.8em 0 0em #04adff,
+      -2.6em 0em 0 0em rgba(4, 173, 255, 0.2),
+      -1.8em -1.8em 0 0em rgba(4, 173, 255, 0.2);
+  }
+  75% {
+    box-shadow: 0em -2.6em 0em 0em rgba(4, 173, 255, 0.2),
+      1.8em -1.8em 0 0em rgba(4, 173, 255, 0.2),
+      2.5em 0em 0 0em rgba(4, 173, 255, 0.2),
+      1.75em 1.75em 0 0em rgba(4, 173, 255, 0.2),
+      0em 2.5em 0 0em rgba(4, 173, 255, 0.5),
+      -1.8em 1.8em 0 0em rgba(4, 173, 255, 0.7), -2.6em 0em 0 0em #04adff,
+      -1.8em -1.8em 0 0em rgba(4, 173, 255, 0.2);
+  }
+  87.5% {
+    box-shadow: 0em -2.6em 0em 0em rgba(4, 173, 255, 0.2),
+      1.8em -1.8em 0 0em rgba(4, 173, 255, 0.2),
+      2.5em 0em 0 0em rgba(4, 173, 255, 0.2),
+      1.75em 1.75em 0 0em rgba(4, 173, 255, 0.2),
+      0em 2.5em 0 0em rgba(4, 173, 255, 0.2),
+      -1.8em 1.8em 0 0em rgba(4, 173, 255, 0.5),
+      -2.6em 0em 0 0em rgba(4, 173, 255, 0.7), -1.8em -1.8em 0 0em #04adff;
+  }
+}
+@keyframes load5 {
+  0%,
+  100% {
+    box-shadow: 0em -2.6em 0em 0em #04adff,
+      1.8em -1.8em 0 0em rgba(4, 173, 255, 0.2),
+      2.5em 0em 0 0em rgba(4, 173, 255, 0.2),
+      1.75em 1.75em 0 0em rgba(4, 173, 255, 0.2),
+      0em 2.5em 0 0em rgba(4, 173, 255, 0.2),
+      -1.8em 1.8em 0 0em rgba(4, 173, 255, 0.2),
+      -2.6em 0em 0 0em rgba(4, 173, 255, 0.5),
+      -1.8em -1.8em 0 0em rgba(4, 173, 255, 0.7);
+  }
+  12.5% {
+    box-shadow: 0em -2.6em 0em 0em rgba(4, 173, 255, 0.7),
+      1.8em -1.8em 0 0em #04adff, 2.5em 0em 0 0em rgba(4, 173, 255, 0.2),
+      1.75em 1.75em 0 0em rgba(4, 173, 255, 0.2),
+      0em 2.5em 0 0em rgba(4, 173, 255, 0.2),
+      -1.8em 1.8em 0 0em rgba(4, 173, 255, 0.2),
+      -2.6em 0em 0 0em rgba(4, 173, 255, 0.2),
+      -1.8em -1.8em 0 0em rgba(4, 173, 255, 0.5);
+  }
+  25% {
+    box-shadow: 0em -2.6em 0em 0em rgba(4, 173, 255, 0.5),
+      1.8em -1.8em 0 0em rgba(4, 173, 255, 0.7), 2.5em 0em 0 0em #04adff,
+      1.75em 1.75em 0 0em rgba(4, 173, 255, 0.2),
+      0em 2.5em 0 0em rgba(4, 173, 255, 0.2),
+      -1.8em 1.8em 0 0em rgba(4, 173, 255, 0.2),
+      -2.6em 0em 0 0em rgba(4, 173, 255, 0.2),
+      -1.8em -1.8em 0 0em rgba(4, 173, 255, 0.2);
+  }
+  37.5% {
+    box-shadow: 0em -2.6em 0em 0em rgba(4, 173, 255, 0.2),
+      1.8em -1.8em 0 0em rgba(4, 173, 255, 0.5),
+      2.5em 0em 0 0em rgba(4, 173, 255, 0.7), 1.75em 1.75em 0 0em #04adff,
+      0em 2.5em 0 0em rgba(4, 173, 255, 0.2),
+      -1.8em 1.8em 0 0em rgba(4, 173, 255, 0.2),
+      -2.6em 0em 0 0em rgba(4, 173, 255, 0.2),
+      -1.8em -1.8em 0 0em rgba(4, 173, 255, 0.2);
+  }
+  50% {
+    box-shadow: 0em -2.6em 0em 0em rgba(4, 173, 255, 0.2),
+      1.8em -1.8em 0 0em rgba(4, 173, 255, 0.2),
+      2.5em 0em 0 0em rgba(4, 173, 255, 0.5),
+      1.75em 1.75em 0 0em rgba(4, 173, 255, 0.7), 0em 2.5em 0 0em #04adff,
+      -1.8em 1.8em 0 0em rgba(4, 173, 255, 0.2),
+      -2.6em 0em 0 0em rgba(4, 173, 255, 0.2),
+      -1.8em -1.8em 0 0em rgba(4, 173, 255, 0.2);
+  }
+  62.5% {
+    box-shadow: 0em -2.6em 0em 0em rgba(4, 173, 255, 0.2),
+      1.8em -1.8em 0 0em rgba(4, 173, 255, 0.2),
+      2.5em 0em 0 0em rgba(4, 173, 255, 0.2),
+      1.75em 1.75em 0 0em rgba(4, 173, 255, 0.5),
+      0em 2.5em 0 0em rgba(4, 173, 255, 0.7), -1.8em 1.8em 0 0em #04adff,
+      -2.6em 0em 0 0em rgba(4, 173, 255, 0.2),
+      -1.8em -1.8em 0 0em rgba(4, 173, 255, 0.2);
+  }
+  75% {
+    box-shadow: 0em -2.6em 0em 0em rgba(4, 173, 255, 0.2),
+      1.8em -1.8em 0 0em rgba(4, 173, 255, 0.2),
+      2.5em 0em 0 0em rgba(4, 173, 255, 0.2),
+      1.75em 1.75em 0 0em rgba(4, 173, 255, 0.2),
+      0em 2.5em 0 0em rgba(4, 173, 255, 0.5),
+      -1.8em 1.8em 0 0em rgba(4, 173, 255, 0.7), -2.6em 0em 0 0em #04adff,
+      -1.8em -1.8em 0 0em rgba(4, 173, 255, 0.2);
+  }
+  87.5% {
+    box-shadow: 0em -2.6em 0em 0em rgba(4, 173, 255, 0.2),
+      1.8em -1.8em 0 0em rgba(4, 173, 255, 0.2),
+      2.5em 0em 0 0em rgba(4, 173, 255, 0.2),
+      1.75em 1.75em 0 0em rgba(4, 173, 255, 0.2),
+      0em 2.5em 0 0em rgba(4, 173, 255, 0.2),
+      -1.8em 1.8em 0 0em rgba(4, 173, 255, 0.5),
+      -2.6em 0em 0 0em rgba(4, 173, 255, 0.7), -1.8em -1.8em 0 0em #04adff;
+  }
+}
+</style>
