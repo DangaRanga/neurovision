@@ -205,7 +205,6 @@ export default {
     this.createModel();
   },
   updated() {
-    console.log(this.training);
     this.createModel();
   },
   // watch() {
