@@ -26,7 +26,7 @@
       </div>
       <model-sidebar
         :layers="num_hidden"
-        :output="'ReLu'"
+        :output="output"
         @progress="nextStep"
       />
     </div>
@@ -62,7 +62,7 @@ export default {
       num_hidden: 1,
       layers: [],
       isModalVisible: false,
-      outputA: "",
+      output: "",
       isLoading: true,
     };
   },
@@ -157,7 +157,8 @@ export default {
       }
 
       localStorage.setItem("layer-struct", JSON.stringify(this.layers));
-
+      localStorage.setItem('final-dataset', JSON.stringify(this.dataset));
+      
       this.$router.push({
         name: "run",
         params: {
@@ -219,7 +220,7 @@ export default {
         case "house_price":
           output = {
             id: 2,
-            name: "input",
+            name: "output",
             nodes: [{ id: 0, layer: 2, output: true }],
           };
           this.output = "ReLu";
@@ -227,7 +228,7 @@ export default {
         case "heart_disease":
           output = {
             id: 2,
-            name: "input",
+            name: "output",
             nodes: [{ id: 0, layer: 2, output: true }],
           };
           this.output = "Sigmoid";
@@ -235,7 +236,7 @@ export default {
         case "iris":
           output = {
             id: 2,
-            name: "input",
+            name: "output",
             nodes: [
               { id: 0, layer: 2, output: true },
               { id: 1, layer: 2, output: true },
@@ -257,6 +258,7 @@ export default {
       nodes: [{ id: 0, layer: 1 }],
     });
     this.layers.push(this.setOutputs(name));
+    
   },
 };
 </script>

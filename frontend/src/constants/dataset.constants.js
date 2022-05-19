@@ -17,7 +17,7 @@ const housePredictionData = {
   in an unknown format with unknown data quality issues in order to clean the data and use it to make 
   predictions. `,
   summary: `Predict the value of a house based on various key attributes about the house!`,
-  problemType: "Linear Regression",
+  problemType: "Mutiple Regression",
   image: House,
   name: "house_price",
 };

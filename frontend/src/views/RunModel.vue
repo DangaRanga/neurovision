@@ -33,7 +33,7 @@
               v-if="isLoading"
               class="flex flex-col justify-center items-center"
             >
-              <h1 class="mx-auto font-extrabold text-4xl">Loading....</h1>
+             <div class="loader">Loading...</div>
             </div>
           </div>
         </div>
@@ -103,7 +103,7 @@ export default {
       isHidden: true,
       headers: [
         { header: "Batch Size", value: 1 },
-        { header: "Epoch No.", value: 100 },
+        { header: "Epoch No.", value: 10 },
         { header: "Learning Rate", value: 0.01 },
         { header: "Loss Function", value: "MSE" },
         { header: "Problem Type", value: "Classification" },
@@ -114,7 +114,7 @@ export default {
   },
   computed: {
     dataset() {
-      return JSON.parse(localStorage.getItem("base-dataset"));
+      return JSON.parse(localStorage.getItem("final-dataset"));
     },
     accuracy() {
       return {
@@ -239,51 +239,49 @@ export default {
         })
       );
 
-      const BASE_URL = process.env.VUE_APP_API_URL;
-      const route = BASE_URL + "/model/run";
+      this.$http
+        .post(
+          `${process.env.VUE_APP_API_URL}/model/run`,
+          {
+            data: dataset,
+            layers: hlayer ,
+            activations: act,
+            lr: this.headers[2].value,
+            batch_size: this.headers[0].value,
+            epochs: this.headers[1].value,
+            prob: this.problem,
+            train: train,
+          }
+        ).then((response) => {
+          const newData = response.data;
+          this.evaluation = newData.evaluation;
+          this.training = newData.training;
+          this.isLoading = !this.isLoading;
+        });
 
-      let response = await fetch(route, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          data: dataset,
-          layers: hlayer || [1],
-          activations: act || ["relu"],
-          lr: this.headers[2].value || 0.5,
-          batch_size: this.headers[0].value || 1,
-          epochs: this.headers[1].value || 10,
-          prob: this.problem,
-          train: train || 80,
-        }),
-        method: "POST",
-      });
-      let json = (await response.json()) || {};
-      if (response.ok) {
-        const newData = json;
-        this.evaluation = newData.evaluation;
-        this.training = newData.training;
-        this.isLoading = !this.isLoading;
-      }
+      // const BASE_URL = process.env.VUE_APP_API_URL;
+      // const route = BASE_URL + "/model/run";
 
-      // this.$http
-      //   .post(
-      //     `${process.env.VUE_APP_API_URL}/model/run`,
-      //     {
-      //       data: dataset,
-      //       layers: hlayer || [1],
-      //       activations: act || ["relu"],
-      //       lr: this.headers[2].value || 0.5,
-      //       batch_size: this.headers[0].value || 1,
-      //       epochs: this.headers[1].value || 10,
-      //       prob: this.problem,
-      //       train: train || 80,
-      //     }
-      //   ).then((response) => {
-      //     const newData = response.data;
-      //     this.evaluation = newData.evaluation;
-      //     this.training = newData.training;
-      //   });
+        // let response = await fetch(route, {
+        //   headers: {
+        //     "Content-Type": "application/json",
+        //   },
+        //   body: JSON.stringify({
+        //     data: dataset,
+        //     layers: hlayer || [1],
+        //     activations: act || ["relu"],
+        //     lr: this.headers[2].value || 0.5,
+        //     batch_size: this.headers[0].value || 1,
+        //     epochs: this.headers[1].value || 10,
+        //     prob: this.problem,
+        //     train: train || 80,
+        //   }),
+        //   method: "POST",
+        // });
+        // let json = (await response.json()) || {};
+        // if (response.ok) {
+          
+        // }  
     },
   },
   created() {
