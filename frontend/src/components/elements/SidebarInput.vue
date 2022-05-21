@@ -70,6 +70,14 @@
         disabled
       />
     </div>
+    <div v-if="type == 'input-nd'" class="w-full m-0 p-0">
+      <p class="text-base font-semibold mb-4">{{ title }}</p>
+      <input
+        class="bg-white rounded outline outline-1 outline-white focus:outline-primary h-12 text-base w-full p-2"
+        :value="value"
+        disabled
+      />
+    </div>
   </div>
 </template>
 

@@ -47,6 +47,7 @@
         :numRecords="dataset.rows.length"
         :isRunning="isRunning"
         :graph="[accuracy, loss]"
+        :final="final"
       />
     </div>
     <div v-if="isHidden" class="grid items-center min-h-screen">
@@ -116,6 +117,12 @@ export default {
     dataset() {
       return JSON.parse(localStorage.getItem("final-dataset"));
     },
+    final(){
+      return [
+        { title: "Overall Model Accuracy", value: String(this.evaluation.acc.toFixed(5) * 100) + "%" },
+        { title: "Overall Model Loss", value: String(this.evaluation.loss.toFixed(5) * 100) + "%" }
+      ]
+    },
     accuracy() {
       const eps = this.training.epochs;
       const acc = this.training.acc_hist;
@@ -124,7 +131,7 @@ export default {
       for(var i=0; i < eps.length; i++){
         data.push({
           epoch: eps[i],
-          acc: acc[i]
+          acc: acc[i] * 100
         })
       }
       return {
@@ -141,14 +148,14 @@ export default {
       for(var i=0; i < eps.length; i++){
         data.push({
           epoch: eps[i],
-          loss: loss[i]
+          loss: loss[i] * 100
         })
       }
       return {
         data: data,
         title: "Loss Progression",
       };
-      
+
     },
   },
   methods: {
@@ -281,29 +288,6 @@ export default {
           this.isLoading = !this.isLoading;
         });
 
-      // const BASE_URL = process.env.VUE_APP_API_URL;
-      // const route = BASE_URL + "/model/run";
-
-        // let response = await fetch(route, {
-        //   headers: {
-        //     "Content-Type": "application/json",
-        //   },
-        //   body: JSON.stringify({
-        //     data: dataset,
-        //     layers: hlayer || [1],
-        //     activations: act || ["relu"],
-        //     lr: this.headers[2].value || 0.5,
-        //     batch_size: this.headers[0].value || 1,
-        //     epochs: this.headers[1].value || 10,
-        //     prob: this.problem,
-        //     train: train || 80,
-        //   }),
-        //   method: "POST",
-        // });
-        // let json = (await response.json()) || {};
-        // if (response.ok) {
-          
-        // }  
     },
   },
   created() {

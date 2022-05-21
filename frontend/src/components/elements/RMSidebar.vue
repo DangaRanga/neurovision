@@ -24,7 +24,14 @@
               :variation="true"
             />
           </div>
-          <div v-if="selected == 2" class="flex flex-col items-center">
+          <div v-if="selected == 2">
+            <sidebar-input
+              v-for="(item, i) in final"
+              :key="i"
+              type="input-nd"
+              :title="item.title"
+              :value="item.value"
+            />
             <graph
               v-for="(values, i) in graphs"
               :key="i"
@@ -33,6 +40,7 @@
               :height="220"
               :isRunning="isRunning"
               :index="i"
+              :epochs="epoch"
             />
           </div>
         </div>
@@ -70,11 +78,12 @@ import InfograpicModal from "@/components/elements/Infographic.vue";
 import SidebarInput from "@/components/elements/SidebarInput.vue";
 import TabbedMenu from "@/components/elements/TabbedMenu.vue";
 import Graph from "@/components/elements/Graph.vue";
+import { dangerNotification } from "@/controllers/toasts/toasts.js";
 import { modelTour } from "@/controllers/tour/animationCustomization.js";
 
 
 export default {
-  props: ["batch", "epoch", "lrate", "loss", "numRecords", 'graph', 'isRunning'],
+  props: ["batch", "epoch", "lrate", "loss", "numRecords", 'graph', 'isRunning', "final"],
   components: {
     "sidebar-input": SidebarInput,
     "tabbed-menu": TabbedMenu,
@@ -92,7 +101,7 @@ export default {
       loss_f: "MSE",
       steps: modelTour,
       selected: 1,
-      graphs: [1,2],
+      graphs: [],
       isTourVisible: localStorage.getItem("isTourVisible") === "true",
       myOptions: {
         useKeyboardNavigation: false,
@@ -158,6 +167,12 @@ export default {
     if (this.isTourVisible) {
       this.showTour();
     }
+  },
+  updated(){
+    this.batch_size = this.batch;
+    this.epochs = this.epoch;
+    this.l_rate = this.lrate;
+    this.graphs = this.graph;
   },
   methods: {
     showTour() {
@@ -237,7 +252,7 @@ export default {
         if(this.epochs <= 0) throw "Epochs should be valid and greater than zero";
         if(this.l_rate <= 0) throw "Learning Rate should be valid and greater than zero";
       }catch(e){
-        console.log(e); // Display to the User than Param Update is Illegal
+        dangerNotification(e); // Display to the User than Param Update is Illegal
         return;
       }
 
