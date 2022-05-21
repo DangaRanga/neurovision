@@ -24,13 +24,15 @@
               :variation="true"
             />
           </div>
-          <div v-if="selected == 2">
+          <div v-if="selected == 2" class="flex flex-col items-center">
             <graph
               v-for="(values, i) in graphs"
               :key="i"
               :values="values"
-              :width="50"
+              :width="350"
               :height="220"
+              :isRunning="isRunning"
+              :index="i"
             />
           </div>
         </div>
@@ -72,7 +74,7 @@ import { modelTour } from "@/controllers/tour/animationCustomization.js";
 
 
 export default {
-  props: ["batch", "epoch", "lrate", "loss", "numRecords"],
+  props: ["batch", "epoch", "lrate", "loss", "numRecords", 'graph', 'isRunning'],
   components: {
     "sidebar-input": SidebarInput,
     "tabbed-menu": TabbedMenu,
@@ -90,7 +92,7 @@ export default {
       loss_f: "MSE",
       steps: modelTour,
       selected: 1,
-      graphs: [],
+      graphs: [1,2],
       isTourVisible: localStorage.getItem("isTourVisible") === "true",
       myOptions: {
         useKeyboardNavigation: false,

@@ -117,16 +117,38 @@ export default {
       return JSON.parse(localStorage.getItem("final-dataset"));
     },
     accuracy() {
+      const eps = this.training.epochs;
+      const acc = this.training.acc_hist;
+      var data = [];
+
+      for(var i=0; i < eps.length; i++){
+        data.push({
+          epoch: eps[i],
+          acc: acc[i]
+        })
+      }
       return {
-        epochs: this.training.epochs,
-        acc: this.training.acc_hist,
+        data: data,
+        title: "Accuracy Progression",
       };
     },
     loss() {
+
+      const eps = this.training.epochs;
+      const loss =  this.training.loss_hist;
+      var data = [];
+
+      for(var i=0; i < eps.length; i++){
+        data.push({
+          epoch: eps[i],
+          loss: loss[i]
+        })
+      }
       return {
-        epochs: this.training.epochs,
-        loss: this.training.acc_hist,
+        data: data,
+        title: "Loss Progression",
       };
+      
     },
   },
   methods: {
