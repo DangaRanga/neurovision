@@ -32,16 +32,18 @@
               :title="item.title"
               :value="item.value"
             />
-            <graph
-              v-for="(values, i) in graphs"
-              :key="i"
-              :values="values"
-              :width="350"
-              :height="220"
-              :isRunning="isRunning"
-              :index="i"
-              :epochs="epoch"
-            />
+            <!-- <div class="flex flex-col items-center"> -->
+              <graph
+                v-for="(values, i) in graphs"
+                :key="i"
+                :values="values"
+                :width="420"
+                :height="220"
+                :isRunning="isRunning"
+                :index="i"
+                :epochs="epoch"
+              />
+            <!-- </div>  -->
           </div>
         </div>
       </div>
