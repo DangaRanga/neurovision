@@ -55,7 +55,7 @@ export default {
             const yAccessor = this.index == 0 ? d => d.acc : d => d.loss;
 
             const xScale = d3.scaleLinear().domain(d3.extent(dataset, xAccessor)).range([0, this.boundedWidth]);
-            const yScale = d3.scaleLinear().domain([0, d3.max(dataset, yAccessor)]).range([this.boundedHeight, 0]);
+            const yScale = d3.scaleLinear().domain(d3.extent(dataset, yAccessor)).range([this.boundedHeight, 0]);
         
             const xAxisG = d3.axisBottom().scale(xScale).ticks(5);
             const yAxisG = d3.axisLeft().scale(yScale).ticks(5);
